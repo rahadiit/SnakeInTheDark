@@ -1,9 +1,5 @@
 package snake.gameScreens;
 
-import snake.core.SnakeStart;
-import snake.interfacesAndAbstract.Drawable;
-import snake.interfacesAndAbstract.Dynamic;
-import snake.interfacesAndAbstract.Subscriber;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -36,12 +32,11 @@ public class SnakeHub implements Screen, InputProcessor {
 
 		Gdx.input.setInputProcessor(this);
 	}
-	
-	
+
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -49,30 +44,25 @@ public class SnakeHub implements Screen, InputProcessor {
 		update();
 		draw();
 	}
-	
 
 	private void draw() {
 		font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), false);
 		font.setColor(Color.GREEN);
 
 		batch.begin();
-		
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-		
-		if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+
+		if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
 			font.draw(batch, "You're pressing the space button", 0, 80);
-			System.out.println("You pressed the space button");
-		}
-			
-		
-		
+
 		font.draw(batch, instruction, w / 2 - font.getBounds(instruction).width
 				/ 2, h / 2 - font.getBounds(instruction).height / 2 + 50);
 		font.draw(batch, instruction2, w / 2
 				- font.getBounds(instruction2).width / 2,
 				h / 2 - font.getBounds(instruction2).height / 2 - 20);
-		
+
 		font = new BitmapFont();
 		font.setColor(Color.GREEN);
 		font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, 700);
@@ -88,43 +78,49 @@ public class SnakeHub implements Screen, InputProcessor {
 		instruction2 = new String("tecle 1");
 	}
 
-	
-
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
 	@Override
 	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
+		if (keycode == Input.Keys.F2) {
+			// set resolution to default and toogles full-screen
+			Gdx.graphics.setDisplayMode(
+					Gdx.graphics.getDesktopDisplayMode().width,
+					Gdx.graphics.getDesktopDisplayMode().height,
+					!Gdx.graphics.isFullscreen());
+
+			System.out.println("Toogled fullscreen\n");
+		}
+
+		return true;
 	}
 
 	@Override
@@ -168,7 +164,5 @@ public class SnakeHub implements Screen, InputProcessor {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	
 
 }

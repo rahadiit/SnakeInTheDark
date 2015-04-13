@@ -8,7 +8,7 @@ package snake.interfacesAndAbstract;
  */
 
 
-public abstract class MapEntity implements Drawable {
+public abstract class MapEntity implements Drawable{
 	int xInMap, yInMap;
 	
 	public int getMapPosX() { return xInMap; }

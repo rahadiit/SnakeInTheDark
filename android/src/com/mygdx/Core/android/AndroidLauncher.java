@@ -1,5 +1,12 @@
 package com.mygdx.Core.android;
 
+/*                               Developed By:
+ *                                  NoDark
+ *                               sessaGlasses
+ *  Module: Mr.Strings -- auto-generated
+ */
+
+
 import snake.core.SnakeStart;
 import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;

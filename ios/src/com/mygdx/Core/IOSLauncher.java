@@ -1,6 +1,13 @@
 package com.mygdx.Core;
 
 import org.robovm.apple.foundation.NSAutoreleasePool;
+
+/*                               Developed By:
+ *                                  NoDark
+ *                               sessaGlasses
+ * Module: Mr.Strings -- auto-generated
+ */
+
 import org.robovm.apple.uikit.UIApplication;
 import snake.core.SnakeStart;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;

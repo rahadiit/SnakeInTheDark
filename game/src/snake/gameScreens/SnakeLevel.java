@@ -1,14 +1,19 @@
 package snake.gameScreens;
 
-import snake.core.SnakeStart;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/*                               Developed By:
+ *                                  NoDark
+ *                               sessaGlasses
+ * Module: Mr.Strings
+ */
 
 public class SnakeLevel implements Screen{
 
@@ -45,6 +50,8 @@ public class SnakeLevel implements Screen{
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
+		if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
+			font.draw(batch, "Now you're pressing the space button", 0, 80);
 		font.draw(batch, congratz, 1280/2 - font.getBounds(congratz).width/2, 720/2 - font.getBounds(congratz).height/2 );
 		batch.end();
 	}

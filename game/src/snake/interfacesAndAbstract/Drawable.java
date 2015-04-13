@@ -8,15 +8,19 @@ package snake.interfacesAndAbstract;
 
 public interface Drawable {
 	
-	float getScreenPosX();
-	float getScreenPosY();
+	public float getScreenPosX();
+	public float getScreenPosY();
 	
-	void setScreenPosX();
-	void setScreenPosY();
+	public void setScreenPosX();
+	public void setScreenPosY();
 	
-	void draw();
-	void setVisible(boolean visible);
-	boolean isVisible();
+	public void draw();
+	public void setVisible(boolean visible);
+	public boolean isVisible();
+	public boolean isSubscribed();
+	
+	
+	public void update(float delta);
 	
 	
 }

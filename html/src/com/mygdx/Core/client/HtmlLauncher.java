@@ -5,6 +5,12 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
 
+/*                               Developed By:
+ *                                  NoDark
+ *                               sessaGlasses
+ *  Module: Mr.Strings -- auto-generated
+ */
+
 public class HtmlLauncher extends GwtApplication {
 
         @Override

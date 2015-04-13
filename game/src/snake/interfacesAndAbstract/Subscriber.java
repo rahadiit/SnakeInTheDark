@@ -1,5 +1,11 @@
 package snake.interfacesAndAbstract;
 
+/*                               Developed By:
+ *                                  NoDark
+ *                               sessaGlasses
+ * Module: Mr.Strings
+ */
+
 public interface Subscriber {
 	
 	public void drawAll();
@@ -10,15 +16,12 @@ public interface Subscriber {
 	public void subscribe(Drawable entity);
 	public void unsubscribe (Drawable entity);
 	
-	public void subscribe(Dynamic entity);
-	public void unsubscribe (Dynamic entity);
+	public void subscribe(Drawable entity, int key);
+	public void unsubscribe (Drawable entity, int key);
 	
 	public void subscribe(int key);
 	public void unsubscribe (int key);
 	public void addToBuffer (int key);
-	
-	public void subscribe(Dynamic entity, int key);
-	public void unsubscribe (Dynamic entity, int key);
 	
 	public void unsubscribeAll(String type);
 }

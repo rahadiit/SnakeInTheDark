@@ -1,5 +1,12 @@
 package com.mygdx.Core.desktop;
 
+/*                               Developed By:
+ *                                  NoDark
+ *                               sessaGlasses
+ * Module: Mr.Strings
+ */
+
+
 import snake.core.SnakeStart;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
