@@ -1,5 +1,8 @@
 package snake.interfacesAndAbstract;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+
 
 /*                               Developed By:
  *                                  NoDark
@@ -8,7 +11,7 @@ package snake.interfacesAndAbstract;
  */
 
 
-public abstract class MapEntity implements Drawable{
+public abstract class MapEntity extends Group /* OR ACTOR? */ {
 	int xInMap, yInMap;
 	
 	public int getMapPosX() { return xInMap; }

@@ -6,6 +6,8 @@ package snake.interfacesAndAbstract;
  * Module: Mr.Strings
  */
 
+
+/// Probably won't be used anymore
 public interface Drawable {
 	
 	public float getScreenPosX();

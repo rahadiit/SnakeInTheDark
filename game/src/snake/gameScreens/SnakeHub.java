@@ -21,7 +21,7 @@ public class SnakeHub implements Screen, InputProcessor {
 	private SpriteBatch batch;
 	private BitmapFont font;
 	private float w, h;
-	String instruction, instruction2;
+	String instructions[]; //will be changed to buttons
 
 	public SnakeHub(Game game, SpriteBatch batch) {
 		this.game = game;
@@ -31,6 +31,8 @@ public class SnakeHub implements Screen, InputProcessor {
 		h = Gdx.graphics.getHeight();
 
 		Gdx.input.setInputProcessor(this);
+		
+		instructions = new String[3];
 	}
 
 	@Override
@@ -54,28 +56,29 @@ public class SnakeHub implements Screen, InputProcessor {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
-		if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
-			font.draw(batch, "You're pressing the space button", 0, 80);
+		if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isTouched())
+			font.draw(batch, "You're touching it! (maybe pressing space button).", 0, 80);
 
-		font.draw(batch, instruction, w / 2 - font.getBounds(instruction).width
-				/ 2, h / 2 - font.getBounds(instruction).height / 2 + 50);
-		font.draw(batch, instruction2, w / 2
-				- font.getBounds(instruction2).width / 2,
-				h / 2 - font.getBounds(instruction2).height / 2 - 20);
+		font.draw(batch, instructions[0], w / 2 - font.getBounds(instructions[0]).width
+				/ 2, h / 2 - font.getBounds(instructions[0]).height / 2 + 50);
+		font.draw(batch, instructions[1], w / 2
+				- font.getBounds(instructions[1]).width / 2,
+				h / 2 - font.getBounds(instructions[1]).height / 2 - 20);
 
 		font = new BitmapFont();
 		font.setColor(Color.GREEN);
-		font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, w*5/6);
+		font.setScale(3f);
+		font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, h*99/100);
 		batch.end();
 	}
 
 	private void update() {
 		if (Gdx.input.isKeyPressed(Input.Keys.NUM_1))
 			game.setScreen(new SnakeLevel(
-					game/* Will be changed to "which level" */, batch));
+					game/* Will be added which level */, batch));
 
-		instruction = new String("Para comecar o jogo");
-		instruction2 = new String("tecle 1");
+		instructions[0] = new String("Para comecar o jogo");
+		instructions[1] = new String("tecle 1");
 	}
 
 	@Override

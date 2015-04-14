@@ -1,13 +1,20 @@
 package snake.gameScreens;
 
+import java.util.ArrayList;
+import java.util.Map;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import snake.interfacesAndAbstract.*;
 
 /*                               Developed By:
  *                                  NoDark
@@ -17,11 +24,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SnakeLevel implements Screen{
 
+	public static float MAP_WIDTH, MAP_HEIGHT;
 	private Game game;
 	private SpriteBatch batch;
+	private InputMultiplexer input;
+	private Camera camera;
 	private BitmapFont font;
-	private float w, h;
-	String instruction, instruction2;
+	private Stage stageMap, StageUI;
+	//private Map map;      //TO BE ADDED
+	
+	ArrayList<Drawable> drawSubscribers, updateSubscribers;// will be removed
+	Map<Integer, Drawable> keySubscribers;// will be removed
+	
 	
 	
 	
@@ -30,8 +44,10 @@ public class SnakeLevel implements Screen{
 		this.game = game;
 		this.batch = batch;
 		
-		w = Gdx.graphics.getWidth();
-		h = Gdx.graphics.getHeight();
+		camera = new OrthographicCamera();
+		
+		MAP_WIDTH = Gdx.graphics.getWidth() * 2/3; //TESTING SIZES
+		MAP_HEIGHT = Gdx.graphics.getHeight() * 2/3; //TESTING SIZES
 	}
 	
 	

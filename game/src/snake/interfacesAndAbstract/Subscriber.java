@@ -6,6 +6,9 @@ package snake.interfacesAndAbstract;
  * Module: Mr.Strings
  */
 
+
+
+//Probably wont be used at all
 public interface Subscriber {
 	
 	public void drawAll();
