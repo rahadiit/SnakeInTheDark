@@ -65,7 +65,7 @@ public class SnakeHub implements Screen, InputProcessor {
 
 		font = new BitmapFont();
 		font.setColor(Color.GREEN);
-		font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, 700);
+		font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, w*5/6);
 		batch.end();
 	}
 

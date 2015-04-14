@@ -19,8 +19,6 @@ public interface Subscriber {
 	public void subscribe(Drawable entity, int key);
 	public void unsubscribe (Drawable entity, int key);
 	
-	public void subscribe(int key);
-	public void unsubscribe (int key);
 	public void addToBuffer (int key);
 	
 	public void unsubscribeAll(String type);
