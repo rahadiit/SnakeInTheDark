@@ -44,7 +44,9 @@ public class SnakeLevel implements Screen{
 		this.game = game;
 		this.batch = batch;
 		
-		camera = new OrthographicCamera();
+		camera = new OrthographicCamera(2360, 1440); //Zooming OUT!!!!!!
+		camera.translate(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, 0);  // Going to the middle
+		camera.update(); // Apply changes of last line -- beautiful
 		
 		MAP_WIDTH = Gdx.graphics.getWidth() * 2/3; //TESTING SIZES
 		MAP_HEIGHT = Gdx.graphics.getHeight() * 2/3; //TESTING SIZES
@@ -66,6 +68,7 @@ public class SnakeLevel implements Screen{
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
+		batch.setProjectionMatrix(camera.combined);
 		if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
 			font.draw(batch, "Now you're pressing the space button", 0, 80);
 		font.draw(batch, congratz, 1280/2 - font.getBounds(congratz).width/2, 720/2 - font.getBounds(congratz).height/2 );
