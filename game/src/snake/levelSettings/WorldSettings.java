@@ -17,7 +17,7 @@ import snake.map.WorldMap;
  */
 public class WorldSettings {
 	private static float WORLD_SIZEX = 100, WORLD_SIZEY = 100; //Arbitrary coordinate System.
-	private static float WORLD2SCREEN_RATIOX = 0.5f, WORLD2SCREEN_RATIOY = 0.5f; //Relative to World (Changeable)
+	private static float WORLD2SCREEN_RATIOX = 1, WORLD2SCREEN_RATIOY = 1; //Relative to World (Changeable)
 	
 	
 	// Set the WorldType of the return line to create a custom World class in game (Changeable)
@@ -32,6 +32,7 @@ public class WorldSettings {
 		Camera camera = new OrthographicCamera();
 		
 		Viewport viewport = new StretchViewport(WORLD_SIZEX/WORLD2SCREEN_RATIOX, WORLD_SIZEY/WORLD2SCREEN_RATIOY, camera); //Aspect ratio Strategy for multiple screen resolutions
+		
 		
 		//viewport.getCamera().translate(WORLD_SIZEX/2, WORLD_SIZEY/2, 0);
 		

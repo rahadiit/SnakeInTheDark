@@ -58,7 +58,7 @@ public class SnakeLevel implements Screen{
 		stageWorld.addActor(world);
 		stageHUD.addActor(hud);
 		
-		stageWorld.getViewport().getCamera().translate(WorldSettings.getWorldWidth()/2, WorldSettings.getWorldHeight()/2, 0);
+		//stageWorld.getViewport().getCamera().translate(-WorldSettings.getWorldWidth()/2, -WorldSettings.getWorldHeight()/2, 0);
 		
 		
 		/*camera = new OrthographicCamera(1280, 720);
