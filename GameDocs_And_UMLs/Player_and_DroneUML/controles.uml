@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_kjqNcN06EeS1pIaFLuyAWg">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_kjqNcd06EeS1pIaFLuyAWg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="__zbKYN06EeS1pIaFLuyAWg" name="Player">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_BgakgOLJEeSpWIIP5gimaw" name="player"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_lvhbAOLJEeSpWIIP5gimaw" name="posicaox">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_oxeJEOLJEeSpWIIP5gimaw" name="posicaoy">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_skVooOLHEeSpWIIP5gimaw" name="itensInventario">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+    </ownedAttribute>
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_PyRcwOMaEeSFhvVhNr8_0Q" client="__zbKYN06EeS1pIaFLuyAWg" supplier="_JVDigOLqEeSpWIIP5gimaw" contract="_JVDigOLqEeSpWIIP5gimaw"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_h42-oN07EeS1pIaFLuyAWg" name="acao">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_rpX2cN07EeS1pIaFLuyAWg" name="input">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_55RCoN1GEeS1pIaFLuyAWg" name="mover">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Cbs9wN1HEeS1pIaFLuyAWg" name="direcao">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_Dv04EN1HEeS1pIaFLuyAWg" name="parado"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_FdTGgN1HEeS1pIaFLuyAWg" name="usarItem">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ct6GQN1HEeS1pIaFLuyAWg" name="item">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_eARGAN1HEeS1pIaFLuyAWg" name="listarInventario"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_EbHbEOLJEeSpWIIP5gimaw" name="&lt;&lt;construtor>> Controles">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bjjWQOLJEeSpWIIP5gimaw" name="jogador"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_07sAAOLFEeSpWIIP5gimaw" name="Drone">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_3IU2sOLFEeSpWIIP5gimaw" name="posicaox">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_9W21gOLFEeSpWIIP5gimaw" name="posicaoy">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_WFfScOLGEeSpWIIP5gimaw" name="direcao">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+    </ownedAttribute>
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_aI9jwOMaEeSFhvVhNr8_0Q" client="_07sAAOLFEeSpWIIP5gimaw" supplier="_R5XF4OLqEeSpWIIP5gimaw" contract="_R5XF4OLqEeSpWIIP5gimaw"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_JZHGcOLGEeSpWIIP5gimaw" name="mover"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_iG2LgOLGEeSpWIIP5gimaw" name="Drone">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_tXtbwOLGEeSpWIIP5gimaw" name="posicaox">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_x7S7sOLGEeSpWIIP5gimaw" name="posicaoy">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_2euqoOLGEeSpWIIP5gimaw" name="direcao">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_JVDigOLqEeSpWIIP5gimaw" name="IPlayer">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_L2Ps4OLqEeSpWIIP5gimaw" name="parado"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_L2QT8OLqEeSpWIIP5gimaw" name="acao">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_L2QT8eLqEeSpWIIP5gimaw" name="input">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_L2QT8uLqEeSpWIIP5gimaw" name="mover">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_L2QT8-LqEeSpWIIP5gimaw" name="direcao">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_L2QT9OLqEeSpWIIP5gimaw" name="Controles">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_L2QT9eLqEeSpWIIP5gimaw" name="jogador"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_L2QT9uLqEeSpWIIP5gimaw" name="listarInventario"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_L2QT9-LqEeSpWIIP5gimaw" name="usarItem">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_L2QT-OLqEeSpWIIP5gimaw" name="item">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_R5XF4OLqEeSpWIIP5gimaw" name="IDrone">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_S5ma4OLqEeSpWIIP5gimaw" name="Drone">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_S5ma4eLqEeSpWIIP5gimaw" name="posicaox">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_S5ma4uLqEeSpWIIP5gimaw" name="posicaoy">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_S5ma4-LqEeSpWIIP5gimaw" name="direcao">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_S5nB8OLqEeSpWIIP5gimaw" name="mover"/>
+  </packagedElement>
+</uml:Model>

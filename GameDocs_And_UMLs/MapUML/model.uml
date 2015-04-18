@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Qmdc8OLREeSAE85AlOtbMQ" name="Model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_Qmdc8eLREeSAE85AlOtbMQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_mHHvwOLWEeSAE85AlOtbMQ" name="List&lt;Entity>" visibility="public"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_oBANEOLXEeSAE85AlOtbMQ" name="Map">
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_rRcqIOLXEeSAE85AlOtbMQ" name="MapAccess" visibility="public" type="_YirFkOLREeSAE85AlOtbMQ" aggregation="composite"/>
+    <nestedClassifier xmi:type="uml:Interface" xmi:id="_rI0PYOLTEeSAE85AlOtbMQ" name="Drawable">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_rBZG0OLVEeSAE85AlOtbMQ" name="draw"/>
+    </nestedClassifier>
+    <nestedClassifier xmi:type="uml:Interface" xmi:id="_YirFkOLREeSAE85AlOtbMQ" name="MapAccess">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_FAPLQOLSEeSAE85AlOtbMQ" name="getEntities">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_jktn8OLXEeSAE85AlOtbMQ" type="_mHHvwOLWEeSAE85AlOtbMQ" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_YKjrEOLSEeSAE85AlOtbMQ" name="setTile" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_tBdogOLSEeSAE85AlOtbMQ" name="x">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_yBraEOLSEeSAE85AlOtbMQ" name="y">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_C9Kq0OLTEeSAE85AlOtbMQ" name="type" type="_2zqiYOLSEeSAE85AlOtbMQ"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_6QKzkOLUEeSAE85AlOtbMQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Kc-rUOLTEeSAE85AlOtbMQ" name="revealTile" visibility="public" concurrency="guarded">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_OUw1MOLTEeSAE85AlOtbMQ" name="x">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Ply_QOLTEeSAE85AlOtbMQ" name="y">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_3xnGcOLUEeSAE85AlOtbMQ" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_l_V0IOLTEeSAE85AlOtbMQ" name="addEffect" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_3l-ToOLTEeSAE85AlOtbMQ" name="effect" type="_omSoQOLTEeSAE85AlOtbMQ"/>
+      </ownedOperation>
+    </nestedClassifier>
+    <nestedClassifier xmi:type="uml:Enumeration" xmi:id="_2zqiYOLSEeSAE85AlOtbMQ" name="TileType">
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_7qegUOLSEeSAE85AlOtbMQ" name="Clear"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_8uqhMOLSEeSAE85AlOtbMQ" name="Wall"/>
+      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_9eA6gOLSEeSAE85AlOtbMQ" name="Hole"/>
+    </nestedClassifier>
+    <nestedClassifier xmi:type="uml:Class" xmi:id="_omSoQOLTEeSAE85AlOtbMQ" name="Entity" isAbstract="true">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_yPXbUOLTEeSAE85AlOtbMQ" client="_omSoQOLTEeSAE85AlOtbMQ" supplier="_rI0PYOLTEeSAE85AlOtbMQ" contract="_rI0PYOLTEeSAE85AlOtbMQ"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_uBlhYOLVEeSAE85AlOtbMQ" name="draw"/>
+    </nestedClassifier>
+  </packagedElement>
+</uml:Model>

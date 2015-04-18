@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SnakeStart extends Game {
 	public SpriteBatch batch;
-	public BitmapFont font;
 	
 	// Note: This will be deleted soon
 	/*Texture img;
@@ -22,12 +21,12 @@ public class SnakeStart extends Game {
 	int i = 0, j = 0;
 	int vi = 2, vj = 2; */
 	
-	
+	public SpriteBatch getBatch () {return batch;}
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		font = new BitmapFont();
-		this.setScreen(new SnakeHub(this, batch));
+		this.setScreen(new SnakeHub(this));
 		
 		// Yep, same thing with these
 		/*img = new Texture("badlogic.jpg");
@@ -57,6 +56,5 @@ public class SnakeStart extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		font.dispose();
 	}
 }

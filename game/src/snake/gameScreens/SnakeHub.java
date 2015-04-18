@@ -1,5 +1,6 @@
 package snake.gameScreens;
 
+import snake.core.SnakeStart;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -17,15 +18,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 
 public class SnakeHub implements Screen, InputProcessor {
-	private Game game;
+	private SnakeStart game;
 	private SpriteBatch batch;
 	private BitmapFont font;
 	private float w, h;
 	String instructions[]; //will be changed to buttons
 
-	public SnakeHub(Game game, SpriteBatch batch) {
+	public SnakeHub(SnakeStart game) {
 		this.game = game;
-		this.batch = batch;
+		this.batch = game.getBatch();
 
 		w = Gdx.graphics.getWidth();
 		h = Gdx.graphics.getHeight();
@@ -74,8 +75,7 @@ public class SnakeHub implements Screen, InputProcessor {
 
 	private void update() {
 		if (Gdx.input.isKeyPressed(Input.Keys.NUM_1))
-			game.setScreen(new SnakeLevel(
-					game/* Will be added which level */, batch));
+			game.setScreen(new SnakeLevel(game, "Generic Level"));
 
 		instructions[0] = new String("Para comecar o jogo");
 		instructions[1] = new String("tecle 1");
