@@ -1,11 +1,6 @@
 package snake.gameScreens;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Vector;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
@@ -32,12 +27,10 @@ public class SnakeLevel implements Screen{
 	private SnakeStart game;
 	private SpriteBatch batch;
 	private InputMultiplexer input;
-	private Camera camera;
 	private BitmapFont font;
 	private Stage stageWorld, stageHUD;
 	private GameWorld world;      
 	private HUD hud;
-	private String congratz;
 	
 	
 	public SnakeLevel (SnakeStart game,  String level) {
@@ -59,12 +52,10 @@ public class SnakeLevel implements Screen{
 		stageHUD.addActor(hud);
 		
 		//stageWorld.getViewport().getCamera().translate(-WorldSettings.getWorldWidth()/2, -WorldSettings.getWorldHeight()/2, 0);
-		
-		
-		/*camera = new OrthographicCamera(1280, 720);
-		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
-		camera.translate(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, 0);  // Going to the middle
-		camera.update(); */
+		input = new InputMultiplexer();
+		//input.addProcessor(stageWorld./*Something()*/);
+		//input.addProcessor(stageHUD./*Something()*/);
+	
 	}
 	
 	
@@ -72,7 +63,7 @@ public class SnakeLevel implements Screen{
 	public void show() {
 		font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), false);
 		font.setColor(Color.GREEN);
-		congratz = new String ("Well done, you pressed it!");
+		new String ("Well done, you pressed it!");
 	}
 
 	@Override

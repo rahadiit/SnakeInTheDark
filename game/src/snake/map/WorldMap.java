@@ -34,7 +34,7 @@ public class WorldMap extends GameWorld {
 		texture = new Texture(Gdx.files.internal("TorontoView.jpeg"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		sprite = new Sprite(texture);
-		sprite.setOrigin(0,0);
+		//sprite.setOrigin(0,0);
 		sprite.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
 		//sprite.setPosition(-sprite.getWidth()/2,-sprite.getHeight()/2);
 

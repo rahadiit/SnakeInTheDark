@@ -17,7 +17,7 @@ import snake.map.WorldMap;
  */
 public class WorldSettings {
 	private static float WORLD_SIZEX = 100, WORLD_SIZEY = 100; //Arbitrary coordinate System.
-	private static float WORLD2SCREEN_RATIOX = 1, WORLD2SCREEN_RATIOY = 1; //Relative to World (Changeable)
+	private static float WORLD2SCREEN_RATIOX = 2, WORLD2SCREEN_RATIOY = 2; //Relative to World (Changeable)
 	
 	
 	// Set the WorldType of the return line to create a custom World class in game (Changeable)
