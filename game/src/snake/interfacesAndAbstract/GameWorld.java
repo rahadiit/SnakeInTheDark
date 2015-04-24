@@ -17,5 +17,6 @@ public abstract class GameWorld extends Group /* Group make it connected to MapE
 	
 	public GameWorld (SnakeStart game) {
 		this.game = game;
+		this.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
 	}
 }
