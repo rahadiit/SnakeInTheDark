@@ -25,6 +25,9 @@ hs_err_pid*
 # Built libraries
 android/libs
 
+#settings
+android/.settings
+
 # Generated files
 bin/
 gen/
