@@ -93,6 +93,15 @@ public class SnakeLevel implements Screen {
 				
 				stageWorld.draw();
 				stageHUD.draw();
+				
+				// Draw fps
+				batch.begin();
+				font.setColor(Color.GREEN);
+				font.setScale(1f);
+				font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), Gdx.graphics.getWidth() * 5/100, Gdx.graphics.getHeight() * 105/100);
+				batch.end();
+				//Ends drawing
+				
 				break;
 				
 			case CUTSCENE:

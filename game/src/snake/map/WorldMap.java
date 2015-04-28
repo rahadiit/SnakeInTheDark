@@ -48,6 +48,10 @@ public class WorldMap extends GameWorld {
 	public void draw (Batch batch, float parentAlpha) {
 		
 		sprite.draw(batch);
+		
+		
+				
+				
 		/*if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
 			font.draw(batch, "Now you're pressing the space button", 0, 80);
 		font.draw(batch, congratz, 50 - font.getBounds(congratz).width/2, 50 - font.getBounds(congratz).height/2 );*/
