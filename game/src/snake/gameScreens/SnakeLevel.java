@@ -1,10 +1,12 @@
 package snake.gameScreens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,7 +15,6 @@ import snake.core.SnakeStart;
 import snake.interfacesAndAbstract.*;
 import snake.levelSettings.HUDSettings;
 import snake.levelSettings.WorldSettings;
-import snake.map.WorldMap;
 
 /*                               Developed By:
  *                                  NoDark
@@ -23,6 +24,12 @@ import snake.map.WorldMap;
 
 public class SnakeLevel implements Screen {
 
+	public static final int ACTIVE = 1;
+	public static final int NOINPUT = -1;
+	public static final int CUTSCENE = 2;
+	public static final int PAUSED = -2;
+	
+	
 	private SnakeStart game;
 	private SpriteBatch batch;
 	private InputMultiplexer input;
@@ -30,6 +37,9 @@ public class SnakeLevel implements Screen {
 	private Stage stageWorld, stageHUD;
 	private GameWorld world;
 	private HUD hud;
+	private Animation cutscene;
+	private int state = ACTIVE;
+	private float time;
 
 	public SnakeLevel(SnakeStart game, String level) {
 		this.game = game;
@@ -49,22 +59,16 @@ public class SnakeLevel implements Screen {
 		stageWorld.addActor(world);
 		stageHUD.addActor(hud);
 
-		// stageWorld.getViewport().getCamera().translate(-WorldSettings.getWorldWidth()/2,
-		// -WorldSettings.getWorldHeight()/2, 0);
+		
+		// Let stages listen to input events
 		input = new InputMultiplexer();
-		// input.addProcessor(stageWorld./*Something()*/);
-		// input.addProcessor(stageHUD./*Something()*/);
-
+		input.addProcessor(stageWorld);
+		input.addProcessor(stageHUD);
+		 
+		Gdx.input.setInputProcessor(input);
 	}
 	
-	public Viewport getWorldViewport() {return stageWorld.getViewport();}
-
-	public Viewport getHUDViewPort() {return stageHUD.getViewport();}
-
-	public GameWorld getGameWorld() {return world;}
 	
-	public HUD getHUD() {return hud;}
-
 	
 	@Override
 	public void show() {
@@ -75,20 +79,32 @@ public class SnakeLevel implements Screen {
 
 	@Override
 	public void render(float delta) {
-
+		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-
-		stageWorld.draw();
-		stageHUD.draw();
-
-		/*
-		 * batch.setProjectionMatrix(camera.combined); batch.begin(); if
-		 * (Gdx.input.isKeyPressed(Input.Keys.SPACE)) font.draw(batch,
-		 * "Now you're pressing the space button", 0, 80); font.draw(batch,
-		 * congratz, 1280/2 - font.getBounds(congratz).width/2, 720/2 -
-		 * font.getBounds(congratz).height/2 ); batch.end();
-		 */
+		
+		getInput();
+		
+		switch (state) {
+			case ACTIVE:
+			case NOINPUT:
+				stageWorld.act(delta);
+				stageHUD.act(delta);
+				
+				stageWorld.draw();
+				stageHUD.draw();
+				break;
+				
+			case CUTSCENE:
+				
+				if (cutscene != null)
+					batch.draw(cutscene.getKeyFrame(time), 0, 0);
+				time += delta;
+				break;
+				
+			default:
+				break;
+		}
 	}
 
 	@Override
@@ -114,12 +130,76 @@ public class SnakeLevel implements Screen {
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void dispose() {
 		stageWorld.dispose();
 		stageHUD.dispose();
+	}
+	
+	
+	private void getInput () {
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && 
+				WorldSettings.getCameraPosX() - stageWorld.getCamera().viewportWidth/2 > 0)
+			moveCamera(-0.2f, 0);
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) &&
+				stageWorld.getCamera().viewportWidth/2 + WorldSettings.getCameraPosX() < WorldSettings.getWorldWidth())
+			moveCamera(0.2f, 0);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && 
+				WorldSettings.getCameraPosY() - stageWorld.getCamera().viewportHeight/2 > 0)
+			moveCamera(0, -0.2f);
+		if (Gdx.input.isKeyPressed(Input.Keys.UP) &&
+				stageWorld.getCamera().viewportHeight/2 + WorldSettings.getCameraPosY() < WorldSettings.getWorldHeight())
+			moveCamera(0, 0.2f);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.O) && 
+				WorldSettings.getWorld2ScreenRatioX() < 5 && WorldSettings.getWorld2ScreenRatioY() < 5)
+			zoomCamera(.9f, .9f);
+		if (Gdx.input.isKeyPressed(Input.Keys.P) && 
+				WorldSettings.getWorld2ScreenRatioX() > 1 && WorldSettings.getWorld2ScreenRatioY() > 1)
+			zoomCamera(1.1f, 1.1f);
+	}
+	
+	
+	public void moveCamera (float x, float y) {
+		stageWorld.getCamera().translate(x, y, 0);
+		
+		WorldSettings.moveCamera(x, y);
+	}
+	
+	
+	public void zoomCamera (float x, float y) {
+		stageWorld.getCamera().viewportWidth *= x;
+		stageWorld.getCamera().viewportHeight *= y;
+		
+		WorldSettings.setWorld2ScreenRatio(WorldSettings.getWorldWidth()/stageWorld.getCamera().viewportWidth,
+				WorldSettings.getWorldHeight()/stageWorld.getCamera().viewportHeight);
+		
+	}
+	
+
+	
+	
+	
+	
+	/* ------------------------------ Getters ------------------------------ */
+	public Viewport getWorldViewport() {return stageWorld.getViewport();}
+
+	public Viewport getHUDViewPort() {return stageHUD.getViewport();}
+
+	public GameWorld getGameWorld() {return world;}
+	
+	public HUD getHUD() {return hud;}
+	
+	/* ------------------------------ Setters ------------------------------ */
+	public boolean setGameState(int state) {
+		if (state >= -2 && state <= 2) {
+			this.state = state;
+			return true;
+		}
+		else
+			return false;
 	}
 }

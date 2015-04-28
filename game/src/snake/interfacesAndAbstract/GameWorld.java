@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
  */
 
 
-public abstract class GameWorld extends Group /* Group make it connected to MapEntities */ {
+public abstract class GameWorld extends Group /* Group makes it connected to MapEntities */ {
 	protected SnakeStart game;
 	
 	public GameWorld (SnakeStart game) {

@@ -34,12 +34,11 @@ public class WorldMap extends GameWorld {
 		texture = new Texture(Gdx.files.internal("TorontoView.jpeg"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		sprite = new Sprite(texture);
-		//sprite.setOrigin(0,0);
 		sprite.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
 		
 		
-		//sprite.setPosition(-sprite.getWidth()/2,-sprite.getHeight()/2);
-		/*font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), false);
+
+		/*font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), Gdx.files.internal("ak_sc_o.png"), false);
 		font.setColor(Color.GREEN);
 		congratz = new String ("Well done, you pressed it!");*/
 		
@@ -51,6 +50,6 @@ public class WorldMap extends GameWorld {
 		sprite.draw(batch);
 		/*if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
 			font.draw(batch, "Now you're pressing the space button", 0, 80);
-		font.draw(batch, congratz, 100 /*1280/2 - font.getBounds(congratz).width/2, 100/*720/2 - font.getBounds(congratz).height/2 );*/
+		font.draw(batch, congratz, 50 - font.getBounds(congratz).width/2, 50 - font.getBounds(congratz).height/2 );*/
 	}
 }

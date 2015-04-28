@@ -1,7 +1,6 @@
 package snake.gameScreens;
 
 import snake.core.SnakeStart;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -51,34 +50,40 @@ public class SnakeHub implements Screen, InputProcessor {
 	private void draw() {
 		font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), false);
 		font.setColor(Color.GREEN);
-
+		
+		
+		//Starts drawing
 		batch.begin();
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
+		//Drawing touch input
 		if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isTouched())
 			font.draw(batch, "You're touching it! (maybe pressing space button).", 0, 80);
 
+		//Drawing instructions
 		font.draw(batch, instructions[0], w / 2 - font.getBounds(instructions[0]).width
 				/ 2, h / 2 - font.getBounds(instructions[0]).height / 2 + 50);
 		font.draw(batch, instructions[1], w / 2
 				- font.getBounds(instructions[1]).width / 2,
 				h / 2 - font.getBounds(instructions[1]).height / 2 - 20);
 
+		// Draw fps
 		font = new BitmapFont();
 		font.setColor(Color.GREEN);
 		font.setScale(3f);
 		font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, h*99/100);
 		batch.end();
+		//Ends drawing
 	}
 
 	private void update() {
-		if (Gdx.input.isKeyPressed(Input.Keys.NUM_1))
+		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
 			game.setScreen(new SnakeLevel(game, "Generic Level"));
 
 		instructions[0] = new String("Para comecar o jogo");
-		instructions[1] = new String("tecle 1");
+		instructions[1] = new String("tecle ENTER");
 	}
 
 	@Override
@@ -113,7 +118,7 @@ public class SnakeHub implements Screen, InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		if (keycode == Input.Keys.F2) {
+		if (keycode == Input.Keys.F1) {
 			// set resolution to default and toogles full-screen
 			Gdx.graphics.setDisplayMode(
 					Gdx.graphics.getDesktopDisplayMode().width,
