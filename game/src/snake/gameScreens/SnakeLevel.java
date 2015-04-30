@@ -29,7 +29,7 @@ public class SnakeLevel implements Screen {
 	public static final int CUTSCENE = 2;
 	public static final int PAUSED = -2;
 	public static final Boolean UPDATEFOCUS = true;
-	public static final Boolean RENDERFOCUS = false;
+	public static final Boolean DRAWFOCUS = false;
 	public static final Boolean NOFOCUS = null;
 	private static float EXPECTED_DELTA_DRAW = 1/60, EXPECTED_DELTA_UPDATE = 1/60;
 	private static int MAX_FRAMES_SKIPPED = 5, MAX_LOGIC_SKIPPED =  5;
@@ -123,7 +123,7 @@ public class SnakeLevel implements Screen {
 			else
 				framesSkipped++;
 		}
-		else {
+		else if (strategy == DRAWFOCUS){
 			if (delta <= EXPECTED_DELTA_UPDATE|| logicSkipped < MAX_LOGIC_SKIPPED) {
 				logicSkipped = 0;
 				stageWorld.act();
@@ -134,6 +134,13 @@ public class SnakeLevel implements Screen {
 
 			stageWorld.draw();
 			stageHUD.draw();
+		} else {
+			stageWorld.act();
+			stageHUD.act();
+			
+			stageWorld.draw();
+			stageHUD.draw();
+			
 		}
 		
 		// Draw fps
