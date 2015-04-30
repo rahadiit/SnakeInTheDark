@@ -140,7 +140,6 @@ public class SnakeLevel implements Screen {
 			
 			stageWorld.draw();
 			stageHUD.draw();
-			
 		}
 		
 		// Draw fps
@@ -246,5 +245,10 @@ public class SnakeLevel implements Screen {
 		}
 		else
 			return false;
+	}
+	
+	
+	public void setStrategy (Boolean strategy) {
+		this.strategy = strategy;
 	}
 }
