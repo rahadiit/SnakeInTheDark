@@ -28,7 +28,11 @@ public class SnakeLevel implements Screen {
 	public static final int NOINPUT = -1;
 	public static final int CUTSCENE = 2;
 	public static final int PAUSED = -2;
-	
+	public static final Boolean UPDATEFOCUS = true;
+	public static final Boolean RENDERFOCUS = false;
+	public static final Boolean NOFOCUS = null;
+	private static float EXPECTED_DELTA_DRAW = 1/60, EXPECTED_DELTA_UPDATE = 1/60;
+	private static int MAX_FRAMES_SKIPPED = 5;
 	
 	private SnakeStart game;
 	private SpriteBatch batch;
@@ -40,6 +44,8 @@ public class SnakeLevel implements Screen {
 	private Animation cutscene;
 	private int state = ACTIVE;
 	private float time;
+	private boolean strategy = UPDATEFOCUS;
+	private int framesSkipped = 0;
 
 	public SnakeLevel(SnakeStart game, String level) {
 		this.game = game;
@@ -86,26 +92,12 @@ public class SnakeLevel implements Screen {
 		getInput();
 		
 		switch (state) {
-			case ACTIVE:
 			case NOINPUT:
-				stageWorld.act(delta);
-				stageHUD.act(delta);
-				
-				stageWorld.draw();
-				stageHUD.draw();
-				
-				// Draw fps
-				batch.begin();
-				font.setColor(Color.GREEN);
-				font.setScale(1f);
-				font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), Gdx.graphics.getWidth() * 5/100, Gdx.graphics.getHeight() * 105/100);
-				batch.end();
-				//Ends drawing
-				
+			case ACTIVE:
+				onRender(delta);
 				break;
 				
 			case CUTSCENE:
-				
 				if (cutscene != null)
 					batch.draw(cutscene.getKeyFrame(time), 0, 0);
 				time += delta;
@@ -114,6 +106,36 @@ public class SnakeLevel implements Screen {
 			default:
 				break;
 		}
+	}
+	
+	
+	private void onRender(float delta) {
+		
+		if (strategy == UPDATEFOCUS) {
+			stageWorld.act(delta);
+			stageHUD.act(delta);
+		
+			if (delta <= EXPECTED_DELTA_RENDER || framesSkipped > MAX_FRAMES_SKIPPED) {
+				framesSkipped = 0;
+				stageWorld.draw();
+				stageHUD.draw();
+			}
+			else
+				framesSkipped++;
+		}
+		else {
+			stageWorld.draw();
+			stageHUD.draw();
+
+		}
+		
+		// Draw fps
+		batch.begin();
+		font.setColor(Color.GREEN);
+		font.setScale(1f);
+		font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), Gdx.graphics.getWidth() * 5/100, Gdx.graphics.getHeight() * 105/100);
+		batch.end();
+		//Ends drawing
 	}
 
 	@Override
