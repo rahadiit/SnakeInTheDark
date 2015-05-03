@@ -13,5 +13,7 @@ public class SnakeDialogHUD {
 	public SnakeDialogHUD(GameWorld world) {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 }

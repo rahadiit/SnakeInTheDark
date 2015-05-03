@@ -10,11 +10,11 @@ import com.badlogic.gdx.assets.AssetManager;
  */
 
 public class Loader {
-	private AssetManager assetMan = null;
+	private static AssetManager assetMan = null;
 	
 	private Loader() {};
 	
-	public AssetManager getManager () {
+	public static AssetManager getManager () {
 		if (assetMan == null)
 			assetMan = new AssetManager ();
 		return assetMan;

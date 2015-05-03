@@ -4,12 +4,16 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import snake.core.SnakeStart;
+import snake.imageUtilities.CameraMan;
 import snake.interfacesAndAbstract.GameWorld;
 import snake.levelSettings.WorldSettings;
 
@@ -23,37 +27,49 @@ import snake.levelSettings.WorldSettings;
 public class WorldMap extends GameWorld {
 	
 	// The code below is simply a prototype for testing purposes 
-	private BitmapFont font;
-	private String congratz;
 	private Texture texture;
 	private Sprite sprite;
 	
-	public WorldMap (SnakeStart game /* Add other parameters of choice*/) {
-		super(game);
+	public WorldMap (/* Add other parameters of choice*/) {
 
 		texture = new Texture(Gdx.files.internal("TorontoView.jpeg"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		sprite = new Sprite(texture);
 		sprite.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
-		
-		
-
-		/*font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), Gdx.files.internal("ak_sc_o.png"), false);
-		font.setColor(Color.GREEN);
-		congratz = new String ("Well done, you pressed it!");*/
-		
+	}
+	
+	
+	@Override
+	public void act(float delta) {
+		getInput(delta);
 	}
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) {
-		
+		super.draw(batch, parentAlpha);
 		sprite.draw(batch);
-		
-		
-				
-				
-		/*if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
-			font.draw(batch, "Now you're pressing the space button", 0, 80);
-		font.draw(batch, congratz, 50 - font.getBounds(congratz).width/2, 50 - font.getBounds(congratz).height/2 );*/
 	}
+	
+	
+	private void getInput (float delta) {
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+			CameraMan.moveCamera(this.getStage(), -20f * delta, 0);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+			CameraMan.moveCamera(this.getStage(), 20f * delta, 0);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+			CameraMan.moveCamera(this.getStage(), 0, -20f * delta);
+		if (Gdx.input.isKeyPressed(Input.Keys.UP))
+			CameraMan.moveCamera(this.getStage(), 0, 20f * delta);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.O))
+			CameraMan.zoomCamera(this.getStage(),-.5f * delta, -.5f * delta);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.P))
+			CameraMan.zoomCamera(this.getStage(),.5f * delta, .5f * delta);
+	}
+	
+
 }

@@ -2,6 +2,7 @@ package snake.interfacesAndAbstract;
 
 import snake.core.SnakeStart;
 import snake.levelSettings.WorldSettings;
+import snake.levelSettings.WorldStage;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
@@ -13,10 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 
 
 public abstract class GameWorld extends Group /* Group makes it connected to MapEntities */ {
-	protected SnakeStart game;
 	
-	public GameWorld (SnakeStart game) {
-		this.game = game;
+	public GameWorld () {
 		this.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
+		
+	}
+	
+	@Override
+	public WorldStage getStage() {
+		return (WorldStage) super.getStage();
 	}
 }
