@@ -5,14 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import snake.core.SnakeStart;
 import snake.interfacesAndAbstract.*;
 import snake.levelSettings.HUDSettings;
@@ -54,7 +49,7 @@ public class SnakeLevel implements Screen {
 		hud = HUDSettings.createHUD(world);
 
 		// Creates a stage (world organizer)
-		stageWorld = WorldSettings.createWorldStage(game, world);
+		stageWorld = WorldSettings.createWorldStage(game.getBatch(), this, world);
 		// Creates a stage (UI organizer)
 		stageHUD = HUDSettings.createHUDStage(game, hud);
 
@@ -200,6 +195,10 @@ public class SnakeLevel implements Screen {
 	public GameWorld getGameWorld() {return world;}
 	
 	public HUD getHUD() {return hud;}
+	
+	public Stage getHudStage() {return stageHUD;}
+	
+	public Stage getWorldStage() {return stageWorld;}
 	
 	/* ------------------------------ Setters ------------------------------ */
 	public void setGameState(State state) {this.state = state; }

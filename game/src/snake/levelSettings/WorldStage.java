@@ -1,7 +1,10 @@
 package snake.levelSettings;
 
+import snake.gameScreens.SnakeLevel;
+import snake.imageUtilities.CameraMan;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -15,47 +18,71 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 
 public class WorldStage extends Stage {
-	private Rectangle clipBounds, scissors; 
-	//private OrthographicCamera
+	private SnakeLevel level;
+	private Rectangle clipBounds, scissors;
+	private CameraMan cameraMan;
 	
-	public WorldStage() {
+	public WorldStage(SnakeLevel level) {
 		super();
-		createScissors();
+		this.level = level;
+		cameraMan = new CameraMan (this);
 	}
-	public WorldStage(Viewport viewport) {
+	public WorldStage(SnakeLevel level, Viewport viewport) {
 		super(viewport);
-		createScissors();
+		this.level = level;
+		cameraMan = new CameraMan (this);
 	}
-	public WorldStage(Viewport viewport, Batch batch) {
+	public WorldStage(SnakeLevel level, Viewport viewport, Batch batch) {
 		super(viewport, batch);
-		createScissors();
+		this.level = level;
+		cameraMan = new CameraMan (this);
+	}
+	
+	
+	@Override
+	public void act (float delta) {
+		getInput(delta);
+		super.act(delta);
 	}
 	
 	@Override
 	public void draw() {
 		
-		Gdx.gl.glViewport(200, 200, 1000, 1000*Gdx.graphics.getHeight()/Gdx.graphics.getWidth());
-		if (WorldSettings.hasVirtualScreen()) {
-			ScissorStack.pushScissors(scissors);
-		}
+		cameraMan.setCamera();
 		super.draw();
-		if (WorldSettings.hasVirtualScreen()) {
-			ScissorStack.popScissors();
-		}
+		cameraMan.unsetCamera();
+	}
+	
+	
+	private void getInput (float delta) {
 		
-		Gdx.gl.glViewport(0, 0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+			cameraMan.moveCamera(this.getBatch(), -20f * delta, 0);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+			cameraMan.moveCamera(this.getBatch(), 20f * delta, 0);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+			cameraMan.moveCamera(this.getBatch(), 0, -20f * delta);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.UP))
+			cameraMan.moveCamera(this.getBatch(), 0, 20f * delta);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.O))
+			cameraMan.zoomCamera(-.5f * delta);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.P))
+			cameraMan.zoomCamera(.5f * delta);
 	}
 	
-	public void createScissors() {
-		scissors = new Rectangle();
-		clipBounds = new Rectangle (WorldSettings.getVScreenX(), WorldSettings.getVScreenY(), 
-				WorldSettings.getVScreenWidth(), WorldSettings.getVScreenHeight());
 	
-		ScissorStack.calculateScissors(this.getCamera(), this.getBatch().getTransformMatrix(), clipBounds, scissors);
-	}
 	
-	public Rectangle getClipBounds () {
-		return clipBounds;
+	
+	
+	/* ---------------- Getters --------------- */
+	public SnakeLevel getLevel() {
+		return level;
 	}
 	
 }

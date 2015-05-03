@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import snake.core.SnakeStart;
 import snake.imageUtilities.CameraMan;
 import snake.interfacesAndAbstract.GameWorld;
@@ -31,7 +32,7 @@ public class WorldMap extends GameWorld {
 	private Sprite sprite;
 	
 	public WorldMap (/* Add other parameters of choice*/) {
-
+		
 		texture = new Texture(Gdx.files.internal("TorontoView.jpeg"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		sprite = new Sprite(texture);
@@ -40,36 +41,12 @@ public class WorldMap extends GameWorld {
 	
 	
 	@Override
-	public void act(float delta) {
-		getInput(delta);
-	}
+	public void act(float delta) {}
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
 		sprite.draw(batch);
 	}
-	
-	
-	private void getInput (float delta) {
-		
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-			CameraMan.moveCamera(this.getStage(), -20f * delta, 0);
-		
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-			CameraMan.moveCamera(this.getStage(), 20f * delta, 0);
-		
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
-			CameraMan.moveCamera(this.getStage(), 0, -20f * delta);
-		if (Gdx.input.isKeyPressed(Input.Keys.UP))
-			CameraMan.moveCamera(this.getStage(), 0, 20f * delta);
-		
-		if (Gdx.input.isKeyPressed(Input.Keys.O))
-			CameraMan.zoomCamera(this.getStage(),-.5f * delta, -.5f * delta);
-		
-		if (Gdx.input.isKeyPressed(Input.Keys.P))
-			CameraMan.zoomCamera(this.getStage(),.5f * delta, .5f * delta);
-	}
-	
 
 }
