@@ -3,7 +3,6 @@ package snake.levelSettings;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import snake.core.SnakeStart;
@@ -13,10 +12,12 @@ import snake.interfacesAndAbstract.HUD;
 
 
 
-/*                               Developed By:
+/**                               Developed By:
  *                                  NoDark
  *                               sessaGlasses
- * Module: Mr.Strings (modifiable according to need)
+ * @author Mr.Strings (Modifiable according to need)
+ * 
+ * Controls HUD Parameters, such as size, camera infos, etc.
  */
 
 public abstract class HUDSettings {

@@ -170,6 +170,9 @@ public class SnakeLevel implements Screen {
 	public void dispose() {
 		stageWorld.dispose();
 		stageHUD.dispose();
+		
+		world.dispose();
+		hud.dispose();
 	}
 	
 	

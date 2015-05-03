@@ -1,14 +1,17 @@
 package snake.interfacesAndAbstract;
 
 import snake.core.SnakeStart;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 
-/*                               Developed By:
+/**                              Developed By:
  *                                  NoDark
  *                               sessaGlasses
- * Module: Mr.Strings
+ *                               
+ * Entity that belongs to a GameWorld             
+ * 
+ * @actor Mr.Strings
+ * 
  */
 
 

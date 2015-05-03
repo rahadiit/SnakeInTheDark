@@ -8,10 +8,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import snake.interfacesAndAbstract.GameWorld;
 import snake.interfacesAndAbstract.HUD;
 
-/*                               Developed By:
- *                                  NoDark
- *                               sessaGlasses
- * Module: Mr.Strings
+/**                               Developed By:
+ *                                   NoDark
+ *                                sessaGlasses
+ * 
+ * Game HUD, to display status and general information
+ * 
+ * @author Mr.Strings
  */
 
 
@@ -43,5 +46,11 @@ public class SnakeHUD extends HUD {
 			font.draw(batch, "Wow. Just... Wow.", 50, 50);
 		}
 		//Ends drawing
+	}
+
+
+	@Override
+	public void dispose() {
+		font.dispose();
 	}
 }

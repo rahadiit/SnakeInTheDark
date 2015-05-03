@@ -3,23 +3,22 @@ package snake.levelSettings;
 import snake.gameScreens.SnakeLevel;
 import snake.imageUtilities.CameraMan;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-/*                               Developed By:
- *                                  NoDark
- *                               sessaGlasses
- * Module: Mr.Strings
+/**                               Developed By:
+ *                                   NoDark
+ *                                sessaGlasses
+ * 
+ * Convenient extension of Stage for camera Handling
+ * 
+ * @author Mr.Strings
  */
 
 public class WorldStage extends Stage {
 	private SnakeLevel level;
-	private Rectangle clipBounds, scissors;
 	private CameraMan cameraMan;
 	
 	public WorldStage(SnakeLevel level) {
@@ -54,35 +53,43 @@ public class WorldStage extends Stage {
 	}
 	
 	
+	/** Get Input -- passes to CameraMan User requests
+	 * 
+	 * @param delta
+	 */
 	private void getInput (float delta) {
 		
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-			cameraMan.moveCamera(this.getBatch(), -20f * delta, 0);
+			cameraMan.moveCamera(-20f * delta, 0);
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-			cameraMan.moveCamera(this.getBatch(), 20f * delta, 0);
+			cameraMan.moveCamera(20f * delta, 0);
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
-			cameraMan.moveCamera(this.getBatch(), 0, -20f * delta);
+			cameraMan.moveCamera( 0, -20f * delta);
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.UP))
-			cameraMan.moveCamera(this.getBatch(), 0, 20f * delta);
+			cameraMan.moveCamera(0, 20f * delta);
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.O))
 			cameraMan.zoomCamera(-.5f * delta);
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.P))
 			cameraMan.zoomCamera(.5f * delta);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.L))
+			cameraMan.moveVCamera(.01f, 0);
+		if (Gdx.input.isKeyPressed(Input.Keys.J))
+			cameraMan.moveVCamera(-.01f, 0);
+		if (Gdx.input.isKeyPressed(Input.Keys.I))
+			cameraMan.moveVCamera(0, .01f);
+		if (Gdx.input.isKeyPressed(Input.Keys.K))
+			cameraMan.moveVCamera(0, -.01f);
 	}
-	
-	
-	
-	
 	
 	/* ---------------- Getters --------------- */
 	public SnakeLevel getLevel() {
 		return level;
-	}
-	
+	}	
 }
