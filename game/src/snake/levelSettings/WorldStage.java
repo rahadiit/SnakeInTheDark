@@ -59,7 +59,7 @@ public class WorldStage extends Stage {
 	 */
 	private void getInput (float delta) {
 		
-		
+		//Camera Movement
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
 			cameraMan.moveCamera(-20f * delta, 0);
 		
@@ -72,18 +72,24 @@ public class WorldStage extends Stage {
 		if (Gdx.input.isKeyPressed(Input.Keys.UP))
 			cameraMan.moveCamera(0, 20f * delta);
 		
+		//Camera Zoom
 		if (Gdx.input.isKeyPressed(Input.Keys.O))
 			cameraMan.zoomCamera(-.5f * delta);
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.P))
 			cameraMan.zoomCamera(.5f * delta);
 		
+		
+		//Virtual Camera Movement
 		if (Gdx.input.isKeyPressed(Input.Keys.L))
 			cameraMan.moveVCamera(.01f, 0);
+		
 		if (Gdx.input.isKeyPressed(Input.Keys.J))
 			cameraMan.moveVCamera(-.01f, 0);
+		
 		if (Gdx.input.isKeyPressed(Input.Keys.I))
 			cameraMan.moveVCamera(0, .01f);
+		
 		if (Gdx.input.isKeyPressed(Input.Keys.K))
 			cameraMan.moveVCamera(0, -.01f);
 	}
