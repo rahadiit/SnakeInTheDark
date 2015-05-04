@@ -24,6 +24,7 @@ public class WorldSettings {
 	private static boolean HAS_VIRTUAL_SCREEN = true; //Defines if World camera occupies whole screen or is clipped
 	private static float VSCREEN_X_PORC = .25f, VSCREEN_Y_PORC = .25f; // Starting point of Virtual Screen (if set) (porcentage to Screen Size
 	private static float VSCREEN_WIDTH_PORC = .5f, VSCREEN_HEIGHT_PORC = .5f; //Size of Virtual Screen (porcentage to Screen Size)
+	private static float VSCREEN_MINSIZE = .3f, VSCREEN_MAXSIZE = 1;
 	//IMPORTANT NOTE -- VSCREEN is UNreliable if it goes beyond the Screen size
 	
 	
@@ -178,6 +179,22 @@ public class WorldSettings {
 	 */
 	public static float getVScreenHeight_Porc() {
 		return VSCREEN_HEIGHT_PORC;
+	}
+	
+	/** gets Virtual Screen MaxSize (Percentage to Screen size
+	 * 
+	 * @return percent
+	 */
+	public static float getVScreenMaxSize() {
+		return VSCREEN_MAXSIZE;
+	}
+	
+	/** gets Virtual Screen MinSize (Percentage to Screen size
+	 * 
+	 * @return percent
+	 */
+	public static float getVScreenMinSize() {
+		return VSCREEN_MINSIZE;
 	}
 	/* ------------------------------ Setters ------------------------------ */
 	

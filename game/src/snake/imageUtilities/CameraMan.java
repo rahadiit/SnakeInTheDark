@@ -101,6 +101,16 @@ public class CameraMan {
 									   WorldSettings.getVScreenHeight_Porc());
 	}
 	
+	public void zoomVCamera (float zoom) {
+		float beforeX = WorldSettings.getVScreenWidth_Porc();
+		float afterX = (float) MathUtils.clamp(beforeX/(1 + zoom), WorldSettings.getVScreenMinSize(), WorldSettings.getVScreenMaxSize());
+		float beforeY = WorldSettings.getVScreenWidth_Porc();
+		float afterY = (float) MathUtils.clamp(beforeY/(1 + zoom),WorldSettings.getVScreenMinSize(), WorldSettings.getVScreenMaxSize());
+		WorldSettings.setVirtualScreen(MathUtils.clamp(WorldSettings.getVScreenX_Porc() - (afterX - beforeX)/2, 0, 1 - afterX),
+									   MathUtils.clamp(WorldSettings.getVScreenY_Porc() - (afterY - beforeY)/2, 0, 1 - afterY),
+										afterX, afterY);
+	}
+	
 	
 	
 }
