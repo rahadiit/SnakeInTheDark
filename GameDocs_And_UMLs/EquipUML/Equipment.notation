@@ -251,9 +251,9 @@
           <element xmi:type="uml:Operation" href="Equipment.uml#_o40kEO9HEeSbZJtTx4nmPA"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_o5IGEe9HEeSbZJtTx4nmPA"/>
         </children>
-        <children xmi:type="notation:Shape" xmi:id="_o5RQAO9HEeSbZJtTx4nmPA" type="3013">
-          <element xmi:type="uml:Operation" href="Equipment.uml#_o4raIO9HEeSbZJtTx4nmPA"/>
-          <layoutConstraint xmi:type="notation:Location" xmi:id="_o5RQAe9HEeSbZJtTx4nmPA"/>
+        <children xmi:type="notation:Shape" xmi:id="_7Rmz8PNSEeSKFeVTEAx5fA" type="3013">
+          <element xmi:type="uml:Operation" href="Equipment.uml#_7Rh7cPNSEeSKFeVTEAx5fA"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_7Rmz8fNSEeSKFeVTEAx5fA"/>
         </children>
         <styles xmi:type="notation:TitleStyle" xmi:id="_3RwQOe6REeS-G-LZbHzsAQ"/>
         <styles xmi:type="notation:SortingStyle" xmi:id="_3RwQOu6REeS-G-LZbHzsAQ"/>

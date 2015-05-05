@@ -28,14 +28,14 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
   <packagedElement xmi:type="uml:Class" xmi:id="_3Rtz8O6REeS-G-LZbHzsAQ" name="EquipmentCreator" isAbstract="true">
     <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_4QUEAO6uEeS-G-LZbHzsAQ" client="_3Rtz8O6REeS-G-LZbHzsAQ"/>
     <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_gXLAEPNNEeSKFeVTEAx5fA" client="_3Rtz8O6REeS-G-LZbHzsAQ" supplier="_1cGBMO60EeS-G-LZbHzsAQ" contract="_1cGBMO60EeS-G-LZbHzsAQ"/>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_o4raIO9HEeSbZJtTx4nmPA" name="createFactory" isStatic="true">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_o4raIe9HEeSbZJtTx4nmPA" name="equip">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedParameter>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_o4raIu9HEeSbZJtTx4nmPA" direction="return"/>
-    </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_o40kEO9HEeSbZJtTx4nmPA" name="create" isAbstract="true">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_o40kEe9HEeSbZJtTx4nmPA" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_7Rh7cPNSEeSKFeVTEAx5fA" name="createFactory" isStatic="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Rh7cfNSEeSKFeVTEAx5fA" name="equip">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Rh7cvNSEeSKFeVTEAx5fA" type="_1cGBMO60EeS-G-LZbHzsAQ" direction="return"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_WsHKAO6tEeS-G-LZbHzsAQ" name="XEquipmentCreator">
@@ -73,7 +73,7 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_QURkMfNNEeSKFeVTEAx5fA" name="equip">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_QURkMvNNEeSKFeVTEAx5fA" direction="return"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_QURkMvNNEeSKFeVTEAx5fA" type="_1cGBMO60EeS-G-LZbHzsAQ" direction="return"/>
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_QUUAcPNNEeSKFeVTEAx5fA" name="create">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_QUUAcfNNEeSKFeVTEAx5fA" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
