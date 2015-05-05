@@ -1,4 +1,11 @@
 
+## Project specific entries
+html/war
+html/webapp
+android/libs
+android/.settings
+
+
 ### Java template
 *.class
 
@@ -21,12 +28,6 @@ hs_err_pid*
 
 # Files for the Dalvik VM
 *.dex
-
-# Built libraries
-android/libs
-
-#settings
-android/.settings
 
 # Generated files
 bin/
