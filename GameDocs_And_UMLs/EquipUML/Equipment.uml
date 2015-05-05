@@ -13,12 +13,10 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
   <packagedElement xmi:type="uml:Component" xmi:id="_WsqxMO6NEeS-G-LZbHzsAQ" name="Equipment">
     <ownedAttribute xmi:type="uml:Port" xmi:id="_5y_asO6NEeS-G-LZbHzsAQ" name="Port0" aggregation="composite"/>
     <ownedAttribute xmi:type="uml:Port" xmi:id="_BZ0pMO6OEeS-G-LZbHzsAQ" name="Port1" aggregation="composite"/>
-    <ownedAttribute xmi:type="uml:Port" xmi:id="_nrCFEO60EeS-G-LZbHzsAQ" name="Port2" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Interface" xmi:id="_aKzsAO6NEeS-G-LZbHzsAQ" name="IMapEntity"/>
   <packagedElement xmi:type="uml:Interface" xmi:id="_byA6YO6NEeS-G-LZbHzsAQ" name="IEquipment"/>
   <packagedElement xmi:type="uml:Usage" xmi:id="_9e4doO6NEeS-G-LZbHzsAQ" name="Usage0" client="_5y_asO6NEeS-G-LZbHzsAQ" supplier="_aKzsAO6NEeS-G-LZbHzsAQ"/>
-  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_Gt05cO6OEeS-G-LZbHzsAQ" name="Realization0" client="_BZ0pMO6OEeS-G-LZbHzsAQ" supplier="_byA6YO6NEeS-G-LZbHzsAQ" contract="_byA6YO6NEeS-G-LZbHzsAQ"/>
   <packagedElement xmi:type="uml:Interface" xmi:id="_GUdFQO6QEeS-G-LZbHzsAQ" name="IMapEntity"/>
   <packagedElement xmi:type="uml:Interface" xmi:id="_LOyRQO6QEeS-G-LZbHzsAQ" name="IEquipment">
     <ownedOperation xmi:type="uml:Operation" xmi:id="_j-eUwO6pEeS-G-LZbHzsAQ" name="activate">
@@ -28,12 +26,12 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
     <ownedOperation xmi:type="uml:Operation" xmi:id="_kzuFQO6qEeS-G-LZbHzsAQ" name="getName"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_3Rtz8O6REeS-G-LZbHzsAQ" name="EquipmentCreator" isAbstract="true">
-    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_4QUEAO6uEeS-G-LZbHzsAQ" client="_3Rtz8O6REeS-G-LZbHzsAQ" supplier="_XO0ZAO6uEeS-G-LZbHzsAQ" contract="_XO0ZAO6uEeS-G-LZbHzsAQ"/>
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_4QUEAO6uEeS-G-LZbHzsAQ" client="_3Rtz8O6REeS-G-LZbHzsAQ"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_o4raIO9HEeSbZJtTx4nmPA" name="createFactory" isStatic="true">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_o4raIe9HEeSbZJtTx4nmPA" name="equip">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_o4raIu9HEeSbZJtTx4nmPA" type="_XO0ZAO6uEeS-G-LZbHzsAQ" direction="return"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_o4raIu9HEeSbZJtTx4nmPA" direction="return"/>
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_o40kEO9HEeSbZJtTx4nmPA" name="create" isAbstract="true">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_o40kEe9HEeSbZJtTx4nmPA" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
@@ -43,17 +41,6 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
     <generalization xmi:type="uml:Generalization" xmi:id="_mHeEwO6tEeS-G-LZbHzsAQ" general="_3Rtz8O6REeS-G-LZbHzsAQ"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_QGEGQO6xEeS-G-LZbHzsAQ" name="create">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_QGEGQe6xEeS-G-LZbHzsAQ" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
-    </ownedOperation>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Interface" xmi:id="_XO0ZAO6uEeS-G-LZbHzsAQ" name="IEquipmentCreator">
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_pkmyoO6wEeS-G-LZbHzsAQ" name="create">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_pkmyoe6wEeS-G-LZbHzsAQ" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_5t6_kO6wEeS-G-LZbHzsAQ" name="createFactory" isStatic="true">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_5t6_ke6wEeS-G-LZbHzsAQ" name="equip">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedParameter>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_f6CrMO9HEeSbZJtTx4nmPA" type="_XO0ZAO6uEeS-G-LZbHzsAQ" direction="return"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_3tXAkO6xEeS-G-LZbHzsAQ" name="XEquipment">
@@ -82,5 +69,14 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
-  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_Lat0oO61EeS-G-LZbHzsAQ" name="Realization1" client="_nrCFEO60EeS-G-LZbHzsAQ" supplier="_XO0ZAO6uEeS-G-LZbHzsAQ" contract="_XO0ZAO6uEeS-G-LZbHzsAQ"/>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_WElC0PM1EeSEJoFN9-IddA" name="Realization0" client="_BZ0pMO6OEeS-G-LZbHzsAQ" supplier="_byA6YO6NEeS-G-LZbHzsAQ" contract="_byA6YO6NEeS-G-LZbHzsAQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_gRlCUPM1EeSEJoFN9-IddA" name="EquipmentCreator">
+    <ownedAttribute xmi:type="uml:Port" xmi:id="__UuKQPM1EeSEJoFN9-IddA" name="" aggregation="composite"/>
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_Ms4jkfNJEeSKFeVTEAx5fA" name="Port1" aggregation="composite"/>
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_Oy-tYPNJEeSKFeVTEAx5fA" name="Port0" aggregation="composite"/>
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_Ms4jkvNJEeSKFeVTEAx5fA" name="Realization0" client="_Ms4jkfNJEeSKFeVTEAx5fA _gRlCUPM1EeSEJoFN9-IddA" supplier="_Ms4jkPNJEeSKFeVTEAx5fA" contract="_Ms4jkPNJEeSKFeVTEAx5fA"/>
+    <nestedClassifier xmi:type="uml:Interface" xmi:id="_Ms4jkPNJEeSKFeVTEAx5fA" name="IEquipment"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_XoAvAPM2EeSEJoFN9-IddA" name="Realization1" client="__UuKQPM1EeSEJoFN9-IddA" supplier="_1cGBMO60EeS-G-LZbHzsAQ" contract="_1cGBMO60EeS-G-LZbHzsAQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_h_uPEPNJEeSKFeVTEAx5fA" name="Usage1" client="_Oy-tYPNJEeSKFeVTEAx5fA" supplier="_byA6YO6NEeS-G-LZbHzsAQ"/>
 </uml:Model>
