@@ -27,6 +27,7 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_3Rtz8O6REeS-G-LZbHzsAQ" name="EquipmentCreator" isAbstract="true">
     <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_4QUEAO6uEeS-G-LZbHzsAQ" client="_3Rtz8O6REeS-G-LZbHzsAQ"/>
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_gXLAEPNNEeSKFeVTEAx5fA" client="_3Rtz8O6REeS-G-LZbHzsAQ" supplier="_1cGBMO60EeS-G-LZbHzsAQ" contract="_1cGBMO60EeS-G-LZbHzsAQ"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_o4raIO9HEeSbZJtTx4nmPA" name="createFactory" isStatic="true">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_o4raIe9HEeSbZJtTx4nmPA" name="equip">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -51,6 +52,7 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_kkgD4O6yEeS-G-LZbHzsAQ" name="other"/>
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_dvjdkPNNEeSKFeVTEAx5fA" client="_3tXAkO6xEeS-G-LZbHzsAQ" supplier="_LOyRQO6QEeS-G-LZbHzsAQ" contract="_LOyRQO6QEeS-G-LZbHzsAQ"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_LUgmUO6yEeS-G-LZbHzsAQ" name="activate">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_LUgmUe6yEeS-G-LZbHzsAQ" name="map" type="_GUdFQO6QEeS-G-LZbHzsAQ" effect="update"/>
     </ownedOperation>
@@ -58,7 +60,6 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
     <ownedOperation xmi:type="uml:Operation" xmi:id="_LUle0O6yEeS-G-LZbHzsAQ" name="getDescription"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_m436QO6yEeS-G-LZbHzsAQ" name="other"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Realization" xmi:id="_DyAeMO6yEeS-G-LZbHzsAQ" client="_3tXAkO6xEeS-G-LZbHzsAQ" supplier="_LOyRQO6QEeS-G-LZbHzsAQ"/>
   <packagedElement xmi:type="uml:Interface" xmi:id="_1cGBMO60EeS-G-LZbHzsAQ" name="IEquipmentCreator">
     <ownedOperation xmi:type="uml:Operation" xmi:id="_1cGBMe60EeS-G-LZbHzsAQ" name="factoryMethod">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_1cGBMu60EeS-G-LZbHzsAQ" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
@@ -67,6 +68,15 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_1cGBNO60EeS-G-LZbHzsAQ" name="equip">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_QURkMPNNEeSKFeVTEAx5fA" name="createFactory" isStatic="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_QURkMfNNEeSKFeVTEAx5fA" name="equip">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_QURkMvNNEeSKFeVTEAx5fA" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_QUUAcPNNEeSKFeVTEAx5fA" name="create">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_QUUAcfNNEeSKFeVTEAx5fA" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_WElC0PM1EeSEJoFN9-IddA" name="Realization0" client="_BZ0pMO6OEeS-G-LZbHzsAQ" supplier="_byA6YO6NEeS-G-LZbHzsAQ" contract="_byA6YO6NEeS-G-LZbHzsAQ"/>
