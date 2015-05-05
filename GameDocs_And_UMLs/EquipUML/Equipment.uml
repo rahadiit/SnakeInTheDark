@@ -14,10 +14,10 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
     <ownedAttribute xmi:type="uml:Port" xmi:id="_5y_asO6NEeS-G-LZbHzsAQ" name="Port0" aggregation="composite"/>
     <ownedAttribute xmi:type="uml:Port" xmi:id="_BZ0pMO6OEeS-G-LZbHzsAQ" name="Port1" aggregation="composite"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Interface" xmi:id="_aKzsAO6NEeS-G-LZbHzsAQ" name="IMapEntity"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_aKzsAO6NEeS-G-LZbHzsAQ" name="IMapAccess"/>
   <packagedElement xmi:type="uml:Interface" xmi:id="_byA6YO6NEeS-G-LZbHzsAQ" name="IEquipment"/>
   <packagedElement xmi:type="uml:Usage" xmi:id="_9e4doO6NEeS-G-LZbHzsAQ" name="Usage0" client="_5y_asO6NEeS-G-LZbHzsAQ" supplier="_aKzsAO6NEeS-G-LZbHzsAQ"/>
-  <packagedElement xmi:type="uml:Interface" xmi:id="_GUdFQO6QEeS-G-LZbHzsAQ" name="IMapEntity"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_GUdFQO6QEeS-G-LZbHzsAQ" name="IMapAccess"/>
   <packagedElement xmi:type="uml:Interface" xmi:id="_LOyRQO6QEeS-G-LZbHzsAQ" name="IEquipment">
     <ownedOperation xmi:type="uml:Operation" xmi:id="_j-eUwO6pEeS-G-LZbHzsAQ" name="activate">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_xtNVoO6pEeS-G-LZbHzsAQ" name="map" type="_GUdFQO6QEeS-G-LZbHzsAQ" effect="update"/>
