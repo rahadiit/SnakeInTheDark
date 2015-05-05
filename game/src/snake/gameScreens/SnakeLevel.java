@@ -13,10 +13,11 @@ import snake.interfacesAndAbstract.*;
 import snake.levelSettings.HUDSettings;
 import snake.levelSettings.WorldSettings;
 
-/*                               Developed By:
+/**                               Developed By:
  *                                  NoDark
  *                               sessaGlasses
- * Module: Mr.Strings
+ * <br> Controls a generic game Level, with a World and HUD. </br>
+ * @author Mr.Strings
  */
 
 public class SnakeLevel implements Screen {

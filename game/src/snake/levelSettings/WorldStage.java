@@ -95,10 +95,10 @@ public class WorldStage extends Stage {
 		
 		//Virtual Camera Zoom
 		if (Gdx.input.isKeyPressed(Input.Keys.U))
-			cameraMan.zoomVCamera(.05f);
+			cameraMan.zoomVCamera(.01f);
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.Y))
-			cameraMan.zoomVCamera(-.05f);
+			cameraMan.zoomVCamera(-.01f);
 	}
 	
 	/* ---------------- Getters --------------- */

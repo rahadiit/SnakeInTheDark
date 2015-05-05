@@ -3,7 +3,6 @@ package snake.imageUtilities;
 import snake.levelSettings.WorldSettings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -11,10 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
+ *                                
+ * <br> Useful for controlling a camera in a Scene2d Stage. Can Zoom, translate and supports virtual
+ * screen size based on WorldSettings Data.</br>
  * @author Mr.Strings
  * 
- * Useful for controlling a camera in a Scene2d Stage. Can Zoom, translate and supports virtual
- * screen size based on WorldSettings Data.
  */
 
 public class CameraMan {

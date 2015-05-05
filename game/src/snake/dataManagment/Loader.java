@@ -3,10 +3,10 @@ package snake.dataManagment;
 import com.badlogic.gdx.assets.AssetManager;
 
 
-/*                               Developed By:
- *                                  NoDark
- *                               sessaGlasses
- * Module: Mr.Strings
+/**                               Developed By:
+ *                                   NoDark
+ *                                sessaGlasses
+ * Module: ------
  */
 
 public class Loader {

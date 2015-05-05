@@ -19,7 +19,7 @@ public abstract class GameWorld extends Group /* Group makes it connected to Map
 	
 	@Override
 	public WorldStage getStage() {
-		return (WorldStage) super.getStage();
+		return this.getStage();
 	}
 	
 	public abstract void dispose();

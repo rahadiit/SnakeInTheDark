@@ -4,10 +4,12 @@ import snake.levelSettings.HUDSettings;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 
-/*                               Developed By:
- *                                  NoDark
- *                               sessaGlasses
- * Module: Mr.Strings
+/**                               Developed By:
+ *                                   NoDark
+ *                                sessaGlasses
+ *                                
+ *  Generic game HUD -- information screens
+ * @author Mr.Strings
  */
 
 

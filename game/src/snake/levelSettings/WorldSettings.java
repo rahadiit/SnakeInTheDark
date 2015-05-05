@@ -10,8 +10,8 @@ import snake.interfacesAndAbstract.GameWorld;
 import snake.map.WorldMap;
 
 /**                               Developed By:
- *                                  NoDark
- *                               sessaGlasses
+ *                                   NoDark
+ *                                sessaGlasses
  * @author Mr.Strings (Modifiable according to need)
  * 
  * Controls World Parameters, such as size, camera infos, virtual Screen Parameters, etc.
@@ -20,7 +20,7 @@ public class WorldSettings {
 	private static float WORLD_WIDTH = 100, WORLD_HEIGHT = 100; //Arbitrary coordinate System.
 	private static float WORLD2SCREEN_RATIO = 1f; //Relative to World (Changeable)
 	private static float CAMERAPOSITIONX = 50,  CAMERAPOSITIONY = 50; //center of camera position (Changeable)
-	private static float MAXZOOM = .3f, MINZOOM = 1f;
+	private static float MAXZOOM = .1f, MINZOOM = 1f;
 	private static boolean HAS_VIRTUAL_SCREEN = true; //Defines if World camera occupies whole screen or is clipped
 	private static float VSCREEN_X_PORC = .25f, VSCREEN_Y_PORC = .25f; // Starting point of Virtual Screen (if set) (porcentage to Screen Size
 	private static float VSCREEN_WIDTH_PORC = .5f, VSCREEN_HEIGHT_PORC = .5f; //Size of Virtual Screen (porcentage to Screen Size)
