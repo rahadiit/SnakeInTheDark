@@ -1,6 +1,5 @@
 package snake.gameScreens;
 
-import snake.core.SnakeStart;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -8,7 +7,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import snake.core.SnakeStart;
 
 /*                               Developed By:
  *                                  NoDark
@@ -20,12 +21,17 @@ public class SnakeHub implements Screen, InputProcessor {
 	private SnakeStart game;
 	private SpriteBatch batch;
 	private BitmapFont font;
+	private GlyphLayout layout;
 	private float w, h;
 	String instructions[]; //will be changed to buttons
 
 	public SnakeHub(SnakeStart game) {
 		this.game = game;
 		this.batch = game.getBatch();
+		this.font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), false);
+		this.layout = new GlyphLayout();
+
+		font.setColor(Color.GREEN);
 
 		w = Gdx.graphics.getWidth();
 		h = Gdx.graphics.getHeight();
@@ -48,10 +54,6 @@ public class SnakeHub implements Screen, InputProcessor {
 	}
 
 	private void draw() {
-		font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), false);
-		font.setColor(Color.GREEN);
-		
-		
 		//Starts drawing
 		batch.begin();
 
@@ -63,11 +65,10 @@ public class SnakeHub implements Screen, InputProcessor {
 			font.draw(batch, "You're touching it! (maybe pressing space button).", 0, 80);
 
 		//Drawing instructions
-		font.draw(batch, instructions[0], w / 2 - font.getBounds(instructions[0]).width
-				/ 2, h / 2 - font.getBounds(instructions[0]).height / 2 + 50);
-		font.draw(batch, instructions[1], w / 2
-				- font.getBounds(instructions[1]).width / 2,
-				h / 2 - font.getBounds(instructions[1]).height / 2 - 20);
+		layout.setText(font, instructions[0]);
+		font.draw(batch, layout, w / 2 - layout.width / 2, h / 2 - layout.height / 2 + 50);
+		layout.setText(font, instructions[1]);
+		font.draw(batch, layout, w / 2 - layout.width / 2, h / 2 - layout.height / 2 - 20);
 
 		// Draw fps
 		/*font = new BitmapFont();
@@ -82,8 +83,8 @@ public class SnakeHub implements Screen, InputProcessor {
 		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
 			game.setScreen(new SnakeLevel(game, "Generic Level"));
 
-		instructions[0] = new String("Para comecar o jogo");
-		instructions[1] = new String("tecle ENTER");
+		instructions[0] = "Para comecar o jogo";
+		instructions[1] = "tecle ENTER";
 	}
 
 	@Override
