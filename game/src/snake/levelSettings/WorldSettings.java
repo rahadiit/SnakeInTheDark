@@ -27,7 +27,6 @@ public class WorldSettings {
 	private static float VSCREEN_MINSIZE = .3f, VSCREEN_MAXSIZE = 1;
 	//IMPORTANT NOTE -- VSCREEN is UNreliable if it goes beyond the Screen size
 	
-	
 	/** Set the WorldType of the return line to create a custom World class in game (Changeable)
 	 * 
 	 * @author Mr.Strings (Modifiable according to need)
@@ -198,33 +197,29 @@ public class WorldSettings {
 	}
 	/* ------------------------------ Setters ------------------------------ */
 	
-	/** Sets Camera Center coordinates - arbitrary coordinate System.
-	 */
+	/** Sets Camera Center coordinates - arbitrary coordinate System.*/
 	public static void setCameraPosition(float posX, float posY) {
 		CAMERAPOSITIONX = posX;
 		CAMERAPOSITIONY = posY;
 	}
 	
-	/** Sets World size - arbitrary coordinate System.
-	 */
+	/** Sets World size - arbitrary coordinate System.*/
 	public static void setWorldSSize(float sizex, float sizey) {
 		WORLD_WIDTH = sizex;
 		WORLD_HEIGHT = sizey;
 	}
 	
-	/** Sets World/screen ratio.
-	 */
+	/** Sets World/screen ratio. */
 	public static void setWorld2ScreenRatio(float ratio) {
 		WORLD2SCREEN_RATIO = ratio;
 	}
 	
-	/** Toggles virtual screen.
-	 */
+	/** Toggles virtual screen.*/
 	public static void toggleVirtualScreen (boolean option) {
 		HAS_VIRTUAL_SCREEN = option;
 	}
 	
-	
+	/** Sets virtual screen (viewport) to draw */
 	public static boolean setVirtualScreen (float x, float y, float width, float height) {
 		if (x >= 0 && x + width <= 1) {
 			VSCREEN_X_PORC = x;
