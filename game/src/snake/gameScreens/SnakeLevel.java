@@ -5,8 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import snake.core.SnakeStart;
 import snake.interfacesAndAbstract.*;
@@ -29,20 +27,18 @@ public class SnakeLevel implements Screen {
 	private static int MAX_FRAMES_SKIPPED = 5, MAX_LOGIC_SKIPPED =  5;
 	
 	private SnakeStart game;
-	private SpriteBatch batch;
 	private InputMultiplexer input;
 	private Stage stageWorld, stageHUD;
 	private GameWorld world;
 	private HUD hud;
-	private Animation cutscene;
+	private Cutscene cutscene;
+	private PauseMenu pauseMenu;
 	private State state = State.ACTIVE;
-	private float time;
 	private Strategy strategy = Strategy.UPDATEFOCUS;
 	private int framesSkipped = 0, logicSkipped = 0;
 
 	public SnakeLevel(SnakeStart game, String level) {
 		this.game = game;
-		this.batch = game.getBatch();
 
 		// Creates GameWorld
 		world = WorldSettings.createWorld("Generic level");
@@ -87,10 +83,14 @@ public class SnakeLevel implements Screen {
 				onRender(delta);
 				break;
 				
+			case PAUSED:
+				pauseMenu.act(delta);
+				pauseMenu.draw();
 			case CUTSCENE:
-				if (cutscene != null)
-					batch.draw(cutscene.getKeyFrame(time), 0, 0);
-				time += delta;
+				if (cutscene != null) {
+					cutscene.act(delta);
+					cutscene.draw();
+				}
 				break;
 				
 			default:

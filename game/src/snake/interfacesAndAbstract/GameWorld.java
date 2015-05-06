@@ -3,10 +3,11 @@ package snake.interfacesAndAbstract;
 import snake.levelSettings.WorldSettings;
 import snake.levelSettings.WorldStage;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
-/*                               Developed By:
- *                                  NoDark
- *                               sessaGlasses
+/**                               Developed By:
+ *                                   NoDark
+ *                                sessaGlasses
  * Module: Mr.Strings && --------- (modifiable according to need)
  */
 
@@ -18,8 +19,11 @@ public abstract class GameWorld extends Group /* Group makes it connected to Map
 	}
 	
 	@Override
-	public WorldStage getStage() {
-		return this.getStage();
+	public Stage getStage() {
+		if (super.getStage() instanceof WorldStage)
+			return (WorldStage) super.getStage();
+		else
+			throw new UnsupportedOperationException("MapEntity has to be in a WorldStage.");
 	}
 	
 	public abstract void dispose();

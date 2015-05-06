@@ -1,8 +1,6 @@
 package snake.interfacesAndAbstract;
 
-import snake.core.SnakeStart;
-import snake.levelSettings.WorldStage;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 
 /**                              Developed By:
@@ -16,35 +14,32 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 
 
-public abstract class MapEntity extends Actor {
-	protected SnakeStart game;
-	protected int xInMap, yInMap;
+public interface MapEntity {
 	
-	public MapEntity (SnakeStart game, GameWorld world) {
+	
+	/*protected SnakeStart game;
+	protected int xInMap, yInMap;*/
+	
+	/*public MapEntity (SnakeStart game, GameWorld world) {
 		this.game = game;
 		world.addActor(this);
-	}
+	}*/
 	
+	
+	/** Adds MapEntity to World. Easy way to do it is extending from Actor
+	 * or Group
+	 * @param world -- World in Which mapEntity will be added.
+	 */
+	public void addToWorld (GameWorld world);
 	
 	/* ------------- Getters -------------- */
-	public int getMapPosX() { return xInMap; }
-	public int getMapPosY() { return yInMap; }
+	public int getMapPosX();
+	public int getMapPosY();
 	
-	public WorldStage getStage() {
-		if (super.getStage() instanceof WorldStage)
-			return (WorldStage) super.getStage();
-		else
-			throw new UnsupportedOperationException("MapEntity has to be in a WorldStage.");
-	}
-	
+	public Stage getStage();
+	public GameWorld getWorld();
 	
 	/* ------------- Setters -------------- */
-	public void setMapPosition (int xInMap, int yInMap) {
-		this.setPosition(xInMap, yInMap);
-		this.xInMap = xInMap;
-		this.yInMap = yInMap;
-	}
-	
-	
+	public void setMapPosition (int xInMap, int yInMap);
 	
 }
