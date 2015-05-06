@@ -1,22 +1,20 @@
 apply plugin: "java"
 apply plugin: "jetty"
 
-gradle.projectsEvaluated {
-    gwt {
-        gwtVersion = '2.6.0' // Should match the gwt version used for building the gwt backend
-        maxHeapSize = "1G" // Default 256m is not enough for gwt compiler. GWT is HUNGRY
-        minHeapSize = "1G"
+gwt {
+    gwtVersion = '2.6.0' // Should match the gwt version used for building the gwt backend
+    maxHeapSize = "1G" // Default 256m is not enough for gwt compiler. GWT is HUNGRY
+    minHeapSize = "1G"
 
-        src = files(file("src/")) // Needs to be in front of "modules" below.
-        modules 'com.mygdx.Core.GdxDefinition'
-        devModules 'com.mygdx.Core.GdxDefinitionSuperdev'
-        project.webAppDirName = 'webapp'
+    src = files(file("src/")) // Needs to be in front of "modules" below.
+    modules 'com.mygdx.Core.GdxDefinition'
+    devModules 'com.mygdx.Core.GdxDefinitionSuperdev'
+    project.webAppDirName = 'webapp'
 
-        compiler {
-            strict = true;
-            enableClosureCompiler = true;
-            disableCastChecking = true;
-        }
+    compiler {
+        strict = true;
+        enableClosureCompiler = true;
+        disableCastChecking = true;
     }
 }
 
