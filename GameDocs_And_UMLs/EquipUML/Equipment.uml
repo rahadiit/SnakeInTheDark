@@ -20,7 +20,7 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_3Rtz8O6REeS-G-LZbHzsAQ" name="EquipmentCreator">
     <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_4QUEAO6uEeS-G-LZbHzsAQ" client="_3Rtz8O6REeS-G-LZbHzsAQ"/>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_o4raIO9HEeSbZJtTx4nmPA" name="createFactory">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_o4raIO9HEeSbZJtTx4nmPA" name="createFactory" isStatic="true">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_o4raIe9HEeSbZJtTx4nmPA" name="equip">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
@@ -53,7 +53,7 @@
   <packagedElement xmi:type="uml:Component" xmi:id="_gRlCUPM1EeSEJoFN9-IddA" name="EquipmentCreator">
     <ownedAttribute xmi:type="uml:Port" xmi:id="_Ms4jkfNJEeSKFeVTEAx5fA" name="Port1" aggregation="composite"/>
     <ownedAttribute xmi:type="uml:Port" xmi:id="_Oy-tYPNJEeSKFeVTEAx5fA" name="Port0" aggregation="composite"/>
-    <ownedAttribute xmi:type="uml:Port" xmi:id="_Mh70sPTyEeS-zf2PdlNkNA" name="EquipmentCreator&lt;&lt;Abstract Class>>" aggregation="composite"/>
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_Mh70sPTyEeS-zf2PdlNkNA" name="EquipmentCreator" aggregation="composite"/>
     <ownedAttribute xmi:type="uml:Port" xmi:id="_azT9sPT0EeS-zf2PdlNkNA" name="Port2" aggregation="composite"/>
     <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_Ms4jkvNJEeSKFeVTEAx5fA" name="Realization0" client="_Ms4jkfNJEeSKFeVTEAx5fA _gRlCUPM1EeSEJoFN9-IddA" supplier="_Ms4jkPNJEeSKFeVTEAx5fA" contract="_Ms4jkPNJEeSKFeVTEAx5fA"/>
     <nestedClassifier xmi:type="uml:Interface" xmi:id="_Ms4jkPNJEeSKFeVTEAx5fA" name="IEquipment"/>

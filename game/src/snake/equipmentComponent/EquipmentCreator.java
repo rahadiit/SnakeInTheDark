@@ -11,7 +11,7 @@ import snake.interfacesAndAbstract.IEquipmentCreator;
 public class EquipmentCreator
 {
 	
-	public IEquipmentCreator createFactory(String equipment)
+	public static IEquipmentCreator createFactory(String equipment)
 	{
 		// Aqui tem que definir os equipamentos e escolher as instâncias
 		

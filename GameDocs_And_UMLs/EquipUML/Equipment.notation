@@ -104,7 +104,7 @@
       </children>
       <children xmi:type="notation:Shape" xmi:id="_MqIHYPTyEeS-zf2PdlNkNA" type="3069">
         <children xmi:type="notation:DecorationNode" xmi:id="_MqIHYvTyEeS-zf2PdlNkNA" type="5006">
-          <layoutConstraint xmi:type="notation:Location" xmi:id="_MqIHY_TyEeS-zf2PdlNkNA" x="-143" y="-20"/>
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_MqIHY_TyEeS-zf2PdlNkNA" x="-89" y="-22"/>
         </children>
         <children xmi:type="notation:DecorationNode" xmi:id="_MqIHZPTyEeS-zf2PdlNkNA" type="5007">
           <layoutConstraint xmi:type="notation:Location" xmi:id="_MqIHZfTyEeS-zf2PdlNkNA" x="25" y="-10"/>
