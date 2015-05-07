@@ -1,6 +1,5 @@
 package snake.equipmentComponent;
 
-import snake.interfacesAndAbstract.EquipmentCreator;
 import snake.interfacesAndAbstract.IEquipment;
 
 
