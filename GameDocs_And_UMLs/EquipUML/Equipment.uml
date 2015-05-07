@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_TtPysO6NEeS-G-LZbHzsAQ" name="Model">
-  <ownedComment xmi:type="uml:Comment" xmi:id="_BPGEcO7REeS-G-LZbHzsAQ">
-    <body>A chamada da função pela Engine do jogo se dará apenas em função das interfaces. Será instanciado um objeto Creator pelo método chooseOne (IEquipmentCreator), em seguida será chamado o factoryMethod para esse objeto.&#xD;
-A partir desse Creator será instanciado um objeto Concrete (pelo factory), que implementa a interface IEquipment</body>
-  </ownedComment>
-  <ownedComment xmi:type="uml:Comment" xmi:id="_r2rDcO7SEeS-G-LZbHzsAQ">
-    <body>O método chooseOne() é static, afinal ele é chamado a partir da classe abstrata EquipmentCreator, sem instâncias dela</body>
-  </ownedComment>
   <packageImport xmi:type="uml:PackageImport" xmi:id="_TtPyse6NEeS-G-LZbHzsAQ">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
@@ -25,21 +18,17 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
     <ownedOperation xmi:type="uml:Operation" xmi:id="_bzPjQO6qEeS-G-LZbHzsAQ" name="getDescription"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_kzuFQO6qEeS-G-LZbHzsAQ" name="getName"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_3Rtz8O6REeS-G-LZbHzsAQ" name="EquipmentCreator" isAbstract="true">
+  <packagedElement xmi:type="uml:Class" xmi:id="_3Rtz8O6REeS-G-LZbHzsAQ" name="EquipmentCreator">
     <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_4QUEAO6uEeS-G-LZbHzsAQ" client="_3Rtz8O6REeS-G-LZbHzsAQ"/>
-    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_gXLAEPNNEeSKFeVTEAx5fA" client="_3Rtz8O6REeS-G-LZbHzsAQ" supplier="_1cGBMO60EeS-G-LZbHzsAQ" contract="_1cGBMO60EeS-G-LZbHzsAQ"/>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_o40kEO9HEeSbZJtTx4nmPA" name="create" isAbstract="true">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_o40kEe9HEeSbZJtTx4nmPA" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_7Rh7cPNSEeSKFeVTEAx5fA" name="createFactory" isStatic="true">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Rh7cfNSEeSKFeVTEAx5fA" name="equip">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_o4raIO9HEeSbZJtTx4nmPA" name="createFactory">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_o4raIe9HEeSbZJtTx4nmPA" name="equip">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_7Rh7cvNSEeSKFeVTEAx5fA" type="_1cGBMO60EeS-G-LZbHzsAQ" direction="return"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_o4raIu9HEeSbZJtTx4nmPA" direction="return"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_WsHKAO6tEeS-G-LZbHzsAQ" name="XEquipmentCreator">
-    <generalization xmi:type="uml:Generalization" xmi:id="_mHeEwO6tEeS-G-LZbHzsAQ" general="_3Rtz8O6REeS-G-LZbHzsAQ"/>
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_WNj6kPT0EeS-zf2PdlNkNA" client="_WsHKAO6tEeS-G-LZbHzsAQ" supplier="_DI3-IPTzEeS-zf2PdlNkNA" contract="_DI3-IPTzEeS-zf2PdlNkNA"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_QGEGQO6xEeS-G-LZbHzsAQ" name="create">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_QGEGQe6xEeS-G-LZbHzsAQ" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
     </ownedOperation>
@@ -60,33 +49,20 @@ A partir desse Creator será instanciado um objeto Concrete (pelo factory), que 
     <ownedOperation xmi:type="uml:Operation" xmi:id="_LUle0O6yEeS-G-LZbHzsAQ" name="getDescription"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_m436QO6yEeS-G-LZbHzsAQ" name="other"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Interface" xmi:id="_1cGBMO60EeS-G-LZbHzsAQ" name="IEquipmentCreator">
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_1cGBMe60EeS-G-LZbHzsAQ" name="factoryMethod">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_1cGBMu60EeS-G-LZbHzsAQ" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_1cGBM-60EeS-G-LZbHzsAQ" name="chooseOne" isStatic="true">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_1cGBNO60EeS-G-LZbHzsAQ" name="equip">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedParameter>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_QURkMPNNEeSKFeVTEAx5fA" name="createFactory" isStatic="true">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_QURkMfNNEeSKFeVTEAx5fA" name="equip">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedParameter>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_QURkMvNNEeSKFeVTEAx5fA" type="_1cGBMO60EeS-G-LZbHzsAQ" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_QUUAcPNNEeSKFeVTEAx5fA" name="create">
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_QUUAcfNNEeSKFeVTEAx5fA" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
-    </ownedOperation>
-  </packagedElement>
   <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_WElC0PM1EeSEJoFN9-IddA" name="Realization0" client="_BZ0pMO6OEeS-G-LZbHzsAQ" supplier="_byA6YO6NEeS-G-LZbHzsAQ" contract="_byA6YO6NEeS-G-LZbHzsAQ"/>
   <packagedElement xmi:type="uml:Component" xmi:id="_gRlCUPM1EeSEJoFN9-IddA" name="EquipmentCreator">
-    <ownedAttribute xmi:type="uml:Port" xmi:id="__UuKQPM1EeSEJoFN9-IddA" name="" aggregation="composite"/>
     <ownedAttribute xmi:type="uml:Port" xmi:id="_Ms4jkfNJEeSKFeVTEAx5fA" name="Port1" aggregation="composite"/>
     <ownedAttribute xmi:type="uml:Port" xmi:id="_Oy-tYPNJEeSKFeVTEAx5fA" name="Port0" aggregation="composite"/>
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_Mh70sPTyEeS-zf2PdlNkNA" name="EquipmentCreator&lt;&lt;Abstract Class>>" aggregation="composite"/>
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_azT9sPT0EeS-zf2PdlNkNA" name="Port2" aggregation="composite"/>
     <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_Ms4jkvNJEeSKFeVTEAx5fA" name="Realization0" client="_Ms4jkfNJEeSKFeVTEAx5fA _gRlCUPM1EeSEJoFN9-IddA" supplier="_Ms4jkPNJEeSKFeVTEAx5fA" contract="_Ms4jkPNJEeSKFeVTEAx5fA"/>
     <nestedClassifier xmi:type="uml:Interface" xmi:id="_Ms4jkPNJEeSKFeVTEAx5fA" name="IEquipment"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_XoAvAPM2EeSEJoFN9-IddA" name="Realization1" client="__UuKQPM1EeSEJoFN9-IddA" supplier="_1cGBMO60EeS-G-LZbHzsAQ" contract="_1cGBMO60EeS-G-LZbHzsAQ"/>
-  <packagedElement xmi:type="uml:Usage" xmi:id="_h_uPEPNJEeSKFeVTEAx5fA" name="Usage1" client="_Oy-tYPNJEeSKFeVTEAx5fA" supplier="_byA6YO6NEeS-G-LZbHzsAQ"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_lg8ZcPNREeSKFeVTEAx5fA" name="Usage1" client="_Oy-tYPNJEeSKFeVTEAx5fA" supplier="_byA6YO6NEeS-G-LZbHzsAQ"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_DI3-IPTzEeS-zf2PdlNkNA" name="IEquipmentCreator">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_SEiPsPT0EeS-zf2PdlNkNA" name="create">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_SEiPsfT0EeS-zf2PdlNkNA" type="_LOyRQO6QEeS-G-LZbHzsAQ" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_Br1GcPT1EeS-zf2PdlNkNA" name="Realization1" client="_azT9sPT0EeS-zf2PdlNkNA" supplier="_DI3-IPTzEeS-zf2PdlNkNA" contract="_DI3-IPTzEeS-zf2PdlNkNA"/>
 </uml:Model>
