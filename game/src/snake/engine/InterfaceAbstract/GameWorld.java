@@ -1,7 +1,7 @@
-package snake.interfacesAndAbstract;
+package snake.engine.InterfaceAbstract;
 
-import snake.creators.WorldSettings;
-import snake.creators.WorldStage;
+import snake.engine.creators.WorldSettings;
+import snake.engine.creators.WorldStage;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 

@@ -7,7 +7,7 @@ package com.mygdx.Core.android;
  */
 
 
-import snake.core.SnakeStart;
+import snake.engine.core.SnakeStart;
 import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;

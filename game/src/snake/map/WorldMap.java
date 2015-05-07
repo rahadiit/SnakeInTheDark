@@ -1,7 +1,7 @@
 package snake.map;
 
-import snake.interfacesAndAbstract.GameWorld;
-import snake.creators.WorldSettings;
+import snake.engine.InterfaceAbstract.GameWorld;
+import snake.engine.creators.WorldSettings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;

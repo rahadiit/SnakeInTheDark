@@ -1,14 +1,14 @@
-package snake.creators;
+package snake.engine.creators;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import snake.hud.SnakeHUD;
-import snake.interfacesAndAbstract.GameStart;
-import snake.interfacesAndAbstract.GameWorld;
-import snake.interfacesAndAbstract.HUD;
+import snake.engine.InterfaceAbstract.GameStart;
+import snake.engine.InterfaceAbstract.GameWorld;
+import snake.engine.InterfaceAbstract.HUD;
+import snake.engine.hud.SnakeHUD;
 
 
 

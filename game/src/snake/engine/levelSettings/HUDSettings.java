@@ -1,14 +1,14 @@
-package snake.levelSettings;
+package snake.engine.levelSettings;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import snake.core.SnakeStart;
-import snake.hud.SnakeHUD;
-import snake.interfacesAndAbstract.GameWorld;
-import snake.interfacesAndAbstract.HUD;
+import snake.engine.InterfaceAbstract.GameWorld;
+import snake.engine.InterfaceAbstract.HUD;
+import snake.engine.core.SnakeStart;
+import snake.engine.hud.SnakeHUD;
 
 
 

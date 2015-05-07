@@ -1,6 +1,6 @@
-package snake.imageUtilities;
+package snake.engine.imageUtilities;
 
-import snake.creators.WorldSettings;
+import snake.engine.creators.WorldSettings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
@@ -37,7 +37,7 @@ public class CameraMan {
 	}
 	
 	/** Sets virtual Screen to draw, according to WorldSettings Class
-	 * @see snake.levelSettings.WorldSettings
+	 * @see snake.engine.levelSettings.WorldSettings
 	 */
 	public void setCamera () {
 		     

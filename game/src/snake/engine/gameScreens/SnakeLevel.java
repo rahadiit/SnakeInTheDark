@@ -1,4 +1,4 @@
-package snake.gameScreens;
+package snake.engine.gameScreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,13 +6,17 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import snake.interfacesAndAbstract.*;
-import snake.creators.HUDSettings;
-import snake.creators.WorldSettings;
+import snake.engine.InterfaceAbstract.Cutscene;
+import snake.engine.InterfaceAbstract.GameStart;
+import snake.engine.InterfaceAbstract.GameWorld;
+import snake.engine.InterfaceAbstract.HUD;
+import snake.engine.InterfaceAbstract.PauseMenu;
+import snake.engine.creators.HUDSettings;
+import snake.engine.creators.WorldSettings;
 
 /**                               Developed By:
- *                                  NoDark
- *                               sessaGlasses
+ *                                   NoDark
+ *                                sessaGlasses
  * <br> Controls a generic game Level, with a World and HUD. </br>
  * @author Mr.Strings
  */

@@ -1,7 +1,7 @@
-package snake.creators;
+package snake.engine.levelSettings;
 
-import snake.gameScreens.SnakeLevel;
-import snake.imageUtilities.CameraMan;
+import snake.engine.gameScreens.SnakeLevel;
+import snake.engine.imageUtilities.CameraMan;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;

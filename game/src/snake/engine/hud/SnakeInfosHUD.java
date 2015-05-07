@@ -1,6 +1,6 @@
-package snake.hud;
+package snake.engine.hud;
 
-import snake.interfacesAndAbstract.GameWorld;
+import snake.engine.InterfaceAbstract.GameWorld;
 
 /*                               Developed By:
  *                                  NoDark
@@ -8,12 +8,10 @@ import snake.interfacesAndAbstract.GameWorld;
  * Module: Mr.Strings
  */
 
-public class SnakeDialogHUD {
+public class SnakeInfosHUD {
 
-	public SnakeDialogHUD(GameWorld world) {
+	public SnakeInfosHUD(GameWorld world) {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 }

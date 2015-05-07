@@ -1,4 +1,4 @@
-package snake.interfacesAndAbstract;
+package snake.engine.InterfaceAbstract;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 

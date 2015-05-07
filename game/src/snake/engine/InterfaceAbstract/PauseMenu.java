@@ -1,4 +1,4 @@
-package snake.interfacesAndAbstract;
+package snake.engine.InterfaceAbstract;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

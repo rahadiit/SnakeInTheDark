@@ -1,7 +1,7 @@
-package snake.core;
+package snake.engine.core;
 
-import snake.gameScreens.SnakeHub;
-import snake.interfacesAndAbstract.GameStart;
+import snake.engine.InterfaceAbstract.GameStart;
+import snake.engine.gameScreens.SnakeHub;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

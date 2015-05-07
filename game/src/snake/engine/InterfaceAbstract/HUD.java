@@ -1,6 +1,6 @@
-package snake.interfacesAndAbstract;
+package snake.engine.InterfaceAbstract;
 
-import snake.creators.HUDSettings;
+import snake.engine.creators.HUDSettings;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 

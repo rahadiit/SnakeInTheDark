@@ -1,4 +1,4 @@
-package snake.gameScreens;
+package snake.engine.gameScreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import snake.core.SnakeStart;
+import snake.engine.core.SnakeStart;
 
 /*                               Developed By:
  *                                  NoDark
