@@ -1,6 +1,6 @@
 package snake.imageUtilities;
 
-import snake.levelSettings.WorldSettings;
+import snake.creators.WorldSettings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;

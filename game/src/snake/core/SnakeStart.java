@@ -1,16 +1,17 @@
 package snake.core;
 
 import snake.gameScreens.SnakeHub;
+import snake.interfacesAndAbstract.GameStart;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-/*                               Developed By:
- *                                  NoDark
- *                               sessaGlasses
- * Module: Mr.Strings
+/**                               Developed By:
+ *                                   NoDark
+ *                                sessaGlasses
+ * @Author Mr.Strings
  */
 
-public class SnakeStart extends Game {
+public class SnakeStart extends Game implements GameStart {
 	public SpriteBatch batch;
 	
 	

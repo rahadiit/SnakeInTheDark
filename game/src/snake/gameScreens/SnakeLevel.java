@@ -6,10 +6,9 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import snake.core.SnakeStart;
 import snake.interfacesAndAbstract.*;
-import snake.levelSettings.HUDSettings;
-import snake.levelSettings.WorldSettings;
+import snake.creators.HUDSettings;
+import snake.creators.WorldSettings;
 
 /**                               Developed By:
  *                                  NoDark
@@ -26,7 +25,7 @@ public class SnakeLevel implements Screen {
 	private static float EXPECTED_DELTA_DRAW = 1/60, EXPECTED_DELTA_UPDATE = 1/60;
 	private static int MAX_FRAMES_SKIPPED = 5, MAX_LOGIC_SKIPPED =  5;
 	
-	private SnakeStart game;
+	private GameStart game;
 	private InputMultiplexer input;
 	private Stage stageWorld, stageHUD;
 	private GameWorld world;
@@ -37,7 +36,7 @@ public class SnakeLevel implements Screen {
 	private Strategy strategy = Strategy.UPDATEFOCUS;
 	private int framesSkipped = 0, logicSkipped = 0;
 
-	public SnakeLevel(SnakeStart game, String level) {
+	public SnakeLevel(GameStart game, String level) {
 		this.game = game;
 
 		// Creates GameWorld
@@ -63,8 +62,6 @@ public class SnakeLevel implements Screen {
 		
 		
 	}
-	
-	
 	
 	@Override
 	public void show() {}
@@ -179,7 +176,7 @@ public class SnakeLevel implements Screen {
 	
 	private void getInput () {
 		if (Gdx.input.isKeyPressed(Input.Keys.F1)) {
-			// set resolution to default and toogles full-screen
+			// set resolution to default and toggles full-screen
 			Gdx.graphics.setDisplayMode(
 					Gdx.graphics.getDesktopDisplayMode().width,
 					Gdx.graphics.getDesktopDisplayMode().height,
