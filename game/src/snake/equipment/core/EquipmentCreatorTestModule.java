@@ -1,6 +1,7 @@
-package snake.equipmentComponent;
+package snake.equipment.core;
 
-import snake.interfacesAndAbstract.IEquipment;
+import snake.equipment.interfaces.EquipmentCreator;
+import snake.equipment.interfaces.IEquipment;
 
 
 /**                              Developed By:

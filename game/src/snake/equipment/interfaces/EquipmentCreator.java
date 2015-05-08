@@ -1,6 +1,6 @@
-package snake.equipmentComponent;
+package snake.equipment.interfaces;
 
-import snake.interfacesAndAbstract.IEquipmentCreator;
+import snake.equipment.creators.FlashlightEquipmentCreator;
 
 /*                               Developed By:
  *                                  NoDarkGlasses

@@ -1,4 +1,6 @@
-package snake.interfacesAndAbstract;
+package snake.equipment.interfaces;
+
+import snake.map.interfaces.IMapAccess;
 
 public interface IEquipment 
 {
