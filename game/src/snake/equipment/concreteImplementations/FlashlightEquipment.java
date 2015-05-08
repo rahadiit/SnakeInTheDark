@@ -3,13 +3,11 @@ package snake.equipment.concreteImplementations;
 import snake.equipment.interfaces.IEquipment;
 import snake.map.interfaces.IMapAccess;
 
-
-/*                               Developed By:
+/**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * Module: bszazulla && --------------- (modifiable according to need)
+ * @author bszazulla
  */
-
 
 public class FlashlightEquipment implements IEquipment
 {

@@ -2,10 +2,10 @@ package snake.equipment.interfaces;
 
 import snake.equipment.creators.FlashlightEquipmentCreator;
 
-/*                               Developed By:
+/**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * Module: bszazulla && --------------- (modifiable according to need)
+ * @author bszazulla
  */
 
 public class EquipmentCreator

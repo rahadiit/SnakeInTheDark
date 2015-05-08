@@ -10,7 +10,7 @@ package snake.equipment.interfaces;
 
 public class EquipmentCreatorTestModule 
 {
-	// Representação do que a engine terá que fazer para criar equipamentos
+	// Representação de como usar este componente para criação de equipamentos
 	public static void main(String[] args) 
 	{
 		// instancia do objeto

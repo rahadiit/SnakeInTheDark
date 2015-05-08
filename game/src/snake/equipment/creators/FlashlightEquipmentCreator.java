@@ -4,13 +4,11 @@ import snake.equipment.concreteImplementations.FlashlightEquipment;
 import snake.equipment.interfaces.IEquipment;
 import snake.equipment.interfaces.IEquipmentCreator;
 
-
-/*                               Developed By:
+/**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * Module: bszazulla && --------------- (modifiable according to need)
+ * @author bszazulla
  */
-
 
 public class FlashlightEquipmentCreator implements IEquipmentCreator
 {
