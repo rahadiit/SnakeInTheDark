@@ -1,6 +1,6 @@
 package snake.equipment.creators;
 
-import snake.equipment.core.FlashlightEquipment;
+import snake.equipment.concreteImplementations.FlashlightEquipment;
 import snake.equipment.interfaces.IEquipment;
 import snake.equipment.interfaces.IEquipmentCreator;
 

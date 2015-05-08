@@ -1,4 +1,4 @@
-package snake.equipment.core;
+package snake.equipment.concreteImplementations;
 
 import snake.equipment.interfaces.IEquipment;
 import snake.map.interfaces.IMapAccess;
