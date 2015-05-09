@@ -139,10 +139,9 @@ public class CameraMan {
 	}
 	
 	public void updateAndRenderLights()  {
-		try {
-			rayHandler.updateAndRender();
-		} finally {
-			System.out.println ("Error: Rayhandler wasn't created.");
-		}
+		if (rayHandler == null)
+			System.out.println("Error: RayHandler wasnt created.");
+		
+		rayHandler.updateAndRender();
 	}
 }
