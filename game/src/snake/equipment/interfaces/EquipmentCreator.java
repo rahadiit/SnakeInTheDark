@@ -1,6 +1,7 @@
 package snake.equipment.interfaces;
 
 import snake.equipment.creators.FlashlightEquipmentCreator;
+import snake.equipment.creators.SensorEquipmentCreator;
 
 /**                              Developed By:
  *                                  NoDarkGlasses
@@ -20,6 +21,10 @@ public class EquipmentCreator
 		if(equipment.equalsIgnoreCase("flashlight"))
 		{
 			obj = new FlashlightEquipmentCreator();
+		}
+		else if(equipment.equalsIgnoreCase("sensor"))
+		{
+			obj = new SensorEquipmentCreator();
 		}
 		
 		return obj;

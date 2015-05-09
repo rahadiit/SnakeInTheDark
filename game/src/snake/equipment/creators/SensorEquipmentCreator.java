@@ -1,6 +1,6 @@
 package snake.equipment.creators;
 
-import snake.equipment.implementations.FlashlightEquipment;
+import snake.equipment.implementations.SensorEquipment;
 import snake.equipment.interfaces.IEquipment;
 import snake.equipment.interfaces.IEquipmentCreator;
 
@@ -10,10 +10,10 @@ import snake.equipment.interfaces.IEquipmentCreator;
  * @author bszazulla
  */
 
-public class FlashlightEquipmentCreator implements IEquipmentCreator
+public class SensorEquipmentCreator implements IEquipmentCreator
 {
 	public IEquipment create()
 	{
-		return new FlashlightEquipment();
+		return new SensorEquipment();
 	}
 }

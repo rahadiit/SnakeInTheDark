@@ -14,7 +14,7 @@ public class EquipmentCreatorTestModule
 	public static void main(String[] args) 
 	{
 		// instancia do objeto
-		IEquipment equip = EquipmentCreator.createFactory("flashlight").create();
+		IEquipment equip = EquipmentCreator.createFactory("sensor").create();
 		
 		System.out.println("Equipment name: " + equip.getName());
 		System.out.println("Equipment description: " + equip.getDescription());

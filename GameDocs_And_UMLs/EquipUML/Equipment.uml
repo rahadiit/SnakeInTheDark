@@ -34,19 +34,11 @@
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_3tXAkO6xEeS-G-LZbHzsAQ" name="XEquipment">
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_P0OS4O6yEeS-G-LZbHzsAQ" name="name">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_aLPKAO6yEeS-G-LZbHzsAQ" name="description">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-    </ownedAttribute>
+    <generalization xmi:type="uml:Generalization" xmi:id="_GE1YEPXnEeShx_4iY5lsMg" general="_7y_U0PXmEeShx_4iY5lsMg"/>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_kkgD4O6yEeS-G-LZbHzsAQ" name="other"/>
-    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_dvjdkPNNEeSKFeVTEAx5fA" client="_3tXAkO6xEeS-G-LZbHzsAQ" supplier="_LOyRQO6QEeS-G-LZbHzsAQ" contract="_LOyRQO6QEeS-G-LZbHzsAQ"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_LUgmUO6yEeS-G-LZbHzsAQ" name="activate">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_LUgmUe6yEeS-G-LZbHzsAQ" name="map" type="_GUdFQO6QEeS-G-LZbHzsAQ" effect="update"/>
     </ownedOperation>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_LUjCkO6yEeS-G-LZbHzsAQ" name="getName"/>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_LUle0O6yEeS-G-LZbHzsAQ" name="getDescription"/>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_m436QO6yEeS-G-LZbHzsAQ" name="other"/>
   </packagedElement>
   <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_WElC0PM1EeSEJoFN9-IddA" name="Realization0" client="_BZ0pMO6OEeS-G-LZbHzsAQ" supplier="_byA6YO6NEeS-G-LZbHzsAQ" contract="_byA6YO6NEeS-G-LZbHzsAQ"/>
@@ -65,4 +57,27 @@
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_Br1GcPT1EeS-zf2PdlNkNA" name="Realization1" client="_azT9sPT0EeS-zf2PdlNkNA" supplier="_DI3-IPTzEeS-zf2PdlNkNA" contract="_DI3-IPTzEeS-zf2PdlNkNA"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_7y_U0PXmEeShx_4iY5lsMg" name="AbstractEquipment" isAbstract="true">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_KsZZEPXnEeShx_4iY5lsMg" name="description">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_Ksb1UPXnEeShx_4iY5lsMg" name="name">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_dvjdkPNNEeSKFeVTEAx5fA" client="_3tXAkO6xEeS-G-LZbHzsAQ _7y_U0PXmEeShx_4iY5lsMg" supplier="_LOyRQO6QEeS-G-LZbHzsAQ" contract="_LOyRQO6QEeS-G-LZbHzsAQ"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_OnqUwPXnEeShx_4iY5lsMg" name="getDescription"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_OnvNQPXnEeShx_4iY5lsMg" name="getName"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_Pcd10PXnEeShx_4iY5lsMg" name="activate" isAbstract="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Pcd10fXnEeShx_4iY5lsMg" name="map" type="_GUdFQO6QEeS-G-LZbHzsAQ" effect="update"/>
+    </ownedOperation>
+    <nestedClassifier xmi:type="uml:Class" xmi:id="_NQrTsPXnEeShx_4iY5lsMg" name="AbstractEquipment">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_NQrTsfXnEeShx_4iY5lsMg" name="description">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_NQrTsvXnEeShx_4iY5lsMg" name="name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_NQrTs_XnEeShx_4iY5lsMg" client="_3tXAkO6xEeS-G-LZbHzsAQ _NQrTsPXnEeShx_4iY5lsMg _NQrTsPXnEeShx_4iY5lsMg _NQrTsPXnEeShx_4iY5lsMg" supplier="_LOyRQO6QEeS-G-LZbHzsAQ" contract="_LOyRQO6QEeS-G-LZbHzsAQ"/>
+    </nestedClassifier>
+  </packagedElement>
 </uml:Model>
