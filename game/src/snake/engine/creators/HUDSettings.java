@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import snake.engine.InterfaceAbstract.GameStart;
-import snake.engine.InterfaceAbstract.GameWorld;
-import snake.engine.InterfaceAbstract.HUD;
-import snake.engine.hud.SnakeHUD;
+import snake.engine.GameStart;
+import snake.engine.GameWorld;
+import snake.engine.HUD;
+import snake.hud.SnakeHUD;
 
 
 

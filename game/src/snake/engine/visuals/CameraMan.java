@@ -1,9 +1,11 @@
-package snake.engine.imageUtilities;
+package snake.engine.visuals;
 
 import snake.engine.creators.WorldSettings;
+import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 
@@ -19,7 +21,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class CameraMan {
 	private OrthographicCamera camera;
-	private boolean isVirtual = false;
+	private boolean virtualScreen = false;
+	private World physicsWorld;
+	
+	private RayHandler rayHandler;
 	
 	/** Creates CameraMan with Stage
 	 * Note: Only works with OrthographicCamera
@@ -46,15 +51,16 @@ public class CameraMan {
 							  (int)(WorldSettings.getVScreenY_Porc() * Gdx.graphics.getHeight()),
 							  (int)(WorldSettings.getVScreenWidth_Porc() * Gdx.graphics.getWidth()),
 							  (int)(WorldSettings.getVScreenHeight_Porc()  * Gdx.graphics.getHeight()));
-			isVirtual = true;
+			virtualScreen = true;
 		}
 	}
+	
 	/** "Unsets" virtual Screen
 	 */
 	public void unsetCamera () {
 		Gdx.gl.glViewport(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-		if (isVirtual) {
-			isVirtual = false;
+		if (virtualScreen) {
+			virtualScreen = false;
 		}
 	}
 	
@@ -113,4 +119,30 @@ public class CameraMan {
 	
 	
 	
+	public void setLights (float ratio) {
+		if (physicsWorld == null) {
+			physicsWorld = Lights.createWorld(ratio);
+		}
+		else
+			Lights.setWorld(physicsWorld);
+
+		if (rayHandler == null) {
+			RayHandler.setGammaCorrection(true);
+			RayHandler.useDiffuseLight(true);
+			rayHandler = new RayHandler(physicsWorld);
+		}
+		else
+			rayHandler.setWorld(physicsWorld);
+		
+		rayHandler.setAmbientLight(WorldSettings.getAmbientColor());
+		rayHandler.setBlurNum(3);
+	}
+	
+	public void updateAndRenderLights()  {
+		try {
+			rayHandler.updateAndRender();
+		} finally {
+			System.out.println ("Error: Rayhandler wasn't created.");
+		}
+	}
 }

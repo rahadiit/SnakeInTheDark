@@ -1,12 +1,14 @@
 package snake.engine.creators;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import snake.engine.InterfaceAbstract.GameWorld;
+import snake.engine.GameWorld;
 import snake.engine.gameScreens.SnakeLevel;
+import snake.engine.visuals.WorldStage;
 import snake.map.WorldMap;
 
 /**                               Developed By:
@@ -26,6 +28,8 @@ public class WorldSettings {
 	private static float VSCREEN_WIDTH_PORC = .5f, VSCREEN_HEIGHT_PORC = .5f; //Size of Virtual Screen (porcentage to Screen Size)
 	private static float VSCREEN_MINSIZE = .3f, VSCREEN_MAXSIZE = 1;
 	//IMPORTANT NOTE -- VSCREEN is UNreliable if it goes beyond the Screen size
+	
+	public static Color ambientColor = new Color (0f, 1f, 1f, .5f);
 	
 	/** Set the WorldType of the return line to create a custom World class in game (Changeable)
 	 * 
@@ -195,6 +199,10 @@ public class WorldSettings {
 	public static float getVScreenMinSize() {
 		return VSCREEN_MINSIZE;
 	}
+	
+	public static Color getAmbientColor() {
+		return ambientColor;
+	}
 	/* ------------------------------ Setters ------------------------------ */
 	
 	/** Sets Camera Center coordinates - arbitrary coordinate System.*/
@@ -239,5 +247,9 @@ public class WorldSettings {
 		return true;
 	}
 	
+	
+	public static void setAmbientColor(Color color) {
+		ambientColor = color;
+	}
 	
 }

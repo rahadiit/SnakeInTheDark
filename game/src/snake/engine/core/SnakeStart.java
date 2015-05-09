@@ -1,7 +1,7 @@
 package snake.engine.core;
 
-import snake.engine.InterfaceAbstract.GameStart;
-import snake.engine.gameScreens.SnakeHub;
+import snake.engine.GameStart;
+import snake.engine.creators.MainMenuSettings;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -20,7 +20,7 @@ public class SnakeStart extends Game implements GameStart {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		this.setScreen(new SnakeHub(this));
+		this.setScreen(MainMenuSettings.createMainMenu(this));
 	}
 
 	@Override

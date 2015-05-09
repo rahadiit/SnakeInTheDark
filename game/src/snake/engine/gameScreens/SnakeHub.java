@@ -2,13 +2,12 @@ package snake.engine.gameScreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import snake.engine.MainMenu;
 import snake.engine.core.SnakeStart;
 
 /*                               Developed By:
@@ -17,7 +16,7 @@ import snake.engine.core.SnakeStart;
  * Module: Mr.Strings
  */
 
-public class SnakeHub implements Screen, InputProcessor {
+public class SnakeHub implements MainMenu {
 	private SnakeStart game;
 	private SpriteBatch batch;
 	private BitmapFont font;
@@ -70,10 +69,7 @@ public class SnakeHub implements Screen, InputProcessor {
 		layout.setText(font, instructions[1]);
 		font.draw(batch, layout, w / 2 - layout.width / 2, h / 2 - layout.height / 2 - 20);
 
-		// Draw fps
-		/*font = new BitmapFont();
-		font.setColor(Color.GREEN);
-		font.setScale(3f);*/
+
 		font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, h*99/100);
 		batch.end();
 		//Ends drawing
@@ -120,7 +116,7 @@ public class SnakeHub implements Screen, InputProcessor {
 	@Override
 	public boolean keyDown(int keycode) {
 		if (keycode == Input.Keys.F1) {
-			// set resolution to default and toogles full-screen
+			// set resolution to default and toggles full-screen
 			Gdx.graphics.setDisplayMode(
 					Gdx.graphics.getDesktopDisplayMode().width,
 					Gdx.graphics.getDesktopDisplayMode().height,

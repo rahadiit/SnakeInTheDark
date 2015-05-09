@@ -1,6 +1,6 @@
-package snake.engine.hud;
+package snake.hud;
 
-import snake.engine.InterfaceAbstract.GameWorld;
+import snake.engine.GameWorld;
 
 /*                               Developed By:
  *                                  NoDark

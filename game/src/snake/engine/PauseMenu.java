@@ -1,4 +1,4 @@
-package snake.engine.InterfaceAbstract;
+package snake.engine;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -9,14 +9,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Module: Mr.Strings
  */
 
-public interface Cutscene {
+
+public interface PauseMenu {
+	
+	public void act(float delta);
 	
 	public void draw();
-	public void act(float delta);
-
-	public void begin(String name);
-	
-	public boolean isRunning();
 	
 	public void setBatch (SpriteBatch batch);
 }

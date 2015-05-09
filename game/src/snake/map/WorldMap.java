@@ -1,12 +1,13 @@
 package snake.map;
 
-import snake.engine.InterfaceAbstract.GameWorld;
+import snake.engine.GameWorld;
 import snake.engine.creators.WorldSettings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 
 
 /**                               Developed By:
@@ -20,6 +21,7 @@ public class WorldMap extends GameWorld {
 	// The code below is simply a prototype for testing purposes 
 	private Texture texture;
 	private Sprite sprite;
+	DirectionalLight light;
 	
 	public WorldMap (/* Add other parameters of choice*/) {
 		
@@ -27,6 +29,8 @@ public class WorldMap extends GameWorld {
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		sprite = new Sprite(texture);
 		sprite.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
+		
+		light = new DirectionalLight();
 	}
 	
 	

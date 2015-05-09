@@ -1,12 +1,12 @@
-package snake.engine.hud;
+package snake.hud;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import snake.engine.InterfaceAbstract.GameWorld;
-import snake.engine.InterfaceAbstract.HUD;
+import snake.engine.GameWorld;
+import snake.engine.HUD;
 
 /**                               Developed By:
  *                                   NoDark

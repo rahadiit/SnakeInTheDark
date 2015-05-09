@@ -1,7 +1,6 @@
-package snake.engine.creators;
+package snake.engine.visuals;
 
 import snake.engine.gameScreens.SnakeLevel;
-import snake.engine.imageUtilities.CameraMan;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -50,6 +49,9 @@ public class WorldStage extends Stage {
 		cameraMan.setCamera();
 		super.draw();
 		cameraMan.unsetCamera();
+		
+		cameraMan.setLights(1);
+		cameraMan.updateAndRenderLights();
 	}
 	
 	

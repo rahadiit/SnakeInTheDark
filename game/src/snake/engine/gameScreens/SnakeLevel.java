@@ -6,11 +6,12 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import snake.engine.InterfaceAbstract.Cutscene;
-import snake.engine.InterfaceAbstract.GameStart;
-import snake.engine.InterfaceAbstract.GameWorld;
-import snake.engine.InterfaceAbstract.HUD;
-import snake.engine.InterfaceAbstract.PauseMenu;
+import snake.engine.Cutscene;
+import snake.engine.GameLevel;
+import snake.engine.GameStart;
+import snake.engine.GameWorld;
+import snake.engine.HUD;
+import snake.engine.PauseMenu;
 import snake.engine.creators.HUDSettings;
 import snake.engine.creators.WorldSettings;
 
@@ -21,7 +22,7 @@ import snake.engine.creators.WorldSettings;
  * @author Mr.Strings
  */
 
-public class SnakeLevel implements Screen {
+public class SnakeLevel implements GameLevel {
 
 	public enum State {ACTIVE, NOINPUT, CUTSCENE, PAUSED}
 	public enum Strategy {UPDATEFOCUS, DRAWFOCUS, NOFOCUS}
@@ -57,14 +58,13 @@ public class SnakeLevel implements Screen {
 		stageWorld.addActor(world);
 		stageHUD.addActor(hud);
 		
+		
 		// Let stages listen to input events
 		input = new InputMultiplexer();
 		input.addProcessor(stageWorld);
 		input.addProcessor(stageHUD);
 		 
 		Gdx.input.setInputProcessor(input);
-		
-		
 	}
 	
 	@Override
