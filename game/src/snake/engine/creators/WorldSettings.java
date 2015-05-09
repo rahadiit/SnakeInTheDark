@@ -29,7 +29,7 @@ public class WorldSettings {
 	private static float VSCREEN_MINSIZE = .3f, VSCREEN_MAXSIZE = 1;
 	//IMPORTANT NOTE -- VSCREEN is UNreliable if it goes beyond the Screen size
 	
-	public static Color ambientColor = new Color (0f, 1f, 1f, .5f);
+	public static Color ambientColor = new Color (1f, 0f, 0f, .5f);
 	
 	/** Set the WorldType of the return line to create a custom World class in game (Changeable)
 	 * 
@@ -246,7 +246,6 @@ public class WorldSettings {
 
 		return true;
 	}
-	
 	
 	public static void setAmbientColor(Color color) {
 		ambientColor = color;
