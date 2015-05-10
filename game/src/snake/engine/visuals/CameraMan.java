@@ -94,8 +94,10 @@ public class CameraMan {
 		float effectiveViewportWidth = camera.viewportWidth * camera.zoom;
         float effectiveViewportHeight = camera.viewportHeight * camera.zoom;
 
-        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, 100 - effectiveViewportWidth / 2f);
-        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
+        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f,
+        									WorldSettings.getWorldWidth() - effectiveViewportWidth / 2f);
+        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f,
+        									WorldSettings.getWorldHeight() - effectiveViewportHeight / 2f);
     }
 	
 	/** translates VirtualScren keeping it in Bounds
@@ -118,7 +120,7 @@ public class CameraMan {
 	}
 	
 	
-	
+	/** Sets lights to be updated and rendered correctly */
 	public void setLights (float ratio) {
 		if (physicsWorld == null) {
 			physicsWorld = Lights.createWorld(ratio);
@@ -129,19 +131,31 @@ public class CameraMan {
 		if (rayHandler == null) {
 			RayHandler.setGammaCorrection(true);
 			RayHandler.useDiffuseLight(true);
-			rayHandler = new RayHandler(physicsWorld);
+			
+			if (Lights.getRayhandler() != null)
+				rayHandler = Lights.getRayhandler();
+			else 
+				rayHandler = new RayHandler(physicsWorld);
 		}
 		else
 			rayHandler.setWorld(physicsWorld);
 		
+		Lights.setRayhandler(rayHandler);
 		rayHandler.setAmbientLight(WorldSettings.getAmbientColor());
 		rayHandler.setBlurNum(3);
+		rayHandler.useCustomViewport((int)(WorldSettings.getVScreenX_Porc() * Gdx.graphics.getWidth()),
+							         (int)(WorldSettings.getVScreenY_Porc() * Gdx.graphics.getHeight()),
+							         (int)(WorldSettings.getVScreenWidth_Porc() * Gdx.graphics.getWidth()),
+							         (int)(WorldSettings.getVScreenHeight_Porc()  * Gdx.graphics.getHeight()));
+		rayHandler.setCombinedMatrix(camera);
 	}
 	
+	
+	/** Calls rayHandler's update and render */
 	public void updateAndRenderLights()  {
 		if (rayHandler == null)
 			System.out.println("Error: RayHandler wasnt created.");
-		
+	
 		rayHandler.updateAndRender();
 	}
 }

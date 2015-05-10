@@ -26,5 +26,10 @@ public abstract class GameWorld extends Group /* Group makes it connected to Map
 			throw new UnsupportedOperationException("MapEntity has to be in a WorldStage.");
 	}
 	
+	
+	public abstract void createLights();
+	
 	public abstract void dispose();
+	
+	
 }

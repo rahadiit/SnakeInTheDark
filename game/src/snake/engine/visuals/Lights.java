@@ -1,5 +1,6 @@
 package snake.engine.visuals;
 
+import box2dLight.RayHandler;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -11,8 +12,9 @@ import com.badlogic.gdx.physics.box2d.World;
  */
 
 public class Lights {
-	private static World physicsWorld;
+	private static World physicsWorld = new World(new Vector2(0,0), true);
 	static float CONVERT2PHYSICS = 1;
+	private static RayHandler handler = new RayHandler (physicsWorld);
 	public static boolean isActive = true;
 	
 	
@@ -30,6 +32,11 @@ public class Lights {
 		return physicsWorld;
 	}
 	
+	
+	public static RayHandler createRayHandler (World world) {
+		handler = new RayHandler(world);
+		return handler;
+	}
 	public static void setWorld (World world) {
 		setWorld(world, 1);
 	}
@@ -44,6 +51,14 @@ public class Lights {
 			physicsWorld = world;
 			CONVERT2PHYSICS = ratio;
 		}
+	}
+	
+	public static void setRayhandler (RayHandler rayHandler) {
+		handler = rayHandler;
+	}
+	
+	public static RayHandler getRayhandler () {
+		return handler;
 	}
 	
 	public static World getWorld() {

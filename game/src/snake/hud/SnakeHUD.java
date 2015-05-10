@@ -40,7 +40,8 @@ public class SnakeHUD extends HUD {
 		font.setColor(Color.GREEN);
 		
 		font.getData().setScale(1f);
-		font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, this.getHeight());
+		if (Gdx.input.isKeyPressed(Input.Keys.H))
+			font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, this.getHeight());
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 			font.setColor(Color.MAGENTA);
@@ -49,7 +50,8 @@ public class SnakeHUD extends HUD {
 		
 		font.setColor(Color.ORANGE);
 		font.getData().setScale(.5f);
-		font.draw(batch, "Use Directional Arrows and IJKL for moving, YU and OP for zooming", this.getWidth()/4, this.getHeight() * 99/100);
+		if (Gdx.input.isKeyPressed(Input.Keys.H))
+			font.draw(batch, "Use Directional Arrows and IJKL for moving, YU and OP for zooming", this.getWidth()/4, this.getHeight() * 99/100);
 		//Ends drawing
 	}
 

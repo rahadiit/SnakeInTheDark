@@ -1,5 +1,6 @@
 package snake.engine.creators;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -19,17 +20,17 @@ import snake.map.WorldMap;
  * Controls World Parameters, such as size, camera infos, virtual Screen Parameters, etc.
  */
 public class WorldSettings {
-	private static float WORLD_WIDTH = 100, WORLD_HEIGHT = 100; //Arbitrary coordinate System.
+	private static float WORLD_WIDTH = 100, WORLD_HEIGHT = heightFix(100); //Arbitrary coordinate System.
 	private static float WORLD2SCREEN_RATIO = 1f; //Relative to World (Changeable)
-	private static float CAMERAPOSITIONX = 50,  CAMERAPOSITIONY = 50; //center of camera position (Changeable)
+	private static float CAMERAPOSITIONX = 50,  CAMERAPOSITIONY = heightFix(50); //center of camera position (Changeable)
 	private static float MAXZOOM = .1f, MINZOOM = 1f;
 	private static boolean HAS_VIRTUAL_SCREEN = true; //Defines if World camera occupies whole screen or is clipped
-	private static float VSCREEN_X_PORC = .25f, VSCREEN_Y_PORC = .25f; // Starting point of Virtual Screen (if set) (porcentage to Screen Size
-	private static float VSCREEN_WIDTH_PORC = .5f, VSCREEN_HEIGHT_PORC = .5f; //Size of Virtual Screen (porcentage to Screen Size)
+	private static float VSCREEN_X_PORC = 0f, VSCREEN_Y_PORC = 0f; // Starting point of Virtual Screen (if set) (porcentage to Screen Size
+	private static float VSCREEN_WIDTH_PORC = 1f, VSCREEN_HEIGHT_PORC = 1f; //Size of Virtual Screen (porcentage to Screen Size)
 	private static float VSCREEN_MINSIZE = .3f, VSCREEN_MAXSIZE = 1;
 	//IMPORTANT NOTE -- VSCREEN is UNreliable if it goes beyond the Screen size
 	
-	public static Color ambientColor = new Color (1f, 0f, 0f, .5f);
+	public static Color ambientColor = new Color (0f, 0f, 0f, 1f);
 	
 	/** Set the WorldType of the return line to create a custom World class in game (Changeable)
 	 * 
@@ -82,6 +83,12 @@ public class WorldSettings {
 		return viewport;
 	}
 	
+	/** Adjusts the height so that 0 is the bottom of the world and 100 is the top of it.
+	 *  Should be used when drawing or positioning objects of GameWorld. 
+	 */
+	public static float heightFix (float height) {
+		return height * Gdx.graphics.getHeight()/Gdx.graphics.getWidth();
+	}
 	
 	
 	
