@@ -1,9 +1,10 @@
 package snake.map;
 
 import snake.engine.GameWorld;
-import snake.engine.MapEntity;
 import snake.engine.creators.WorldSettings;
 import snake.engine.visuals.Lights;
+import snake.engine.visuals.ShadowSource;
+import snake.engine.visuals.Shadows;
 import box2dLight.Light;
 import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
@@ -26,6 +27,7 @@ public class WorldMap extends GameWorld {
 	private Sprite sprite;
 	private Sprite entity; //must be changed to Map Entities 
 	Light light;
+	ShadowSource shadow;
 	private float velocity = .2f;
 	private int x = 1;
 	private boolean y = false, triggered = false;
@@ -42,6 +44,8 @@ public class WorldMap extends GameWorld {
 		entity.setSize(4, 12);
 		entity.setAlpha(1f);
 		entity.setPosition(60, 15);
+		
+		
 		
 	}
 	
@@ -87,12 +91,13 @@ public class WorldMap extends GameWorld {
 	
 	@Override
 	public void createLights() {
-		light = new PointLight (Lights.getRayhandler(), 30, new Color(1f, 0f, .5f, 1f), 40, 50, WorldSettings.heightFix(50));
+		light = new PointLight (Lights.getRayhandler(), 5000, new Color(1f, 0f, .5f, 1f), 40, 50, WorldSettings.heightFix(50));
+		light.setSoft(false);
 	}
 	
 	@Override
 	public void dispose() {
-		//sprite.getTexture().dispose();
+		sprite.getTexture().dispose();
 		light.dispose();
 	}
 

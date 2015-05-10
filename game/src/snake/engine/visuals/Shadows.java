@@ -12,9 +12,10 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
+ *                                
+<br> Controls application shadow system </br>
  * @author Mr.Strings
  */
-
 
 public abstract class Shadows {
 	
@@ -22,25 +23,28 @@ public abstract class Shadows {
 	public static ShadowSource createCircleShadowSource(float radius, float posx, float posy) {
 		
 
+		
+		CircleShape circle = new CircleShape();
+		circle.setRadius(radius);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = circle;
+		
 		BodyDef bodyDef = new BodyDef();
 		
 		bodyDef.type = BodyType.KinematicBody;
+		bodyDef.fixedRotation = true;
 		
 		bodyDef.position.set(posx, posy);
 	
-		ShadowSource body = (ShadowSource) Lights.getWorld().createBody(bodyDef);
+		ShadowSource shadow = new ShadowSource();
+		shadow.createBody (Lights.getWorld().createBody(bodyDef));
 
-		CircleShape circle = new CircleShape();
-		circle.setRadius(radius);
-
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = circle;
-
-		body.createFixture(fixtureDef);
+		shadow.body.createFixture(fixtureDef);
 
 		circle.dispose();
 		
-		return body;
+		return shadow;
 	}
 	
 	public static ShadowSource createRectShadowSource (int width, int height, int posx, int posy) {
@@ -49,20 +53,23 @@ public abstract class Shadows {
 		
 		bodyDef.position.set(posx, posy);
 		
-		ShadowSource body = (ShadowSource) Lights.getWorld().createBody(bodyDef);
+		ShadowSource shadow = new ShadowSource();
+		shadow.body = Lights.getWorld().createBody(bodyDef);
 		
 		PolygonShape shape = new PolygonShape();
       
         shape.setAsBox(width/2, height/2);
         
-        body.createFixture(shape, 0);
+        shadow.body.createFixture(shape, 0);
 		
-		return body;
+		return shadow;
 	}
 	
 	
 	public static ShadowSource createShadowSource (BodyDef bodyDef) {
-		return (ShadowSource) Lights.getWorld().createBody(bodyDef);
+		ShadowSource shadow = new ShadowSource();
+		shadow.body = Lights.getWorld().createBody(bodyDef);
+		return shadow;
 	}
 	
 	

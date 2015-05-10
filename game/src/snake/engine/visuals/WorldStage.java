@@ -24,18 +24,21 @@ public class WorldStage extends Stage {
 		super();
 		this.level = level;
 		cameraMan = new CameraMan(this);
+		cameraMan.addLightSupport(1);
 		level.getGameWorld().createLights();
 	}
 	public WorldStage(SnakeLevel level, Viewport viewport) {
 		super(viewport);
 		this.level = level;
 		cameraMan = new CameraMan (this);
+		cameraMan.addLightSupport(1);
 		level.getGameWorld().createLights();
 	}
 	public WorldStage(SnakeLevel level, Viewport viewport, Batch batch) {
 		super(viewport, batch);
 		this.level = level;
 		cameraMan = new CameraMan(this);
+		cameraMan.addLightSupport(1);
 		level.getGameWorld().createLights();
 	}
 	
@@ -52,7 +55,7 @@ public class WorldStage extends Stage {
 		cameraMan.setCamera();
 		super.draw();
 		
-		cameraMan.setLights(1);
+		cameraMan.setLights();
 		cameraMan.updateAndRenderLights();
 		cameraMan.unsetCamera();
 	}

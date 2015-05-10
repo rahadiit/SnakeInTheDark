@@ -8,13 +8,15 @@ import com.badlogic.gdx.physics.box2d.World;
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
+ *                                
+ * <br> Controls application Light system.  </br>
  * @author Mr.Strings
  */
 
 public class Lights {
-	private static World physicsWorld = new World(new Vector2(0,0), true);
 	static float CONVERT2PHYSICS = 1;
-	private static RayHandler handler = new RayHandler (physicsWorld);
+	private static World physicsWorld;
+	private static RayHandler handler;
 	public static boolean isActive = true;
 	
 	
@@ -37,24 +39,19 @@ public class Lights {
 		handler = new RayHandler(world);
 		return handler;
 	}
-	public static void setWorld (World world) {
-		setWorld(world, 1);
-	}
-
-	public static void setWorld(World world, float ratio) {
+	
+	public static void setWorld(World world) {
 		if (world == null) {
-			physicsWorld = new World(new Vector2(0,0), true);
-			setWorld(physicsWorld);
-			CONVERT2PHYSICS = ratio;
-		}
-		else {	
 			physicsWorld = world;
-			CONVERT2PHYSICS = ratio;
 		}
 	}
 	
 	public static void setRayhandler (RayHandler rayHandler) {
 		handler = rayHandler;
+	}
+	
+	public static void setConversionRatio(float ratio) {
+		CONVERT2PHYSICS = ratio;
 	}
 	
 	public static RayHandler getRayhandler () {
@@ -64,4 +61,5 @@ public class Lights {
 	public static World getWorld() {
 		return physicsWorld;
 	}
+
 }

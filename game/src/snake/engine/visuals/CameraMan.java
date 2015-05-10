@@ -87,7 +87,7 @@ public class CameraMan {
 		
 	}
 	
-	/** Keeps Camera in World Bounds. Addapted from link below
+	/** Keeps Camera in World Bounds. Adapted from link below
 	 * @see https://github.com/libgdx/libgdx/wiki/Orthographic-camera
 	*/
 	private void keepInBounds () {
@@ -100,8 +100,7 @@ public class CameraMan {
         									WorldSettings.getWorldHeight() - effectiveViewportHeight / 2f);
     }
 	
-	/** translates VirtualScren keeping it in Bounds
-	 */
+	/** translates VirtualScren keeping it in Bounds */
 	public void moveVCamera (float x, float y) {
 		WorldSettings.setVirtualScreen(MathUtils.clamp(WorldSettings.getVScreenX_Porc() + x, 0, 1 - WorldSettings.getVScreenWidth_Porc()), 
 									   MathUtils.clamp(WorldSettings.getVScreenY_Porc() + y, 0, 1 - WorldSettings.getVScreenHeight_Porc()),
@@ -120,26 +119,19 @@ public class CameraMan {
 	}
 	
 	
-	/** Sets lights to be updated and rendered correctly */
-	public void setLights (float ratio) {
-		if (physicsWorld == null) {
-			physicsWorld = Lights.createWorld(ratio);
-		}
-		else
-			Lights.setWorld(physicsWorld);
-
-		if (rayHandler == null) {
-			RayHandler.setGammaCorrection(true);
-			RayHandler.useDiffuseLight(true);
-			
-			if (Lights.getRayhandler() != null)
-				rayHandler = Lights.getRayhandler();
-			else 
-				rayHandler = new RayHandler(physicsWorld);
-		}
-		else
-			rayHandler.setWorld(physicsWorld);
+	/** Adds light support */
+	public void addLightSupport (float ratio) {
+		physicsWorld = Lights.createWorld(ratio);
 		
+		RayHandler.setGammaCorrection(true);
+		RayHandler.useDiffuseLight(true);
+			 
+		rayHandler = Lights.createRayHandler(physicsWorld);
+	}
+	
+	
+	/** Sets lights to be updated and rendered accordingly */
+	public void setLights() {
 		Lights.setRayhandler(rayHandler);
 		rayHandler.setAmbientLight(WorldSettings.getAmbientColor());
 		rayHandler.setBlurNum(3);
