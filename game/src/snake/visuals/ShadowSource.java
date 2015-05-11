@@ -1,4 +1,4 @@
-package snake.engine.visuals;
+package snake.visuals;
 
 import com.badlogic.gdx.physics.box2d.Body;
 

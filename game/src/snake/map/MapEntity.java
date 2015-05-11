@@ -1,5 +1,6 @@
-package snake.engine;
+package snake.map;
 
+import snake.engine.GameWorld;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 

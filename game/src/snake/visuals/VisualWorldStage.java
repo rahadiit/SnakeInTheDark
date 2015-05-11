@@ -1,10 +1,10 @@
-package snake.engine.visuals;
+package snake.visuals;
 
+import snake.engine.gameScreens.LevelStage;
 import snake.engine.gameScreens.SnakeLevel;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**                               Developed By:
@@ -16,30 +16,42 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * @author Mr.Strings
  */
 
-public class WorldStage extends Stage {
-	private SnakeLevel level;
+public class VisualWorldStage extends LevelStage {
 	private CameraMan cameraMan;
 	
-	public WorldStage(SnakeLevel level) {
-		super();
-		this.level = level;
+	public VisualWorldStage(SnakeLevel level) {
+		super(level);
 		cameraMan = new CameraMan(this);
 		cameraMan.addLightSupport(1);
-		level.getGameWorld().createLights();
+		
+		try {
+			VisualGameWorld world = (VisualGameWorld) level.getGameWorld();
+			world.createLights();
+		} catch (Exception e) {
+			System.out.println ("GameWorld of VisualWorldStage must be a VisualGameWorld");
+		}
 	}
-	public WorldStage(SnakeLevel level, Viewport viewport) {
-		super(viewport);
-		this.level = level;
+	public VisualWorldStage(SnakeLevel level, Viewport viewport) {
+		super(level, viewport);
 		cameraMan = new CameraMan (this);
 		cameraMan.addLightSupport(1);
-		level.getGameWorld().createLights();
+		try {
+			VisualGameWorld world = (VisualGameWorld) level.getGameWorld();
+			world.createLights();
+		} catch (Exception e) {
+			System.out.println ("GameWorld of VisualWorldStage must be a VisualGameWorld");
+		}
 	}
-	public WorldStage(SnakeLevel level, Viewport viewport, Batch batch) {
-		super(viewport, batch);
-		this.level = level;
+	public VisualWorldStage(SnakeLevel level, Viewport viewport, Batch batch) {
+		super(level, viewport, batch);
 		cameraMan = new CameraMan(this);
 		cameraMan.addLightSupport(1);
-		level.getGameWorld().createLights();
+		try {
+			VisualGameWorld world = (VisualGameWorld) level.getGameWorld();
+			world.createLights();
+		} catch (Exception e) {
+			System.out.println ("GameWorld of VisualWorldStage must be a VisualGameWorld");
+		}
 	}
 	
 	
@@ -108,9 +120,4 @@ public class WorldStage extends Stage {
 		if (Gdx.input.isKeyPressed(Input.Keys.Y))
 			cameraMan.zoomVCamera(-.01f);
 	}
-	
-	/* ---------------- Getters --------------- */
-	public SnakeLevel getLevel() {
-		return level;
-	}	
 }

@@ -10,10 +10,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import snake.engine.MainMenu;
 import snake.engine.core.SnakeStart;
 
-/*                               Developed By:
- *                                  NoDark
- *                               sessaGlasses
- * Module: Mr.Strings
+/**                               Developed By:
+ *                                   NoDark
+ *                                sessaGlasses
+ *                                
+ * <br> SnakeInTheDark main menu Sketch. </br>
+ * @author Mr.Strings
  */
 
 public class SnakeHub implements MainMenu {
@@ -77,7 +79,7 @@ public class SnakeHub implements MainMenu {
 
 	private void update() {
 		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
-			game.setScreen(new SnakeLevel(game, "Generic Level"));
+			game.setScreen(new SnakeLevel(game, "SnakeMap", "Generic LevelID"));
 
 		instructions[0] = "Para comecar o jogo";
 		instructions[1] = "tecle ENTER";

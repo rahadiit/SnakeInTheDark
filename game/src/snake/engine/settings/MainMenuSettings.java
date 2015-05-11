@@ -1,4 +1,4 @@
-package snake.engine.creators;
+package snake.engine.settings;
 
 import snake.engine.MainMenu;
 import snake.engine.core.SnakeStart;
@@ -15,7 +15,6 @@ import snake.engine.gameScreens.SnakeHub;
  */
 
 public class MainMenuSettings {
-	
 	
 	public static MainMenu createMainMenu(SnakeStart game) {
 		return new SnakeHub(game);

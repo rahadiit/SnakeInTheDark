@@ -1,10 +1,8 @@
-package snake.map;
+package snake.map.types;
 
 import snake.engine.GameWorld;
-import snake.engine.creators.WorldSettings;
-import snake.engine.visuals.Lights;
-import snake.engine.visuals.ShadowSource;
-import snake.engine.visuals.Shadows;
+import snake.engine.settings.WorldSettings;
+import snake.visuals.Lights;
 import box2dLight.Light;
 import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
@@ -27,12 +25,11 @@ public class WorldMap extends GameWorld {
 	private Sprite sprite;
 	private Sprite entity; //must be changed to Map Entities 
 	Light light;
-	ShadowSource shadow;
 	private float velocity = .2f;
 	private int x = 1;
 	private boolean y = false, triggered = false;
 	
-	public WorldMap (/* Add other parameters of choice*/) {
+	public WorldMap (String LevelData/* Add other parameters of choice*/) {
 		
 		Texture texture = new Texture(Gdx.files.internal("foggy_forest_by_BrokenLens.jpeg"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -89,7 +86,7 @@ public class WorldMap extends GameWorld {
 			entity.draw(batch);
 	}
 	
-	@Override
+
 	public void createLights() {
 		light = new PointLight (Lights.getRayhandler(), 5000, new Color(1f, 0f, .5f, 1f), 40, 50, WorldSettings.heightFix(50));
 		light.setSoft(false);
@@ -99,6 +96,7 @@ public class WorldMap extends GameWorld {
 	public void dispose() {
 		sprite.getTexture().dispose();
 		light.dispose();
+		entity.getTexture().dispose();
 	}
 
 }

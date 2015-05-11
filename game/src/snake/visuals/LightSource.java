@@ -1,4 +1,4 @@
-package snake.engine.visuals;
+package snake.visuals;
 
 public class LightSource {
 

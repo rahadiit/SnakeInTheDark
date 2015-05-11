@@ -12,8 +12,8 @@ import snake.engine.GameStart;
 import snake.engine.GameWorld;
 import snake.engine.HUD;
 import snake.engine.PauseMenu;
-import snake.engine.creators.HUDSettings;
-import snake.engine.creators.WorldSettings;
+import snake.engine.settings.HUDSettings;
+import snake.engine.settings.WorldSettings;
 
 /**                               Developed By:
  *                                   NoDark
@@ -32,7 +32,7 @@ public class SnakeLevel implements GameLevel {
 	
 	private GameStart game;
 	private InputMultiplexer input;
-	private Stage stageWorld, stageHUD;
+	private LevelStage stageWorld, stageHUD;
 	private GameWorld world;
 	private HUD hud;
 	private Cutscene cutscene;
@@ -41,18 +41,18 @@ public class SnakeLevel implements GameLevel {
 	private Strategy strategy = Strategy.UPDATEFOCUS;
 	private int framesSkipped = 0, logicSkipped = 0;
 
-	public SnakeLevel(GameStart game, String level) {
+	public SnakeLevel(GameStart game, String level, String levelDataID) {
 		this.game = game;
 
 		// Creates GameWorld
-		world = WorldSettings.createWorld("Generic level");
+		world = WorldSettings.createWorld(level, levelDataID);
 		// Creates HUD
 		hud = HUDSettings.createHUD(world);
 
 		// Creates a stage (world organizer)
 		stageWorld = WorldSettings.createWorldStage(game.getBatch(), this, world);
 		// Creates a stage (UI organizer)
-		stageHUD = HUDSettings.createHUDStage(game, hud);
+		stageHUD = HUDSettings.createHUDStage(game.getBatch(), this, hud);
 
 		// Adds world and HUD to the stages
 		stageWorld.addActor(world);
@@ -204,6 +204,7 @@ public class SnakeLevel implements GameLevel {
 	public Stage getHudStage() {return stageHUD;}
 	
 	public Stage getWorldStage() {return stageWorld;}
+	
 	
 	/* ------------------------------ Setters ------------------------------ */
 	public void setGameState(State state) {this.state = state; }

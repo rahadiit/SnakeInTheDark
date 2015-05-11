@@ -1,7 +1,7 @@
 package snake.equipment.implementations;
 
 import snake.equipment.interfaces.IEquipment;
-import snake.map.interfaces.IMapAccess;
+import snake.map.IMapAccess;
 
 /**                              Developed By:
  *                                  NoDarkGlasses

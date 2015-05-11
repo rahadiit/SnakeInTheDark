@@ -1,4 +1,4 @@
-package snake.engine.visuals;
+package snake.visuals;
 
 import box2dLight.RayHandler;
 import com.badlogic.gdx.math.Vector2;

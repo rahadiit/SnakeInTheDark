@@ -1,7 +1,7 @@
 package snake.engine.core;
 
 import snake.engine.GameStart;
-import snake.engine.creators.MainMenuSettings;
+import snake.engine.settings.MainMenuSettings;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

@@ -1,23 +1,29 @@
-package snake.engine.creators;
+package snake.engine.settings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import snake.engine.GameWorld;
+import snake.engine.gameScreens.LevelStage;
 import snake.engine.gameScreens.SnakeLevel;
-import snake.engine.visuals.WorldStage;
-import snake.map.WorldMap;
+import snake.map.types.WorldMap;
+import snake.visuals.VisualWorldStage;
 
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
- * @author Mr.Strings (Modifiable according to need)
+ * <br> Controls World Parameters, such as size, camera infos, virtual Screen Parameters, etc. </br>
+ * <br>
+ * 		Note: Customization in Factory type methods (such as createWorld() and createWorldStage()) and
+ * 		attributes is recommended.
+ * </br>
+ * @author Mr.Strings 
  * 
- * Controls World Parameters, such as size, camera infos, virtual Screen Parameters, etc.
+ * 
+ * 
  */
 public class WorldSettings {
 	private static float WORLD_WIDTH = 100, WORLD_HEIGHT = heightFix(100); //Arbitrary coordinate System.
@@ -30,6 +36,7 @@ public class WorldSettings {
 	private static float VSCREEN_MINSIZE = .3f, VSCREEN_MAXSIZE = 1;
 	//IMPORTANT NOTE -- VSCREEN is UNreliable if it goes beyond the Screen size
 	
+	
 	public static Color ambientColor = new Color (0f, 0f, 0f, 1f);
 	
 	/** Set the WorldType of the return line to create a custom World class in game (Changeable)
@@ -39,10 +46,19 @@ public class WorldSettings {
 	 * @param levelData
 	 * @return GameWorld
 	 */
-	public static GameWorld createWorld (String levelData) { 
+	public static GameWorld createWorld (String type, String levelDataID) { 
 		
-		// Set the WorldType of the return to create a custom World class in game 
-		return new WorldMap(/*Add other parameters of choice*/);
+		switch (type.toLowerCase()) {
+			case "snakemap":
+			case "snake map":
+				return new WorldMap(levelDataID);
+			// Set the WorldType of the return to create a custom World class in game
+			default:
+				System.out.println("Map type not found");
+				return null;
+		}
+		
+		
 	}
 	
 	/** Creates Scene2d Stage.
@@ -54,9 +70,12 @@ public class WorldSettings {
 	 * @param world - World to be Staged
 	 * @return Stage - Stage created
 	 */
-	public static Stage createWorldStage (Batch batch, SnakeLevel level, GameWorld world) {
-		Stage stage;
-		stage = new WorldStage(level, WorldSettings.createWorldViewport(world), batch);
+	public static LevelStage createWorldStage (Batch batch, SnakeLevel level, GameWorld world) {
+		LevelStage stage;
+		
+		 //change StageType here
+		stage = new VisualWorldStage(level, WorldSettings.createWorldViewport(world), batch);
+		
 		
 		float width = stage.getViewport().getCamera().viewportWidth;
 		float height = stage.getViewport().getCamera().viewportHeight;

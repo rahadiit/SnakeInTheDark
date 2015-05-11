@@ -1,4 +1,4 @@
-package snake.map.interfaces;
+package snake.map;
 
 public interface IMapAccess {
 
