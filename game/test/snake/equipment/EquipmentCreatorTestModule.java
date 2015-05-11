@@ -1,4 +1,4 @@
-package snake.equipment.interfaces;
+ï»¿package snake.equipment;
 
 
 
@@ -10,7 +10,7 @@ package snake.equipment.interfaces;
 
 public class EquipmentCreatorTestModule 
 {
-	// Representação de como usar este componente para criação de equipamentos
+	// RepresentaÃ§Ã£o de como usar este componente para criaÃ§Ã£o de equipamentos
 	public static void main(String[] args) 
 	{
 		// instancia do objeto
