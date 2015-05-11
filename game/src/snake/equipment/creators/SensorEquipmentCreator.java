@@ -1,8 +1,8 @@
 package snake.equipment.creators;
 
+import snake.equipment.IEquipment;
+import snake.equipment.IEquipmentCreator;
 import snake.equipment.implementations.SensorEquipment;
-import snake.equipment.interfaces.IEquipment;
-import snake.equipment.interfaces.IEquipmentCreator;
 
 /**                              Developed By:
  *                                  NoDarkGlasses

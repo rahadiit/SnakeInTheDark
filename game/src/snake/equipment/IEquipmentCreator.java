@@ -1,4 +1,4 @@
-package snake.equipment.interfaces;
+package snake.equipment;
 
 public interface IEquipmentCreator 
 {

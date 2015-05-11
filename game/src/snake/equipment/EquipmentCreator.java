@@ -1,4 +1,4 @@
-package snake.equipment.interfaces;
+package snake.equipment;
 
 import snake.equipment.creators.FlashlightEquipmentCreator;
 import snake.equipment.creators.SensorEquipmentCreator;
