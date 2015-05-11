@@ -1,8 +1,8 @@
 package snake.map.types;
 
-import snake.engine.GameWorld;
 import snake.engine.settings.WorldSettings;
 import snake.visuals.Lights;
+import snake.visuals.VisualGameWorld;
 import box2dLight.Light;
 import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
@@ -19,7 +19,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  * Module: --------
  */
 
-public class WorldMap extends GameWorld {
+public class WorldMap extends VisualGameWorld {
 	
 	// The code below is simply a prototype for testing purposes 
 	private Sprite sprite;

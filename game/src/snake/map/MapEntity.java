@@ -1,6 +1,8 @@
 package snake.map;
 
+import snake.engine.GameStart;
 import snake.engine.GameWorld;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 
@@ -15,32 +17,26 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  */
 
 
-public interface MapEntity {
+public abstract class MapEntity extends Actor {
 	
+	protected int xInMap, yInMap;
 	
-	/*protected SnakeStart game;
-	protected int xInMap, yInMap;*/
-	
-	/*public MapEntity (SnakeStart game, GameWorld world) {
-		this.game = game;
+	public MapEntity (GameWorld world) {
 		world.addActor(this);
-	}*/
+	}
 	
 	
-	/** Adds MapEntity to World. Easy way to do it is extending from Actor
-	 * or Group
+	/** removes MapEntity from World.
 	 * @param world -- World in Which mapEntity will be added.
 	 */
-	public void addToWorld (GameWorld world);
 	
 	/* ------------- Getters -------------- */
-	public int getMapPosX();
-	public int getMapPosY();
+	public abstract int getMapPosX();
+	public abstract int getMapPosY();
 	
-	public Stage getStage();
-	public GameWorld getWorld();
+	public abstract Stage getStage();
 	
 	/* ------------- Setters -------------- */
-	public void setMapPosition (int xInMap, int yInMap);
+	public abstract void setMapPosition (int xInMap, int yInMap);
 	
 }
