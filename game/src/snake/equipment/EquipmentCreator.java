@@ -18,13 +18,16 @@ public class EquipmentCreator
 		
 		IEquipmentCreator obj = null;
 		
-		if(equipment.equalsIgnoreCase("flashlight"))
+		switch (equipment.toLowerCase())
 		{
-			obj = new FlashlightEquipmentCreator();
-		}
-		else if(equipment.equalsIgnoreCase("sensor"))
-		{
-			obj = new SensorEquipmentCreator();
+			case "flashlight":
+				obj = new FlashlightEquipmentCreator();
+				break;
+			case "sensor":
+				obj = new SensorEquipmentCreator();
+				break;
+			default:
+				throw new IllegalArgumentException(String.format("No factory defined for \"%s\".", equipment));
 		}
 		
 		return obj;
