@@ -1,6 +1,6 @@
 package snake.visuals;
 
-import snake.engine.gameScreens.LevelStage;
+import snake.engine.gameScreens.WorldStage;
 import snake.engine.gameScreens.SnakeLevel;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * @author Mr.Strings
  */
 
-public class VisualWorldStage extends LevelStage {
+public class VisualWorldStage extends WorldStage {
 	private CameraMan cameraMan;
 	
 	public VisualWorldStage(SnakeLevel level) {

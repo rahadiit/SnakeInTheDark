@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import snake.engine.GameWorld;
 import snake.engine.HUD;
-import snake.engine.gameScreens.LevelStage;
+import snake.engine.gameScreens.WorldStage;
 import snake.engine.gameScreens.SnakeLevel;
 import snake.hud.SnakeHUD;
 
@@ -34,9 +34,9 @@ public abstract class HUDSettings {
 		return new StretchViewport(HUD_SIZEX, HUD_SIZEY, camera); //Aspect ratio Strategy for multiple screen resolutions
 	}
 	
-	public static LevelStage createHUDStage (Batch batch, SnakeLevel level, HUD hud) {
-		LevelStage stage;
-		stage = new LevelStage(level, HUDSettings.createHUDViewport(hud), batch);
+	public static WorldStage createHUDStage (Batch batch, SnakeLevel level, HUD hud) {
+		WorldStage stage;
+		stage = new WorldStage(level, HUDSettings.createHUDViewport(hud), batch);
 		
 		float width = stage.getViewport().getCamera().viewportWidth;
 		float height = stage.getViewport().getCamera().viewportHeight;

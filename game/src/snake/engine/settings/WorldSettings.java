@@ -7,9 +7,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import snake.engine.GameWorld;
-import snake.engine.gameScreens.LevelStage;
+import snake.engine.gameScreens.WorldStage;
 import snake.engine.gameScreens.SnakeLevel;
-import snake.map.types.WorldMap;
+import snake.map.types.ForestMap;
+import snake.map.types.TempleMap;
 import snake.visuals.VisualWorldStage;
 
 /**                               Developed By:
@@ -49,9 +50,13 @@ public class WorldSettings {
 	public static GameWorld createWorld (String type, String levelDataID) { 
 		
 		switch (type.toLowerCase()) {
-			case "snakemap":
-			case "snake map":
-				return new WorldMap(levelDataID);
+			case "forestmap":
+			case "forest map":
+				return new ForestMap(levelDataID);
+			case "templemap":
+			case "temple map":
+				return new TempleMap(levelDataID);	
+				
 			// Set the WorldType of the return to create a custom World class in game
 			default:
 				System.out.println("Map type not found");
@@ -70,8 +75,8 @@ public class WorldSettings {
 	 * @param world - World to be Staged
 	 * @return Stage - Stage created
 	 */
-	public static LevelStage createWorldStage (Batch batch, SnakeLevel level, GameWorld world) {
-		LevelStage stage;
+	public static WorldStage createWorldStage (Batch batch, SnakeLevel level, GameWorld world) {
+		WorldStage stage;
 		
 		 //change StageType here
 		stage = new VisualWorldStage(level, WorldSettings.createWorldViewport(world), batch);

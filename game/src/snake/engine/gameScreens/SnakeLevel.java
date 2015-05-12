@@ -32,7 +32,7 @@ public class SnakeLevel implements GameLevel {
 	
 	private GameStart game;
 	private InputMultiplexer input;
-	private LevelStage stageWorld, stageHUD;
+	private WorldStage stageWorld, stageHUD;
 	private GameWorld world;
 	private HUD hud;
 	private Cutscene cutscene;

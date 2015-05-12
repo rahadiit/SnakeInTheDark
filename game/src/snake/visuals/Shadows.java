@@ -47,7 +47,7 @@ public abstract class Shadows {
 		return shadow;
 	}
 	
-	public static ShadowSource createRectShadowSource (int width, int height, int posx, int posy) {
+	public static ShadowSource createRectShadowSource (float width, float height, float posx, float posy) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.KinematicBody;
 		

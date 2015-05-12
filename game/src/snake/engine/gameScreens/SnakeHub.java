@@ -79,7 +79,7 @@ public class SnakeHub implements MainMenu {
 
 	private void update() {
 		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
-			game.setScreen(new SnakeLevel(game, "SnakeMap", "Generic LevelID"));
+			game.setScreen(new SnakeLevel(game, "TempleMap", "Generic LevelID"));
 
 		instructions[0] = "Para comecar o jogo";
 		instructions[1] = "tecle ENTER";

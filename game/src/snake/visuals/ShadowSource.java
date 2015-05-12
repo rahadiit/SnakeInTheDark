@@ -20,11 +20,11 @@ public class ShadowSource {
 	}
 	
 	
-	public void moveBody (int x, int y) {
+	public void moveBody (float x, float y) {
 		moveBody(x, y, 0);
 	}
 	
-	public void moveBody (int x, int y, int angle) {
+	public void moveBody (float x, float y, float angle) {
 		body.setTransform(x * Lights.CONVERT2PHYSICS, y* Lights.CONVERT2PHYSICS, angle);
 	}
 	
