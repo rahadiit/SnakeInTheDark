@@ -3,16 +3,15 @@ package snake.engine.gameScreens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import snake.engine.Cutscene;
 import snake.engine.GameLevel;
-import snake.engine.GameStart;
 import snake.engine.GameWorld;
 import snake.engine.HUD;
 import snake.engine.PauseMenu;
 import snake.engine.settings.HUDSettings;
+import snake.engine.settings.ScreenSettings;
 import snake.engine.settings.WorldSettings;
 
 /**                               Developed By:
@@ -30,7 +29,6 @@ public class SnakeLevel implements GameLevel {
 	private static float EXPECTED_DELTA_DRAW = 1/60, EXPECTED_DELTA_UPDATE = 1/60;
 	private static int MAX_FRAMES_SKIPPED = 5, MAX_LOGIC_SKIPPED =  5;
 	
-	private GameStart game;
 	private InputMultiplexer input;
 	private WorldStage stageWorld, stageHUD;
 	private GameWorld world;
@@ -41,18 +39,17 @@ public class SnakeLevel implements GameLevel {
 	private Strategy strategy = Strategy.UPDATEFOCUS;
 	private int framesSkipped = 0, logicSkipped = 0;
 
-	public SnakeLevel(GameStart game, String level, String levelDataID) {
-		this.game = game;
+	public SnakeLevel(String levelType, String levelDataID) {
 
 		// Creates GameWorld
-		world = WorldSettings.createWorld(level, levelDataID);
+		world = WorldSettings.createWorld(levelType, levelDataID);
 		// Creates HUD
-		hud = HUDSettings.createHUD(world);
+		hud = HUDSettings.createHUD(levelType, levelDataID);
 
 		// Creates a stage (world organizer)
-		stageWorld = WorldSettings.createWorldStage(game.getBatch(), this, world);
+		stageWorld = WorldSettings.createWorldStage(ScreenSettings.getBatch(), this, world);
 		// Creates a stage (UI organizer)
-		stageHUD = HUDSettings.createHUDStage(game.getBatch(), this, hud);
+		stageHUD = HUDSettings.createHUDStage(ScreenSettings.getBatch(), this, hud);
 
 		// Adds world and HUD to the stages
 		stageWorld.addActor(world);
@@ -187,11 +184,6 @@ public class SnakeLevel implements GameLevel {
 					!Gdx.graphics.isFullscreen());
 		}
 		
-		}
-
-	
-	public void setScreen(Screen screen) {
-		game.setScreen(screen);
 	}
 	
 	

@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import snake.engine.MainMenu;
-import snake.engine.core.SnakeStart;
+import snake.engine.settings.ScreenSettings;
 
 /**                               Developed By:
  *                                   NoDark
@@ -19,16 +19,14 @@ import snake.engine.core.SnakeStart;
  */
 
 public class SnakeHub implements MainMenu {
-	private SnakeStart game;
 	private SpriteBatch batch;
 	private BitmapFont font;
 	private GlyphLayout layout;
 	private float w, h;
 	String instructions[]; //will be changed to buttons
 
-	public SnakeHub(SnakeStart game) {
-		this.game = game;
-		this.batch = game.getBatch();
+	public SnakeHub() {
+		this.batch = ScreenSettings.getBatch();
 		this.font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), false);
 		this.layout = new GlyphLayout();
 
@@ -79,7 +77,7 @@ public class SnakeHub implements MainMenu {
 
 	private void update() {
 		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
-			game.setScreen(new SnakeLevel(game, "TempleMap", "Generic LevelID"));
+			ScreenSettings.goToScreen("SnakeLevel", "TempleMap", "Some random Data");
 
 		instructions[0] = "Para comecar o jogo";
 		instructions[1] = "tecle ENTER";

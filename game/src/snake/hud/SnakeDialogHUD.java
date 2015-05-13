@@ -1,7 +1,5 @@
 package snake.hud;
 
-import snake.engine.GameWorld;
-
 /*                               Developed By:
  *                                  NoDark
  *                               sessaGlasses
@@ -10,7 +8,7 @@ import snake.engine.GameWorld;
 
 public class SnakeDialogHUD {
 
-	public SnakeDialogHUD(GameWorld world) {
+	public SnakeDialogHUD() {
 		// TODO Auto-generated constructor stub
 	}
 	

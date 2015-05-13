@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import snake.engine.GameWorld;
 import snake.engine.HUD;
 import snake.engine.gameScreens.WorldStage;
 import snake.engine.gameScreens.SnakeLevel;
@@ -25,8 +24,8 @@ public abstract class HUDSettings {
 	private static float HUD_SIZEX = 1280, HUD_SIZEY = 720;
 	private static float CAMERAPOSITIONX = 640, CAMERAPOSITIONY = 360;
 	
-	public static HUD createHUD (GameWorld world) {
-		return new SnakeHUD (world); //can be changed for another HUD
+	public static HUD createHUD (String type, String levelDataID) {
+		return new SnakeHUD (type, levelDataID); //can be changed for another HUD
 	}
 	
 	public static Viewport createHUDViewport(HUD hud) {

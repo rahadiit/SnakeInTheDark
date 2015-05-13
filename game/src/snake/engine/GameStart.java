@@ -1,7 +1,7 @@
 package snake.engine;
 
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 /**                               Developed By:
  *                                   NoDark
@@ -12,8 +12,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @Author Mr.Strings
  */
 
-public interface GameStart {
+public abstract class GameStart extends Game{
+	protected Batch batch;
 	
-	public SpriteBatch getBatch();
-	public void setScreen (Screen screen);
+	public Batch getBatch() {return batch;}
 }

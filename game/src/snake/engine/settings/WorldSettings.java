@@ -9,8 +9,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import snake.engine.GameWorld;
 import snake.engine.gameScreens.WorldStage;
 import snake.engine.gameScreens.SnakeLevel;
-import snake.map.types.ForestMap;
-import snake.map.types.TempleMap;
+import snake.map.types.ForestMap_test;
+import snake.map.types.TempleMap_test;
 import snake.visuals.VisualWorldStage;
 
 /**                               Developed By:
@@ -52,10 +52,10 @@ public class WorldSettings {
 		switch (type.toLowerCase()) {
 			case "forestmap":
 			case "forest map":
-				return new ForestMap(levelDataID);
+				return new ForestMap_test(levelDataID);
 			case "templemap":
 			case "temple map":
-				return new TempleMap(levelDataID);	
+				return new TempleMap_test(levelDataID);	
 				
 			// Set the WorldType of the return to create a custom World class in game
 			default:

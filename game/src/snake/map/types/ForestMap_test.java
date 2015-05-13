@@ -19,7 +19,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  * Module: --------
  */
 
-public class ForestMap extends VisualGameWorld {
+public class ForestMap_test extends VisualGameWorld {
 	
 	// The code below is simply a prototype for testing purposes 
 	private Sprite sprite;
@@ -29,7 +29,7 @@ public class ForestMap extends VisualGameWorld {
 	private int x = 1;
 	private boolean y = false, triggered = false;
 	
-	public ForestMap (String LevelData/* Add other parameters of choice*/) {
+	public ForestMap_test (String LevelData/* Add other parameters of choice*/) {
 		
 		WorldSettings.setAmbientColor(Color.WHITE);
 		

@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 
 public abstract class HUD extends Group {
 
-	public HUD(GameWorld world) {
+	public HUD() {
 		this.setBounds(0, 0, HUDSettings.getHudWidth(), HUDSettings.getHudHeight());
 	}
 	

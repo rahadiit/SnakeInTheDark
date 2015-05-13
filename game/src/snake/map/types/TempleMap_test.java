@@ -1,13 +1,13 @@
 package snake.map.types;
 
 import snake.engine.settings.WorldSettings;
+import snake.map.MapEntity;
 import snake.visuals.Lights;
 import snake.visuals.ShadowSource;
 import snake.visuals.Shadows;
 import snake.visuals.VisualGameWorld;
 import box2dLight.ConeLight;
 import box2dLight.Light;
-import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -23,7 +23,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  * Module: --------
  */
 
-public class TempleMap extends VisualGameWorld {
+public class TempleMap_test extends VisualGameWorld {
 	
 	// The code below is simply a prototype for testing purposes 
 	private Sprite temple;
@@ -35,7 +35,7 @@ public class TempleMap extends VisualGameWorld {
 	private int x = 1;
 	private boolean y = false, triggered = false;
 	
-	public TempleMap (String LevelData/* Add other parameters of choice*/) {
+	public TempleMap_test (String LevelData/* Add other parameters of choice*/) {
 		WorldSettings.setAmbientColor(Color.WHITE);
 		
 		Texture texture = new Texture(Gdx.files.internal("pixelArtTemple.png"));
@@ -48,7 +48,7 @@ public class TempleMap extends VisualGameWorld {
 		magician.setSize(20, 20);
 		magician.setAlpha(1f);
 		magician.setPosition(40, WorldSettings.heightFix(30));
-		
+		magician.setOrigin(10, 11);
 		
 		Texture texture3 = new Texture(Gdx.files.internal("mysteryBox.png"));
 		box = new Sprite(texture3);
@@ -61,7 +61,7 @@ public class TempleMap extends VisualGameWorld {
 	
 	@Override
 	public void act(float delta) {
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
 			magician.setPosition(magician.getX() - .3f, magician.getY());
 			light.setPosition(light.getX()- .3f , light.getY());
 		}
@@ -79,12 +79,20 @@ public class TempleMap extends VisualGameWorld {
 		}
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
-			WorldSettings.setAmbientColor(new Color (0f, .1f, .3f, .7f));
+			WorldSettings.setAmbientColor(new Color (.1f, .1f, .3f, 1f));
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.X)) {
 			WorldSettings.setAmbientColor(Color.WHITE);
 		}
-
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.C)) {
+			magician.rotate(5);
+			light.setDirection(90 + magician.getRotation());
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.V)) {
+			magician.rotate(-5);
+			light.setDirection(90 + magician.getRotation());
+		}
 	}
 	
 	@Override

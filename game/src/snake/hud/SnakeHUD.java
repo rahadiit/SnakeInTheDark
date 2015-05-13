@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import snake.engine.GameWorld;
 import snake.engine.HUD;
 
 /**                               Developed By:
@@ -19,17 +18,15 @@ import snake.engine.HUD;
 
 
 public class SnakeHUD extends HUD {
-	GameWorld world;
 	SnakeInfosHUD infos;
 	SnakeDialogHUD dialog;
 	BitmapFont font;
 	
-	public SnakeHUD (GameWorld world) {
-		super(world);
-		this.world = world;
+	public SnakeHUD (String type, String levelData) {
+		super();
 		
-		infos = new SnakeInfosHUD(world);
-		dialog  = new SnakeDialogHUD(world);
+		infos = new SnakeInfosHUD();
+		dialog  = new SnakeDialogHUD();
 		
 		font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), false);
 	}
