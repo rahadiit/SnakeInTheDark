@@ -1,4 +1,4 @@
-package snake.engine.settings;
+package snake.engine.creators;
 
 import snake.engine.GameStart;
 import snake.engine.gameScreens.SnakeHub;

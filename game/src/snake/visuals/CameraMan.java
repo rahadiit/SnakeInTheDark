@@ -1,6 +1,6 @@
 package snake.visuals;
 
-import snake.engine.settings.WorldSettings;
+import snake.engine.creators.WorldSettings;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;

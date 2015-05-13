@@ -1,8 +1,8 @@
 package snake.map.types;
 
-import snake.engine.settings.WorldSettings;
+import snake.engine.creators.WorldSettings;
 import snake.visuals.Lights;
-import snake.visuals.VisualGameWorld;
+import snake.visuals.enhanced.VisualGameWorld;
 import box2dLight.Light;
 import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
@@ -16,14 +16,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
- * Module: --------
+ *                                
+ * Map for testing purposes only.
+ * @author Mr.Strings
  */
 
 public class ForestMap_test extends VisualGameWorld {
 	
 	// The code below is simply a prototype for testing purposes 
 	private Sprite sprite;
-	private Sprite entity; //must be changed to Map Entities 
+	private Sprite entity; //must be changed to Map Entities
 	Light light;
 	private float velocity = .2f;
 	private int x = 1;

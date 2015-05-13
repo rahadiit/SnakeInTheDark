@@ -1,4 +1,4 @@
-package snake.engine.settings;
+package snake.engine.creators;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;

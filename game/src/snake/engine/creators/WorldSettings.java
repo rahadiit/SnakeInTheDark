@@ -1,4 +1,4 @@
-package snake.engine.settings;
+package snake.engine.creators;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -11,7 +11,7 @@ import snake.engine.gameScreens.WorldStage;
 import snake.engine.gameScreens.SnakeLevel;
 import snake.map.types.ForestMap_test;
 import snake.map.types.TempleMap_test;
-import snake.visuals.VisualWorldStage;
+import snake.visuals.enhanced.VisualWorldStage;
 
 /**                               Developed By:
  *                                   NoDark

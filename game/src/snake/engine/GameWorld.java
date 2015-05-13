@@ -1,7 +1,7 @@
 package snake.engine;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
-import snake.engine.settings.WorldSettings;
+import snake.engine.creators.WorldSettings;
 
 /**                               Developed By:
  *                                   NoDark

@@ -10,9 +10,9 @@ import snake.engine.GameLevel;
 import snake.engine.GameWorld;
 import snake.engine.HUD;
 import snake.engine.PauseMenu;
-import snake.engine.settings.HUDSettings;
-import snake.engine.settings.ScreenSettings;
-import snake.engine.settings.WorldSettings;
+import snake.engine.creators.HUDSettings;
+import snake.engine.creators.ScreenSettings;
+import snake.engine.creators.WorldSettings;
 
 /**                               Developed By:
  *                                   NoDark

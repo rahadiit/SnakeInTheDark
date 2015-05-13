@@ -1,7 +1,8 @@
-package snake.visuals;
+package snake.visuals.enhanced;
 
 import snake.engine.gameScreens.WorldStage;
 import snake.engine.gameScreens.SnakeLevel;
+import snake.visuals.CameraMan;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -35,6 +36,7 @@ public class VisualWorldStage extends WorldStage {
 		super(level, viewport);
 		cameraMan = new CameraMan (this);
 		cameraMan.addLightSupport(1);
+		
 		try {
 			VisualGameWorld world = (VisualGameWorld) level.getGameWorld();
 			world.createLights();
@@ -46,6 +48,7 @@ public class VisualWorldStage extends WorldStage {
 		super(level, viewport, batch);
 		cameraMan = new CameraMan(this);
 		cameraMan.addLightSupport(1);
+		
 		try {
 			VisualGameWorld world = (VisualGameWorld) level.getGameWorld();
 			world.createLights();

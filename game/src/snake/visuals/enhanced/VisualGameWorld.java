@@ -1,4 +1,4 @@
-package snake.visuals;
+package snake.visuals.enhanced;
 
 import snake.engine.GameWorld;
 

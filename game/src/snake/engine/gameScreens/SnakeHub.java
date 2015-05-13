@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import snake.engine.MainMenu;
-import snake.engine.settings.ScreenSettings;
+import snake.engine.creators.ScreenSettings;
 
 /**                               Developed By:
  *                                   NoDark

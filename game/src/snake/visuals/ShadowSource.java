@@ -25,7 +25,8 @@ public class ShadowSource {
 	}
 	
 	public void moveBody (float x, float y, float angle) {
-		body.setTransform(x * Lights.CONVERT2PHYSICS, y* Lights.CONVERT2PHYSICS, angle);
+		body.setTransform((body.getPosition().x + x) * Lights.CONVERT2PHYSICS,
+				(body.getPosition().y + y)* Lights.CONVERT2PHYSICS, angle);
 	}
 	
 	

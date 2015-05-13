@@ -1,9 +1,7 @@
 package snake.map;
 
 import snake.engine.GameWorld;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-
+import com.badlogic.gdx.scenes.scene2d.Group;
 
 /**                              Developed By:
  *                                  NoDark
@@ -16,26 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  */
 
 
-public abstract class MapEntity extends Actor {
+public abstract class MapEntity extends Group {
 	
 	protected int xInMap, yInMap;
 	
 	public MapEntity (GameWorld world) {
 		world.addActor(this);
 	}
-	
-	
-	/** removes MapEntity from World.
-	 * @param world -- World in Which mapEntity will be added.
-	 */
-	
-	/* ------------- Getters -------------- */
-	public abstract int getMapPosX();
-	public abstract int getMapPosY();
-	
-	public abstract Stage getStage();
-	
-	/* ------------- Setters -------------- */
-	public abstract void setMapPosition (int xInMap, int yInMap);
-	
 }
