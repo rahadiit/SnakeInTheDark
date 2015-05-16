@@ -1,5 +1,6 @@
 package snake.engine.creators;
 
+import java.util.Stack;
 import snake.engine.GameStart;
 import snake.engine.gameScreens.SnakeHub;
 import snake.engine.gameScreens.SnakeLevel;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public abstract class ScreenSettings {
 	private static GameStart game;
+	private Stack <Screen> screenStack = new Stack<>();
 	
 	
 	public static Screen createScreen(String screenType, String subtype, String subSubType) {

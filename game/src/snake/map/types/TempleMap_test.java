@@ -37,7 +37,6 @@ public class TempleMap_test extends VisualGameWorld {
 	
 	public TempleMap_test (String LevelData/* Add other parameters of choice*/) {
 		WorldSettings.setAmbientColor(Color.WHITE);
-		
 		//Procedimento padrao para carregar uma imagem -- vai ser melhorado com o assetManager
 		Texture texture = new Texture(Gdx.files.internal("pixelArtTemple.png")); 
 		temple = new Sprite(texture);

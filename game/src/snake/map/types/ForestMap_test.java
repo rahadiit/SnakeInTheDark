@@ -33,7 +33,7 @@ public class ForestMap_test extends VisualGameWorld {
 	
 	public ForestMap_test (String LevelData/* Add other parameters of choice*/) {
 		
-		WorldSettings.setAmbientColor(Color.WHITE);
+		WorldSettings.setAmbientColor(Color.BLACK);
 		
 		Texture texture = new Texture(Gdx.files.internal("foggy_forest_by_BrokenLens.jpeg"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
