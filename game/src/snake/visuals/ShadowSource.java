@@ -6,6 +6,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
+ *                                
+ * <br> a generic shadow source </br> 
  * @author Mr.Strings
  */
 

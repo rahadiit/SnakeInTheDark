@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
+ *                                
+ * <br> Interface for cutscene support </br>
  * @author Mr.Strings
  */
 

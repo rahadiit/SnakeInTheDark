@@ -7,7 +7,7 @@ import snake.map.MapEntity;
  *                                  NoDark
  *                               sessaGlasses
  *                               
- * Entity that belongs to a VisualGameWorld             
+ * <br> Entity that belongs to a VisualGameWorld </br>             
  * 
  * @author Mr.Strings
  * 

@@ -34,30 +34,34 @@ public class Lights {
 		return physicsWorld;
 	}
 	
-	
+	/** Creates lights randler */
 	public static RayHandler createRayHandler (World world) {
 		handler = new RayHandler(world);
 		return handler;
 	}
 	
+	/** Sets current lights world -- based on box2d */
 	public static void setWorld(World world) {
 		if (world == null) {
 			physicsWorld = world;
 		}
 	}
 	
+	/** Sets current rayHandler */
 	public static void setRayhandler (RayHandler rayHandler) {
 		handler = rayHandler;
 	}
 	
+	/** set unity convertion ratio for physics (light) world */
 	public static void setConversionRatio(float ratio) {
 		CONVERT2PHYSICS = ratio;
 	}
-	
+	/** Gets current rayHandler */
 	public static RayHandler getRayhandler () {
 		return handler;
 	}
 	
+	/** Gets current physics (light) world */
 	public static World getWorld() {
 		return physicsWorld;
 	}

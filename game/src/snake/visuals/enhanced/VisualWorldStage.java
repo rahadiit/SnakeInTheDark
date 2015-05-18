@@ -1,6 +1,6 @@
 package snake.visuals.enhanced;
 
-import snake.engine.gameScreens.WorldStage;
+import snake.engine.gameScreens.LevelStage;
 import snake.engine.gameScreens.SnakeLevel;
 import snake.visuals.CameraMan;
 import com.badlogic.gdx.Gdx;
@@ -12,12 +12,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  *                                   NoDark
  *                                sessaGlasses
  * 
- * Convenient extension of Stage for camera Handling
+ * <br> Convenient extension of Stage for camera Handling and lights </br>
  * 
  * @author Mr.Strings
  */
 
-public class VisualWorldStage extends WorldStage {
+public class VisualWorldStage extends LevelStage {
 	private CameraMan cameraMan;
 	
 	public VisualWorldStage(SnakeLevel level) {

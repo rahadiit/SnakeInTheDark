@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  *                                
  * <br> Useful for controlling a camera in a Scene2d Stage. Can Zoom, translate and supports virtual
  * screen size based on WorldSettings Data.</br>
+ * <br> Also, sets light for awesome illumination </br>
  * @author Mr.Strings
  * 
  */

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import snake.engine.GameWorld;
-import snake.engine.gameScreens.WorldStage;
+import snake.engine.gameScreens.LevelStage;
 import snake.engine.gameScreens.SnakeLevel;
 import snake.map.types.ForestMap_test;
 import snake.map.types.TempleMap_test;
@@ -75,8 +75,8 @@ public class WorldSettings {
 	 * @param world - World to be Staged
 	 * @return Stage - Stage created
 	 */
-	public static WorldStage createWorldStage (Batch batch, SnakeLevel level, GameWorld world) {
-		WorldStage stage;
+	public static LevelStage createWorldStage (Batch batch, SnakeLevel level, GameWorld world) {
+		LevelStage stage;
 		
 		 //change StageType here
 		stage = new VisualWorldStage(level, WorldSettings.createWorldViewport(world), batch);

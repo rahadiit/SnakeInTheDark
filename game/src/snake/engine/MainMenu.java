@@ -7,12 +7,10 @@ import com.badlogic.gdx.Screen;
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
- * @author Mr.Strings (Modifiable according to need)
- * 
- * Game Main menu.
+ *  <br> Game Main menu. </br>
+ * @author Mr.Strings
  * 
  */
-
 
 public interface MainMenu extends Screen, InputProcessor {
 }

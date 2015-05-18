@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
- * Module: Mr.Strings
+ *                                
+ * <br> simple interface for PauseMenu </br>
+ * @author Mr.Strings
  */
 
 

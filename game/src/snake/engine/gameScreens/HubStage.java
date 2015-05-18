@@ -9,7 +9,7 @@ import snake.engine.MainMenu;
  *                                   NoDark
  *                                sessaGlasses
  *                                
- *  <br> Extension of stage -- gives easy access to menu and, consequently, elements in it </br>
+ *  <br> Extension of stage in HUB -- gives easy access to menu and, consequently, elements in it </br>
  *  <br> Note: Not used yet
  *  @author Mr.Strings
  */

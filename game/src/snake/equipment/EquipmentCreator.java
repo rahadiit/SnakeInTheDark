@@ -14,7 +14,7 @@ public class EquipmentCreator
 	
 	public static IEquipmentCreator createFactory(String equipment)
 	{
-		// Aqui tem que definir os equipamentos e escolher as instâncias
+		// Aqui tem que definir os equipamentos e escolher as instancias
 		
 		IEquipmentCreator obj = null;
 		

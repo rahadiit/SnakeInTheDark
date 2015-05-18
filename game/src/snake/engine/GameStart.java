@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
  *                                   NoDark
  *                                sessaGlasses
  *          
- *  <br> Interface for a starting point (core) of a Game. Should ideally extend com.badlogic.gdx.Game; </br>
+ *  <br> Interface for a starting point (core) of a Game. </br>
  *  <br> See snake.core.SnakeStart for an example implementation.</br>
  * @Author Mr.Strings
  */

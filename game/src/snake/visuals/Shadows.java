@@ -19,10 +19,8 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public abstract class Shadows {
 	
-
+	/** Creates circle shadow source */
 	public static ShadowSource createCircleShadowSource(float radius, float posx, float posy) {
-		
-
 		
 		CircleShape circle = new CircleShape();
 		circle.setRadius(radius);
@@ -47,6 +45,7 @@ public abstract class Shadows {
 		return shadow;
 	}
 	
+	/** Creates rectangular shadow source */
 	public static ShadowSource createRectShadowSource (float width, float height, float posx, float posy) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.KinematicBody;
@@ -66,6 +65,7 @@ public abstract class Shadows {
 	}
 	
 	
+	/** Creates custom shadow source, using Box2d bodies */
 	public static ShadowSource createShadowSource (BodyDef bodyDef) {
 		ShadowSource shadow = new ShadowSource();
 		shadow.body = Lights.getWorld().createBody(bodyDef);
@@ -73,6 +73,7 @@ public abstract class Shadows {
 	}
 	
 	
+	/** Removes shadow Source */
 	public static void removeShadowSource (Body shadow) {
 		Lights.getWorld().destroyBody(shadow);
 	}

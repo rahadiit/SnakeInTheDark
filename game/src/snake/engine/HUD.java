@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
  *                                   NoDark
  *                                sessaGlasses
  *                                
- *  Generic game HUD -- information screens
+ *  <br> Generic game HUD -- information screens </br>
  * @author Mr.Strings
  */
 

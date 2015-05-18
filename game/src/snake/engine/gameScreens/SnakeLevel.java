@@ -17,7 +17,7 @@ import snake.engine.creators.WorldSettings;
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
- * <br> Controls a generic game Level, with a World and HUD. </br>
+ * <br> Controls a generic game Level flow, with a World and HUD. </br>
  * @author Mr.Strings
  */
 
@@ -30,9 +30,9 @@ public class SnakeLevel implements GameLevel {
 	private static int MAX_FRAMES_SKIPPED = 5, MAX_LOGIC_SKIPPED =  5;
 	
 	private InputMultiplexer input;
-	private WorldStage stageWorld, stageHUD;
-	private GameWorld world;
-	private HUD hud;
+	private LevelStage stageWorld, stageHUD; //Is used as a Subscriber, controls update, render, input polling (if applicable) and viewports 
+	private GameWorld world; //the world in which is the game
+	private HUD hud; //Game HUD -- info display and such
 	private Cutscene cutscene;
 	private PauseMenu pauseMenu;
 	private State state = State.ACTIVE;
@@ -64,9 +64,13 @@ public class SnakeLevel implements GameLevel {
 		Gdx.input.setInputProcessor(input);
 	}
 	
+	
+	/** is triggered when the Screen is set */
 	@Override
 	public void show() {}
 
+	
+	/** Controls game logic -- keeps looping, updating and drawing as the game goes */
 	@Override
 	public void render(float delta) {
 		
@@ -97,6 +101,7 @@ public class SnakeLevel implements GameLevel {
 	}
 	
 	
+	/** Auxiliary class for rendering options */
 	private void onRender(float delta) {
 		
 		switch (strategy) {
@@ -140,6 +145,8 @@ public class SnakeLevel implements GameLevel {
 		
 	}
 
+	
+	/** Is triggered when the Screen is resized */
 	@Override
 	public void resize(int width, int height) {
 		stageWorld.getViewport().update(width, height);
@@ -165,6 +172,8 @@ public class SnakeLevel implements GameLevel {
 		// TODO Auto-generated method stub
 	}
 
+	
+	/** Prevents memory leak -- must be called when the screen will not be used anymore */
 	@Override
 	public void dispose() {
 		stageWorld.dispose();
@@ -174,7 +183,7 @@ public class SnakeLevel implements GameLevel {
 		hud.dispose();
 	}
 	
-	
+	/** Is triggered when input is received */
 	private void getInput () {
 		if (Gdx.input.isKeyPressed(Input.Keys.F1)) {
 			// set resolution to default and toggles full-screen
@@ -189,17 +198,25 @@ public class SnakeLevel implements GameLevel {
 	
 	/* ------------------------------ Getters ------------------------------ */
 
+	
+	/** Gets Level gameWorld */
 	public GameWorld getGameWorld() {return world;}
 	
+	/** Gets Level HUD */
 	public HUD getHUD() {return hud;}
 	
+	/** Gets Stage for HUD */
 	public Stage getHudStage() {return stageHUD;}
 	
+	/** Gets Stage for World */
 	public Stage getWorldStage() {return stageWorld;}
 	
 	
 	/* ------------------------------ Setters ------------------------------ */
+	
+	/** Sets game stage (paused, active, etc.) */
 	public void setGameState(State state) {this.state = state; }
 	
+	/** Sets rendering strategy -- prioritize update or drawing or none */
 	public void setStrategy (Strategy strategy) {this.strategy = strategy;}
 }
