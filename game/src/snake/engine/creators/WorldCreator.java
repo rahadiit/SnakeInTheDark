@@ -47,7 +47,7 @@ public abstract class WorldCreator {
 				
 			// Set the WorldType of the return to create a custom World class in game
 			default:
-				System.out.println("Map type not found");
+				System.out.println("Map type " + type + " not found");
 				return null;
 		}
 		

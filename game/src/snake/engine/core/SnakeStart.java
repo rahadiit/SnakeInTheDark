@@ -16,7 +16,8 @@ public class SnakeStart extends GameStart {
 	public void create () {
 		super.batch = new SpriteBatch();
 		ScreenCreator.setGameInstance(this);
-		ScreenCreator.goToScreen("SnakeHub", "Nope...", "These two are actually not important");
+		String[] param = {"MainMenu"};
+		ScreenCreator.goToScreen(param);
 	}
 
 	@Override

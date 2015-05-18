@@ -2,16 +2,6 @@ package snake.engine.creators;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import snake.engine.GameWorld;
-import snake.engine.gameScreens.LevelStage;
-import snake.engine.gameScreens.SnakeLevel;
-import snake.map.types.ForestMap_test;
-import snake.map.types.TempleMap_test;
-import snake.visuals.enhanced.VisualWorldStage;
 
 /**                               Developed By:
  *                                   NoDark
