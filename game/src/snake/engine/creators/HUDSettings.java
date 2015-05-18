@@ -21,38 +21,18 @@ import snake.hud.SnakeHUD;
  */
 
 public abstract class HUDSettings {
-	private static float HUD_SIZEX = 1280, HUD_SIZEY = 720;
+	private static float HUD_WIDTH = 1280, HUD_HEIGHT = 720;
 	private static float CAMERAPOSITIONX = 640, CAMERAPOSITIONY = 360;
 	
-	public static HUD createHUD (String type, String levelDataID) {
-		return new SnakeHUD (type, levelDataID); //can be changed for another HUD
-	}
-	
-	public static Viewport createHUDViewport(HUD hud) {
-		Camera camera = new OrthographicCamera();
-		return new StretchViewport(HUD_SIZEX, HUD_SIZEY, camera); //Aspect ratio Strategy for multiple screen resolutions
-	}
-	
-	public static LevelStage createHUDStage (Batch batch, SnakeLevel level, HUD hud) {
-		LevelStage stage;
-		stage = new LevelStage(level, HUDSettings.createHUDViewport(hud), batch);
-		
-		float width = stage.getViewport().getCamera().viewportWidth;
-		float height = stage.getViewport().getCamera().viewportHeight;
-		
-		stage.getViewport().getCamera().translate(CAMERAPOSITIONX - width/2, CAMERAPOSITIONY - height/2, 0);
-		
-		return  stage;
-	}
 	
 	
 	/* ------------------------------ Getters ------------------------------ */
 	public static float getHudWidth() {
-		return HUD_SIZEX;
+		return HUD_WIDTH;
 	}
 	
 	public static float getHudHeight() {
-		return HUD_SIZEY;
+		return HUD_HEIGHT;
 	}
 	
 	public static float getCameraPosX() {
@@ -68,9 +48,9 @@ public abstract class HUDSettings {
 		CAMERAPOSITIONX = posX;
 		CAMERAPOSITIONY = posY;
 	}
-	public static void setHUDSSize(float sizex, float sizey) {
-		HUD_SIZEX = sizex;
-		HUD_SIZEY = sizey;
+	public static void setHUDSSize(float width, float height) {
+		HUD_WIDTH = width;
+		HUD_HEIGHT = height;
 	}
 	
 	

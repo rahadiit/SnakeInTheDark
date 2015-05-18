@@ -17,7 +17,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  *  <br> has an array of all active Screens (NOT YET DONE) </br>
  * @Author Mr.Strings
  */
-public abstract class ScreenSettings {
+public abstract class ScreenCreator {
 	private static GameStart game;
 	private Stack <Screen> screenStack = new Stack<>();
 	

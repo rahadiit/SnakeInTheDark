@@ -10,9 +10,9 @@ import snake.engine.GameLevel;
 import snake.engine.GameWorld;
 import snake.engine.HUD;
 import snake.engine.PauseMenu;
-import snake.engine.creators.HUDSettings;
-import snake.engine.creators.ScreenSettings;
-import snake.engine.creators.WorldSettings;
+import snake.engine.creators.HUDCreator;
+import snake.engine.creators.ScreenCreator;
+import snake.engine.creators.WorldCreator;
 
 /**                               Developed By:
  *                                   NoDark
@@ -42,14 +42,14 @@ public class SnakeLevel implements GameLevel {
 	public SnakeLevel(String levelType, String levelDataID) {
 
 		// Creates GameWorld
-		world = WorldSettings.createWorld(levelType, levelDataID);
+		world = WorldCreator.createWorld(levelType, levelDataID);
 		// Creates HUD
-		hud = HUDSettings.createHUD(levelType, levelDataID);
+		hud = HUDCreator.createHUD(levelType, levelDataID);
 
 		// Creates a stage (world organizer)
-		stageWorld = WorldSettings.createWorldStage(ScreenSettings.getBatch(), this, world);
+		stageWorld = WorldCreator.createWorldStage(ScreenCreator.getBatch(), this, world);
 		// Creates a stage (UI organizer)
-		stageHUD = HUDSettings.createHUDStage(ScreenSettings.getBatch(), this, hud);
+		stageHUD = HUDCreator.createHUDStage(ScreenCreator.getBatch(), this, hud);
 
 		// Adds world and HUD to the stages
 		stageWorld.addActor(world);

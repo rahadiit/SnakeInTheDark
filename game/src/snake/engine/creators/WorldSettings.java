@@ -40,72 +40,7 @@ public class WorldSettings {
 	
 	public static Color ambientColor = new Color (0f, 0f, 0f, 1f);
 	
-	/** Set the WorldType of the return line to create a custom World class in game (Changeable)
-	 * 
-	 * @author Mr.Strings (Modifiable according to need)
-	 * 
-	 * @param levelData
-	 * @return GameWorld
-	 */
-	public static GameWorld createWorld (String type, String levelDataID) { 
-		
-		switch (type.toLowerCase()) {
-			case "forestmap":
-			case "forest map":
-				return new ForestMap_test(levelDataID);
-			case "templemap":
-			case "temple map":
-				return new TempleMap_test(levelDataID);	
-				
-			// Set the WorldType of the return to create a custom World class in game
-			default:
-				System.out.println("Map type not found");
-				return null;
-		}
-		
-		
-	}
 	
-	/** Creates Scene2d Stage.
-	 * 
-	 * @author Mr.Strings (Modifiable according to need)
-	 * 
-	 * @param batch
-	 * @param level - Current level
-	 * @param world - World to be Staged
-	 * @return Stage - Stage created
-	 */
-	public static LevelStage createWorldStage (Batch batch, SnakeLevel level, GameWorld world) {
-		LevelStage stage;
-		
-		 //change StageType here
-		stage = new VisualWorldStage(level, WorldSettings.createWorldViewport(world), batch);
-		
-		
-		float width = stage.getViewport().getCamera().viewportWidth;
-		float height = stage.getViewport().getCamera().viewportHeight;
-		
-		OrthographicCamera camera = (OrthographicCamera) stage.getViewport().getCamera();
-		camera.translate(CAMERAPOSITIONX - width/2, CAMERAPOSITIONY - height/2, 0);
-		
-		return  stage;
-	}
-	
-	/** Creates Viewport for GameWorld to fit
-	 * 
-	 * @param world
-	 * @return Viewport
-	 */
-	public static Viewport createWorldViewport(GameWorld world) {
-		OrthographicCamera camera = new OrthographicCamera();
-		
-		//creates viewport that stretches to fit resolution
-		Viewport viewport = new StretchViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
-		
-		camera.zoom = 1/WORLD2SCREEN_RATIO;
-		
-		return viewport;
-	}
 	
 	/** Adjusts the height so that 0 is the bottom of the world and 100 is the top of it.
 	 *  Should be used when drawing or positioning objects of GameWorld. 

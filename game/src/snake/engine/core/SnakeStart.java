@@ -1,7 +1,7 @@
 package snake.engine.core;
 
 import snake.engine.GameStart;
-import snake.engine.creators.ScreenSettings;
+import snake.engine.creators.ScreenCreator;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**                               Developed By:
@@ -15,8 +15,8 @@ public class SnakeStart extends GameStart {
 
 	public void create () {
 		super.batch = new SpriteBatch();
-		ScreenSettings.setGameInstance(this);
-		ScreenSettings.goToScreen("SnakeHub", "Nope...", "These two are actually not important");
+		ScreenCreator.setGameInstance(this);
+		ScreenCreator.goToScreen("SnakeHub", "Nope...", "These two are actually not important");
 	}
 
 	@Override
