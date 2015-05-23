@@ -133,6 +133,7 @@ public class CameraMan {
 	
 	/** Sets lights to be updated and rendered accordingly */
 	public void setLights() {
+		Lights.setWorld(physicsWorld);
 		Lights.setRayhandler(rayHandler);
 		rayHandler.setAmbientLight(WorldSettings.getAmbientColor());
 		rayHandler.setBlurNum(3);

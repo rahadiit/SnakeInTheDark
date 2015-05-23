@@ -22,5 +22,8 @@ public abstract class LightMapEntity extends MapEntity{
 	public abstract boolean hasLights();
 	
 	public abstract void createLights();
+	
+	
+	public abstract void disposeLights();
 
 }

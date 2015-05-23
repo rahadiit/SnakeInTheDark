@@ -19,6 +19,11 @@ public abstract class GameWorld extends Group /* Group makes it connected to Map
 		this.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight()); //Sets world size to be displayed on screen
 	}
 	
+	
+	/** Is called when the Screen in which the GameWorld is is set to current.*/
+	public abstract void show();
+	
+	
 	public abstract void dispose();
 	
 	

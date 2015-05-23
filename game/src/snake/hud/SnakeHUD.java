@@ -32,12 +32,17 @@ public class SnakeHUD extends HUD {
 	}
 	
 	
+	public void show() {
+		//TODO: Auto-generated method snub
+	}
+	
+	
 	public void draw(Batch batch, float parentAlpha) {
 		// Draw fps
 		font.setColor(Color.GREEN);
 		
 		font.getData().setScale(1f);
-		if (Gdx.input.isKeyPressed(Input.Keys.H))
+		if (Gdx.input.isKeyPressed(Input.Keys.H) || Gdx.input.isTouched())
 			font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, this.getHeight());
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.W)) {

@@ -62,15 +62,19 @@ public class SnakeLevel implements GameLevel {
 		input.addProcessor(stageHUD);
 		 
 		Gdx.input.setInputProcessor(input);
+		
 	}
 	
 	
-	/** is triggered when the Screen is set */
+	/** is triggered when the Screen is set. */
 	@Override
-	public void show() {}
+	public void show() {
+		world.show();
+		hud.show();
+	}
 
 	
-	/** Controls game logic -- keeps looping, updating and drawing as the game goes */
+	/** Controls game logic -- keeps looping, updating and drawing as the game goes. */
 	@Override
 	public void render(float delta) {
 		
@@ -98,6 +102,9 @@ public class SnakeLevel implements GameLevel {
 			default:
 				break;
 		}
+		
+		if (ScreenCreator.updateRequested())
+			ScreenCreator.updateScreens();
 	}
 	
 	
@@ -161,10 +168,9 @@ public class SnakeLevel implements GameLevel {
 
 	}
 
+	/** Is triggered when the screen goes out of paused state, usually when it regain focus on Android. */
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -173,7 +179,8 @@ public class SnakeLevel implements GameLevel {
 	}
 
 	
-	/** Prevents memory leak -- must be called when the screen will not be used anymore */
+	/** Prevents memory leak, disposing the Screen when it won't be used anymore 
+	 * -- is done automatically by the ScreenCreator if used. */
 	@Override
 	public void dispose() {
 		stageWorld.dispose();
@@ -192,7 +199,6 @@ public class SnakeLevel implements GameLevel {
 					Gdx.graphics.getDesktopDisplayMode().height,
 					!Gdx.graphics.isFullscreen());
 		}
-		
 	}
 	
 	

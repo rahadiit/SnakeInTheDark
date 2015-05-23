@@ -1,11 +1,13 @@
 package snake.map.types;
 
+import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
 import snake.visuals.Lights;
 import snake.visuals.enhanced.VisualGameWorld;
 import box2dLight.Light;
 import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -17,7 +19,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  *                                   NoDark
  *                                sessaGlasses
  *                                
- * Map for testing purposes only.
+ * <br> Map for testing purposes only. (REALLY BAD DESIGN) </br>
  * @author Mr.Strings
  */
 
@@ -32,7 +34,6 @@ public class ForestMap_test extends VisualGameWorld {
 	private boolean y = false, triggered = false;
 	
 	public ForestMap_test (String LevelData/* Add other parameters of choice*/) {
-		
 		WorldSettings.setAmbientColor(Color.BLACK);
 		
 		Texture texture = new Texture(Gdx.files.internal("foggy_forest_by_BrokenLens.jpeg"));
@@ -45,15 +46,19 @@ public class ForestMap_test extends VisualGameWorld {
 		entity.setSize(4, 12);
 		entity.setAlpha(1f);
 		entity.setPosition(60, 15);
+	}
+	
+	
+	public void show () {
 		
-		
-		
+		WorldSettings.setAmbientColor(Color.BLACK);
 	}
 	
 	
 	
 	@Override
 	public void act(float delta) {
+		
 		if (light.getX() >= 100) {
 			velocity *=-1;
 			y = false;
@@ -77,19 +82,44 @@ public class ForestMap_test extends VisualGameWorld {
 		if (triggered && light.getX() > 91) {
 			Gdx.app.exit();
 		}
-		
-		
 	}
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) {
-		super.draw(batch, parentAlpha);
 		sprite.draw(batch);
 		
 		if (y)
 			entity.draw(batch);
+		
+		
+		super.draw(batch, parentAlpha);
+		
+		
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+			String[] param = {"SnakeLevel", "TempleMap", "Some random Data"};
+			try {
+				ScreenCreator.addAndGo(param);
+			}  catch (Exception e) {
+				System.out.println ("Could not switch Screens");
+			}
+		}
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
+			try {
+				ScreenCreator.backToPrevious();
+			} catch (Exception e) {
+				String[] param = {"MainMenu"};
+				try {
+					ScreenCreator.switchAndGo(param);
+				} catch (Exception excp) {
+					System.out.println("Couldn't switch screens.");
+				}
+			}
+		}
+		
 	}
-	
+
 
 	public void createLights() {
 		light = new PointLight (Lights.getRayhandler(), 5000, new Color(1f, 0f, .5f, 1f), 40, 50, WorldSettings.heightFix(50));
@@ -99,6 +129,7 @@ public class ForestMap_test extends VisualGameWorld {
 	@Override
 	public void dispose() {
 		sprite.getTexture().dispose();
+		light.remove();
 		light.dispose();
 		entity.getTexture().dispose();
 	}

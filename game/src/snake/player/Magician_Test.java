@@ -18,7 +18,7 @@ import snake.visuals.enhanced.LightMapEntity;
  *                                  NoDark
  *                               sessaGlasses
  *                               
- * Player for testing purposes at TempleMap         
+ * <br> Player for testing purposes at TempleMap </br>         
  * 
  * @author Mr.Strings
  * 
@@ -78,7 +78,7 @@ public class Magician_Test extends LightMapEntity {
 
 	@Override
 	public boolean hasLights() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -86,4 +86,10 @@ public class Magician_Test extends LightMapEntity {
 		light = new ConeLight (Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f),
 				   			   100, 50, WorldSettings.heightFix(50), 90, 30);
 	} //Se quiser destruir a luz, pode ser em qualquer lugar
+
+	@Override
+	public void disposeLights() {
+		light.remove(); // IF you don't remove stuff gets crazy
+		light.dispose();
+	}
 }

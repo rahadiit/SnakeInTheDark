@@ -1,18 +1,17 @@
 package snake.map.types;
 
+import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
+import snake.engine.gameScreens.LevelStage;
 import snake.map.sets.Box_Test;
 import snake.player.Magician_Test;
-import snake.visuals.ShadowSource;
-import snake.visuals.Shadows;
 import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;
-import box2dLight.Light;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -32,8 +31,6 @@ public class TempleMap_test extends VisualGameWorld {
 	private Sprite temple;
 	private Magician_Test magician; //Da pra colocar uma array com todas as entities? 
 	private Box_Test box; // Provavelmente sim.
-	Light light;
-	ShadowSource shadow;
 	
 	public TempleMap_test (String LevelData/* Add other parameters of choice*/) {
 		WorldSettings.setAmbientColor(Color.WHITE);
@@ -44,6 +41,12 @@ public class TempleMap_test extends VisualGameWorld {
 		
 		magician = new Magician_Test(this);
 		box = new Box_Test(this);
+	}
+	
+	
+	public void show () {
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		WorldSettings.setAmbientColor(Color.WHITE);
 	}
 	
 	
@@ -58,12 +61,36 @@ public class TempleMap_test extends VisualGameWorld {
 		if (Gdx.input.isKeyPressed(Input.Keys.X)) {
 			WorldSettings.setAmbientColor(Color.WHITE);
 		}
+		
 	}
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		temple.draw(batch);
 		super.draw(batch, parentAlpha);
+		
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+			String[] param = {"SnakeLevel", "ForestMap", "Some random Data"};
+			try {
+				ScreenCreator.addAndGo(param);
+			}  catch (Exception e) {
+				System.out.println ("Could not switch Screens");
+			}
+		}
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
+			try {
+				ScreenCreator.backToPrevious();
+			} catch (Exception e) {
+				String[] param = {"MainMenu"};
+				try {
+					ScreenCreator.switchAndGo(param);
+				} catch (Exception excp) {
+					System.out.println("Couldn't switch screens.");
+				}
+			}
+		}
 	}
 
 	public void createLights() {
@@ -76,8 +103,9 @@ public class TempleMap_test extends VisualGameWorld {
 	@Override
 	public void dispose() {
 		temple.getTexture().dispose();
-		//light.dispose();
-		temple.getTexture().dispose();
+		
+		box.disposeLights();
+		magician.disposeLights();
 	}
 
 }

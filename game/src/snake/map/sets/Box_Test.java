@@ -45,4 +45,8 @@ public class Box_Test extends LightMapEntity{
 	public void createLights() {
 		shadow = Shadows.createRectShadowSource(15, 15, 50, WorldSettings.heightFix(70));
 	}
+	
+	public void disposeLights() {
+		shadow.destroyShadow();
+	}
 }

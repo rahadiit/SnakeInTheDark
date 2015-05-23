@@ -1,7 +1,6 @@
 package snake.engine.creators;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 import snake.engine.GameStart;
 import snake.engine.gameScreens.SnakeHub;
@@ -15,63 +14,124 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  *                                   NoDark
  *                                sessaGlasses
  *  
- *  <br> TODO: SET PROPER USE OF SCREEN STACK </br>
+ *  <br> TODO: Secure Screeen changes </br>
  *  
  *  
  *  <br> Create Screen as specified. </br>
- *  <br> has an array of all active Screens (NOT YET DONE) </br>
+ *  <br> has a stack (deque) of all active Screens </br>
  * @Author Mr.Strings
  */
 public abstract class ScreenCreator {
 	private static GameStart game;
-	private static Deque <ArrayList<Screen>> screenStack = new ArrayDeque<>();
+	private static Deque <Screen> screenStack = new ArrayDeque<>();
+	private static boolean updateRequested = false;
 	
-	
+	/** Creates new String, but doesn't set it as current.
+	 * @param Settings[] -- array of settings for desired screen. 
+	 */
 	public static Screen createScreen(String settings[]) {
 		Screen screen;
-		
-		switch (settings[0].toLowerCase()) {
-			case "snakehub":
-			case "snake hub":
-			case "mainmenu":
-			case "main menu":
-				screen = new SnakeHub();
-				break;
-			case "snakelevel":
-			case "snake level":
-				try {
+		try {
+			switch (settings[0].toLowerCase()) {
+				case "snakehub":
+				case "snake hub":
+				case "mainmenu":
+				case "main menu":
+					screen = new SnakeHub();
+					break;
+				case "snakelevel":
+				case "snake level":
 					screen = new SnakeLevel(settings[1], settings[2]);
-				} catch (ArrayIndexOutOfBoundsException e) {
-					System.out.println ("Not enough parameters to create Screen");
+					break;
+				default:
+					System.out.println("Screen type not found.");
 					return null;
-				}
-				break;
-			default:
-				System.out.println("Screen type not found.");
-				return null;
 		}
-		
-		//screenStack.getFirst().add(screen);
-		
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println ("Not enough parameters to create requested Screen.");
+			return null;
+		}
+
 		return screen;
 	}
 	
-	public static void goToScreen (String settings[]) {
-		game.setScreen(createScreen(settings));
+	
+	/** Working fine, but needs improvement. 
+	 * @throws Exception */
+	public static void addAndGo (String settings[]) throws Exception {
+		
+		try {
+			Screen screen = createScreen(settings);
+		
+			screenStack.push(screen);
+		
+			game.setScreen(screen);
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
 	}
 	
 	
+	/** Removes Current Screen from Stack (if there is one) and adds created Screen
+	 * with sent settings.
+	 *  
+	 * @param settings
+	 * @throws Exception 
+	 */
+	public static void switchAndGo (String settings[]) throws Exception {
+		try {
+			
+			if (screenStack.isEmpty() == false) {
+				Screen removed = screenStack.pop();
+				removed.dispose();
+			}
+		
+			Screen screen = createScreen(settings);
+			screenStack.push(screen);
+			updateRequested = true;
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
+	
+	
+	/** Pops and disposes current screen from stack.
+	 * @throws Exception -- if there is no screen left in stack 
+	 * */
+	public static void backToPrevious() throws Exception {
+		Screen screen = screenStack.pop();
+		screen.dispose();
+		if (screenStack.isEmpty() == true)
+			throw new Exception ("This is the first Screen.");
+		else
+			updateRequested = true;
+	}
+	
+	public static boolean updateRequested() {
+		return updateRequested;
+	}
+	
+	public static void updateScreens () {
+		if (screenStack.isEmpty() == false) {
+			updateRequested = false;
+			game.setScreen(screenStack.getFirst());
+		}
+	}
+	
+	/** Sets Game instance -- can only be done once */
 	public static void setGameInstance(GameStart theGame) {
 		if (game == null)
 			game = theGame;
 		else
 			System.out.println("Cannot change game instance.");
 	}
+
 	
-	public static GameStart getGameInstance() {
-		return game;
-	}
-	
+	/** Gets game batch -- doesn't prevent creation of another batch, but this isn't 
+	 *  really recommended.
+	 */
 	public static SpriteBatch getBatch() {
 		if (game != null && game.getBatch() instanceof SpriteBatch)
 			return (SpriteBatch) game.getBatch();

@@ -42,9 +42,7 @@ public class Lights {
 	
 	/** Sets current lights world -- based on box2d */
 	public static void setWorld(World world) {
-		if (world == null) {
-			physicsWorld = world;
-		}
+		physicsWorld = world;
 	}
 	
 	/** Sets current rayHandler */

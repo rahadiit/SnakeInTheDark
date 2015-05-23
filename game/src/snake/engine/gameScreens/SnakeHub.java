@@ -15,6 +15,7 @@ import snake.engine.creators.ScreenCreator;
  *                                sessaGlasses
  *                                
  * <br> SnakeInTheDark main menu Sketch. </br>
+ * <br> NOTE: Seems that the GlyphLayout isn't working well in the emulator (not tested yet)
  * @author Mr.Strings
  */
 
@@ -43,15 +44,20 @@ public class SnakeHub implements MainMenu {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-
 	}
 
+	
+	/** Does the rendering -- keeps repeating for updating and drawing the game */
 	@Override
 	public void render(float delta) {
 		update();
 		draw();
+		
+		if (ScreenCreator.updateRequested())
+			ScreenCreator.updateScreens();
 	}
 
+	/** Draws figures on Screen */
 	private void draw() {
 		//Starts drawing
 		batch.begin();
@@ -75,40 +81,54 @@ public class SnakeHub implements MainMenu {
 		//Ends drawing
 	}
 
+	
+	/** updates Screen logic */
 	private void update() {
-		if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) {
 			String[] param = {"SnakeLevel", "TempleMap", "Some random Data"};
-			ScreenCreator.goToScreen(param);
+			
+			try {
+				ScreenCreator.switchAndGo(param);
+			} catch (Exception e) {
+				System.out.println("Cannot create Screen.");
+			}
 		}
 
 		instructions[0] = "Para comecar o jogo";
 		instructions[1] = "tecle ENTER";
 	}
 
+	
+	/** Called when the Screen is resized. */
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
+	/** Called when the Screen is paused. */
 	public void pause() {
 		// TODO Auto-generated method stub
 
 	}
 
+	
+	/** Called when the Screen returns from a paused state. */
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
 
 	}
 
+	
+	/** Called when Game changes Screens (this to other ones). */
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
 
 	}
 
+	
+	/** Disposes the Screen -- is done automatically by the ScreenCreator if used. */
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -123,8 +143,6 @@ public class SnakeHub implements MainMenu {
 					Gdx.graphics.getDesktopDisplayMode().width,
 					Gdx.graphics.getDesktopDisplayMode().height,
 					!Gdx.graphics.isFullscreen());
-
-			System.out.println("Toogled fullscreen\n");
 		}
 
 		return true;
