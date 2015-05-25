@@ -22,7 +22,7 @@ public class SnakeHUD extends HUD {
 	SnakeDialogHUD dialog;
 	BitmapFont font;
 	
-	public SnakeHUD (String type, String levelData) {
+	public SnakeHUD (String levelData) {
 		super();
 		
 		infos = new SnakeInfosHUD();

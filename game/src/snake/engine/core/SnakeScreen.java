@@ -1,4 +1,4 @@
-package snake.engine.gameScreens;
+package snake.engine.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -13,6 +13,7 @@ import snake.engine.PauseMenu;
 import snake.engine.creators.HUDCreator;
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldCreator;
+import snake.engine.stages.LevelStage;
 
 /**                               Developed By:
  *                                   NoDark
@@ -21,7 +22,7 @@ import snake.engine.creators.WorldCreator;
  * @author Mr.Strings
  */
 
-public class SnakeLevel implements GameLevel {
+public class SnakeScreen implements GameLevel {
 
 	public enum State {ACTIVE, NOINPUT, CUTSCENE, PAUSED}
 	public enum Strategy {UPDATEFOCUS, DRAWFOCUS, NOFOCUS}
@@ -39,8 +40,9 @@ public class SnakeLevel implements GameLevel {
 	private Strategy strategy = Strategy.UPDATEFOCUS;
 	private int framesSkipped = 0, logicSkipped = 0;
 
-	public SnakeLevel(String levelType, String levelDataID) {
-
+	
+	/** Creates level with the types provided by the Creator Classes. */
+	public SnakeScreen(String levelType, String levelDataID) {
 		// Creates GameWorld
 		world = WorldCreator.createWorld(levelType, levelDataID);
 		// Creates HUD
@@ -63,6 +65,60 @@ public class SnakeLevel implements GameLevel {
 		 
 		Gdx.input.setInputProcessor(input);
 		
+	}
+	
+	
+	/** Creates Level with custom World and HUD */
+	public SnakeScreen(GameWorld world, HUD hud, String levelDataID) {
+
+		// Creates GameWorld
+		this.world = world;
+		// Creates HUD
+		this.hud = hud;
+
+		// Creates a stage (world organizer)
+		stageWorld = WorldCreator.createWorldStage(ScreenCreator.getBatch(), this, world);
+		// Creates a stage (UI organizer)
+		stageHUD = HUDCreator.createHUDStage(ScreenCreator.getBatch(), this, hud);
+
+		// Adds world and HUD to the stages
+		stageWorld.addActor(world);
+		stageHUD.addActor(hud);
+		
+		
+		// Let stages listen to input events
+		input = new InputMultiplexer();
+		input.addProcessor(stageWorld);
+		input.addProcessor(stageHUD);
+		 
+		Gdx.input.setInputProcessor(input);
+		
+	}
+	
+	/** Sets Level with custom world, HUD and Stages. */
+	public SnakeScreen(GameWorld world, HUD hud, LevelStage stageWorld, LevelStage stageHUD, String levelDataID) {
+
+		// Creates GameWorld
+		this.world = world;
+		// Creates HUD
+		this.hud = hud;
+
+		// Sets the stage (world organizer)
+		this.stageWorld = stageWorld;
+		// sets the stage (UI organizer)
+		this.stageHUD = stageHUD;
+
+		// Adds world and HUD to the stages
+		stageWorld.addActor(world);
+		stageHUD.addActor(hud);
+		
+		
+		// Let stages listen to input events
+		input = new InputMultiplexer();
+		input.addProcessor(stageWorld);
+		input.addProcessor(stageHUD);
+		 
+		Gdx.input.setInputProcessor(input);
 	}
 	
 	

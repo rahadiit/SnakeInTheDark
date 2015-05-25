@@ -59,6 +59,33 @@ public class ForestMap_test extends VisualGameWorld {
 	@Override
 	public void act(float delta) {
 		
+		
+		// Switch screens
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+			String[] param = {"SnakeScreen", "TempleMap", "Some random Data"};
+			try {
+				ScreenCreator.addAndGo(param);
+			}  catch (Exception e) {
+				System.out.println ("Could not switch Screens");
+			}
+		}
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
+			try {
+				ScreenCreator.backToPrevious();
+			} catch (Exception e) {
+				String[] param = {"MainMenu"};
+				try {
+					ScreenCreator.switchAndGo(param);
+				} catch (Exception excp) {
+					System.out.println("Couldn't switch screens.");
+				}
+			}
+		}
+		
+		
+		
+		//Do level stuff
 		if (light.getX() >= 100) {
 			velocity *=-1;
 			y = false;
@@ -87,37 +114,9 @@ public class ForestMap_test extends VisualGameWorld {
 	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		sprite.draw(batch);
-		
 		if (y)
 			entity.draw(batch);
-		
-		
 		super.draw(batch, parentAlpha);
-		
-		
-		
-		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			String[] param = {"SnakeLevel", "TempleMap", "Some random Data"};
-			try {
-				ScreenCreator.addAndGo(param);
-			}  catch (Exception e) {
-				System.out.println ("Could not switch Screens");
-			}
-		}
-		
-		if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
-			try {
-				ScreenCreator.backToPrevious();
-			} catch (Exception e) {
-				String[] param = {"MainMenu"};
-				try {
-					ScreenCreator.switchAndGo(param);
-				} catch (Exception excp) {
-					System.out.println("Couldn't switch screens.");
-				}
-			}
-		}
-		
 	}
 
 

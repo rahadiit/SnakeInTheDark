@@ -1,7 +1,7 @@
 package snake.visuals.enhanced;
 
-import snake.engine.gameScreens.LevelStage;
-import snake.engine.gameScreens.SnakeLevel;
+import snake.engine.core.SnakeScreen;
+import snake.engine.stages.LevelStage;
 import snake.visuals.CameraMan;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class VisualWorldStage extends LevelStage {
 	private CameraMan cameraMan;
 	
-	public VisualWorldStage(SnakeLevel level) {
+	public VisualWorldStage(SnakeScreen level) {
 		super(level);
 		cameraMan = new CameraMan(this);
 		cameraMan.addLightSupport(1);
@@ -32,7 +32,7 @@ public class VisualWorldStage extends LevelStage {
 			System.out.println ("GameWorld of VisualWorldStage must be a VisualGameWorld");
 		}
 	}
-	public VisualWorldStage(SnakeLevel level, Viewport viewport) {
+	public VisualWorldStage(SnakeScreen level, Viewport viewport) {
 		super(level, viewport);
 		cameraMan = new CameraMan (this);
 		cameraMan.addLightSupport(1);
@@ -44,7 +44,7 @@ public class VisualWorldStage extends LevelStage {
 			System.out.println ("GameWorld of VisualWorldStage must be a VisualGameWorld");
 		}
 	}
-	public VisualWorldStage(SnakeLevel level, Viewport viewport, Batch batch) {
+	public VisualWorldStage(SnakeScreen level, Viewport viewport, Batch batch) {
 		super(level, viewport, batch);
 		cameraMan = new CameraMan(this);
 		cameraMan.addLightSupport(1);

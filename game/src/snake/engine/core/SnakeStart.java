@@ -16,7 +16,7 @@ public class SnakeStart extends GameStart {
 	public void create () {
 		super.batch = new SpriteBatch();
 		ScreenCreator.setGameInstance(this);
-		String[] param = {"SnakeHub"}; 
+		String[] param = {"SnakeScreen", "SnakeHub", "levelDataID"}; 
 		
 		try {
 			ScreenCreator.addAndGo(param);

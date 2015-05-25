@@ -2,7 +2,7 @@ package snake.map.types;
 
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
-import snake.engine.gameScreens.LevelStage;
+import snake.engine.stages.LevelStage;
 import snake.map.sets.Box_Test;
 import snake.player.Magician_Test;
 import snake.visuals.enhanced.LightMapEntity;
@@ -55,23 +55,9 @@ public class TempleMap_test extends VisualGameWorld {
 	public void act(float delta) {
 		super.act(delta);
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
-			WorldSettings.setAmbientColor(new Color (.1f, .1f, .3f, 1f));
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.X)) {
-			WorldSettings.setAmbientColor(Color.WHITE);
-		}
-		
-	}
-	
-	@Override
-	public void draw (Batch batch, float parentAlpha) {
-		temple.draw(batch);
-		super.draw(batch, parentAlpha);
-		
-		
+
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			String[] param = {"SnakeLevel", "ForestMap", "Some random Data"};
+			String[] param = {"SnakeScreen", "ForestMap", "Some random Data"};
 			try {
 				ScreenCreator.addAndGo(param);
 			}  catch (Exception e) {
@@ -91,6 +77,20 @@ public class TempleMap_test extends VisualGameWorld {
 				}
 			}
 		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
+			WorldSettings.setAmbientColor(new Color (.1f, .1f, .3f, 1f));
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.X)) {
+			WorldSettings.setAmbientColor(Color.WHITE);
+		}
+		
+	}
+	
+	@Override
+	public void draw (Batch batch, float parentAlpha) {
+		temple.draw(batch);
+		super.draw(batch, parentAlpha);
 	}
 
 	public void createLights() {

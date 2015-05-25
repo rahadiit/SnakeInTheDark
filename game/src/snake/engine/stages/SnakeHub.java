@@ -1,4 +1,4 @@
-package snake.engine.gameScreens;
+package snake.engine.stages;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

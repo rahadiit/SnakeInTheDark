@@ -3,8 +3,8 @@ package snake.engine.creators;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import snake.engine.GameStart;
-import snake.engine.gameScreens.SnakeHub;
-import snake.engine.gameScreens.SnakeLevel;
+import snake.engine.core.SnakeScreen;
+import snake.engine.stages.SnakeHub;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -41,7 +41,9 @@ public abstract class ScreenCreator {
 					break;
 				case "snakelevel":
 				case "snake level":
-					screen = new SnakeLevel(settings[1], settings[2]);
+				case "snakescreen":
+				case "snake screen":
+					screen = new SnakeScreen(settings[1], settings[2]);
 					break;
 				default:
 					System.out.println("Screen type not found.");

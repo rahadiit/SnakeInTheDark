@@ -1,4 +1,4 @@
-package snake.engine.gameScreens;
+package snake.engine.stages;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;

@@ -1,10 +1,12 @@
 package snake.engine.creators;
 
+import snake.engine.BlankWorld;
 import snake.engine.GameWorld;
-import snake.engine.gameScreens.LevelStage;
-import snake.engine.gameScreens.SnakeLevel;
+import snake.engine.core.SnakeScreen;
+import snake.engine.stages.LevelStage;
 import snake.map.types.ForestMap_test;
 import snake.map.types.TempleMap_test;
+import snake.visuals.enhanced.VisualBlankWorld;
 import snake.visuals.enhanced.VisualWorldStage;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -36,21 +38,34 @@ public abstract class WorldCreator {
 	 * @return GameWorld
 	 */
 	public static GameWorld createWorld (String type, String levelDataID) { 
+		GameWorld world;
 		
+		// Set the WorldType of the return to create a custom World class in game
 		switch (type.toLowerCase()) {
 			case "forestmap":
 			case "forest map":
-				return new ForestMap_test(levelDataID);
+				world =  new ForestMap_test(levelDataID);
+				break;
 			case "templemap":
 			case "temple map":
-				return new TempleMap_test(levelDataID);	
+				world = new TempleMap_test(levelDataID);	
+				break;
 				
-			// Set the WorldType of the return to create a custom World class in game
+			case "snakehub":
+			case "snake hub":
+			case "visualblank":
+			case "visual blank":	
+				world = new VisualBlankWorld();
+				break;
+			case "blank":
+				world = new BlankWorld();
+				
 			default:
 				System.out.println("Map type " + type + " not found");
 				return null;
 		}
 		
+		return world;
 		
 	}
 	
@@ -63,7 +78,7 @@ public abstract class WorldCreator {
 	 * @param world - World to be Staged
 	 * @return Stage - Stage created
 	 */
-	public static LevelStage createWorldStage (Batch batch, SnakeLevel level, GameWorld world) {
+	public static LevelStage createWorldStage (Batch batch, SnakeScreen level, GameWorld world) {
 		LevelStage stage;
 		
 		 //change StageType here
