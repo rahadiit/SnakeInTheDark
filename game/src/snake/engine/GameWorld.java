@@ -7,7 +7,7 @@ import snake.engine.creators.WorldSettings;
  *                                   NoDark
  *                                sessaGlasses
  *                                
- * <br> Class for a World of the game -- Can be anything such as 2D sidescroller or top-down, or even fully 3D game (although
+ * <br> Class for a World of the game -- Can be anything such as 2D side-scroller or top-down, or even fully 3D game (although
  * the focus is on 2D) </br>
  * Module: Mr.Strings
  */
@@ -17,6 +17,10 @@ public abstract class GameWorld extends Group /* Group makes it connected to Map
 	
 	public GameWorld () {
 		this.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight()); //Sets world size to be displayed on screen
+	}
+	
+	public String getPrefferedStage() {
+		return new String ("LevelStage");
 	}
 	
 	

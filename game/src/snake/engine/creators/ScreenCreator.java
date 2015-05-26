@@ -4,7 +4,6 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import snake.engine.GameStart;
 import snake.engine.core.SnakeScreen;
-import snake.engine.stages.SnakeHub;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -33,12 +32,6 @@ public abstract class ScreenCreator {
 		Screen screen;
 		try {
 			switch (settings[0].toLowerCase()) {
-				case "snakehub":
-				case "snake hub":
-				case "mainmenu":
-				case "main menu":
-					screen = new SnakeHub();
-					break;
 				case "snakelevel":
 				case "snake level":
 				case "snakescreen":
@@ -66,8 +59,9 @@ public abstract class ScreenCreator {
 			Screen screen = createScreen(settings);
 		
 			screenStack.push(screen);
-		
-			game.setScreen(screen);
+			
+			updateRequested = true;
+			
 			
 		}catch (IllegalStateException e) {
 			throw new IllegalStateException ("Not enough space avaible for new Screen.");

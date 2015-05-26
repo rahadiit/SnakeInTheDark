@@ -2,7 +2,6 @@ package snake.map.types;
 
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
-import snake.engine.stages.LevelStage;
 import snake.map.sets.Box_Test;
 import snake.player.Magician_Test;
 import snake.visuals.enhanced.LightMapEntity;
@@ -45,6 +44,7 @@ public class TempleMap_test extends VisualGameWorld {
 	
 	
 	public void show () {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		WorldSettings.setAmbientColor(Color.WHITE);
 	}
@@ -69,7 +69,7 @@ public class TempleMap_test extends VisualGameWorld {
 			try {
 				ScreenCreator.backToPrevious();
 			} catch (Exception e) {
-				String[] param = {"MainMenu"};
+				String[] param = {"SnakeLevel", "MainMenu", "LevelDataID"};
 				try {
 					ScreenCreator.switchAndGo(param);
 				} catch (Exception excp) {

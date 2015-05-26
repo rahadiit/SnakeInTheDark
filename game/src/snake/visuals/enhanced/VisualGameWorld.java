@@ -13,5 +13,11 @@ import snake.engine.GameWorld;
 
 
 public abstract class VisualGameWorld extends GameWorld{
+	
+	@Override
+	public String getPrefferedStage() {
+		return new String ("Visual World Stage");
+	}
+	
 	public abstract void createLights();
 }

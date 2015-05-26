@@ -1,7 +1,7 @@
 package snake.visuals.enhanced;
 
+import snake.engine.core.LevelStage;
 import snake.engine.core.SnakeScreen;
-import snake.engine.stages.LevelStage;
 import snake.visuals.CameraMan;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -56,7 +56,7 @@ public class VisualWorldStage extends LevelStage {
 			System.out.println ("GameWorld of VisualWorldStage must be a VisualGameWorld");
 		}
 	}
-	
+
 	
 	@Override
 	public void act (float delta) {

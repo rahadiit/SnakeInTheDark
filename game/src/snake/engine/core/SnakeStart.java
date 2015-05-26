@@ -23,6 +23,8 @@ public class SnakeStart extends GameStart {
 		} catch (Exception e) {
 			System.out.println("Cannot create Screen.");
 		}
+		
+		ScreenCreator.updateScreens();
 	}
 
 	@Override

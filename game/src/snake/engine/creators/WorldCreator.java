@@ -2,8 +2,8 @@ package snake.engine.creators;
 
 import snake.engine.BlankWorld;
 import snake.engine.GameWorld;
+import snake.engine.core.LevelStage;
 import snake.engine.core.SnakeScreen;
-import snake.engine.stages.LevelStage;
 import snake.map.types.ForestMap_test;
 import snake.map.types.TempleMap_test;
 import snake.visuals.enhanced.VisualBlankWorld;
@@ -30,13 +30,14 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 public abstract class WorldCreator {
 
-	/** Set the WorldType of the return line to create a custom World class in game (Changeable)
+	/** 
+	 * Creates World as specified. Can be customized as desired.
 	 * 
-	 * @author Mr.Strings (Modifiable according to need)
-	 * 
-	 * @param levelData
-	 * @return GameWorld
-	 */
+	 * @author Mr.Strings
+	 * @param type of World (String)
+	 * @param levelDataID (String)
+	 * @return created GameWorld, or null if world specified wasn't found.
+	 * */
 	public static GameWorld createWorld (String type, String levelDataID) { 
 		GameWorld world;
 		
@@ -53,6 +54,12 @@ public abstract class WorldCreator {
 				
 			case "snakehub":
 			case "snake hub":
+			case "mainmenu":
+			case "main menu":
+				world = new VisualBlankWorld();
+				break;
+				
+			//Blank Worlds
 			case "visualblank":
 			case "visual blank":	
 				world = new VisualBlankWorld();
@@ -69,7 +76,7 @@ public abstract class WorldCreator {
 		
 	}
 	
-	/** Creates Scene2d Stage.
+	/** Creates Stage for GameWorld as specified in method getPrefferedStage(). Can be customized as desired.
 	 * 
 	 * @author Mr.Strings (Modifiable according to need)
 	 * 
@@ -82,8 +89,19 @@ public abstract class WorldCreator {
 		LevelStage stage;
 		
 		 //change StageType here
-		stage = new VisualWorldStage(level, createWorldViewport(world), batch);
-		
+		switch  (world.getPrefferedStage().toLowerCase()) {
+			case "worldstage":
+			case "world stage":
+				stage = new LevelStage(level, createWorldViewport(world), batch);
+				break;
+			case "visualworldstage":	
+			case "visual world stage":
+				stage = new VisualWorldStage(level, createWorldViewport(world), batch);
+				break;
+			default:
+				System.out.println ("Stage not found. Please check getPreferredStage() method in world");
+				return null;
+		}
 		
 		float width = stage.getViewport().getCamera().viewportWidth;
 		float height = stage.getViewport().getCamera().viewportHeight;

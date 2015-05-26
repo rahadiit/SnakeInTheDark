@@ -1,6 +1,5 @@
-package snake.engine.stages;
+package snake.engine.core;
 
-import snake.engine.core.SnakeScreen;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;

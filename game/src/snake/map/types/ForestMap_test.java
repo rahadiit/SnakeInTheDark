@@ -34,7 +34,6 @@ public class ForestMap_test extends VisualGameWorld {
 	private boolean y = false, triggered = false;
 	
 	public ForestMap_test (String LevelData/* Add other parameters of choice*/) {
-		WorldSettings.setAmbientColor(Color.BLACK);
 		
 		Texture texture = new Texture(Gdx.files.internal("foggy_forest_by_BrokenLens.jpeg"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -50,7 +49,6 @@ public class ForestMap_test extends VisualGameWorld {
 	
 	
 	public void show () {
-		
 		WorldSettings.setAmbientColor(Color.BLACK);
 	}
 	
@@ -74,7 +72,7 @@ public class ForestMap_test extends VisualGameWorld {
 			try {
 				ScreenCreator.backToPrevious();
 			} catch (Exception e) {
-				String[] param = {"MainMenu"};
+				String[] param = {"SnakeLevel", "MainMenu", "LevelDataID"};
 				try {
 					ScreenCreator.switchAndGo(param);
 				} catch (Exception excp) {

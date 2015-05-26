@@ -13,7 +13,6 @@ import snake.engine.PauseMenu;
 import snake.engine.creators.HUDCreator;
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldCreator;
-import snake.engine.stages.LevelStage;
 
 /**                               Developed By:
  *                                   NoDark
@@ -31,7 +30,7 @@ public class SnakeScreen implements GameLevel {
 	private static int MAX_FRAMES_SKIPPED = 5, MAX_LOGIC_SKIPPED =  5;
 	
 	private InputMultiplexer input;
-	private LevelStage stageWorld, stageHUD; //Is used as a Subscriber, controls update, render, input polling (if applicable) and viewports 
+	private LevelStage stageWorld, stageHUD; //Is used as a Subscriber, controls update, render, input polling (if applicable) and viewports
 	private GameWorld world; //the world in which is the game
 	private HUD hud; //Game HUD -- info display and such
 	private Cutscene cutscene;

@@ -19,6 +19,10 @@ public abstract class HUD extends Group {
 		this.setBounds(0, 0, HUDSettings.getHudWidth(), HUDSettings.getHudHeight());
 	}
 	
+	public String getPrefferedStage() {
+		return new String ("LevelStage");
+	}
+	
 	public abstract void show();
 	
 	public abstract void dispose();
