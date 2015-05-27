@@ -85,6 +85,48 @@ public class TempleMap_test extends VisualGameWorld {
 			WorldSettings.setAmbientColor(Color.WHITE);
 		}
 		
+		
+		//Camera Movement
+		if (Gdx.input.isKeyPressed(Input.Keys.A))
+			getStage().getCameraMan().moveCamera(-20f * delta, 0);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.D))
+			getStage().getCameraMan().moveCamera(20f * delta, 0);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.S))
+			getStage().getCameraMan().moveCamera( 0, -20f * delta);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.W))
+			getStage().getCameraMan().moveCamera(0, 20f * delta);
+			
+		//Camera Zoom
+		if (Gdx.input.isKeyPressed(Input.Keys.O))
+			getStage().getCameraMan().zoomCamera(-.5f * delta);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.P))
+			getStage().getCameraMan().zoomCamera(.5f * delta);
+		
+		
+		//Virtual Camera Movement
+		if (Gdx.input.isKeyPressed(Input.Keys.L))
+			getStage().getCameraMan().moveVCamera(.01f, 0);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.J))
+			getStage().getCameraMan().moveVCamera(-.01f, 0);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.I))
+			getStage().getCameraMan().moveVCamera(0, .01f);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.K))
+			getStage().getCameraMan().moveVCamera(0, -.01f);
+			
+		//Virtual Camera Zoom
+		if (Gdx.input.isKeyPressed(Input.Keys.U))
+			getStage().getCameraMan().zoomVCamera(.01f);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.Y))
+			getStage().getCameraMan().zoomVCamera(-.01f);
+		
 	}
 	
 	@Override
@@ -106,6 +148,27 @@ public class TempleMap_test extends VisualGameWorld {
 		
 		box.disposeLights();
 		magician.disposeLights();
+	}
+
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

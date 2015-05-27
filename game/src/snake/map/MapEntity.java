@@ -1,6 +1,7 @@
 package snake.map;
 
-import snake.engine.GameWorld;
+import snake.engine.core.LevelStage;
+import snake.engine.models.GameWorld;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 /**                              Developed By:
@@ -20,5 +21,10 @@ public abstract class MapEntity extends Group {
 	
 	public MapEntity (GameWorld world) {
 		world.addActor(this);
+	}
+	
+	@Override
+	public LevelStage getStage() {
+		return (LevelStage) super.getStage();
 	}
 }

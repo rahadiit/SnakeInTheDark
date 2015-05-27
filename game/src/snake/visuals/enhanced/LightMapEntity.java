@@ -1,6 +1,6 @@
 package snake.visuals.enhanced;
 
-import snake.engine.GameWorld;
+import snake.engine.models.GameWorld;
 import snake.map.MapEntity;
 
 /**                              Developed By:
@@ -22,8 +22,13 @@ public abstract class LightMapEntity extends MapEntity{
 	public abstract boolean hasLights();
 	
 	public abstract void createLights();
-	
-	
+
 	public abstract void disposeLights();
+	
+	
+	@Override
+	public VisualWorldStage getStage() {
+		return (VisualWorldStage) super.getStage();
+	}
 
 }

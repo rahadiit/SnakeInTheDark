@@ -5,14 +5,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import snake.engine.Cutscene;
-import snake.engine.GameLevel;
-import snake.engine.GameWorld;
-import snake.engine.HUD;
-import snake.engine.PauseMenu;
 import snake.engine.creators.HUDCreator;
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldCreator;
+import snake.engine.models.Cutscene;
+import snake.engine.models.GameLevel;
+import snake.engine.models.GameWorld;
+import snake.engine.models.HUD;
+import snake.engine.models.PauseMenu;
 
 /**                               Developed By:
  *                                   NoDark
@@ -219,18 +219,21 @@ public class SnakeScreen implements GameLevel {
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-
+		world.pause();
+		hud.pause();
 	}
 
 	/** Is triggered when the screen goes out of paused state, usually when it regain focus on Android. */
 	@Override
 	public void resume() {
+		world.resume();
+		hud.resume();
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
+		world.hide();
+		hud.hide();
 	}
 
 	

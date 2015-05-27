@@ -1,7 +1,7 @@
-package snake.engine.core;
+package snake.start;
 
-import snake.engine.GameStart;
 import snake.engine.creators.ScreenCreator;
+import snake.engine.models.GameStart;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**                               Developed By:

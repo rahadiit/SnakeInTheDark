@@ -1,6 +1,6 @@
 package com.mygdx.Core.client;
 
-import snake.engine.core.SnakeStart;
+import snake.start.SnakeStart;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;

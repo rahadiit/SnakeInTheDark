@@ -1,6 +1,6 @@
 package snake.visuals.enhanced;
 
-import snake.engine.GameWorld;
+import snake.engine.models.GameWorld;
 
 
 /**                               Developed By:
@@ -20,4 +20,10 @@ public abstract class VisualGameWorld extends GameWorld{
 	}
 	
 	public abstract void createLights();
+	
+	
+	@Override
+	public VisualWorldStage getStage() {
+		return (VisualWorldStage) super.getStage();
+	}
 }

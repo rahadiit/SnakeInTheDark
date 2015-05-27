@@ -2,8 +2,11 @@ package snake.engine.creators;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import snake.engine.GameStart;
+import snake.engine.core.LevelStage;
 import snake.engine.core.SnakeScreen;
+import snake.engine.models.GameStart;
+import snake.engine.models.GameWorld;
+import snake.engine.models.HUD;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -51,7 +54,31 @@ public abstract class ScreenCreator {
 	}
 	
 	
-	/** Working fine, but needs improvement. 
+	/** Creates new SnakeScreen, but doesn't set it as current.
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param levelDataID -- String of info to start level 
+	 */
+	public static Screen createScreen(GameWorld world, HUD hud, String levelDataID) {
+		return new SnakeScreen (world, hud, levelDataID);
+	}
+	
+	
+	/** Creates new SnakeScreen, but doesn't set it as current.
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param stageWorld -- stage to World
+	 * @param stageHUD -- stage to HUD
+	 * @param levelDataID -- String of info to start level 
+	 */
+	public static Screen createScreen(GameWorld world, HUD hud, LevelStage stageWorld,
+									  LevelStage stageHUD, String levelDataID) {
+		return new SnakeScreen (world, hud, stageWorld, stageHUD, levelDataID);
+	}
+	
+	/** Creates Screen and adds it to stack.
+	 * 
+	 * @param settings[] -- settings used to create Screen
 	 * @throws Exception */
 	public static void addAndGo (String settings[]) throws Exception {
 		
@@ -84,6 +111,104 @@ public abstract class ScreenCreator {
 			}
 		
 			Screen screen = createScreen(settings);
+			screenStack.push(screen);
+			updateRequested = true;
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
+	
+	
+	/** Creates Screen and adds it to stack.
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param levelDataID -- String of info to start level 
+	 * @throws Exception */
+	public static void addAndGo (GameWorld world, HUD hud, String levelDataID) throws Exception {
+		
+		try {
+			Screen screen = createScreen(world, hud, levelDataID);
+		
+			screenStack.push(screen);
+			
+			updateRequested = true;
+			
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
+	
+	/** Creates Screen and adds it to stack.
+	 * 
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param stageWorld -- stage to World
+	 * @param stageHUD -- stage to HUD
+	 * @param levelDataID -- String of info to start level 
+	 * @throws Exception */
+	public static void addAndGo (GameWorld world, HUD hud, LevelStage stageWorld,
+			  LevelStage stageHUD, String levelDataID) throws Exception {
+		
+		try {
+			Screen screen = createScreen(world, hud, stageWorld, stageHUD, levelDataID);
+		
+			screenStack.push(screen);
+			
+			updateRequested = true;
+			
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
+
+	
+	/** Removes Current Screen from Stack (if there is one) and adds created Screen
+	 * with sent settings.
+	 *  
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param levelDataID -- String of info to start level 
+	 * @throws Exception 
+	 */
+	public static void switchAndGo (GameWorld world, HUD hud, String levelDataID) throws Exception {
+		try {
+			
+			if (screenStack.isEmpty() == false) {
+				Screen removed = screenStack.pop();
+				removed.dispose();
+			}
+		
+			Screen screen = createScreen(world, hud, levelDataID);
+			screenStack.push(screen);
+			updateRequested = true;
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
+	
+	/** Removes Current Screen from Stack (if there is one) and adds created Screen
+	 * with sent settings.
+	 *	
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param stageWorld -- stage to World
+	 * @param stageHUD -- stage to HUD
+	 * @param levelDataID -- String of info to start level 
+	 */
+	public static void switchAndGo (GameWorld world, HUD hud, LevelStage stageWorld,
+			  LevelStage stageHUD, String levelDataID) throws Exception {
+		try {
+			
+			if (screenStack.isEmpty() == false) {
+				Screen removed = screenStack.pop();
+				removed.dispose();
+			}
+		
+			Screen screen = createScreen(world, hud, stageWorld, stageHUD, levelDataID);
 			screenStack.push(screen);
 			updateRequested = true;
 			

@@ -1,4 +1,4 @@
-package snake.engine;
+package snake.engine.models;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Batch;

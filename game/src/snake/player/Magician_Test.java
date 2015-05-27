@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import snake.engine.GameWorld;
 import snake.engine.creators.WorldSettings;
+import snake.engine.models.GameWorld;
 import snake.visuals.Lights;
 import snake.visuals.enhanced.LightMapEntity;
 

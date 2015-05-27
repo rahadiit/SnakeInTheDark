@@ -11,7 +11,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Batch;	
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 
@@ -107,6 +107,48 @@ public class ForestMap_test extends VisualGameWorld {
 		if (triggered && light.getX() > 91) {
 			Gdx.app.exit();
 		}
+		
+		
+		//Camera Movement
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+			getStage().getCameraMan().moveCamera(-20f * delta, 0);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+			getStage().getCameraMan().moveCamera(20f * delta, 0);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+			getStage().getCameraMan().moveCamera( 0, -20f * delta);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.UP))
+			getStage().getCameraMan().moveCamera(0, 20f * delta);
+			
+		//Camera Zoom
+		if (Gdx.input.isKeyPressed(Input.Keys.O))
+			getStage().getCameraMan().zoomCamera(-.5f * delta);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.P))
+			getStage().getCameraMan().zoomCamera(.5f * delta);
+		
+		
+		//Virtual Camera Movement
+		if (Gdx.input.isKeyPressed(Input.Keys.L))
+			getStage().getCameraMan().moveVCamera(.01f, 0);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.J))
+			getStage().getCameraMan().moveVCamera(-.01f, 0);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.I))
+			getStage().getCameraMan().moveVCamera(0, .01f);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.K))
+			getStage().getCameraMan().moveVCamera(0, -.01f);
+			
+		//Virtual Camera Zoom
+		if (Gdx.input.isKeyPressed(Input.Keys.U))
+			getStage().getCameraMan().zoomVCamera(.01f);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.Y))
+			getStage().getCameraMan().zoomVCamera(-.01f);
 	}
 	
 	@Override
@@ -129,6 +171,27 @@ public class ForestMap_test extends VisualGameWorld {
 		light.remove();
 		light.dispose();
 		entity.getTexture().dispose();
+	}
+
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

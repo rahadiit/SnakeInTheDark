@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import snake.engine.HUD;
+import snake.engine.models.HUD;
 
 /**                               Developed By:
  *                                   NoDark
@@ -61,5 +61,26 @@ public class SnakeHUD extends HUD {
 	@Override
 	public void dispose() {
 		font.dispose();
+	}
+
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
 	}
 }

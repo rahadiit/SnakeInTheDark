@@ -1,10 +1,6 @@
-package snake.visuals.enhanced;
+package snake.engine.models;
 
-public class VisualBlankWorld extends VisualGameWorld{
-	
-	public void createLights() {
-		//Method Snub
-	}
+public class BlankWorld extends GameWorld {
 
 	@Override
 	public void show() {
@@ -35,4 +31,5 @@ public class VisualBlankWorld extends VisualGameWorld{
 		// TODO Auto-generated method stub
 		
 	}
+
 }

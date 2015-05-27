@@ -7,7 +7,7 @@ package com.mygdx.Core.desktop;
  */
 
 
-import snake.engine.core.SnakeStart;
+import snake.start.SnakeStart;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 

@@ -1,9 +1,9 @@
 package snake.engine.creators;
 
-import snake.engine.BlankHUD;
-import snake.engine.HUD;
 import snake.engine.core.LevelStage;
 import snake.engine.core.SnakeScreen;
+import snake.engine.models.BlankHUD;
+import snake.engine.models.HUD;
 import snake.hud.SnakeHUD;
 import snake.menus.SnakeHub;
 import com.badlogic.gdx.graphics.Camera;

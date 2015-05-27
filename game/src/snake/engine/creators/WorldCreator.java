@@ -1,9 +1,9 @@
 package snake.engine.creators;
 
-import snake.engine.BlankWorld;
-import snake.engine.GameWorld;
 import snake.engine.core.LevelStage;
 import snake.engine.core.SnakeScreen;
+import snake.engine.models.BlankWorld;
+import snake.engine.models.GameWorld;
 import snake.map.types.ForestMap_test;
 import snake.map.types.TempleMap_test;
 import snake.visuals.enhanced.VisualBlankWorld;
