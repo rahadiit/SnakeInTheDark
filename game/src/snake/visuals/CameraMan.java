@@ -85,7 +85,14 @@ public class CameraMan {
 		camera.zoom = MathUtils.clamp(camera.zoom, WorldSettings.getMaxZoom(), WorldSettings.getMinZoom());
 		WorldSettings.setWorld2ScreenRatio(1/camera.zoom);
 		keepInBounds();
-		
+	}
+	
+	
+	/** Sets camera in default zoom */
+	public void doDefaultZoom() {
+		camera.zoom = MathUtils.clamp(1, WorldSettings.getMaxZoom(), WorldSettings.getMinZoom());
+		WorldSettings.setWorld2ScreenRatio(1);
+		keepInBounds();
 	}
 	
 	/** Keeps Camera in World Bounds. Adapted from link below

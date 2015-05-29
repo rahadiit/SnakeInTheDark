@@ -26,6 +26,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public abstract class ScreenCreator {
 	private static GameStart game;
 	private static Deque <Screen> screenStack = new ArrayDeque<>();
+	private static Deque <Screen> removedStack = new ArrayDeque<>();
 	private static boolean updateRequested = false;
 	
 	/** Creates new String, but doesn't set it as current.
@@ -96,28 +97,7 @@ public abstract class ScreenCreator {
 	}
 	
 	
-	/** Removes Current Screen from Stack (if there is one) and adds created Screen
-	 * with sent settings.
-	 *  
-	 * @param settings
-	 * @throws Exception 
-	 */
-	public static void switchAndGo (String settings[]) throws Exception {
-		try {
-			
-			if (screenStack.isEmpty() == false) {
-				Screen removed = screenStack.pop();
-				removed.dispose();
-			}
-		
-			Screen screen = createScreen(settings);
-			screenStack.push(screen);
-			updateRequested = true;
-			
-		}catch (IllegalStateException e) {
-			throw new IllegalStateException ("Not enough space avaible for new Screen.");
-		}
-	}
+	
 	
 	
 	/** Creates Screen and adds it to stack.
@@ -163,6 +143,29 @@ public abstract class ScreenCreator {
 			throw new IllegalStateException ("Not enough space avaible for new Screen.");
 		}
 	}
+	
+	/** Removes Current Screen from Stack (if there is one) and adds created Screen
+	 * with sent settings.
+	 *  
+	 * @param settings
+	 * @throws Exception 
+	 */
+	public static void switchAndGo (String settings[]) throws Exception {
+		try {
+			
+			if (screenStack.isEmpty() == false) {
+				Screen removed = screenStack.pop();
+				removedStack.push(removed);
+			}
+		
+			Screen screen = createScreen(settings);
+			screenStack.push(screen);
+			updateRequested = true;
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
 
 	
 	/** Removes Current Screen from Stack (if there is one) and adds created Screen
@@ -178,7 +181,7 @@ public abstract class ScreenCreator {
 			
 			if (screenStack.isEmpty() == false) {
 				Screen removed = screenStack.pop();
-				removed.dispose();
+				removedStack.push(removed);
 			}
 		
 			Screen screen = createScreen(world, hud, levelDataID);
@@ -205,7 +208,7 @@ public abstract class ScreenCreator {
 			
 			if (screenStack.isEmpty() == false) {
 				Screen removed = screenStack.pop();
-				removed.dispose();
+				removedStack.push(removed);
 			}
 		
 			Screen screen = createScreen(world, hud, stageWorld, stageHUD, levelDataID);
@@ -222,8 +225,8 @@ public abstract class ScreenCreator {
 	 * @throws Exception -- if there is no screen left in stack 
 	 * */
 	public static void backToPrevious() throws Exception {
-		Screen screen = screenStack.pop();
-		screen.dispose();
+		Screen removed = screenStack.pop();
+		removedStack.push(removed);
 		if (screenStack.isEmpty() == true)
 			throw new Exception ("This is the first Screen.");
 		else
@@ -237,6 +240,11 @@ public abstract class ScreenCreator {
 	public static void updateScreens () {
 		if (screenStack.isEmpty() == false) {
 			updateRequested = false;
+			
+			while (removedStack.isEmpty() == false) {
+				Screen removed = removedStack.pop();
+				removed.dispose();
+			}
 			game.setScreen(screenStack.getFirst());
 		}
 	}

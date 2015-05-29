@@ -275,6 +275,12 @@ public class SnakeScreen implements GameLevel {
 	/** Gets Stage for World */
 	public Stage getWorldStage() {return stageWorld;}
 	
+	/** Gets Screen's current cutscene. To use it, must set Game State to CUTSCENE. */
+	public Cutscene getCutscene() {return cutscene;};
+	
+	/** Gets pause menu. To use it, must set Game State to PAUSED. */
+	public PauseMenu getPauseMenu() {return pauseMenu;}
+	
 	
 	/* ------------------------------ Setters ------------------------------ */
 	
@@ -283,4 +289,10 @@ public class SnakeScreen implements GameLevel {
 	
 	/** Sets rendering strategy -- prioritize update or drawing or none */
 	public void setStrategy (Strategy strategy) {this.strategy = strategy;}
+	
+	/** Sets Screen's current cutscene. To use it, must set Game State to CUTSCENE. */
+	public void setCutscene(Cutscene cutscene) {this.cutscene = cutscene;}
+	
+	/** Sets pause menu. To use it, must set Game State to CUTSCENE. */
+	public void setPauseMenu (PauseMenu pauseMenu) {this.pauseMenu = pauseMenu;}
 }

@@ -20,7 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  *                                   NoDark
  *                                sessaGlasses
  *                                
- * Map for testing purposes only.
+ * <br> Map for testing purposes only. (BETTER DESIGN) </br>
  * @author Mr.Strings
  */
 
@@ -32,7 +32,6 @@ public class TempleMap_test extends VisualGameWorld {
 	private Box_Test box; // Provavelmente sim.
 	
 	public TempleMap_test (String LevelData/* Add other parameters of choice*/) {
-		WorldSettings.setAmbientColor(Color.WHITE);
 		//Procedimento padrao para carregar uma imagem -- vai ser melhorado com o assetManager
 		Texture texture = new Texture(Gdx.files.internal("pixelArtTemple.png")); 
 		temple = new Sprite(texture);
@@ -44,8 +43,6 @@ public class TempleMap_test extends VisualGameWorld {
 	
 	
 	public void show () {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		WorldSettings.setAmbientColor(Color.WHITE);
 	}
 	
@@ -56,24 +53,26 @@ public class TempleMap_test extends VisualGameWorld {
 		super.act(delta);
 		
 
+		//Adds new screen on top of this one
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 			String[] param = {"SnakeScreen", "ForestMap", "Some random Data"};
 			try {
 				ScreenCreator.addAndGo(param);
 			}  catch (Exception e) {
-				System.out.println ("Could not switch Screens");
+				e.printStackTrace(System.out);
 			}
 		}
 		
+		//Back to previous screen
 		if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
 			try {
 				ScreenCreator.backToPrevious();
-			} catch (Exception e) {
+			} catch (Exception e) { //OR... Create a menu to go back
 				String[] param = {"SnakeLevel", "MainMenu", "LevelDataID"};
 				try {
-					ScreenCreator.switchAndGo(param);
+					ScreenCreator.switchAndGo(param); 
 				} catch (Exception excp) {
-					System.out.println("Couldn't switch screens.");
+					e.printStackTrace(System.out);
 				}
 			}
 		}

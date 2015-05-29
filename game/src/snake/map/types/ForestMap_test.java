@@ -19,7 +19,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  *                                   NoDark
  *                                sessaGlasses
  *                                
- * <br> Map for testing purposes only. (REALLY BAD DESIGN) </br>
+ * <br> Map for testing purposes only. (BAD DESIGN) </br>
  * @author Mr.Strings
  */
 
@@ -58,25 +58,26 @@ public class ForestMap_test extends VisualGameWorld {
 	public void act(float delta) {
 		
 		
-		// Switch screens
+		//Adds new screen on top of this one
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 			String[] param = {"SnakeScreen", "TempleMap", "Some random Data"};
 			try {
 				ScreenCreator.addAndGo(param);
 			}  catch (Exception e) {
-				System.out.println ("Could not switch Screens");
+				e.printStackTrace(System.out);
 			}
 		}
 		
+		//Back to previous screen
 		if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
 			try {
 				ScreenCreator.backToPrevious();
-			} catch (Exception e) {
+			} catch (Exception e) { //OR... Creates new SnakeHub Screen
 				String[] param = {"SnakeLevel", "MainMenu", "LevelDataID"};
 				try {
 					ScreenCreator.switchAndGo(param);
 				} catch (Exception excp) {
-					System.out.println("Couldn't switch screens.");
+					e.printStackTrace(System.out);
 				}
 			}
 		}

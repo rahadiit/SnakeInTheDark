@@ -21,7 +21,7 @@ public class SnakeStart extends GameStart {
 		try {
 			ScreenCreator.addAndGo(param);
 		} catch (Exception e) {
-			System.out.println("Cannot create Screen.");
+			e.printStackTrace(System.out);
 		}
 		
 		ScreenCreator.updateScreens();

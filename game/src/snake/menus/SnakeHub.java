@@ -28,8 +28,6 @@ public class SnakeHub extends HUD {
 		this.font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), false);
 		this.layout = new GlyphLayout();
 
-		font.setColor(Color.GREEN);
-
 		w = Gdx.graphics.getWidth();
 		h = Gdx.graphics.getHeight();
 		
@@ -44,6 +42,7 @@ public class SnakeHub extends HUD {
 	/** updates Screen logic */
 	@Override
 	public void act(float delta) {
+		font.setColor(Color.GREEN);
 		if (Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) {
 			String[] param = {"SnakeScreen", "TempleMap", "Some random Data"};
 			try {
