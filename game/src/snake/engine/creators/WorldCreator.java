@@ -4,6 +4,7 @@ import snake.engine.core.LevelStage;
 import snake.engine.core.SnakeScreen;
 import snake.engine.models.BlankWorld;
 import snake.engine.models.GameWorld;
+import snake.map.TiledMapWorld;
 import snake.map.types.ForestMap_test;
 import snake.map.types.TempleMap_test;
 import snake.visuals.enhanced.VisualBlankWorld;
@@ -40,9 +41,16 @@ public abstract class WorldCreator {
 	 * */
 	public static GameWorld createWorld (String type, String levelDataID) { 
 		GameWorld world;
-		
+
+		// TODO: change to factories here -- Gabriel
+
 		// Set the WorldType of the return to create a custom World class in game
 		switch (type.toLowerCase()) {
+
+			case "tiledmap":
+				world = new TiledMapWorld(levelDataID);
+				break;
+
 			case "forestmap":
 			case "forest map":
 				world =  new ForestMap_test(levelDataID);

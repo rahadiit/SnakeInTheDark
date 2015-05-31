@@ -34,6 +34,8 @@ public class HUDCreator {
 		HUD hud;
 		
 		switch (type.toLowerCase()) {
+
+			case "tiledmap":
 		
 			case "templemap":
 			case "temple map":
