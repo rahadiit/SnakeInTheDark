@@ -18,10 +18,9 @@ import snake.visuals.enhanced.LightMapEntity;
  *                                  NoDark
  *                               sessaGlasses
  *                               
- * <br> Player for testing purposes at TempleMap </br>         
+ * <br> Player for testing purposes at TempleMap </br>
  * 
  * @author Mr.Strings
- * 
  */
 
 public class Magician_Test extends LightMapEntity {
