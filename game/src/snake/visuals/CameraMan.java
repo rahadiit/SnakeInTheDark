@@ -73,7 +73,7 @@ public class CameraMan {
 		keepInBounds();
 
 		WorldSettings.setCameraPosition(camera.position.x, camera.position.y);
-		
+		camera.update();
 	}
 	
 	
@@ -85,6 +85,7 @@ public class CameraMan {
 		camera.zoom = MathUtils.clamp(camera.zoom, WorldSettings.getMaxZoom(), WorldSettings.getMinZoom());
 		WorldSettings.setWorld2ScreenRatio(1/camera.zoom);
 		keepInBounds();
+		camera.update();
 	}
 	
 	
@@ -93,6 +94,7 @@ public class CameraMan {
 		camera.zoom = MathUtils.clamp(1, WorldSettings.getMaxZoom(), WorldSettings.getMinZoom());
 		WorldSettings.setWorld2ScreenRatio(1);
 		keepInBounds();
+		camera.update();
 	}
 	
 	/** Keeps Camera in World Bounds. Adapted from link below

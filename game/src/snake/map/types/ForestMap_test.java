@@ -50,6 +50,8 @@ public class ForestMap_test extends VisualGameWorld {
 	
 	public void show () {
 		WorldSettings.setAmbientColor(Color.BLACK);
+		WorldSettings.setWorld2ScreenRatio(1);
+		
 	}
 	
 	
@@ -157,7 +159,7 @@ public class ForestMap_test extends VisualGameWorld {
 		sprite.draw(batch);
 		if (y)
 			entity.draw(batch);
-		super.draw(batch, parentAlpha);
+		super.drawChildren(batch, parentAlpha);
 	}
 
 

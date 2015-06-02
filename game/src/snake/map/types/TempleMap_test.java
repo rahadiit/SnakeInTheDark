@@ -125,13 +125,12 @@ public class TempleMap_test extends VisualGameWorld {
 			
 		if (Gdx.input.isKeyPressed(Input.Keys.Y))
 			getStage().getCameraMan().zoomVCamera(-.01f);
-		
 	}
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) {
 		temple.draw(batch);
-		super.draw(batch, parentAlpha);
+		super.drawChildren(batch, parentAlpha);
 	}
 
 	public void createLights() {
