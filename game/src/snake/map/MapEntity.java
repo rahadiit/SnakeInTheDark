@@ -25,15 +25,17 @@ public abstract class MapEntity extends Group {
 		world.addActor(this);
 	}
 	
-	public MapEntity () {}
-	
 	//Adds actor to a custom group
 	public MapEntity (Group group) {
 		group.addActor(this);
 	}
 	
+	public MapEntity () {}
+	
 	@Override
 	public LevelStage getStage() {
 		return (LevelStage) super.getStage();
 	}
+	
+	public abstract void dispose();
 }

@@ -1,4 +1,4 @@
-package snake.map.sets;
+package snake.tests;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -48,5 +48,10 @@ public class Box_Test extends LightMapEntity{
 	
 	public void disposeLights() {
 		shadow.destroyShadow();
+	}
+
+	@Override
+	public void dispose() {
+		sprite.getTexture().dispose();
 	}
 }
