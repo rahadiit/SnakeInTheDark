@@ -111,7 +111,7 @@ public abstract class WorldCreator {
 		
 		return  stage;
 	}
-	
+
 	/** Creates Viewport for GameWorld to fit
 	 * 
 	 * @param world

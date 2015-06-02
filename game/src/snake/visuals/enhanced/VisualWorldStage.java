@@ -11,6 +11,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  *                                sessaGlasses
  * 
  * <br> Convenient extension of Stage for camera Handling and lights </br>
+ * <br> Really handy for simple games, while for bigger ones, a custom handling of Lights and camera is
+ *      highly recommended 
+ * </br>
  * 
  * @author Mr.Strings
  */

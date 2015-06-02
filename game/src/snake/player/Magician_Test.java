@@ -71,8 +71,8 @@ public class Magician_Test extends LightMapEntity {
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
-		//sprite.draw(batch);
-		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento
+		sprite.draw(batch);
+		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 
