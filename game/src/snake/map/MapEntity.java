@@ -19,8 +19,17 @@ public abstract class MapEntity extends Group {
 	
 	protected int xInMap, yInMap;
 	
+	
+	//Creates and adds actor to world
 	public MapEntity (GameWorld world) {
 		world.addActor(this);
+	}
+	
+	public MapEntity () {}
+	
+	//Adds actor to a custom group
+	public MapEntity (Group group) {
+		group.addActor(this);
 	}
 	
 	@Override
