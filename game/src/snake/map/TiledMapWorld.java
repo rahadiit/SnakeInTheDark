@@ -1,7 +1,5 @@
 package snake.map;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -31,49 +29,6 @@ public class TiledMapWorld extends VisualGameWorld {
     @Override
     public void act(float delta) {
         super.act(delta);
-
-        Input input = Gdx.input;
-
-        //Camera Movement
-        if (input.isKeyPressed(Input.Keys.LEFT))
-            getStage().getCameraMan().moveCamera(-20f * delta, 0);
-
-        if (input.isKeyPressed(Input.Keys.RIGHT))
-            getStage().getCameraMan().moveCamera(20f * delta, 0);
-
-        if (input.isKeyPressed(Input.Keys.DOWN))
-            getStage().getCameraMan().moveCamera( 0, -20f * delta);
-
-        if (input.isKeyPressed(Input.Keys.UP))
-            getStage().getCameraMan().moveCamera(0, 20f * delta);
-
-        //Camera Zoom
-        if (input.isKeyPressed(Input.Keys.O))
-            getStage().getCameraMan().zoomCamera(-.5f * delta);
-
-        if (input.isKeyPressed(Input.Keys.P))
-            getStage().getCameraMan().zoomCamera(.5f * delta);
-
-
-        //Virtual Camera Movement
-        if (input.isKeyPressed(Input.Keys.L))
-            getStage().getCameraMan().moveVCamera(.01f, 0);
-
-        if (input.isKeyPressed(Input.Keys.J))
-            getStage().getCameraMan().moveVCamera(-.01f, 0);
-
-        if (input.isKeyPressed(Input.Keys.I))
-            getStage().getCameraMan().moveVCamera(0, .01f);
-
-        if (input.isKeyPressed(Input.Keys.K))
-            getStage().getCameraMan().moveVCamera(0, -.01f);
-
-        //Virtual Camera Zoom
-        if (input.isKeyPressed(Input.Keys.U))
-            getStage().getCameraMan().zoomVCamera(.01f);
-
-        if (input.isKeyPressed(Input.Keys.Y))
-            getStage().getCameraMan().zoomVCamera(-.01f);
     }
 
     @Override
@@ -86,20 +41,33 @@ public class TiledMapWorld extends VisualGameWorld {
     @Override
     public void show() {
         WorldSettings.setAmbientColor(Color.WHITE);
+        OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
+        float wFactor = 8f / camera.viewportWidth;
+        float hFactor = 8f / camera.viewportHeight;
+        float factor = Math.max(wFactor, hFactor);
+        camera.setToOrtho(false, 8, 8);
+        camera.position.set(4f, 4f, 0);
+        camera.zoom = factor;
+        camera.update();
     }
 
     @Override
-    public void hide() {}
+    public void hide() {
+    }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 
     @Override
-    public void dispose() {}
+    public void dispose() {
+    }
 
     @Override
-    public void createLights() {}
+    public void createLights() {
+    }
 }
