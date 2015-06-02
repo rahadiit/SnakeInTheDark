@@ -161,4 +161,9 @@ public class CameraMan {
 	
 		rayHandler.updateAndRender();
 	}
+	
+	/** Get CameraMan's camera */
+	public OrthographicCamera getCamera() {
+		return camera;
+	}
 }
