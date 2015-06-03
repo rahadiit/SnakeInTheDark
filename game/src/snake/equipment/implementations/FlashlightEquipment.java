@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import snake.map.IMapAccess;
 import snake.visuals.Lights;
 
@@ -87,5 +88,11 @@ public class FlashlightEquipment extends AbstractEquipment
 	{
 		light.remove(); // IF you don't remove stuff gets crazy
 		light.dispose();
+	}
+	
+	@Override
+	public void dispose() 
+	{
+		sprite.getTexture().dispose();
 	}
 }

@@ -1,4 +1,4 @@
-package snake.player;
+package snake.tests;
 
 import box2dLight.ConeLight;
 import com.badlogic.gdx.Gdx;
@@ -27,6 +27,7 @@ public class Magician_Test extends LightMapEntity {
 	
 	private ConeLight light;
 	private Sprite sprite;
+	private Weapon weapon;
 	
 	
 	public Magician_Test (GameWorld world) {
@@ -39,29 +40,33 @@ public class Magician_Test extends LightMapEntity {
 		this.setBounds(0, WorldSettings.heightFix(0), 30, 30); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
 		//... Com o heightFix, o topo fica 100, o chao fica 0 (Highly recommended)
 		this.setOrigin(13, 16); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
+		
+		
+		weapon = new Weapon (world, this, getX(), getY(), 0);
 	}
 	
 	@Override
 	public void act (float delta) { // Aqui se realizam as atualizacoes
+		super.act(delta);
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-			this.moveBy(-.3f, 0);
+			moveBy(-.3f, 0);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			this.moveBy(+.3f, 0);
+			moveBy(+.3f, 0);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			this.moveBy(0, +.3f);
+			moveBy(0, +.3f);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			this.moveBy(0, -.3f);
+			moveBy(0, -.3f);
 		}
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-			this.rotateBy(5);
+			rotateBy(5);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.V)) {
-			this.rotateBy(-5);
+			rotateBy(-5);
 		}
 		
 		light.setPosition(getOriginX() + getX(), getOriginY() + getY());
@@ -70,9 +75,10 @@ public class Magician_Test extends LightMapEntity {
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
-
+		
 		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+		super.draw(batch, parentAlpha);
 	}
 
 	@Override
@@ -91,9 +97,10 @@ public class Magician_Test extends LightMapEntity {
 		light.remove(); // IF you don't remove stuff gets crazy
 		light.dispose();
 	}
-	
+
 	@Override
 	public void dispose() {
 		sprite.getTexture().dispose();
+		
 	}
 }

@@ -4,15 +4,14 @@ import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
-import snake.map.sets.Box_Test;
 import snake.player.Magician_Test;
+import snake.tests.Box_Test;
 import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -141,8 +140,10 @@ public class TempleMap_test extends VisualGameWorld {
 
 	public void createLights() {
 		for (Actor x : this.getChildren()) {
-			LightMapEntity ent = (LightMapEntity) x;
-			ent.createLights();
+			try {
+				LightMapEntity ent = (LightMapEntity) x;
+				ent.createLights();
+			} catch (ClassCastException e){}
 		}
 	}
 	
@@ -151,7 +152,10 @@ public class TempleMap_test extends VisualGameWorld {
 		temple.getTexture().dispose();
 		
 		box.disposeLights();
+		box.dispose();
+		
 		magician.disposeLights();
+		magician.dispose();
 	}
 
 
