@@ -21,7 +21,7 @@ public class Bullet extends MapEntity {
 		
 		this.setBounds(f, g, 5, 5);
 		
-		velocity = new Vector2(0,1);
+		velocity = new Vector2(1,0);
 		
 	}
 	
