@@ -2,10 +2,13 @@ package snake.map.types;
 
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
+import snake.equipment.EquipmentCreator;
+import snake.equipment.IEquipment;
 import snake.map.sets.Box_Test;
 import snake.player.Magician_Test;
 import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -14,6 +17,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 
 
 /**                               Developed By:
@@ -39,6 +43,8 @@ public class TempleMap_test extends VisualGameWorld {
 		
 		magician = new Magician_Test(this);
 		box = new Box_Test(this);
+		IEquipment flashlight = EquipmentCreator.createFactory("flashlight").create();
+		this.addActor((Group)flashlight);
 	}
 	
 	
