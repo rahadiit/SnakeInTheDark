@@ -1,6 +1,5 @@
 package snake.visuals.enhanced;
 
-import com.badlogic.gdx.scenes.scene2d.Group;
 import snake.engine.models.GameWorld;
 import snake.map.MapEntity;
 
@@ -20,9 +19,6 @@ public abstract class LightMapEntity extends MapEntity{
 		super(world);
 	}
 	
-	public LightMapEntity(Group group) {
-		super(group);
-	}
 	
 	public LightMapEntity() {}
 	

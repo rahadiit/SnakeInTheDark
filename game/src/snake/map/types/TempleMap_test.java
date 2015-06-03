@@ -2,13 +2,13 @@ package snake.map.types;
 
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
+import snake.engine.dataManagment.Loader;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
 import snake.tests.Magician_Test;
 import snake.tests.Box_Test;
 import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -35,11 +35,15 @@ public class TempleMap_test extends VisualGameWorld {
 	private Box_Test box; // Provavelmente sim.
 	
 	public TempleMap_test (String LevelData/* Add other parameters of choice*/) {
-		//Procedimento padrao para carregar uma imagem -- vai ser melhorado com o assetManager
-		Texture texture = new Texture(Gdx.files.internal("pixelArtTemple.png")); 
+		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
+		Loader.load("pixelArtTemple.png", Texture.class);
+		while (!Loader.isLoaded("pixelArtTemple.png"))
+			Loader.update();
+						
+		//Cria a imagem
+		Texture texture = Loader.get("pixelArtTemple.png");
 		temple = new Sprite(texture);
 		temple.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
-		
 		
 		magician = new Magician_Test(this); //Player
 		box = new Box_Test(this); //Simple box with shadow

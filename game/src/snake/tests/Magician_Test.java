@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import snake.engine.creators.WorldSettings;
+import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
 import snake.visuals.Lights;
 import snake.visuals.enhanced.LightMapEntity;
@@ -28,13 +29,23 @@ public class Magician_Test extends LightMapEntity {
 	private ConeLight light;
 	private Sprite sprite;
 	private Weapon weapon;
+	private String texName = "magician.png";
 	
 	
 	public Magician_Test (GameWorld world) {
 		super(world);
-		//Procedimento padrao para carregar uma imagem -- vai ser melhorado com o assetManager
-		Texture texture = new Texture(Gdx.files.internal("magician.png")); //cria textura
-		sprite = new Sprite(texture); // coloca na sprite
+
+		world.addActor(this);
+		
+		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
+		Loader.load(texName, Texture.class);
+		while (!Loader.isLoaded(texName))
+				Loader.update();
+		
+		//Cria a imagem
+		Texture texture = Loader.get(texName);
+		sprite = new Sprite(texture);
+					
 		sprite.setAlpha(1f); //Transparencia -- de 0 a 1 (0 eh invisivel)
 		
 		this.setBounds(0, WorldSettings.heightFix(0), 30, 30); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
@@ -42,7 +53,10 @@ public class Magician_Test extends LightMapEntity {
 		this.setOrigin(13, 16); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
 		
-		weapon = new Weapon (world, this, getX(), getY(), 0);
+		weapon = new Weapon (world);
+		this.addActor(weapon);
+		weapon.setBounds(17.5f, 20, 5, 5);
+		weapon.setRotation(90);
 	}
 	
 	@Override
@@ -100,7 +114,7 @@ public class Magician_Test extends LightMapEntity {
 
 	@Override
 	public void dispose() {
-		sprite.getTexture().dispose();
+		Loader.unload(texName);
 		
 	}
 }

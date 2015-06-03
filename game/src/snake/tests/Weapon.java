@@ -2,35 +2,47 @@ package snake.tests;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Group;
+import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
 import snake.visuals.enhanced.LightMapEntity;
 
 public class Weapon extends LightMapEntity{
 	GameWorld world;
+	Sprite sprite;
+	String texName = "bullet.png";
 	
 	
-	public Weapon (GameWorld world, Group group, float x, float y, float rotation) {
+	public Weapon (GameWorld world) {
 		this.world = world;
-		group.addActor(this);
 		
-		this.setBounds(0, 0, 20, 20);
-		this.setRotation(rotation);
+		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
+		Loader.load(texName, Texture.class);
+		while (!Loader.isLoaded(texName))
+			Loader.update();
+		
+		//Cria a imagem
+		Texture texture = Loader.get(texName);
+		sprite = new Sprite(texture);
 	}
 	
 
 	@Override
 	public void act(float delta) {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)) { //Devia ser acionada pelo player
-			Vector2 vector = this.localToStageCoordinates(new Vector2(this.getX() + 18, this.getY() + 15));
-			Bullet bullet = new Bullet (world, vector.x, vector.y, this.getRotation());
+			Vector2 vector = this.localToStageCoordinates(new Vector2(0, 0));
+			Bullet bullet = new Bullet (world, vector.x, vector.y, this.getParent().getRotation() + 90);
+			world.addActor(bullet);
 		}
 	}
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
+		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento
+				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 	
 	@Override
@@ -45,6 +57,8 @@ public class Weapon extends LightMapEntity{
 	public void disposeLights() {}
 
 	@Override
-	public void dispose() {}
+	public void dispose() {
+		Loader.unload(texName);
+	}
 
 }

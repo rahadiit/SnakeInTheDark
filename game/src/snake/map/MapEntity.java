@@ -18,16 +18,12 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 public abstract class MapEntity extends Group {
 	
 	protected int xInMap, yInMap;
+	public GameWorld world;
 	
 	
 	//Creates and adds actor to world
 	public MapEntity (GameWorld world) {
-		world.addActor(this);
-	}
-	
-	//Adds actor to a custom group
-	public MapEntity (Group group) {
-		group.addActor(this);
+		this.world = world;
 	}
 	
 	public MapEntity () {}

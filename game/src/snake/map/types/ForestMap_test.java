@@ -2,6 +2,7 @@ package snake.map.types;
 
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
+import snake.engine.dataManagment.Loader;
 import snake.visuals.Lights;
 import snake.visuals.enhanced.VisualGameWorld;
 import box2dLight.Light;
@@ -10,7 +11,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Batch;	
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -32,16 +32,30 @@ public class ForestMap_test extends VisualGameWorld {
 	private float velocity = .2f;
 	private int x = 1;
 	private boolean y = false, triggered = false;
+	private String texName = "foggy_forest_by_BrokenLens.jpeg";
+	private String entityName = "Scary_Silhouette.png";
 	
 	public ForestMap_test (String LevelData/* Add other parameters of choice*/) {
 		
-		Texture texture = new Texture(Gdx.files.internal("foggy_forest_by_BrokenLens.jpeg"));
-		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
+		Loader.load(texName, Texture.class);
+		while (!Loader.isLoaded(texName))
+			Loader.update();
+				
+		//Cria a imagem
+		Texture texture = Loader.get(texName);
 		sprite = new Sprite(texture);
 		sprite.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
 		
-		Texture texture2 = new Texture(Gdx.files.internal("Scary_Silhouette.png"));
+		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
+		Loader.load(entityName, Texture.class);
+		while (!Loader.isLoaded(entityName))
+			Loader.update();
+						
+		//Cria a imagem
+		Texture texture2 = Loader.get(entityName);
 		entity = new Sprite(texture2);
+		
 		entity.setSize(4, 12);
 		entity.setAlpha(1f);
 		entity.setPosition(60, 15);
@@ -170,10 +184,10 @@ public class ForestMap_test extends VisualGameWorld {
 	
 	@Override
 	public void dispose() {
-		sprite.getTexture().dispose();
+		Loader.unload(texName);
+		Loader.unload(entityName);
 		light.remove();
 		light.dispose();
-		entity.getTexture().dispose();
 	}
 
 
