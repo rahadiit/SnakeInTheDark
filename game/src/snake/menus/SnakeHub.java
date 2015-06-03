@@ -48,7 +48,7 @@ public class SnakeHub extends HUD {
 			try {
 				ScreenCreator.switchAndGo(param);
 			} catch (Exception e) {
-				System.out.println("Cannot create Screen.");
+				e.printStackTrace();
 			}
 		}
 

@@ -20,4 +20,10 @@ public class SensorEquipment extends AbstractEquipment
 	{
 		// implementar isso!
 	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -4,7 +4,7 @@ import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
-import snake.player.Magician_Test;
+import snake.tests.Magician_Test;
 import snake.tests.Box_Test;
 import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;
@@ -40,10 +40,12 @@ public class TempleMap_test extends VisualGameWorld {
 		temple = new Sprite(texture);
 		temple.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
 		
-		magician = new Magician_Test(this);
-		box = new Box_Test(this);
-		IEquipment flashlight = EquipmentCreator.createFactory("flashlight").create();
-		this.addActor((Group)flashlight);
+		
+		magician = new Magician_Test(this); //Player
+		box = new Box_Test(this); //Simple box with shadow
+		
+		IEquipment flashlight = EquipmentCreator.createFactory("flashlight").create(); //Equipment
+		this.addActor((Group)flashlight); //Added to group
 	}
 	
 	
