@@ -28,7 +28,13 @@ public class Weapon extends LightMapEntity {
 			charging = true;
 			vec.set(0,0);
 			this.localToStageCoordinates(vec);
-			bullet = new Bullet (world, vec.x, vec.y, this.getParent().getRotation() + 90);
+			bullet = null;
+			bullet = new Bullet (world);
+			bullet.setPosition(vec.x, vec.y);
+			bullet.setRotation(this.getParent().getRotation() + 90);
+			vec.set(1,0);
+			vec.rotate(this.getParent().getRotation() + 90);
+			bullet.setVelocity(vec);
 			world.addActor(bullet);
 		}
 		else if (charging == true && !Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {

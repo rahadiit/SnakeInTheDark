@@ -20,7 +20,7 @@ public class Bullet extends LightMapEntity {
 	private Light light;
 	Vector2 vec;
 	
-	public Bullet (Group group, float x, float y, float rotation) {
+	public Bullet (Group group) {
 
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
@@ -31,12 +31,9 @@ public class Bullet extends LightMapEntity {
 		Texture texture = Loader.get(texName);
 		sprite = new Sprite(texture);
 		
-		this.setBounds(x, y, 5, 5);
-		
-		this.setRotation(rotation);
-		
-		velocity = new Vector2(1,0);
-		velocity.rotate(rotation);
+		this.setSize(5, 5);
+
+		velocity = new Vector2(0,0);
 		
 		createLights();
 	}
@@ -98,6 +95,11 @@ public class Bullet extends LightMapEntity {
 		}
 		
 		super.disposeLights();
+	}
+	
+	
+	public void setVelocity (Vector2 velocity) {
+		this.velocity.set(velocity);
 	}
 	
 }
