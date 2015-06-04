@@ -18,6 +18,7 @@ public class FlashLight_test extends LightMapEntity {
 	public FlashLight_test (GameWorld world) {
 		super(world);
 		setBounds(0, 0, 1, 1);
+		vec = new Vector2();
 	}
 	
 	@Override
@@ -28,7 +29,8 @@ public class FlashLight_test extends LightMapEntity {
 	
 	@Override
 	public void act(float delta) {
-		vec = this.localToStageCoordinates(new Vector2 (getX(), getY())); 
+		vec.set(getX(), getY());
+		this.localToStageCoordinates(vec); 
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)) {
 			System.out.println(getX() + ":" + getY());
