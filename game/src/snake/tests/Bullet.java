@@ -35,7 +35,7 @@ public class Bullet extends LightMapEntity {
 		
 		this.setRotation(rotation);
 		
-		velocity = new Vector2(0,0);
+		velocity = new Vector2(1,0);
 		velocity.rotate(rotation);
 		
 		createLights();
