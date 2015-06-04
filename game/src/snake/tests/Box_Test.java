@@ -27,15 +27,14 @@ public class Box_Test extends LightMapEntity{
 		//Cria a imagem
 		Texture texture = Loader.get(texName);
 		sprite = new Sprite(texture);
-		
-		this.setBounds(38, WorldSettings.heightFix(53), 23, 23);
-		sprite.setAlpha(1f);
-		
-		this.setPosition(38, WorldSettings.heightFix(53));
 	}
 	
 	@Override
-	public void act(float delta) {}
+	public void act(float delta) {
+		if (this.hit(this.getX(), this.getY(), true) != null) {
+			this.dispose();
+		}
+	}
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
@@ -60,6 +59,8 @@ public class Box_Test extends LightMapEntity{
 
 	@Override
 	public void dispose() {
+		if (this.getParent() != null || this.getStage() != null)
+			this.remove();
 		Loader.unload(texName);
 	}
 }

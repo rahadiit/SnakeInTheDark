@@ -2,6 +2,7 @@ package snake.visuals.enhanced;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import snake.engine.models.GameWorld;
+import snake.map.MapEntity;
 
 
 /**                               Developed By:
@@ -20,7 +21,14 @@ public abstract class VisualGameWorld extends GameWorld{
 		return new String ("Visual World Stage");
 	}
 	
-	public abstract void createLights();
+	public void createLights() {
+		for (Actor a: this.getChildren()) {
+			try {
+				LightMapEntity e = (LightMapEntity) a;
+				e.createLights();
+			} catch (ClassCastException e){}
+		}
+	}
 	
 	
 	@Override
@@ -35,6 +43,10 @@ public abstract class VisualGameWorld extends GameWorld{
 			try {
 				LightMapEntity e = (LightMapEntity) a;
 				e.disposeLights();
+			} catch (ClassCastException e){}
+			try {
+				MapEntity e = (MapEntity) a;
+				e.dispose();
 			} catch (ClassCastException e){}
 		}
 	}

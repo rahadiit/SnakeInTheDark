@@ -1,18 +1,13 @@
 package snake.tests;
 
-import box2dLight.ConeLight;
+import snake.engine.dataManagment.Loader;
+import snake.engine.models.GameWorld;
+import snake.visuals.enhanced.LightMapEntity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import snake.engine.creators.WorldSettings;
-import snake.engine.dataManagment.Loader;
-import snake.engine.models.GameWorld;
-import snake.visuals.Lights;
-import snake.visuals.enhanced.LightMapEntity;
 
 
 
@@ -27,9 +22,9 @@ import snake.visuals.enhanced.LightMapEntity;
 
 public class Magician_Test extends LightMapEntity {
 	
-	private ConeLight light;
 	private Sprite sprite;
 	private Weapon weapon;
+	private FlashLight_test flashlight;
 	private String texName = "magician.png";
 	
 	
@@ -49,15 +44,19 @@ public class Magician_Test extends LightMapEntity {
 					
 		sprite.setAlpha(1f); //Transparencia -- de 0 a 1 (0 eh invisivel)
 		
-		this.setBounds(0, WorldSettings.heightFix(0), 30, 30); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
-		//... Com o heightFix, o topo fica 100, o chao fica 0 (Highly recommended)
-		this.setOrigin(13, 16); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
-		
+		//Adiciona equipamento arma
 		weapon = new Weapon (world);
 		this.addActor(weapon);
 		weapon.setBounds(17.5f, 20, 5, 5);
 		weapon.setRotation(90);
+		
+		//adiciona equipamento lanterna_teste
+		flashlight = new FlashLight_test (world);
+		this.addActor(flashlight);
+		flashlight.setX(7.7f);
+		flashlight.setY(10);
+		
 	}
 	
 	@Override
@@ -83,9 +82,6 @@ public class Magician_Test extends LightMapEntity {
 		if (Gdx.input.isKeyPressed(Input.Keys.V)) {
 			rotateBy(-5);
 		}
-		
-		light.setPosition(getOriginX() + getX(), getOriginY() + getY());
-		light.setDirection(getRotation() + 90);
 	}
 	
 	@Override
@@ -103,21 +99,20 @@ public class Magician_Test extends LightMapEntity {
 
 	@Override
 	public void createLights() { //Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
-		light = new ConeLight (Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f),
-				   			   100, 50, WorldSettings.heightFix(50), 90, 30);
 		super.createLights(); //Importante para criar as luzes/sombra dos filhos
-	} //Se quiser destruir a luz, pode ser em qualquer lugar
+	}
 
 	@Override
 	public void disposeLights() {
-		light.remove(); // IF you don't remove stuff gets crazy
-		light.dispose();
 		super.disposeLights();
 	}
 
 	@Override
 	public void dispose() {
+		super.dispose();
+		if (this.getParent() != null || this.getStage() != null) {
+			this.remove();
+		}
 		Loader.unload(texName);
-		
 	}
 }

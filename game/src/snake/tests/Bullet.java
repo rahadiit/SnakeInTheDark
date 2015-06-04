@@ -35,7 +35,7 @@ public class Bullet extends LightMapEntity {
 		
 		this.setRotation(rotation);
 		
-		velocity = new Vector2(1,0);
+		velocity = new Vector2(0,0);
 		velocity.rotate(rotation);
 		
 		createLights();
@@ -51,6 +51,10 @@ public class Bullet extends LightMapEntity {
 		if (getX() < 0 || getX() > WorldSettings.getWorldWidth()
 			|| getY() < 0 || getY() > WorldSettings.getWorldHeight())
 			dispose();
+		
+		if (this.hit(this.getX(), this.getY(), true) != null) {
+			this.dispose();
+		}
 	}
 	
 	@Override
@@ -62,7 +66,8 @@ public class Bullet extends LightMapEntity {
 	
 	public void dispose () {
 		super.dispose();
-		this.remove();
+		if (this.getParent() != null || this.getStage() != null)
+			this.remove();
 		Loader.unload(texName);
 	}
 
@@ -75,17 +80,22 @@ public class Bullet extends LightMapEntity {
 	@Override
 	public void createLights() {
 		super.createLights();
+		
+		//Mudança de coordenadas
 		vec = this.localToStageCoordinates(new Vector2(this.getWidth()/2, this.getHeight()/2));
 		light = new PointLight (Lights.getRayhandler(), 5000, new Color(.5f, .5f, 1, 1f), 5,
-								vec.x, vec.y);
+								vec.x, vec.y); //criacao de luz
 		light.setSoft(false);
 		
 	}
 
 	@Override
 	public void disposeLights() {
-		light.remove();
-		light.dispose();
+		if (light != null) {
+			light.remove();
+			light.dispose();
+			light = null;
+		}
 		
 		super.disposeLights();
 	}

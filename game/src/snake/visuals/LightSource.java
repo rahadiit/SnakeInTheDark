@@ -4,7 +4,7 @@ package snake.visuals;
  *                                   NoDark
  *                                sessaGlasses
  *                                
- * <br> Light Source in World -- still in development </br>
+ * <br> Light Source in World -- still in development (Blank) </br>
  * @author Mr.Strings
  * 
  */
