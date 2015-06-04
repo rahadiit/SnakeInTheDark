@@ -11,20 +11,31 @@ import snake.visuals.enhanced.LightMapEntity;
 public class Weapon extends LightMapEntity {
 	Sprite sprite;
 	boolean charging = false;
+	private Vector2 vec;
+	private Bullet bullet;
 
 	
 	
 	public Weapon (GameWorld world) {
 		super(world);
+		vec = new Vector2 (0,0);
 	}
 	
 
 	@Override
 	public void act(float delta) {
+		super.act(delta);
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && charging == false) { //Devia ser acionada pelo player
 			charging = true;
-			Vector2 vector = this.localToStageCoordinates(new Vector2(0, 0));
-			Bullet bullet = new Bullet (world, vector.x, vector.y, this.getParent().getRotation() + 90);
+			vec.set(0,0);
+			this.localToStageCoordinates(vec);
+			bullet = null;
+			bullet = new Bullet (world);
+			bullet.setPosition(vec.x, vec.y);
+			bullet.setRotation(this.getParent().getRotation() + 90);
+			vec.set(0,0);
+			vec.rotate(this.getParent().getRotation() + 90);
+			bullet.setVelocity(vec);
 			world.addActor(bullet);
 		}
 		else if (charging == true && !Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
@@ -36,6 +47,7 @@ public class Weapon extends LightMapEntity {
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
+		super.draw(batch, parentAlpha);
 	}
 	
 	@Override
