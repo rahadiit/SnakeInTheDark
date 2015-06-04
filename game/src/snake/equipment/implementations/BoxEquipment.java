@@ -5,23 +5,20 @@ import snake.map.IMapAccess;
 /**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * @author bszazulla
+ * @author 
  */
 
-public class GunEquipment extends AbstractEquipment
+public class SensorEquipment extends AbstractEquipment
 {
-	
-	public SensorEquipment()
+	public BoxEquipment()
 	{		
-		this.name = "Gun";
-		this.description = "When a droid gets close to you, if you have ammo, it's destroyed";	
+		this.name = "Box";
+		this.description = "It would't be a Spy game without a box";	
 	}
-	public int ammo;
 	
 	public void activate(IMapAccess map) 
-	{
-		if (ammo > 0)
-			
+	{					
+		map.Status("box")
 	}
 }
 @Override

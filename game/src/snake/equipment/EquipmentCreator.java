@@ -26,6 +26,20 @@ public class EquipmentCreator
 			case "sensor":
 				obj = new SensorEquipmentCreator();
 				break;
+			case "emp":
+				obj = new EmpEquipmentCreator();
+				break;
+			case "box":
+				obj = new BoxEquipmentCreator();
+				break;
+			case "gun":
+				obj = new GunEquipmentCreator();
+				break;
+			case "trap":
+				obj = new TrapEquipmentCreator();
+				break;
+
+
 			default:
 				throw new IllegalArgumentException(String.format("No factory defined for \"%s\".", equipment));
 		}

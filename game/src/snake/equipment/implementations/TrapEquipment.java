@@ -21,3 +21,26 @@ public class TrapEquipment extends AbstractEquipment
 		map.setCell(map.getx(), map.gety(), trap);
 	}
 }
+@Override
+public void dispose()
+{
+	// TODO Auto-generated method stub
+
+}
+
+@Override
+public void draw(Batch batch, float parentAlpha)
+{
+	// TODO Auto-generated method stub
+
+}
+
+@Override
+public void act(float delta)
+{
+	// TODO Auto-generated method stub
+
+}
+
+// THIS EQUIPMENT HAS NO LIGHTS
+}

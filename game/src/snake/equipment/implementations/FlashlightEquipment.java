@@ -12,7 +12,7 @@ import snake.visuals.Lights;
 /**                              Developed By:
  *                                  NoDarkGlasses
  *                                  
- * Implementação concreta da lanterna
+ * Implementaï¿½ï¿½o concreta da lanterna
  *                        
  * @author bszazulla
  */
@@ -24,41 +24,41 @@ public class FlashlightEquipment extends AbstractEquipment
 	ConeLight light;
 	int cont;
 
-	// Construtor com parametros de posição de início
+	// Construtor com parametros de posiï¿½ï¿½o de inï¿½cio
 	public FlashlightEquipment(int x, int y)
 	{
 		this.name = "Flashlight";
-		this.description = "The Flashlight...";
+		this.description = "The Flashlight lights in front of you, but use with caution, it doesnt last long";
 		
 		this.setBounds(x, y, 5, 5); // ver o setPosition
 	}
 	
-	// Construtor sem parâmetros
+	// Construtor sem parï¿½metros
 	public FlashlightEquipment()
 	{
 		this.name = "Flashlight";
-		this.description = "The Flashlight...";
+		this.description = "The Flashlight lights in front of you, but use with caution, it doesnt last long";
 		
 		this.setBounds(20, 20, 5, 5); // ver o setPosition do player!!!!!!!!
 	}
 	
-	// Ativação de seu efeito no mapa
+	// Ativaï¿½ï¿½o de seu efeito no mapa
 	public void activate(IMapAccess map) 
 	{
 		// implementar isso
 	}
 
-	// Desenho do equipamento no jogo, SE ADICIONADO EM ALGUM LUGAR QUE PEÇA SEU DRAW (EXEMPLO: MAPA TEMPLE)
+	// Desenho do equipamento no jogo, SE ADICIONADO EM ALGUM LUGAR QUE PEï¿½A SEU DRAW (EXEMPLO: MAPA TEMPLE)
 	public void draw (Batch batch, float parentAlpha)
 	{
 		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), 
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 	
-	// Atualização gráfica no jogo
+	// Atualizaï¿½ï¿½o grï¿½fica no jogo
 	public void act (float delta) 
 	{
-		// esses getters são relativos à imagem da lanterna, para que a luz fique sempre junto dela
+		// esses getters sï¿½o relativos ï¿½ imagem da lanterna, para que a luz fique sempre junto dela
 		light.setPosition(getOriginX() + getX() + 3, getOriginY() + getY() + 3);
 		light.setDirection(sprite.getRotation() + 90); 
 		
