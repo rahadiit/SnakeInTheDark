@@ -1,5 +1,6 @@
 package snake.visuals.enhanced;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import snake.engine.models.GameWorld;
 import snake.map.MapEntity;
 
@@ -24,10 +25,29 @@ public abstract class LightMapEntity extends MapEntity{
 	
 	public abstract boolean hasLights();
 	
-	public abstract void createLights();
+	public void createLights() {
+		for (Actor x : this.getChildren()) {
+			try {
+				LightMapEntity ent = (LightMapEntity) x;
+				ent.createLights();
+			} catch (ClassCastException e){}
+		}
+	}
 
-	public abstract void disposeLights();
+	public void disposeLights() {
+		for (Actor x : this.getChildren()) {
+			try {
+				LightMapEntity ent = (LightMapEntity) x;
+				ent.disposeLights();
+			} catch (ClassCastException e){}
+		}
+	}
 	
+	@Override
+	public void dispose() {
+		super.dispose();
+		disposeLights();
+	}
 	
 	@Override
 	public VisualWorldStage getStage() {

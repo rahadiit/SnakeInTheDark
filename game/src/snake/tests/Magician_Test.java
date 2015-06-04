@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
@@ -104,12 +105,14 @@ public class Magician_Test extends LightMapEntity {
 	public void createLights() { //Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
 		light = new ConeLight (Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f),
 				   			   100, 50, WorldSettings.heightFix(50), 90, 30);
+		super.createLights(); //Importante para criar as luzes/sombra dos filhos
 	} //Se quiser destruir a luz, pode ser em qualquer lugar
 
 	@Override
 	public void disposeLights() {
 		light.remove(); // IF you don't remove stuff gets crazy
 		light.dispose();
+		super.disposeLights();
 	}
 
 	@Override

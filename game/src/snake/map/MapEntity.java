@@ -2,6 +2,7 @@ package snake.map;
 
 import snake.engine.core.LevelStage;
 import snake.engine.models.GameWorld;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 /**                              Developed By:
@@ -33,5 +34,12 @@ public abstract class MapEntity extends Group {
 		return (LevelStage) super.getStage();
 	}
 	
-	public abstract void dispose();
+	public void dispose() {
+		for (Actor a: this.getChildren()) {
+			try {
+				MapEntity e = (MapEntity) a;
+				e.dispose();
+			} catch (ClassCastException e){}
+		}
+	}
 }

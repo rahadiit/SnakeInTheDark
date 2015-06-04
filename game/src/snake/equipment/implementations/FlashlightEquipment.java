@@ -38,35 +38,35 @@ public class FlashlightEquipment extends AbstractEquipment
 		// implementar isso
 	}
 	
-	// DESENHA NO MAPA -> ELE FAZ ISSO SOZINHO FORA COM A SPRITE QUE É GUARDADA AQUI
+	// DESENHA NO MAPA -> ELE FAZ ISSO SOZINHO FORA COM A SPRITE QUE ï¿½ GUARDADA AQUI
 	public void draw (Batch batch, float parentAlpha)
 	{
 		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), 
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 	
-	// FAZ PARTE DA ATUALIZAÇÃO DA LÓGICA DO JOGO -- SE NÃO TEM LUZ 
+	// FAZ PARTE DA ATUALIZAï¿½ï¿½O DA Lï¿½GICA DO JOGO -- SE Nï¿½O TEM LUZ 
 	public void act (float delta) 
 	{
 		light.setPosition(getOriginX() + getX() + 4, getOriginY() + getY() + 3);
-		light.setDirection(sprite.getRotation() + 45); // atualiza de acordo com a rotação da imagem do objeto
+		light.setDirection(sprite.getRotation() + 45); // atualiza de acordo com a rotaï¿½ï¿½o da imagem do objeto
 		
 		cont++;
 		if(cont%60 == 0)
 		{
 			if(acesa)
 			{
-				light.remove();
+				light.setActive(false);
 				acesa = false;
 			}
 			else
 			{
-				light.add(Lights.getRayhandler());
+				light.setActive(true);
 				acesa = true;
 			}
 		}
 		
-		// transformaçao de coordenadas para mexer junto com o player quando for junto com o player
+		// transformaï¿½ao de coordenadas para mexer junto com o player quando for junto com o player
 		
 		
 	}

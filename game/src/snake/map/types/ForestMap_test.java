@@ -186,8 +186,7 @@ public class ForestMap_test extends VisualGameWorld {
 	public void dispose() {
 		Loader.unload(texName);
 		Loader.unload(entityName);
-		light.remove();
-		light.dispose();
+		super.dispose();
 	}
 
 

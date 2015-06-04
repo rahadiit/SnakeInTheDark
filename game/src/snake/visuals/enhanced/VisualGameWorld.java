@@ -1,5 +1,6 @@
 package snake.visuals.enhanced;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import snake.engine.models.GameWorld;
 
 
@@ -25,5 +26,16 @@ public abstract class VisualGameWorld extends GameWorld{
 	@Override
 	public VisualWorldStage getStage() {
 		return (VisualWorldStage) super.getStage();
+	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		for (Actor a: this.getChildren()) {
+			try {
+				LightMapEntity e = (LightMapEntity) a;
+				e.disposeLights();
+			} catch (ClassCastException e){}
+		}
 	}
 }

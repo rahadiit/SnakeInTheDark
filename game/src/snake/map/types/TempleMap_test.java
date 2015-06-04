@@ -33,15 +33,16 @@ public class TempleMap_test extends VisualGameWorld {
 	private Sprite temple;
 	private Magician_Test magician; //Da pra colocar uma array com todas as entities? 
 	private Box_Test box; // Provavelmente sim.
+	private String texName = "pixelArtTemple.png";
 	
 	public TempleMap_test (String LevelData/* Add other parameters of choice*/) {
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
-		Loader.load("pixelArtTemple.png", Texture.class);
-		while (!Loader.isLoaded("pixelArtTemple.png"))
+		Loader.load(texName, Texture.class);
+		while (!Loader.isLoaded(texName))
 			Loader.update();
 						
 		//Cria a imagem
-		Texture texture = Loader.get("pixelArtTemple.png");
+		Texture texture = Loader.get(texName);
 		temple = new Sprite(texture);
 		temple.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
 		
@@ -155,13 +156,8 @@ public class TempleMap_test extends VisualGameWorld {
 	
 	@Override
 	public void dispose() {
-		temple.getTexture().dispose();
-		
-		box.disposeLights();
-		box.dispose();
-		
-		magician.disposeLights();
-		magician.dispose();
+		Loader.unload(texName);
+		super.dispose();
 	}
 
 
