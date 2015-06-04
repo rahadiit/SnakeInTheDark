@@ -12,7 +12,7 @@ import snake.equipment.implementations.SensorEquipment;
 
 public class SensorEquipmentCreator implements IEquipmentCreator
 {
-	public IEquipment create()
+	public IEquipment create(int x, int y)
 	{
 		return new SensorEquipment();
 	}

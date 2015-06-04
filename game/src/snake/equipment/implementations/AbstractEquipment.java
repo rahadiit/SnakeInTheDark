@@ -1,12 +1,16 @@
 package snake.equipment.implementations;
 
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+
 import snake.equipment.IEquipment;
 import snake.map.IMapAccess;
 import snake.visuals.enhanced.LightMapEntity;
 
 /**                              Developed By:
  *                                  NoDarkGlasses
+ *                                  
+ * Classe abstrata diretora de todos os equipamentos concretos
  *                        
  * @author bszazulla
  */
@@ -16,29 +20,40 @@ public abstract class AbstractEquipment extends LightMapEntity implements IEquip
 	protected String name;
 	protected String description;
 	
+	// Captar o nome do equipamento
 	public String getName()
 	{
 		return name;
 	}
 	
+	// para pegar uma pequena descrição do equipamento
 	public String getDescription()
 	{
 		return description;
 	}
 	
+	// Para se ativar no mapa o efeito do equipamento
 	public abstract void activate(IMapAccess map);
 
+	// Para se desenhar na tela (ele se chama sozinho)
+	public abstract void draw (Batch batch, float parentAlpha);
+	
+	// Para se atualizar na lógica do jogo
+	public abstract void act (float delta);
+	
+	// Métodos relacionados ao foco de luz (alguns equipments terão eles sobrescritos, outros não - usam esses da classe mãe mesmo -)
+	// Se há ou não luz funcionando (just a test)
 	@Override
 	public boolean hasLights()
 	{
 		return false;
 	}
-
+	// Criação da luz (nunguém chama de fora, ele é um dos métodos que caracterizam o objeto)
 	@Override
 	public void createLights()
 	{
 	}
-
+	// Espécie de free na luz criada
 	@Override
 	public void disposeLights()
 	{
