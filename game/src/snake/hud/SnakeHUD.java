@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import snake.engine.HUD;
+import snake.engine.models.HUD;
 
 /**                               Developed By:
  *                                   NoDark
@@ -22,7 +22,7 @@ public class SnakeHUD extends HUD {
 	SnakeDialogHUD dialog;
 	BitmapFont font;
 	
-	public SnakeHUD (String type, String levelData) {
+	public SnakeHUD (String levelData) {
 		super();
 		
 		infos = new SnakeInfosHUD();
@@ -32,12 +32,17 @@ public class SnakeHUD extends HUD {
 	}
 	
 	
+	public void show() {
+		//TODO: Auto-generated method snub
+	}
+	
+	
 	public void draw(Batch batch, float parentAlpha) {
 		// Draw fps
 		font.setColor(Color.GREEN);
 		
 		font.getData().setScale(1f);
-		if (Gdx.input.isKeyPressed(Input.Keys.H))
+		if (Gdx.input.isKeyPressed(Input.Keys.H) || Gdx.input.isTouched())
 			font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, this.getHeight());
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
@@ -56,5 +61,26 @@ public class SnakeHUD extends HUD {
 	@Override
 	public void dispose() {
 		font.dispose();
+	}
+
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
 	}
 }

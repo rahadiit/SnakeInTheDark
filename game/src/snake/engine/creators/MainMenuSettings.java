@@ -11,4 +11,5 @@ package snake.engine.creators;
  */
 
 public class MainMenuSettings {
+	
 }

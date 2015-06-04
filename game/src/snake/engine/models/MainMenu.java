@@ -1,14 +1,14 @@
-package snake.visuals;
+package snake.engine.models;
+
+
 
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
- *                                
- * <br> Light Source in World -- still in development (Blank) </br>
+ *  <br> Convenience class for main menu creation. </br>
  * @author Mr.Strings
  * 
  */
 
-public class LightSource {
-
+public abstract class MainMenu extends HUD {
 }

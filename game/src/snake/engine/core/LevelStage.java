@@ -1,4 +1,4 @@
-package snake.engine.gameScreens;
+package snake.engine.core;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -14,25 +14,25 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 
 public class LevelStage extends Stage{
-	private SnakeLevel level;
+	private SnakeScreen level;
 	
-	public LevelStage(SnakeLevel level) {
+	public LevelStage(SnakeScreen level) {
 		super();
 		this.level = level;
 	}
 	
-	public LevelStage(SnakeLevel level, Viewport viewport) {
+	public LevelStage(SnakeScreen level, Viewport viewport) {
 		super(viewport);
 		this.level = level;
 	}
 	
-	public LevelStage(SnakeLevel level, Viewport viewport, Batch batch) {
+	public LevelStage(SnakeScreen level, Viewport viewport, Batch batch) {
 		super(viewport, batch);
 		this.level = level;
 	}
 	
 	/* ---------------- Getters --------------- */
-	public SnakeLevel getLevel() {
+	public SnakeScreen getLevel() {
 		return level;
 	}	
 }

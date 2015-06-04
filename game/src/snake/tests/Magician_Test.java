@@ -1,16 +1,13 @@
-package snake.player;
+package snake.tests;
 
-import box2dLight.ConeLight;
+import snake.engine.dataManagment.Loader;
+import snake.engine.models.GameWorld;
+import snake.visuals.enhanced.LightMapEntity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import snake.engine.creators.WorldSettings;
-import snake.engine.models.GameWorld;
-import snake.visuals.Lights;
-import snake.visuals.enhanced.LightMapEntity;
 
 
 
@@ -25,54 +22,74 @@ import snake.visuals.enhanced.LightMapEntity;
 
 public class Magician_Test extends LightMapEntity {
 	
-	private ConeLight light;
 	private Sprite sprite;
+	private Weapon weapon;
+	private FlashLight_test flashlight;
+	private String texName = "magician.png";
 	
 	
 	public Magician_Test (GameWorld world) {
 		super(world);
-		//Procedimento padrao para carregar uma imagem -- vai ser melhorado com o assetManager
-		Texture texture = new Texture(Gdx.files.internal("magician.png")); //cria textura
-		sprite = new Sprite(texture); // coloca na sprite
+
+		world.addActor(this);
+		
+		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
+		Loader.load(texName, Texture.class);
+		while (!Loader.isLoaded(texName))
+				Loader.update();
+		
+		//Cria a imagem
+		Texture texture = Loader.get(texName);
+		sprite = new Sprite(texture);
+					
 		sprite.setAlpha(1f); //Transparencia -- de 0 a 1 (0 eh invisivel)
 		
-		this.setBounds(0, WorldSettings.heightFix(0), 30, 30); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
-		//... Com o heightFix, o topo fica 100, o chao fica 0 (Highly recommended)
-		this.setOrigin(13, 16); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
+		
+		//Adiciona equipamento arma
+		weapon = new Weapon (world);
+		this.addActor(weapon);
+		weapon.setBounds(17.5f, 20, 5, 5);
+		weapon.setRotation(90);
+		
+		//adiciona equipamento lanterna_teste
+		flashlight = new FlashLight_test (world);
+		this.addActor(flashlight);
+		flashlight.setX(7.7f);
+		flashlight.setY(10);
+		
 	}
 	
 	@Override
 	public void act (float delta) { // Aqui se realizam as atualizacoes
+		super.act(delta);
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-			this.moveBy(-.3f, 0);
+			moveBy(-.3f, 0);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			this.moveBy(+.3f, 0);
+			moveBy(+.3f, 0);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			this.moveBy(0, +.3f);
+			moveBy(0, +.3f);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			this.moveBy(0, -.3f);
+			moveBy(0, -.3f);
 		}
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-			this.rotateBy(5);
+			rotateBy(5);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.V)) {
-			this.rotateBy(-5);
+			rotateBy(-5);
 		}
-		
-		light.setPosition(getOriginX() + getX(), getOriginY() + getY());
-		light.setDirection(getRotation() + 90);
 	}
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
-
+		
 		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+		super.draw(batch, parentAlpha);
 	}
 
 	@Override
@@ -82,18 +99,20 @@ public class Magician_Test extends LightMapEntity {
 
 	@Override
 	public void createLights() { //Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
-		light = new ConeLight (Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f),
-				   			   100, 50, WorldSettings.heightFix(50), 90, 30);
-	} //Se quiser destruir a luz, pode ser em qualquer lugar
+		super.createLights(); //Importante para criar as luzes/sombra dos filhos
+	}
 
 	@Override
 	public void disposeLights() {
-		light.remove(); // IF you don't remove stuff gets crazy
-		light.dispose();
+		super.disposeLights();
 	}
-	
+
 	@Override
 	public void dispose() {
-		sprite.getTexture().dispose();
+		super.dispose();
+		if (this.getParent() != null || this.getStage() != null) {
+			this.remove();
+		}
+		Loader.unload(texName);
 	}
 }

@@ -1,17 +1,5 @@
 package snake.engine.creators;
 
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import snake.engine.HUD;
-import snake.engine.gameScreens.LevelStage;
-import snake.engine.gameScreens.SnakeLevel;
-import snake.hud.SnakeHUD;
-
-
-
 /**                               Developed By:
  *                                  NoDark
  *                               sessaGlasses

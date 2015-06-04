@@ -1,18 +1,18 @@
-package snake.engine.gameScreens;
+package snake.engine.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import snake.engine.Cutscene;
-import snake.engine.GameLevel;
-import snake.engine.GameWorld;
-import snake.engine.HUD;
-import snake.engine.PauseMenu;
 import snake.engine.creators.HUDCreator;
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldCreator;
+import snake.engine.models.Cutscene;
+import snake.engine.models.GameLevel;
+import snake.engine.models.GameWorld;
+import snake.engine.models.HUD;
+import snake.engine.models.PauseMenu;
 
 /**                               Developed By:
  *                                   NoDark
@@ -21,7 +21,7 @@ import snake.engine.creators.WorldCreator;
  * @author Mr.Strings
  */
 
-public class SnakeLevel implements GameLevel {
+public class SnakeScreen implements GameLevel {
 
 	public enum State {ACTIVE, NOINPUT, CUTSCENE, PAUSED}
 	public enum Strategy {UPDATEFOCUS, DRAWFOCUS, NOFOCUS}
@@ -30,7 +30,7 @@ public class SnakeLevel implements GameLevel {
 	private static int MAX_FRAMES_SKIPPED = 5, MAX_LOGIC_SKIPPED =  5;
 	
 	private InputMultiplexer input;
-	private LevelStage stageWorld, stageHUD; //Is used as a Subscriber, controls update, render, input polling (if applicable) and viewports 
+	private LevelStage stageWorld, stageHUD; //Is used as a Subscriber, controls update, render, input polling (if applicable) and viewports
 	private GameWorld world; //the world in which is the game
 	private HUD hud; //Game HUD -- info display and such
 	private Cutscene cutscene;
@@ -39,8 +39,9 @@ public class SnakeLevel implements GameLevel {
 	private Strategy strategy = Strategy.UPDATEFOCUS;
 	private int framesSkipped = 0, logicSkipped = 0;
 
-	public SnakeLevel(String levelType, String levelDataID) {
-
+	
+	/** Creates level with the types provided by the Creator Classes. */
+	public SnakeScreen(String levelType, String levelDataID) {
 		// Creates GameWorld
 		world = WorldCreator.createWorld(levelType, levelDataID);
 		// Creates HUD
@@ -62,15 +63,73 @@ public class SnakeLevel implements GameLevel {
 		input.addProcessor(stageHUD);
 		 
 		Gdx.input.setInputProcessor(input);
+		
 	}
 	
 	
-	/** is triggered when the Screen is set */
+	/** Creates Level with custom World and HUD */
+	public SnakeScreen(GameWorld world, HUD hud, String levelDataID) {
+
+		// Creates GameWorld
+		this.world = world;
+		// Creates HUD
+		this.hud = hud;
+
+		// Creates a stage (world organizer)
+		stageWorld = WorldCreator.createWorldStage(ScreenCreator.getBatch(), this, world);
+		// Creates a stage (UI organizer)
+		stageHUD = HUDCreator.createHUDStage(ScreenCreator.getBatch(), this, hud);
+
+		// Adds world and HUD to the stages
+		stageWorld.addActor(world);
+		stageHUD.addActor(hud);
+		
+		
+		// Let stages listen to input events
+		input = new InputMultiplexer();
+		input.addProcessor(stageWorld);
+		input.addProcessor(stageHUD);
+		 
+		Gdx.input.setInputProcessor(input);
+		
+	}
+	
+	/** Sets Level with custom world, HUD and Stages. */
+	public SnakeScreen(GameWorld world, HUD hud, LevelStage stageWorld, LevelStage stageHUD, String levelDataID) {
+
+		// Creates GameWorld
+		this.world = world;
+		// Creates HUD
+		this.hud = hud;
+
+		// Sets the stage (world organizer)
+		this.stageWorld = stageWorld;
+		// sets the stage (UI organizer)
+		this.stageHUD = stageHUD;
+
+		// Adds world and HUD to the stages
+		stageWorld.addActor(world);
+		stageHUD.addActor(hud);
+		
+		
+		// Let stages listen to input events
+		input = new InputMultiplexer();
+		input.addProcessor(stageWorld);
+		input.addProcessor(stageHUD);
+		 
+		Gdx.input.setInputProcessor(input);
+	}
+	
+	
+	/** is triggered when the Screen is set. */
 	@Override
-	public void show() {}
+	public void show() {
+		world.show();
+		hud.show();
+	}
 
 	
-	/** Controls game logic -- keeps looping, updating and drawing as the game goes */
+	/** Controls game logic -- keeps looping, updating and drawing as the game goes. */
 	@Override
 	public void render(float delta) {
 		
@@ -98,6 +157,9 @@ public class SnakeLevel implements GameLevel {
 			default:
 				break;
 		}
+		
+		if (ScreenCreator.updateRequested())
+			ScreenCreator.updateScreens();
 	}
 	
 	
@@ -157,23 +219,26 @@ public class SnakeLevel implements GameLevel {
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-
+		world.pause();
+		hud.pause();
 	}
 
+	/** Is triggered when the screen goes out of paused state, usually when it regain focus on Android. */
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-
+		world.resume();
+		hud.resume();
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
+		world.hide();
+		hud.hide();
 	}
 
 	
-	/** Prevents memory leak -- must be called when the screen will not be used anymore */
+	/** Prevents memory leak, disposing the Screen when it won't be used anymore 
+	 * -- is done automatically by the ScreenCreator if used. */
 	@Override
 	public void dispose() {
 		stageWorld.dispose();
@@ -192,7 +257,6 @@ public class SnakeLevel implements GameLevel {
 					Gdx.graphics.getDesktopDisplayMode().height,
 					!Gdx.graphics.isFullscreen());
 		}
-		
 	}
 	
 	
@@ -211,6 +275,12 @@ public class SnakeLevel implements GameLevel {
 	/** Gets Stage for World */
 	public Stage getWorldStage() {return stageWorld;}
 	
+	/** Gets Screen's current cutscene. To use it, must set Game State to CUTSCENE. */
+	public Cutscene getCutscene() {return cutscene;};
+	
+	/** Gets pause menu. To use it, must set Game State to PAUSED. */
+	public PauseMenu getPauseMenu() {return pauseMenu;}
+	
 	
 	/* ------------------------------ Setters ------------------------------ */
 	
@@ -219,4 +289,10 @@ public class SnakeLevel implements GameLevel {
 	
 	/** Sets rendering strategy -- prioritize update or drawing or none */
 	public void setStrategy (Strategy strategy) {this.strategy = strategy;}
+	
+	/** Sets Screen's current cutscene. To use it, must set Game State to CUTSCENE. */
+	public void setCutscene(Cutscene cutscene) {this.cutscene = cutscene;}
+	
+	/** Sets pause menu. To use it, must set Game State to CUTSCENE. */
+	public void setPauseMenu (PauseMenu pauseMenu) {this.pauseMenu = pauseMenu;}
 }

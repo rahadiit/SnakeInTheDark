@@ -12,8 +12,8 @@ import snake.equipment.implementations.FlashlightEquipment;
 
 public class FlashlightEquipmentCreator implements IEquipmentCreator
 {
-	public IEquipment create()
+	public IEquipment create(int x, int y)
 	{
-		return new FlashlightEquipment();
+		return new FlashlightEquipment(x, y);
 	}
 }

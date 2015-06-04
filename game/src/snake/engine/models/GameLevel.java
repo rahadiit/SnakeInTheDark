@@ -1,4 +1,4 @@
-package snake.engine;
+package snake.engine.models;
 
 import com.badlogic.gdx.Screen;
 

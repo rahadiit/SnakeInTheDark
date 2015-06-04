@@ -1,7 +1,7 @@
-package snake.engine.core;
+package snake.start;
 
-import snake.engine.GameStart;
 import snake.engine.creators.ScreenCreator;
+import snake.engine.models.GameStart;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**                               Developed By:
@@ -16,8 +16,15 @@ public class SnakeStart extends GameStart {
 	public void create () {
 		super.batch = new SpriteBatch();
 		ScreenCreator.setGameInstance(this);
-		String[] param = {"MainMenu"};
-		ScreenCreator.goToScreen(param);
+		String[] param = {"SnakeScreen", "SnakeHub", "levelDataID"}; 
+		
+		try {
+			ScreenCreator.addAndGo(param);
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		
+		ScreenCreator.updateScreens();
 	}
 
 	@Override

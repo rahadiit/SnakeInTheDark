@@ -1,15 +1,17 @@
 package snake.map.types;
 
+import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
+import snake.engine.dataManagment.Loader;
 import snake.visuals.Lights;
 import snake.visuals.enhanced.VisualGameWorld;
 import box2dLight.Light;
 import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Batch;	
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 
@@ -17,7 +19,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  *                                   NoDark
  *                                sessaGlasses
  *                                
- * Map for testing purposes only.
+ * <br> Map for testing purposes only. (BAD DESIGN) </br>
  * @author Mr.Strings
  */
 
@@ -30,23 +32,39 @@ public class ForestMap_test extends VisualGameWorld {
 	private float velocity = .2f;
 	private int x = 1;
 	private boolean y = false, triggered = false;
+	private String texName = "foggy_forest_by_BrokenLens.jpeg";
+	private String entityName = "Scary_Silhouette.png";
 	
 	public ForestMap_test (String LevelData/* Add other parameters of choice*/) {
 		
-		WorldSettings.setAmbientColor(Color.BLACK);
-		
-		Texture texture = new Texture(Gdx.files.internal("foggy_forest_by_BrokenLens.jpeg"));
-		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
+		Loader.load(texName, Texture.class);
+		while (!Loader.isLoaded(texName))
+			Loader.update();
+				
+		//Cria a imagem
+		Texture texture = Loader.get(texName);
 		sprite = new Sprite(texture);
 		sprite.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
 		
-		Texture texture2 = new Texture(Gdx.files.internal("Scary_Silhouette.png"));
+		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
+		Loader.load(entityName, Texture.class);
+		while (!Loader.isLoaded(entityName))
+			Loader.update();
+						
+		//Cria a imagem
+		Texture texture2 = Loader.get(entityName);
 		entity = new Sprite(texture2);
+		
 		entity.setSize(4, 12);
 		entity.setAlpha(1f);
 		entity.setPosition(60, 15);
-		
-		
+	}
+	
+	
+	public void show () {
+		WorldSettings.setAmbientColor(Color.BLACK);
+		WorldSettings.setWorld2ScreenRatio(1);
 		
 	}
 	
@@ -54,6 +72,35 @@ public class ForestMap_test extends VisualGameWorld {
 	
 	@Override
 	public void act(float delta) {
+		
+		
+		//Adds new screen on top of this one
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+			String[] param = {"SnakeScreen", "TempleMap", "Some random Data"};
+			try {
+				ScreenCreator.addAndGo(param);
+			}  catch (Exception e) {
+				e.printStackTrace(System.out);
+			}
+		}
+		
+		//Back to previous screen
+		if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
+			try {
+				ScreenCreator.backToPrevious();
+			} catch (Exception e) { //OR... Creates new SnakeHub Screen
+				String[] param = {"SnakeLevel", "MainMenu", "LevelDataID"};
+				try {
+					ScreenCreator.switchAndGo(param);
+				} catch (Exception excp) {
+					e.printStackTrace(System.out);
+				}
+			}
+		}
+		
+		
+		
+		//Do level stuff
 		if (light.getX() >= 100) {
 			velocity *=-1;
 			y = false;
@@ -79,17 +126,56 @@ public class ForestMap_test extends VisualGameWorld {
 		}
 		
 		
+		//Camera Movement
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+			getStage().getCameraMan().moveCamera(-20f * delta, 0);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+			getStage().getCameraMan().moveCamera(20f * delta, 0);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+			getStage().getCameraMan().moveCamera( 0, -20f * delta);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.UP))
+			getStage().getCameraMan().moveCamera(0, 20f * delta);
+			
+		//Camera Zoom
+		if (Gdx.input.isKeyPressed(Input.Keys.O))
+			getStage().getCameraMan().zoomCamera(-.5f * delta);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.P))
+			getStage().getCameraMan().zoomCamera(.5f * delta);
+		
+		
+		//Virtual Camera Movement
+		if (Gdx.input.isKeyPressed(Input.Keys.L))
+			getStage().getCameraMan().moveVCamera(.01f, 0);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.J))
+			getStage().getCameraMan().moveVCamera(-.01f, 0);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.I))
+			getStage().getCameraMan().moveVCamera(0, .01f);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.K))
+			getStage().getCameraMan().moveVCamera(0, -.01f);
+			
+		//Virtual Camera Zoom
+		if (Gdx.input.isKeyPressed(Input.Keys.U))
+			getStage().getCameraMan().zoomVCamera(.01f);
+			
+		if (Gdx.input.isKeyPressed(Input.Keys.Y))
+			getStage().getCameraMan().zoomVCamera(-.01f);
 	}
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) {
-		super.draw(batch, parentAlpha);
 		sprite.draw(batch);
-		
 		if (y)
 			entity.draw(batch);
+		super.drawChildren(batch, parentAlpha);
 	}
-	
+
 
 	public void createLights() {
 		light = new PointLight (Lights.getRayhandler(), 5000, new Color(1f, 0f, .5f, 1f), 40, 50, WorldSettings.heightFix(50));
@@ -98,9 +184,30 @@ public class ForestMap_test extends VisualGameWorld {
 	
 	@Override
 	public void dispose() {
-		sprite.getTexture().dispose();
-		light.dispose();
-		entity.getTexture().dispose();
+		Loader.unload(texName);
+		Loader.unload(entityName);
+		super.dispose();
+	}
+
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -73,7 +73,7 @@ public class CameraMan {
 		keepInBounds();
 
 		WorldSettings.setCameraPosition(camera.position.x, camera.position.y);
-		
+		camera.update();
 	}
 	
 	
@@ -85,7 +85,16 @@ public class CameraMan {
 		camera.zoom = MathUtils.clamp(camera.zoom, WorldSettings.getMaxZoom(), WorldSettings.getMinZoom());
 		WorldSettings.setWorld2ScreenRatio(1/camera.zoom);
 		keepInBounds();
-		
+		camera.update();
+	}
+	
+	
+	/** Sets camera in default zoom */
+	public void doDefaultZoom() {
+		camera.zoom = MathUtils.clamp(1, WorldSettings.getMaxZoom(), WorldSettings.getMinZoom());
+		WorldSettings.setWorld2ScreenRatio(1);
+		keepInBounds();
+		camera.update();
 	}
 	
 	/** Keeps Camera in World Bounds. Adapted from link below
@@ -133,6 +142,7 @@ public class CameraMan {
 	
 	/** Sets lights to be updated and rendered accordingly */
 	public void setLights() {
+		Lights.setWorld(physicsWorld);
 		Lights.setRayhandler(rayHandler);
 		rayHandler.setAmbientLight(WorldSettings.getAmbientColor());
 		rayHandler.setBlurNum(3);
@@ -150,5 +160,10 @@ public class CameraMan {
 			System.out.println("Error: RayHandler wasnt created.");
 	
 		rayHandler.updateAndRender();
+	}
+	
+	/** Get CameraMan's camera */
+	public OrthographicCamera getCamera() {
+		return camera;
 	}
 }

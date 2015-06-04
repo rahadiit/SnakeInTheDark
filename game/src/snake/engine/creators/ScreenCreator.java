@@ -1,11 +1,12 @@
 package snake.engine.creators;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
-import snake.engine.GameStart;
-import snake.engine.gameScreens.SnakeHub;
-import snake.engine.gameScreens.SnakeLevel;
+import snake.engine.core.LevelStage;
+import snake.engine.core.SnakeScreen;
+import snake.engine.models.GameStart;
+import snake.engine.models.GameWorld;
+import snake.engine.models.HUD;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -15,63 +16,251 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  *                                   NoDark
  *                                sessaGlasses
  *  
- *  <br> TODO: SET PROPER USE OF SCREEN STACK </br>
+ *  <br> TODO: Secure Screeen changes </br>
  *  
  *  
  *  <br> Create Screen as specified. </br>
- *  <br> has an array of all active Screens (NOT YET DONE) </br>
+ *  <br> has a stack (deque) of all active Screens </br>
  * @Author Mr.Strings
  */
 public abstract class ScreenCreator {
 	private static GameStart game;
-	private static Deque <ArrayList<Screen>> screenStack = new ArrayDeque<>();
+	private static Deque <Screen> screenStack = new ArrayDeque<>();
+	private static Deque <Screen> removedStack = new ArrayDeque<>();
+	private static boolean updateRequested = false;
 	
-	
+	/** Creates new String, but doesn't set it as current.
+	 * @param Settings[] -- array of settings for desired screen. 
+	 */
 	public static Screen createScreen(String settings[]) {
 		Screen screen;
-		
-		switch (settings[0].toLowerCase()) {
-			case "snakehub":
-			case "snake hub":
-			case "mainmenu":
-			case "main menu":
-				screen = new SnakeHub();
-				break;
-			case "snakelevel":
-			case "snake level":
-				try {
-					screen = new SnakeLevel(settings[1], settings[2]);
-				} catch (ArrayIndexOutOfBoundsException e) {
-					System.out.println ("Not enough parameters to create Screen");
+		try {
+			switch (settings[0].toLowerCase()) {
+				case "snakelevel":
+				case "snake level":
+				case "snakescreen":
+				case "snake screen":
+					screen = new SnakeScreen(settings[1], settings[2]);
+					break;
+				default:
+					System.out.println("Screen type not found.");
 					return null;
-				}
-				break;
-			default:
-				System.out.println("Screen type not found.");
-				return null;
 		}
-		
-		//screenStack.getFirst().add(screen);
-		
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println ("Not enough parameters to create requested Screen.");
+			return null;
+		}
+
 		return screen;
 	}
 	
-	public static void goToScreen (String settings[]) {
-		game.setScreen(createScreen(settings));
+	
+	/** Creates new SnakeScreen, but doesn't set it as current.
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param levelDataID -- String of info to start level 
+	 */
+	public static Screen createScreen(GameWorld world, HUD hud, String levelDataID) {
+		return new SnakeScreen (world, hud, levelDataID);
 	}
 	
 	
+	/** Creates new SnakeScreen, but doesn't set it as current.
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param stageWorld -- stage to World
+	 * @param stageHUD -- stage to HUD
+	 * @param levelDataID -- String of info to start level 
+	 */
+	public static Screen createScreen(GameWorld world, HUD hud, LevelStage stageWorld,
+									  LevelStage stageHUD, String levelDataID) {
+		return new SnakeScreen (world, hud, stageWorld, stageHUD, levelDataID);
+	}
+	
+	/** Creates Screen and adds it to stack.
+	 * 
+	 * @param settings[] -- settings used to create Screen
+	 * @throws Exception */
+	public static void addAndGo (String settings[]) throws Exception {
+		
+		try {
+			Screen screen = createScreen(settings);
+		
+			screenStack.push(screen);
+			
+			updateRequested = true;
+			
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
+	
+	
+	
+	
+	
+	/** Creates Screen and adds it to stack.
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param levelDataID -- String of info to start level 
+	 * @throws Exception */
+	public static void addAndGo (GameWorld world, HUD hud, String levelDataID) throws Exception {
+		
+		try {
+			Screen screen = createScreen(world, hud, levelDataID);
+		
+			screenStack.push(screen);
+			
+			updateRequested = true;
+			
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
+	
+	/** Creates Screen and adds it to stack.
+	 * 
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param stageWorld -- stage to World
+	 * @param stageHUD -- stage to HUD
+	 * @param levelDataID -- String of info to start level 
+	 * @throws Exception */
+	public static void addAndGo (GameWorld world, HUD hud, LevelStage stageWorld,
+			  LevelStage stageHUD, String levelDataID) throws Exception {
+		
+		try {
+			Screen screen = createScreen(world, hud, stageWorld, stageHUD, levelDataID);
+		
+			screenStack.push(screen);
+			
+			updateRequested = true;
+			
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
+	
+	/** Removes Current Screen from Stack (if there is one) and adds created Screen
+	 * with sent settings.
+	 *  
+	 * @param settings
+	 * @throws Exception 
+	 */
+	public static void switchAndGo (String settings[]) throws Exception {
+		try {
+			
+			if (screenStack.isEmpty() == false) {
+				Screen removed = screenStack.pop();
+				removedStack.push(removed);
+			}
+		
+			Screen screen = createScreen(settings);
+			screenStack.push(screen);
+			updateRequested = true;
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
+
+	
+	/** Removes Current Screen from Stack (if there is one) and adds created Screen
+	 * with sent settings.
+	 *  
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param levelDataID -- String of info to start level 
+	 * @throws Exception 
+	 */
+	public static void switchAndGo (GameWorld world, HUD hud, String levelDataID) throws Exception {
+		try {
+			
+			if (screenStack.isEmpty() == false) {
+				Screen removed = screenStack.pop();
+				removedStack.push(removed);
+			}
+		
+			Screen screen = createScreen(world, hud, levelDataID);
+			screenStack.push(screen);
+			updateRequested = true;
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
+	
+	/** Removes Current Screen from Stack (if there is one) and adds created Screen
+	 * with sent settings.
+	 *	
+	 * @param world -- GameWorld of Screen.
+	 * @param hud -- HUD of Screen.
+	 * @param stageWorld -- stage to World
+	 * @param stageHUD -- stage to HUD
+	 * @param levelDataID -- String of info to start level 
+	 */
+	public static void switchAndGo (GameWorld world, HUD hud, LevelStage stageWorld,
+			  LevelStage stageHUD, String levelDataID) throws Exception {
+		try {
+			
+			if (screenStack.isEmpty() == false) {
+				Screen removed = screenStack.pop();
+				removedStack.push(removed);
+			}
+		
+			Screen screen = createScreen(world, hud, stageWorld, stageHUD, levelDataID);
+			screenStack.push(screen);
+			updateRequested = true;
+			
+		}catch (IllegalStateException e) {
+			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+		}
+	}
+	
+	
+	/** Pops and disposes current screen from stack.
+	 * @throws Exception -- if there is no screen left in stack 
+	 * */
+	public static void backToPrevious() throws Exception {
+		Screen removed = screenStack.pop();
+		removedStack.push(removed);
+		if (screenStack.isEmpty() == true)
+			throw new Exception ("This is the first Screen.");
+		else
+			updateRequested = true;
+	}
+	
+	public static boolean updateRequested() {
+		return updateRequested;
+	}
+	
+	public static void updateScreens () {
+		if (screenStack.isEmpty() == false) {
+			updateRequested = false;
+			
+			while (removedStack.isEmpty() == false) {
+				Screen removed = removedStack.pop();
+				removed.dispose();
+			}
+			game.setScreen(screenStack.getFirst());
+		}
+	}
+	
+	/** Sets Game instance -- can only be done once */
 	public static void setGameInstance(GameStart theGame) {
 		if (game == null)
 			game = theGame;
 		else
 			System.out.println("Cannot change game instance.");
 	}
+
 	
-	public static GameStart getGameInstance() {
-		return game;
-	}
-	
+	/** Gets game batch -- doesn't prevent creation of another batch, but this isn't 
+	 *  really recommended.
+	 */
 	public static SpriteBatch getBatch() {
 		if (game != null && game.getBatch() instanceof SpriteBatch)
 			return (SpriteBatch) game.getBatch();

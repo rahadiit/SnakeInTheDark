@@ -9,7 +9,7 @@ import org.robovm.apple.foundation.NSAutoreleasePool;
  */
 
 import org.robovm.apple.uikit.UIApplication;
-import snake.engine.core.SnakeStart;
+import snake.start.SnakeStart;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
 

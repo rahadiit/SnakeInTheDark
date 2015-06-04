@@ -1,10 +1,12 @@
 package snake.engine.creators;
 
-import snake.engine.GameWorld;
-import snake.engine.gameScreens.LevelStage;
-import snake.engine.gameScreens.SnakeLevel;
+import snake.engine.core.LevelStage;
+import snake.engine.core.SnakeScreen;
+import snake.engine.models.BlankWorld;
+import snake.engine.models.GameWorld;
 import snake.map.types.ForestMap_test;
 import snake.map.types.TempleMap_test;
+import snake.visuals.enhanced.VisualBlankWorld;
 import snake.visuals.enhanced.VisualWorldStage;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -28,33 +30,53 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 public abstract class WorldCreator {
 
-	/** Set the WorldType of the return line to create a custom World class in game (Changeable)
+	/** 
+	 * Creates World as specified. Can be customized as desired.
 	 * 
-	 * @author Mr.Strings (Modifiable according to need)
-	 * 
-	 * @param levelData
-	 * @return GameWorld
-	 */
+	 * @author Mr.Strings
+	 * @param type of World (String)
+	 * @param levelDataID (String)
+	 * @return created GameWorld, or null if world specified wasn't found.
+	 * */
 	public static GameWorld createWorld (String type, String levelDataID) { 
+		GameWorld world;
 		
+		// Set the WorldType of the return to create a custom World class in game
 		switch (type.toLowerCase()) {
 			case "forestmap":
 			case "forest map":
-				return new ForestMap_test(levelDataID);
+				world =  new ForestMap_test(levelDataID);
+				break;
 			case "templemap":
 			case "temple map":
-				return new TempleMap_test(levelDataID);	
+				world = new TempleMap_test(levelDataID);	
+				break;
 				
-			// Set the WorldType of the return to create a custom World class in game
+			case "snakehub":
+			case "snake hub":
+			case "mainmenu":
+			case "main menu":
+				world = new VisualBlankWorld();
+				break;
+				
+			//Blank Worlds
+			case "visualblank":
+			case "visual blank":	
+				world = new VisualBlankWorld();
+				break;
+			case "blank":
+				world = new BlankWorld();
+				
 			default:
 				System.out.println("Map type " + type + " not found");
 				return null;
 		}
 		
+		return world;
 		
 	}
 	
-	/** Creates Scene2d Stage.
+	/** Creates Stage for GameWorld as specified in method getPrefferedStage(). Can be customized as desired.
 	 * 
 	 * @author Mr.Strings (Modifiable according to need)
 	 * 
@@ -63,12 +85,23 @@ public abstract class WorldCreator {
 	 * @param world - World to be Staged
 	 * @return Stage - Stage created
 	 */
-	public static LevelStage createWorldStage (Batch batch, SnakeLevel level, GameWorld world) {
+	public static LevelStage createWorldStage (Batch batch, SnakeScreen level, GameWorld world) {
 		LevelStage stage;
 		
 		 //change StageType here
-		stage = new VisualWorldStage(level, createWorldViewport(world), batch);
-		
+		switch  (world.getPrefferedStage().toLowerCase()) {
+			case "worldstage":
+			case "world stage":
+				stage = new LevelStage(level, createWorldViewport(world), batch);
+				break;
+			case "visualworldstage":	
+			case "visual world stage":
+				stage = new VisualWorldStage(level, createWorldViewport(world), batch);
+				break;
+			default:
+				System.out.println ("Stage not found. Please check getPreferredStage() method in world");
+				return null;
+		}
 		
 		float width = stage.getViewport().getCamera().viewportWidth;
 		float height = stage.getViewport().getCamera().viewportHeight;
@@ -78,7 +111,7 @@ public abstract class WorldCreator {
 		
 		return  stage;
 	}
-	
+
 	/** Creates Viewport for GameWorld to fit
 	 * 
 	 * @param world
