@@ -15,6 +15,7 @@ import snake.visuals.enhanced.LightMapEntity;
 
 public class Bullet extends LightMapEntity {
 	private Vector2 velocity;
+	private float angularVelocity = 0;
 	private Sprite sprite;
 	private String texName = "blueOrb.png";
 	private Light light;
@@ -32,6 +33,7 @@ public class Bullet extends LightMapEntity {
 		sprite = new Sprite(texture);
 		
 		this.setSize(5, 5);
+		//this.setOrigin(2.5f, 2.5f);
 
 		velocity = new Vector2(0,0);
 		
@@ -40,7 +42,8 @@ public class Bullet extends LightMapEntity {
 	
 	@Override
 	public void act(float delta) {
-		this.moveBy(velocity.x, velocity.y);
+		this.moveBy(delta*velocity.x, delta * velocity.y);
+		this.rotateBy(delta * angularVelocity);
 		
 		vec = this.localToStageCoordinates(new Vector2(this.getWidth()/2, this.getHeight()/2));
 		light.setPosition(vec.x, vec.y);
