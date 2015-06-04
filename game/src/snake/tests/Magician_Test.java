@@ -54,8 +54,7 @@ public class Magician_Test extends LightMapEntity {
 		//adiciona equipamento lanterna_teste
 		flashlight = new FlashLight_test (world);
 		this.addActor(flashlight);
-		flashlight.setX(7.7f);
-		flashlight.setY(10);
+		flashlight.setPosition(15f, 20);
 		
 	}
 	

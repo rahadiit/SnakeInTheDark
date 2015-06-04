@@ -29,7 +29,7 @@ public class FlashLight_test extends LightMapEntity {
 	
 	@Override
 	public void act(float delta) {
-		vec.set(getX(), getY());
+		vec.set(0, 0);
 		this.localToStageCoordinates(vec); 
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)) {
