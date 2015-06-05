@@ -48,7 +48,8 @@ public class EmpEquipment extends AbstractEquipment
 //
 //		for(i; i < a; i++)
 //			for (j; j < b; j++)
-//				if ()
+//				if (map.getCell(i, j) == "drone")
+//					map.destroyDrone(i, j);
 //					
 //				
 	}

@@ -24,7 +24,7 @@ public class GunEquipment extends AbstractEquipment
 	public void activate(IMapAccess map) 
 	{
 		//if (ammo > 0)
-			
+		//	map.destroyDrone(map.getX(), map.getY());
 	}
 
 	@Override

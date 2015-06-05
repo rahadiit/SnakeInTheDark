@@ -20,7 +20,7 @@ public class BoxEquipment extends AbstractEquipment
 	
 	public void activate(IMapAccess map) 
 	{					
-		//map.Status("box")
+		//map.Status(box)
 	}
 
 	@Override
