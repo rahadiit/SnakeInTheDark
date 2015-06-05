@@ -10,10 +10,11 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import snake.engine.dataManagment.Loader;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MapManager {
+public class MapManager implements IMapAccess {
 
     private static final AssetManager assetManager;
 
@@ -33,6 +34,21 @@ public class MapManager {
 
     public MapManager() {
         entities = new LinkedList<>();
+    }
+
+    private List<MapEntity> immutableList = Collections.unmodifiableList(entities);
+    @Override
+    public List<MapEntity> getEntities() {
+        return immutableList;
+    }
+
+    @Override
+    public void addEntity(MapEntity entity) {
+        entities.add(entity);
+    }
+
+    public void clearEntities() {
+        entities.clear();
     }
 
     public void tickEntities(float delta) {

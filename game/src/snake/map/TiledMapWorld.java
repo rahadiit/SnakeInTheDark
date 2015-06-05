@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapRenderer;
 import snake.engine.creators.WorldSettings;
+import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;
 
 public class TiledMapWorld extends VisualGameWorld {
@@ -16,6 +17,10 @@ public class TiledMapWorld extends VisualGameWorld {
         manager = new MapManager();
         manager.loadMap(mapName);
         renderer = manager.createRenderer();
+    }
+
+    public IMapAccess getMapAccess() {
+        return manager;
     }
 
     @Override
@@ -62,9 +67,17 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void dispose() {
+        for (MapEntity entity : manager.getEntities()) {
+            entity.dispose();
+            if (entity instanceof LightMapEntity)
+                ((LightMapEntity) entity).disposeLights();
+        }
     }
 
     @Override
     public void createLights() {
+        for (MapEntity entity : manager.getEntities())
+            if (entity instanceof LightMapEntity)
+                ((LightMapEntity) entity).createLights();
     }
 }
