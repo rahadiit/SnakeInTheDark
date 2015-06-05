@@ -33,7 +33,7 @@ public class FlashlightEquipment extends AbstractEquipment
 	public FlashlightEquipment(float x, float y)
 	{
 		this.name = "Flashlight";
-		this.description = "The Flashlight lights in front of you, but use with caution, it doesn't last long. To alight it, press K button.";
+		this.description = "The Flashlight lights in front of you, but use with caution, it doesn't last long. To turn it on, press K button.";
 		
 		this.setBounds(x, y, 5, 5); // tamanho defaut
 		vec = new Vector2();
@@ -43,7 +43,7 @@ public class FlashlightEquipment extends AbstractEquipment
 	public FlashlightEquipment()
 	{
 		this.name = "Flashlight";
-		this.description = "The Flashlight lights in front of you, but use with caution, it doesnt last long";
+		this.description = "The Flashlight lights in front of you, but use with caution, it doesnt last long. To turn it on, press K button.";
 		
 		this.setBounds(20, 20, 5, 5); // ver o setPosition do player!!!!!!!!
 	}
