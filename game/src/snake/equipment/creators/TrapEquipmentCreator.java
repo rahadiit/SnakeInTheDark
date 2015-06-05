@@ -12,7 +12,7 @@ import snake.equipment.implementations.TrapEquipment;
 
 public class TrapEquipmentCreator implements IEquipmentCreator
 {
-	public IEquipment create(float x, float y)
+	public IEquipment create(float x, float y, boolean onMap)
 	{
 		return new TrapEquipment();
 	}

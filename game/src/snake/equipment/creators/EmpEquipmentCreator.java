@@ -12,7 +12,7 @@ import snake.equipment.implementations.EmpEquipment;
 
 public class EmpEquipmentCreator implements IEquipmentCreator
 {
-	public IEquipment create(float x, float y)
+	public IEquipment create(float x, float y, boolean onMap)
 	{
 		return new EmpEquipment();
 	}

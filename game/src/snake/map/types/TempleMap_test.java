@@ -59,7 +59,7 @@ public class TempleMap_test extends VisualGameWorld {
 		box.setPosition(38, WorldSettings.heightFix(53));
 		
 		// VC PASSA A POSIÇÃO INICIAL DO EQUIPAMENTO, TEM A VERSÃO DO CONSTRUTOR SEM ISSO TBM!
-		IEquipment flashlight = EquipmentCreator.createFactory("flashlight").create(20, 20); //Equipment
+		IEquipment flashlight = EquipmentCreator.createFactory("flashlight").create(20, 20, true); //Equipment
 		this.addActor((Group)flashlight); //Added to group // added to this map
 		
 		createLights();

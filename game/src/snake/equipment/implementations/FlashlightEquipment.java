@@ -28,24 +28,27 @@ public class FlashlightEquipment extends AbstractEquipment
 	ConeLight light;
 	Vector2 vec;
 	int cont;
+	boolean onMap;
 
 	// Construtor com parametros de posicao de inicio
-	public FlashlightEquipment(float x, float y)
+	public FlashlightEquipment(float x, float y, boolean onMap)
 	{
 		this.name = "Flashlight";
 		this.description = "The Flashlight lights in front of you, but use with caution, it doesn't last long. To turn it on, press K button.";
 		
 		this.setBounds(x, y, 5, 5); // tamanho defaut
 		vec = new Vector2();
+		this.onMap = onMap;
 	}
 	
 	// Construtor sem par�metros
-	public FlashlightEquipment()
+	public FlashlightEquipment(boolean onMap)
 	{
 		this.name = "Flashlight";
 		this.description = "The Flashlight lights in front of you, but use with caution, it doesnt last long. To turn it on, press K button.";
 		
 		this.setBounds(20, 20, 5, 5); // ver o setPosition do player!!!!!!!!
+		this.onMap = onMap;
 	}
 	
 	// Ativacao de seu efeito no mapa
@@ -57,8 +60,9 @@ public class FlashlightEquipment extends AbstractEquipment
 	// Desenho do equipamento no jogo, SE ADICIONADO EM ALGUM LUGAR QUE PECA SEU SPRITE (EXEMPLO: MAPA TEMPLE)
 	public void draw (Batch batch, float parentAlpha)
 	{
-		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), 
-				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+		// se estiver no mapa eh que usa a sprite
+		if(onMap)
+			batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 	
 	// Atualizacao grafica no jogo

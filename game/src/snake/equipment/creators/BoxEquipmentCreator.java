@@ -12,7 +12,7 @@ import snake.equipment.implementations.BoxEquipment;
 
 public class BoxEquipmentCreator implements IEquipmentCreator
 {
-	public IEquipment create(float x, float y)
+	public IEquipment create(float x, float y, boolean onMap)
 	{
 		return new BoxEquipment();
 	}
