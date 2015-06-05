@@ -3,32 +3,25 @@ package snake.map;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.maps.Map;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.maps.MapRenderer;
 import snake.engine.creators.WorldSettings;
 import snake.visuals.enhanced.VisualGameWorld;
 
 public class TiledMapWorld extends VisualGameWorld {
 
-    private Map currentMap;
     private MapManager manager;
-    private TiledMapRenderer renderer;
+    private MapRenderer renderer;
 
     public TiledMapWorld(String mapName) {
         manager = new MapManager();
-        setMap(manager.loadMap(mapName));
-    }
-
-    public void setMap(TiledMap map) {
-        currentMap = map;
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / 32f);
+        manager.loadMap(mapName);
+        renderer = manager.createRenderer();
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+        manager.tickEntities(delta);
     }
 
     @Override
@@ -36,17 +29,21 @@ public class TiledMapWorld extends VisualGameWorld {
         super.draw(batch, parentAlpha);
         renderer.setView((OrthographicCamera) getStage().getCamera());
         renderer.render();
+
+        manager.drawEntities(batch, parentAlpha);
     }
 
     @Override
     public void show() {
         WorldSettings.setAmbientColor(Color.WHITE);
         OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
-        float wFactor = 8f / camera.viewportWidth;
-        float hFactor = 8f / camera.viewportHeight;
+        int width = manager.getMapWidth();
+        int height = manager.getMapHeight();
+        float wFactor = width / camera.viewportWidth;
+        float hFactor = height / camera.viewportHeight;
         float factor = Math.max(wFactor, hFactor);
-        camera.setToOrtho(false, 8, 8);
-        camera.position.set(4f, 4f, 0);
+        camera.setToOrtho(false, width, height);
+        camera.position.set(width * .5f, height * .5f, 0);
         camera.zoom = factor;
         camera.update();
     }
