@@ -60,7 +60,13 @@ public class FlashlightEquipment extends AbstractEquipment
 	public void act (float delta) 
 	{
 		// set do vetor de localização do foco de luz
-		vec.set(2.3f , 3.6f);
+		
+		if (onMap)
+			vec.set(2.3f, 3.6f); // ajustado a sprite PixelFlashlight.png, para ficar no lugar
+		else
+			vec.set(0, 0); // senão, centro defaut
+		
+		
 		this.localToStageCoordinates(vec);
 		
 		// lanterna ascende ou apaga ao pressionar k
