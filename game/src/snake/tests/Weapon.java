@@ -2,44 +2,77 @@ package snake.tests;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
 import snake.visuals.enhanced.LightMapEntity;
 
 public class Weapon extends LightMapEntity {
-	Sprite sprite;
-	boolean charging = false;
+	private boolean charging = false;
 	private Vector2 vec;
 	private Bullet bullet;
+	private float bulletSize, MAXSIZE = 3, MINSIZE = .2F;
 
 	
 	
 	public Weapon (GameWorld world) {
 		super(world);
-		vec = new Vector2 (0,0);
+		vec = new Vector2 ();
+		
+		this.setSize(5, 5);
+		this.setOrigin(2.5f,  2.5f);
 	}
 	
 
 	@Override
 	public void act(float delta) {
 		super.act(delta);
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && charging == false) { //Devia ser acionada pelo player
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !charging) { //Devia ser acionada pelo player
 			charging = true;
+			bullet = new Bullet (world);
+			bullet.setPosition(0, 0);
+			this.addActor(bullet);
+			
+			bulletSize = MINSIZE;
+			bullet.setScale(bulletSize);
+			bulletSize += (.5f * delta);
+		}
+		else if (charging && Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+			if (bulletSize <= MAXSIZE) {
+				bullet.setScale(bulletSize);
+				bulletSize += (2f * delta);
+			}
+		}
+
+		else if (charging && !Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+			charging = false;
+			
+			bullet.remove();
+			
+			//set position
 			vec.set(0,0);
 			this.localToStageCoordinates(vec);
-			bullet = null;
-			bullet = new Bullet (world);
 			bullet.setPosition(vec.x, vec.y);
-			bullet.setRotation(this.getParent().getRotation() + 90);
-			vec.set(0,0);
-			vec.rotate(this.getParent().getRotation() + 90);
+
+			//set velocity 
+			vec.set(0,40);
+			
+			//Must rotate vector according to world
+			float rotation = 0;
+			Actor parent = this.getParent();
+			while (parent != null) {
+				rotation += parent.getRotation();
+				parent = parent.getParent();
+			}
+			vec.rotate(rotation);
 			bullet.setVelocity(vec);
+			
+			//add to weapon
 			world.addActor(bullet);
-		}
-		else if (charging == true && !Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			charging = false;
 		}
 		
 		
