@@ -26,33 +26,24 @@ public class FlashlightEquipment extends AbstractEquipment
 	Texture texture = new Texture(Gdx.files.internal("PixelFlashlight.png"));
 	Sprite sprite = new Sprite(texture); 
 	ConeLight light;
-	Vector2 vec;
-	int cont;
+	Vector2 vec = new Vector2();
 	boolean onMap;
+	int cont;
 
 	// Construtor com parametros de posicao de inicio
 	public FlashlightEquipment(float x, float y, boolean onMap)
 	{
 		this.name = "Flashlight";
-		this.description = "The Flashlight lights in front of you, but use with caution, it doesn't last long. To turn it on, press K button.";
+		this.description = "The Flashlight lights in front of you, but use with caution, it doesn't last long. To turn it on, press T button.";
 		
-		this.setBounds(x, y, 5, 5); // tamanho defaut
-		vec = new Vector2();
+		this.setBounds(x, y, 4, 4); // tamanho defaut
+		
 		this.onMap = onMap;
 	}
 	
-	// Construtor sem parï¿½metros
-	public FlashlightEquipment(boolean onMap)
-	{
-		this.name = "Flashlight";
-		this.description = "The Flashlight lights in front of you, but use with caution, it doesnt last long. To turn it on, press K button.";
-		
-		this.setBounds(20, 20, 5, 5); // ver o setPosition do player!!!!!!!!
-		this.onMap = onMap;
-	}
 	
 	// Ativacao de seu efeito no mapa
-	public void activate(IMapAccess map) 
+	public void activateOnMap(IMapAccess map) 
 	{
 		// nao ha ativacao especifica para a lanterna
 	}
@@ -69,11 +60,11 @@ public class FlashlightEquipment extends AbstractEquipment
 	public void act (float delta) 
 	{
 		// set do vetor de localização do foco de luz
-		vec.set((float)2.8 , (float)3.7);
+		vec.set(2.3f , 3.6f);
 		this.localToStageCoordinates(vec);
 		
 		// lanterna ascende ou apaga ao pressionar k
-		if (Gdx.input.isKeyJustPressed(Input.Keys.K))
+		if (Gdx.input.isKeyJustPressed(Input.Keys.T))
 		{
 			light.setActive(!light.isActive());
 		}

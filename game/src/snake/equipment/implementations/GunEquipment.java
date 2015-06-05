@@ -21,7 +21,7 @@ public class GunEquipment extends AbstractEquipment
 
 	public int ammo;
 
-	public void activate(IMapAccess map) 
+	public void activateOnMap(IMapAccess map) 
 	{
 		//if (ammo > 0)
 			
