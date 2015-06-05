@@ -15,8 +15,8 @@ public class Weapon extends LightMapEntity {
 	private Vector2 vec;
 	private Bullet bullet;
 	private float bulletSize, MAXSIZE = 3, MINSIZE = .4f;
-	private String shootSoundName = "spark.mp3";
-	Sound shootSound;
+	private String shootSoundName = "spark.mp3", thunderSoundName = "thunder.mp3";
+	Sound shootSound, thunderSound;
 
 	
 	
@@ -28,9 +28,11 @@ public class Weapon extends LightMapEntity {
 		this.setOrigin(2.5f,  2.5f);
 		
 		Loader.load(shootSoundName, Sound.class);
-		while (!Loader.isLoaded(shootSoundName))
+		Loader.load(thunderSoundName, Sound.class);
+		while (!Loader.isLoaded(shootSoundName) || !Loader.isLoaded(thunderSoundName))
 			Loader.update();
 		shootSound = Loader.get(shootSoundName);
+		thunderSound = Loader.get(thunderSoundName);
 	}
 	
 
@@ -81,7 +83,11 @@ public class Weapon extends LightMapEntity {
 			world.addActor(bullet);
 			
 			bullet.setZIndex(1);; //make it go under the box
-			shootSound.play(.5f);
+			
+			if (bulletSize < 2f)
+				shootSound.play(.5f);
+			else
+				thunderSound.play(.5f);
 		}
 		
 		

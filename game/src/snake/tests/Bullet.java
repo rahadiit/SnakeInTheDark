@@ -57,8 +57,8 @@ public class Bullet extends LightMapEntity {
 		
 		
 		if (this.getParent() == null && 
-				vec.x < 0 || vec.x > WorldSettings.getWorldWidth()
-			|| vec.y < 0 || vec.y > WorldSettings.getWorldHeight())
+				(vec.x < 0 || vec.x > WorldSettings.getWorldWidth()
+			|| vec.y < 0 || vec.y > WorldSettings.getWorldHeight()))
 			dispose(); 
 
 	}
