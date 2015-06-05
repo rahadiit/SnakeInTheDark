@@ -12,10 +12,15 @@ import snake.map.IMapAccess;
 
 public class BoxEquipment extends AbstractEquipment
 {
+	Texture texture = new Texture(Gdx.files.internal("mysteryBox.png"));
+	Sprite sprite = new Sprite(texture); 
 	public BoxEquipment()
 	{		
 		this.name = "Box";
 		this.description = "It would't be a Spy game without a box";	
+		this.setBounds(x, y, 4, 4); // tamanho defaut
+		this.onMap = onMap;
+
 	}
 	
 	public void activateOnMap(IMapAccess map) 
@@ -40,8 +45,8 @@ public class BoxEquipment extends AbstractEquipment
 	@Override
 	public void draw(Batch batch, float parentAlpha)
 	{
-		// TODO Auto-generated method stub
-
+		if(onMap)
+			batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 
 	// THIS EQUIPMENT HAS NO LIGHTS

@@ -12,7 +12,8 @@ import snake.map.IMapAccess;
 
 public class GunEquipment extends AbstractEquipment
 {
-
+	Texture texture = new Texture(Gdx.files.internal("ammo.png"));
+	Sprite sprite = new Sprite(texture); 
 	public GunEquipment()
 	{
 		this.name = "Gun";
@@ -37,8 +38,8 @@ public class GunEquipment extends AbstractEquipment
 	@Override
 	public void draw(Batch batch, float parentAlpha)
 	{
-		// TODO Auto-generated method stub
-
+		if(onMap)
+			batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 
 	@Override

@@ -12,10 +12,14 @@ import snake.map.IMapAccess;
 
 public class EmpEquipment extends AbstractEquipment
 {
+	Texture texture = new Texture(Gdx.files.internal("emp.png"));
+	Sprite sprite = new Sprite(texture); 
 	public EmpEquipment()
 	{		
 		this.name = "EMP";
-		this.description = "The EMP destroys every drone around you";	
+		this.description = "The EMP destroys every drone around you";
+		this.setBounds(x, y, 4, 4); // tamanho defaut		
+		this.onMap = onMap;
 	}
 	
 	public void activateOnMap(IMapAccess map) 
@@ -64,8 +68,8 @@ public class EmpEquipment extends AbstractEquipment
 	@Override
 	public void draw(Batch batch, float parentAlpha)
 	{
-		// TODO Auto-generated method stub
-
+		if(onMap)
+			batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 
 	@Override
