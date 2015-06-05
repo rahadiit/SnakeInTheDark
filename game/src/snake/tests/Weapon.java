@@ -1,21 +1,18 @@
 package snake.tests;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
 import snake.visuals.enhanced.LightMapEntity;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Weapon extends LightMapEntity {
 	private boolean charging = false;
 	private Vector2 vec;
 	private Bullet bullet;
-	private float bulletSize, MAXSIZE = 3, MINSIZE = .2F;
+	private float bulletSize, MAXSIZE = 3, MINSIZE = .4f;
 
 	
 	
@@ -73,6 +70,7 @@ public class Weapon extends LightMapEntity {
 			
 			//add to weapon
 			world.addActor(bullet);
+			bullet.setZIndex(0);; //make it go under the box
 		}
 		
 		

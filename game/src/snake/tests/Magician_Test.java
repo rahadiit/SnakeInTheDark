@@ -32,6 +32,7 @@ public class Magician_Test extends LightMapEntity {
 		super(world);
 
 		world.addActor(this);
+		this.setOrigin(13, 16); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(texName, Texture.class);

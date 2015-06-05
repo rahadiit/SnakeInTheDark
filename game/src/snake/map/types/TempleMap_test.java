@@ -46,19 +46,18 @@ public class TempleMap_test extends VisualGameWorld {
 		temple = new Sprite(texture);
 		temple.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
 		
+		
 		//Cria o Player
 		magician = new Magician_Test(this); //Player
 		magician.setBounds(0, WorldSettings.heightFix(0), 30, 30); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
 		//... Com o heightFix, o topo fica 100, o chao fica 0 (Highly recommended)
-		magician.setOrigin(13, 16); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
-		
+	
 		//Cria uma caixa
 		box = new Box_Test(this); //Simple box with shadow
-		box.setBounds(38, WorldSettings.heightFix(53), 23, 23);
-		
+		box.setBounds(38, WorldSettings.heightFix(53), 23, 23);		
 		box.setPosition(38, WorldSettings.heightFix(53));
-		
-		// VC PASSA A POSIÇÃO INICIAL DO EQUIPAMENTO, TEM A VERSÃO DO CONSTRUTOR SEM ISSO TBM!
+				
+		// VC PASSA A POSIï¿½ï¿½O INICIAL DO EQUIPAMENTO, TEM A VERSï¿½O DO CONSTRUTOR SEM ISSO TBM!
 		IEquipment flashlight = EquipmentCreator.createFactory("flashlight").create(20, 20, true); //Equipment
 		this.addActor((Group)flashlight); //Added to group // added to this map
 		

@@ -53,12 +53,12 @@ public class Bullet extends LightMapEntity {
 		this.setOrigin(2.5f, 2.5f);
 		light.setPosition(vec.x, vec.y);
 		light.setDistance(1.3f * Math.max(this.getWidth(), this.getHeight()) * Math.max(this.getScaleX(), this.getScaleY()));
-		System.out.println(light.getDistance());
 		
 		
 		if (vec.x < 0 || vec.x > WorldSettings.getWorldWidth()
 			|| vec.y < 0 || vec.y > WorldSettings.getWorldHeight())
 			dispose(); 
+
 	}
 	
 	@Override
