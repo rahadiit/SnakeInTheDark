@@ -6,7 +6,7 @@ import snake.map.IMapAccess;
 
 public interface IEquipment 
 {
-	public void activate(IMapAccess map);
+	public void activateOnMap(IMapAccess map);
 	public String getDescription();
 	public String getName();
 	void draw(Batch batch, float parentAlpha);

@@ -32,6 +32,7 @@ public class Magician_Test extends LightMapEntity {
 		super(world);
 
 		world.addActor(this);
+		this.setOrigin(13, 16); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(texName, Texture.class);
@@ -48,8 +49,7 @@ public class Magician_Test extends LightMapEntity {
 		//Adiciona equipamento arma
 		weapon = new Weapon (world);
 		this.addActor(weapon);
-		weapon.setBounds(17.5f, 20, 5, 5);
-		weapon.setRotation(90);
+		weapon.setPosition(15.25f, 22.5f);
 		
 		//adiciona equipamento lanterna_teste
 		flashlight = new FlashLight_test (world);

@@ -24,7 +24,7 @@ public class TrapEquipment extends AbstractEquipment
 		this.description = "The Trap destroy a drone that pass the cell you placed it";	
 	}
 	
-	public void activate(IMapAccess map) 
+	public void activateOnMap(IMapAccess map) 
 	{
 		//map.setCell(map.getx(), map.gety(), trap);
 	}

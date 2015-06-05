@@ -31,7 +31,7 @@ public class SensorEquipment extends AbstractEquipment
 		this.description = "The Sensor reveals drones around you";
 	}
 	
-	public void activate(IMapAccess map) 
+	public void activateOnMap(IMapAccess map) 
 	{
 //		int x, y, i, j, m, n, a, b;
 //		x = map.getX();

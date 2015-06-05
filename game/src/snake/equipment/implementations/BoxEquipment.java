@@ -18,7 +18,7 @@ public class BoxEquipment extends AbstractEquipment
 		this.description = "It would't be a Spy game without a box";	
 	}
 	
-	public void activate(IMapAccess map) 
+	public void activateOnMap(IMapAccess map) 
 	{					
 		//map.Status(box)
 	}

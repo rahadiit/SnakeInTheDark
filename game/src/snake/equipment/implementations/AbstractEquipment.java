@@ -33,7 +33,7 @@ public abstract class AbstractEquipment extends LightMapEntity implements IEquip
 	}
 	
 	// Para se ativar no mapa o efeito do equipamento
-	public abstract void activate(IMapAccess map);
+	public abstract void activateOnMap(IMapAccess map);
 
 	// Para se desenhar na tela (ele se chama sozinho)
 	public abstract void draw (Batch batch, float parentAlpha);
