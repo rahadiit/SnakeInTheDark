@@ -1,9 +1,11 @@
 package snake.tests;
 
+import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
 import snake.visuals.enhanced.LightMapEntity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -13,6 +15,8 @@ public class Weapon extends LightMapEntity {
 	private Vector2 vec;
 	private Bullet bullet;
 	private float bulletSize, MAXSIZE = 3, MINSIZE = .4f;
+	private String shootSoundName = "spark.mp3";
+	Sound shootSound;
 
 	
 	
@@ -22,6 +26,11 @@ public class Weapon extends LightMapEntity {
 		
 		this.setSize(5, 5);
 		this.setOrigin(2.5f,  2.5f);
+		
+		Loader.load(shootSoundName, Sound.class);
+		while (!Loader.isLoaded(shootSoundName))
+			Loader.update();
+		shootSound = Loader.get(shootSoundName);
 	}
 	
 
@@ -70,7 +79,9 @@ public class Weapon extends LightMapEntity {
 			
 			//add to weapon
 			world.addActor(bullet);
-			bullet.setZIndex(0);; //make it go under the box
+			
+			bullet.setZIndex(1);; //make it go under the box
+			shootSound.play(.5f);
 		}
 		
 		
@@ -90,6 +101,7 @@ public class Weapon extends LightMapEntity {
 	public void dispose() {
 		if (this.getParent() != null)
 			this.remove();
+		Loader.unload(shootSoundName);
 	}
 
 }

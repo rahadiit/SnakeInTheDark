@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
@@ -19,7 +21,8 @@ public class Bullet extends LightMapEntity {
 	private Sprite sprite;
 	private String texName = "blueOrb.png";
 	private Light light;
-	Vector2 vec;
+	Vector2 vec; //To avoid instantiating 60x per second
+	private float rotation; //To avoid instantiating 60x per second
 	
 	public Bullet (GameWorld world) {
 		super(world);
@@ -27,6 +30,7 @@ public class Bullet extends LightMapEntity {
 		vec = new Vector2();
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
+		Loader.load(texName, Texture.class);
 		Loader.load(texName, Texture.class);
 		while (!Loader.isLoaded(texName))
 			Loader.update();
@@ -43,8 +47,8 @@ public class Bullet extends LightMapEntity {
 	@Override
 	public void act(float delta) {
 		this.moveBy(delta*velocity.x, delta * velocity.y);
-		this.rotateBy(delta * angularVelocity);
 		
+		this.rotateBy(delta * angularVelocity);
 		
 		//Arruma a posicao da luz (Tem que ser relativa ao Stage
 		vec.set(this.getWidth()/2 - getOriginX() , this.getHeight()/2 -getOriginY());
@@ -55,7 +59,8 @@ public class Bullet extends LightMapEntity {
 		light.setDistance(1.3f * Math.max(this.getWidth(), this.getHeight()) * Math.max(this.getScaleX(), this.getScaleY()));
 		
 		
-		if (vec.x < 0 || vec.x > WorldSettings.getWorldWidth()
+		if (this.getParent() == null && 
+				vec.x < 0 || vec.x > WorldSettings.getWorldWidth()
 			|| vec.y < 0 || vec.y > WorldSettings.getWorldHeight())
 			dispose(); 
 
@@ -109,5 +114,6 @@ public class Bullet extends LightMapEntity {
 	public void setVelocity (Vector2 velocity) {
 		this.velocity.set(velocity);
 	}
+	
 	
 }

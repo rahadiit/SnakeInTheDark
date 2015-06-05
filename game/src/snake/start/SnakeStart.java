@@ -1,6 +1,7 @@
 package snake.start;
 
 import snake.engine.creators.ScreenCreator;
+import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameStart;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -35,5 +36,6 @@ public class SnakeStart extends GameStart {
 	@Override
 	public void dispose () {
 		batch.dispose();
+		Loader.getManager().clear();
 	}
 }
