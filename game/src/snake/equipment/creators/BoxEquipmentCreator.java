@@ -2,7 +2,7 @@ package snake.equipment.creators;
 
 import snake.equipment.IEquipment;
 import snake.equipment.IEquipmentCreator;
-import snake.equipment.implementations.FlashlightEquipment;
+import snake.equipment.implementations.BoxEquipment;
 
 /**                              Developed By:
  *                                  NoDarkGlasses
@@ -12,7 +12,7 @@ import snake.equipment.implementations.FlashlightEquipment;
 
 public class BoxEquipmentCreator implements IEquipmentCreator
 {
-	public IEquipment create()
+	public IEquipment create(float x, float y)
 	{
 		return new BoxEquipment();
 	}

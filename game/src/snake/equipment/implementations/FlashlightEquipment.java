@@ -16,7 +16,7 @@ import snake.visuals.Lights;
 /**                              Developed By:
  *                                  NoDarkGlasses
  *                                  
- * Implementaï¿½ï¿½o concreta da lanterna
+ * Implementacao concreta da lanterna
  *                        
  * @author bszazulla
  */
@@ -29,13 +29,13 @@ public class FlashlightEquipment extends AbstractEquipment
 	Vector2 vec;
 	int cont;
 
-	// Construtor com parametros de posiï¿½ï¿½o de inï¿½cio
-	public FlashlightEquipment(int x, int y)
+	// Construtor com parametros de posicao de inicio
+	public FlashlightEquipment(float x, float y)
 	{
 		this.name = "Flashlight";
-		this.description = "The Flashlight lights in front of you, but use with caution, it doesnt last long";
+		this.description = "The Flashlight lights in front of you, but use with caution, it doesn't last long. To alight it, press K button.";
 		
-		this.setBounds(x, y, 5, 5); // ver o setPosition
+		this.setBounds(x, y, 5, 5); // tamanho defaut
 		vec = new Vector2();
 	}
 	
@@ -48,28 +48,29 @@ public class FlashlightEquipment extends AbstractEquipment
 		this.setBounds(20, 20, 5, 5); // ver o setPosition do player!!!!!!!!
 	}
 	
-	// Ativaï¿½ï¿½o de seu efeito no mapa
+	// Ativacao de seu efeito no mapa
 	public void activate(IMapAccess map) 
 	{
-		// implementar isso
+		// nao ha ativacao especifica para a lanterna
 	}
 
-	// Desenho do equipamento no jogo, SE ADICIONADO EM ALGUM LUGAR QUE PEï¿½A SEU DRAW (EXEMPLO: MAPA TEMPLE)
+	// Desenho do equipamento no jogo, SE ADICIONADO EM ALGUM LUGAR QUE PECA SEU SPRITE (EXEMPLO: MAPA TEMPLE)
 	public void draw (Batch batch, float parentAlpha)
 	{
 		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), 
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 	
-	// Atualizaï¿½ï¿½o grï¿½fica no jogo
+	// Atualizacao grafica no jogo
 	public void act (float delta) 
 	{
-		vec.set(0, 0);
+		// set do vetor de localização do foco de luz
+		vec.set((float)2.8 , (float)3.7);
 		this.localToStageCoordinates(vec);
-
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT))
+		
+		// lanterna ascende ou apaga ao pressionar k
+		if (Gdx.input.isKeyJustPressed(Input.Keys.K))
 		{
-			System.out.println(getX() + ":" + getY());
 			light.setActive(!light.isActive());
 		}
 
@@ -104,6 +105,6 @@ public class FlashlightEquipment extends AbstractEquipment
 	@Override
 	public void dispose() 
 	{
-		sprite.getTexture().dispose(); // if you don't dispose stuff gets crazy too
+		sprite.getTexture().dispose(); // if you don't dispose stuff gets crazy
 	}
 }

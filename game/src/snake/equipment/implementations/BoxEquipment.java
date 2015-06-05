@@ -1,5 +1,7 @@
 package snake.equipment.implementations;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+
 import snake.map.IMapAccess;
 
 /**                              Developed By:
@@ -8,7 +10,7 @@ import snake.map.IMapAccess;
  * @author 
  */
 
-public class SensorEquipment extends AbstractEquipment
+public class BoxEquipment extends AbstractEquipment
 {
 	public BoxEquipment()
 	{		
@@ -18,29 +20,29 @@ public class SensorEquipment extends AbstractEquipment
 	
 	public void activate(IMapAccess map) 
 	{					
-		map.Status("box")
+		//map.Status("box")
 	}
-}
-@Override
-public void dispose()
-{
-	// TODO Auto-generated method stub
 
-}
+	@Override
+	public void dispose()
+	{
+		// TODO Auto-generated method stub
 
-@Override
-public void draw(Batch batch, float parentAlpha)
-{
-	// TODO Auto-generated method stub
+	}
 
-}
+	@Override
+	public void act(float delta)
+	{
+		// TODO Auto-generated method stub
 
-@Override
-public void act(float delta)
-{
-	// TODO Auto-generated method stub
+	}
 
-}
+	@Override
+	public void draw(Batch batch, float parentAlpha)
+	{
+		// TODO Auto-generated method stub
 
-// THIS EQUIPMENT HAS NO LIGHTS
+	}
+
+	// THIS EQUIPMENT HAS NO LIGHTS
 }

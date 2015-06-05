@@ -1,7 +1,11 @@
 package snake.equipment;
 
+import snake.equipment.creators.BoxEquipmentCreator;
+import snake.equipment.creators.EmpEquipmentCreator;
 import snake.equipment.creators.FlashlightEquipmentCreator;
+import snake.equipment.creators.GunEquipmentCreator;
 import snake.equipment.creators.SensorEquipmentCreator;
+import snake.equipment.creators.TrapEquipmentCreator;
 
 /**                              Developed By:
  *                                  NoDarkGlasses

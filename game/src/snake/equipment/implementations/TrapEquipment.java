@@ -1,5 +1,10 @@
 package snake.equipment.implementations;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import snake.map.IMapAccess;
 
 /**                              Developed By:
@@ -10,6 +15,9 @@ import snake.map.IMapAccess;
 
 public class TrapEquipment extends AbstractEquipment
 {
+	Texture texture = new Texture(Gdx.files.internal("PixelFlashlight.png"));
+	Sprite sprite = new Sprite(texture); 
+	
 	public TrapEquipment()
 	{		
 		this.name = "Trap";
@@ -18,29 +26,29 @@ public class TrapEquipment extends AbstractEquipment
 	
 	public void activate(IMapAccess map) 
 	{
-		map.setCell(map.getx(), map.gety(), trap);
+		//map.setCell(map.getx(), map.gety(), trap);
 	}
-}
-@Override
-public void dispose()
-{
-	// TODO Auto-generated method stub
 
-}
+	@Override
+	public void dispose()
+	{
+		// TODO Auto-generated method stub
 
-@Override
-public void draw(Batch batch, float parentAlpha)
-{
-	// TODO Auto-generated method stub
+	}
 
-}
+	@Override
+	public void draw(Batch batch, float parentAlpha)
+	{
+		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), 
+				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+	}
 
-@Override
-public void act(float delta)
-{
-	// TODO Auto-generated method stub
+	@Override
+	public void act(float delta)
+	{
+		// TODO Auto-generated method stub
 
-}
+	}
 
-// THIS EQUIPMENT HAS NO LIGHTS
+	// THIS EQUIPMENT HAS NO LIGHTS
 }

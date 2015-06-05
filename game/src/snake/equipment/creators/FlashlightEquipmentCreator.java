@@ -12,7 +12,7 @@ import snake.equipment.implementations.FlashlightEquipment;
 
 public class FlashlightEquipmentCreator implements IEquipmentCreator
 {
-	public IEquipment create(int x, int y)
+	public IEquipment create(float x, float y)
 	{
 		return new FlashlightEquipment(x, y);
 	}
