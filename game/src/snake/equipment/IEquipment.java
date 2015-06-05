@@ -3,11 +3,12 @@ package snake.equipment;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import snake.map.IMapAccess;
+import snake.visuals.enhanced.ILightMapEntity;
 
-public interface IEquipment 
+public interface IEquipment extends ILightMapEntity
 {
-	public void activateOnMap(IMapAccess map);
-	public String getDescription();
-	public String getName();
+	void activateOnMap(IMapAccess map);
+	String getDescription();
+	String getName();
 	void draw(Batch batch, float parentAlpha);
 }

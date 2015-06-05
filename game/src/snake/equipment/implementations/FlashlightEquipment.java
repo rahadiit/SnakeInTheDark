@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import snake.map.IMapAccess;
 import snake.visuals.Lights;
 
@@ -59,12 +60,12 @@ public class FlashlightEquipment extends AbstractEquipment
 	// Atualizacao grafica no jogo
 	public void act (float delta) 
 	{
-		// set do vetor de localização do foco de luz
+		// set do vetor de localizaï¿½ï¿½o do foco de luz
 		
 		if (onMap)
 			vec.set(2.3f, 3.6f); // ajustado a sprite PixelFlashlight.png, para ficar no lugar
 		else
-			vec.set(0, 0); // senão, centro defaut
+			vec.set(0, 0); // senï¿½o, centro defaut
 		
 		
 		this.localToStageCoordinates(vec);
@@ -76,7 +77,10 @@ public class FlashlightEquipment extends AbstractEquipment
 		}
 
 		light.setPosition(vec);
-		light.setDirection(this.getParent().getRotation() + 90);
+
+		Actor parent = getParent();
+		if (parent != null)
+			light.setDirection(parent.getRotation() + 90);
 	}
 
 	// THIS EQUIPMENT HAS LIGHTS

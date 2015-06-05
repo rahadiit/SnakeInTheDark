@@ -5,16 +5,14 @@ import snake.engine.models.GameWorld;
 import snake.map.MapEntity;
 
 /**                              Developed By:
- *                                  NoDark
- *                               sessaGlasses
- *                               
- * <br> Entity that belongs to a VisualGameWorld </br>             
- * 
+ *                               NoDarkGlasses
+ *
+ * <br />
+ * Entity that belongs to a VisualGameWorld
+ *
  * @author Mr.Strings
- * 
  */
-
-public abstract class LightMapEntity extends MapEntity{
+public abstract class LightMapEntity extends MapEntity implements ILightMapEntity {
 
 	public LightMapEntity(GameWorld world) {
 		super(world);
@@ -22,25 +20,19 @@ public abstract class LightMapEntity extends MapEntity{
 	
 	
 	public LightMapEntity() {}
-	
-	public abstract boolean hasLights();
-	
+
+	@Override
 	public void createLights() {
-		for (Actor x : this.getChildren()) {
-			try {
-				LightMapEntity ent = (LightMapEntity) x;
-				ent.createLights();
-			} catch (ClassCastException e){}
-		}
+		for (Actor child : getChildren())
+			if (child instanceof ILightMapEntity)
+			    ((ILightMapEntity) child).createLights();
 	}
 
+	@Override
 	public void disposeLights() {
-		for (Actor x : this.getChildren()) {
-			try {
-				LightMapEntity ent = (LightMapEntity) x;
-				ent.disposeLights();
-			} catch (ClassCastException e){}
-		}
+		for (Actor child : getChildren())
+			if (child instanceof ILightMapEntity)
+				((ILightMapEntity) child).disposeLights();
 	}
 	
 	@Override

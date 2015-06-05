@@ -1,45 +1,41 @@
 package snake.map;
 
-import snake.engine.core.LevelStage;
-import snake.engine.models.GameWorld;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import snake.engine.core.LevelStage;
+import snake.engine.models.GameWorld;
 
 /**                              Developed By:
- *                                  NoDark
- *                               sessaGlasses
- *                               
- * Entity that belongs to a GameWorld             
- * 
+ *                               NoDarkGlasses
+ *
+ * <br />
+ * Entity that belongs in a GameWorld
+ *
  * @author Mr.Strings
- * 
  */
+public abstract class MapEntity extends Group implements IMapEntity {
 
+    protected int xInMap, yInMap;
+    public GameWorld world;
 
-public abstract class MapEntity extends Group {
-	
-	protected int xInMap, yInMap;
-	public GameWorld world;
-	
-	
-	//Creates and adds actor to world
-	public MapEntity (GameWorld world) {
-		this.world = world;
-	}
-	
-	public MapEntity () {}
-	
-	@Override
-	public LevelStage getStage() {
-		return (LevelStage) super.getStage();
-	}
-	
-	public void dispose() {
-		for (Actor a: this.getChildren()) {
-			try {
-				MapEntity e = (MapEntity) a;
-				e.dispose();
-			} catch (ClassCastException e){}
-		}
-	}
+    //Creates and adds actor to world
+    public MapEntity(GameWorld world) {
+        this.world = world;
+    }
+
+    public MapEntity() {
+    }
+
+    @Override
+    public LevelStage getStage() {
+        return (LevelStage) super.getStage();
+    }
+
+    @Override
+    public void dispose() {
+        for (Actor child : getChildren()) {
+            if (child instanceof MapEntity)
+                ((MapEntity) child).dispose();
+        }
+    }
 }

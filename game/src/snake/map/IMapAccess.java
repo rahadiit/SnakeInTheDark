@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IMapAccess {
 
-    List<MapEntity> getEntities();
-    void addEntity(MapEntity entity);
+    List<IMapEntity> getEntities();
+    void addEntity(IMapEntity entity);
 
 }

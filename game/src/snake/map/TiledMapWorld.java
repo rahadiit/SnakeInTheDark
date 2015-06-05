@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapRenderer;
 import snake.engine.creators.WorldSettings;
+import snake.visuals.enhanced.ILightMapEntity;
 import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;
 
@@ -25,17 +26,16 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void act(float delta) {
-        super.act(delta);
         manager.tickEntities(delta);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-        renderer.setView((OrthographicCamera) getStage().getCamera());
-        renderer.render();
-
         manager.drawEntities(batch, parentAlpha);
+
+        OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
+        renderer.setView(camera);
+        renderer.render();
     }
 
     @Override
@@ -67,17 +67,17 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void dispose() {
-        for (MapEntity entity : manager.getEntities()) {
+        for (IMapEntity entity : manager.getEntities()) {
             entity.dispose();
-            if (entity instanceof LightMapEntity)
+            if (entity instanceof ILightMapEntity)
                 ((LightMapEntity) entity).disposeLights();
         }
     }
 
     @Override
     public void createLights() {
-        for (MapEntity entity : manager.getEntities())
-            if (entity instanceof LightMapEntity)
+        for (IMapEntity entity : manager.getEntities())
+            if (entity instanceof ILightMapEntity)
                 ((LightMapEntity) entity).createLights();
     }
 }

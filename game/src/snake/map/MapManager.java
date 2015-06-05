@@ -25,25 +25,21 @@ public class MapManager implements IMapAccess {
 
     private TiledMap map;
 
-    private List<MapEntity> entities;
+    private final List<IMapEntity> entities = new LinkedList<>();
+    private final List<IMapEntity> immutableWrapper = Collections.unmodifiableList(entities);
 
     private int mapWidth;
     private int mapHeight;
     private int tileWidth;
     private int tileHeight;
 
-    public MapManager() {
-        entities = new LinkedList<>();
-    }
-
-    private List<MapEntity> immutableList = Collections.unmodifiableList(entities);
     @Override
-    public List<MapEntity> getEntities() {
-        return immutableList;
+    public List<IMapEntity> getEntities() {
+        return immutableWrapper;
     }
 
     @Override
-    public void addEntity(MapEntity entity) {
+    public void addEntity(IMapEntity entity) {
         entities.add(entity);
     }
 
@@ -52,12 +48,12 @@ public class MapManager implements IMapAccess {
     }
 
     public void tickEntities(float delta) {
-        for (MapEntity entity : entities)
+        for (IMapEntity entity : entities)
             entity.act(delta);
     }
 
     public void drawEntities(Batch batch, float parentAlpha) {
-        for (MapEntity entity : entities)
+        for (IMapEntity entity : entities)
             entity.draw(batch, parentAlpha);
     }
 
