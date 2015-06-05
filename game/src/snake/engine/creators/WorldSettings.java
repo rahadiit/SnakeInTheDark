@@ -28,7 +28,7 @@ public class WorldSettings {
 	//IMPORTANT NOTE -- VSCREEN is UNreliable if it goes beyond the Screen size
 	
 	
-	public static Color ambientColor = new Color (0f, 0f, 0f, 1f);
+	private static Color ambientColor = new Color (0f, 0f, 0f, 1f);
 	
 	
 	

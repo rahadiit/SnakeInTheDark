@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
@@ -22,7 +20,6 @@ public class Bullet extends LightMapEntity {
 	private String texName = "blueOrb.png";
 	private Light light;
 	Vector2 vec; //To avoid instantiating 60x per second
-	private float rotation; //To avoid instantiating 60x per second
 	
 	public Bullet (GameWorld world) {
 		super(world);
