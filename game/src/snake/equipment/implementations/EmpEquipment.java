@@ -14,6 +14,7 @@ public class EmpEquipment extends AbstractEquipment
 {
 	Texture texture = new Texture(Gdx.files.internal("emp.png"));
 	Sprite sprite = new Sprite(texture); 
+	boolean onMap;
 	public EmpEquipment()
 	{		
 		this.name = "EMP";

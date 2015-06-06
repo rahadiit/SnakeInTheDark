@@ -17,7 +17,8 @@ public class TrapEquipment extends AbstractEquipment
 {
 	Texture texture = new Texture(Gdx.files.internal("trap.png"));
 	Sprite sprite = new Sprite(texture); 
-	
+	boolean onMap;
+
 	public TrapEquipment()
 	{		
 		this.name = "Trap";
