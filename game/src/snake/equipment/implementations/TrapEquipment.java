@@ -15,7 +15,7 @@ import snake.map.IMapAccess;
 
 public class TrapEquipment extends AbstractEquipment
 {
-	Texture texture = new Texture(Gdx.files.internal("trap.png"));
+	Texture texture = new Texture(Gdx.files.internal("PixelFlashlight.png"));
 	Sprite sprite = new Sprite(texture); 
 	boolean onMap;
 

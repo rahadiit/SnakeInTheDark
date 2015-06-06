@@ -13,7 +13,7 @@ import snake.map.IMapAccess;
 public class GunEquipment extends AbstractEquipment
 {
 	boolean onMap;
-	Texture texture = new Texture(Gdx.files.internal("ammo.png"));
+	Texture texture = new Texture(Gdx.files.internal("PixelFlashlight.png"));
 	Sprite sprite = new Sprite(texture); 
 	public GunEquipment()
 	{
