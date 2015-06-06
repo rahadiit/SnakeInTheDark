@@ -25,7 +25,7 @@ public class SensorEquipment extends AbstractEquipment
 		this.name = "Sensor";
 		this.description = "The Sensor reveals drones around you";
 		
-		this.setPosition (5, 5); // ver o setPosition
+		this.setBounds (x, y, 5, 5); // ver o setPosition
 	}
 	
 	

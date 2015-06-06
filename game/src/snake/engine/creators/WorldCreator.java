@@ -51,6 +51,8 @@ public abstract class WorldCreator {
 				world = new TiledMapWorld(levelDataID);
 				break;
 
+				
+			// Down there are the Demos
 			case "forestmap":
 			case "forest map":
 				world =  new ForestMap_test(levelDataID);
@@ -60,6 +62,8 @@ public abstract class WorldCreator {
 				world = new TempleMap_test(levelDataID);	
 				break;
 				
+				
+			//Blank Worlds
 			case "snakehub":
 			case "snake hub":
 			case "mainmenu":
@@ -67,7 +71,6 @@ public abstract class WorldCreator {
 				world = new VisualBlankWorld();
 				break;
 				
-			//Blank Worlds
 			case "visualblank":
 			case "visual blank":	
 				world = new VisualBlankWorld();
