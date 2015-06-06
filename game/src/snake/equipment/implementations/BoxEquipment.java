@@ -21,7 +21,7 @@ public class BoxEquipment extends AbstractEquipment
 	{		
 		this.name = "Box";
 		this.description = "It would't be a Spy game without a box";	
-		this.setBounds(x, y, 4, 4); // tamanho defaut // NOTA: A POSICAO NAO ESTA SETTADA. VOLTAR PARA SETBOUNDS
+		this.setBounds(x, y, 4, 4); // tamanho default
 		this.onMap = onMap; 
 
 	}

@@ -21,7 +21,7 @@ public class EmpEquipment extends AbstractEquipment
 	{		
 		this.name = "EMP";
 		this.description = "The EMP destroys every drone around you";
-		this.setBounds(x, y, 4, 4); // tamanho defaut	// NOTA: A POSICAO NAO ESTA SETTADA. VOLTAR PARA SETBOUNDS
+		this.setBounds(x, y, 4, 4); // tamanho default
 		this.onMap = onMap; 
 	}
 	
