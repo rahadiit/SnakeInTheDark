@@ -31,11 +31,13 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        manager.drawEntities(batch, parentAlpha);
-
+        batch.end();
         OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
         renderer.setView(camera);
         renderer.render();
+        batch.begin();
+
+        manager.drawEntities(batch, parentAlpha);
     }
 
     @Override
