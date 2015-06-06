@@ -29,8 +29,7 @@ public class Bullet extends LightMapEntity {
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(texName, Texture.class);
 		Loader.load(texName, Texture.class);
-		while (!Loader.isLoaded(texName))
-			Loader.update();
+		Loader.getManager().finishLoadingAsset(texName);
 					
 		Texture texture = Loader.get(texName);
 		sprite = new Sprite(texture);
@@ -75,6 +74,7 @@ public class Bullet extends LightMapEntity {
 		if (this.getParent() != null || this.getStage() != null)
 			this.remove();
 		Loader.unload(texName);
+		
 	}
 
 	@Override

@@ -108,6 +108,7 @@ public class Weapon extends LightMapEntity {
 		if (this.getParent() != null)
 			this.remove();
 		Loader.unload(shootSoundName);
+		Loader.unload(thunderSoundName);
 	}
 
 }

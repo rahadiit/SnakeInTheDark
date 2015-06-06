@@ -21,8 +21,7 @@ public class Box_Test extends LightMapEntity{
 		world.addActor(this);
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(texName, Texture.class);
-		while (!Loader.isLoaded(texName))
-			Loader.update();
+		Loader.getManager().finishLoadingAsset(texName);
 								
 		//Cria a imagem
 		Texture texture = Loader.get(texName);

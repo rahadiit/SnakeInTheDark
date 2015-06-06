@@ -39,8 +39,7 @@ public class ForestMap_test extends VisualGameWorld {
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(texName, Texture.class);
-		while (!Loader.isLoaded(texName))
-			Loader.update();
+		Loader.getManager().finishLoadingAsset(texName);
 				
 		//Cria a imagem
 		Texture texture = Loader.get(texName);
@@ -49,8 +48,7 @@ public class ForestMap_test extends VisualGameWorld {
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(entityName, Texture.class);
-		while (!Loader.isLoaded(entityName))
-			Loader.update();
+		Loader.getManager().finishLoadingAsset(entityName);
 						
 		//Cria a imagem
 		Texture texture2 = Loader.get(entityName);

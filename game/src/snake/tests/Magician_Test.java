@@ -36,8 +36,7 @@ public class Magician_Test extends LightMapEntity {
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(texName, Texture.class);
-		while (!Loader.isLoaded(texName))
-				Loader.update();
+		Loader.getManager().finishLoadingAsset(texName);
 		
 		//Cria a imagem
 		Texture texture = Loader.get(texName);

@@ -29,16 +29,18 @@ public class FlashLight_test extends LightMapEntity {
 	
 	@Override
 	public void act(float delta) {
+		
+		//Set lights' position
 		vec.set(0, 0);
-		this.localToStageCoordinates(vec); 
+		this.localToStageCoordinates(vec);
+		light.setPosition(vec);
+		//And rotation
+		light.setDirection(this.getParent().getRotation() + 90);
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)) {
 			System.out.println(getX() + ":" + getY());
 			light.setActive(!light.isActive());
-	}
-			
-		light.setPosition(vec);
-		light.setDirection(this.getParent().getRotation() + 90);
+		}
 	}
 	
 	

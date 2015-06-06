@@ -1,12 +1,14 @@
 package snake.equipment.implementations;
 
+import box2dLight.PointLight;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
 import snake.map.IMapAccess;
 
 /**                              Developed By:
  *                                  NoDarkGlasses
  *
- * Implementa��o concreta do sensor
+ * Implementa������o concreta do sensor
  *    
  * @author bszazulla
  */
@@ -15,7 +17,7 @@ public class SensorEquipment extends AbstractEquipment
 {
 	
 	// sensor eh um equipment sem sprite, ele eh fixo com o player
-	ConeLight light;
+	PointLight light;  						/** MUDEI PARA POINTLIGHT AQUI */
 	Vector2 vec = new Vector2();
 
 	public SensorEquipment(int x, int y)
@@ -23,7 +25,7 @@ public class SensorEquipment extends AbstractEquipment
 		this.name = "Sensor";
 		this.description = "The Sensor reveals drones around you";
 		
-		this.setBounds(x, y, 5, 5); // ver o setPosition
+		this.setPosition (5, 5); // ver o setPosition
 	}
 	
 	
@@ -71,13 +73,6 @@ public class SensorEquipment extends AbstractEquipment
 	}
 
 	@Override
-	public void dispose()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void draw(Batch batch, float parentAlpha)
 	{
 		// TODO Auto-generated method stub
@@ -116,6 +111,6 @@ public class SensorEquipment extends AbstractEquipment
 	@Override
 	public void dispose() 
 	{
-		sprite.getTexture().dispose(); // if you don't dispose stuff gets crazy
+		////////sprite.getTexture().dispose(); // if you don't dispose stuff gets crazy
 	}
 }

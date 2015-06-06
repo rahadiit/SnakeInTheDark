@@ -1,7 +1,9 @@
 package snake.equipment.implementations;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import snake.map.IMapAccess;
 
 /**                              Developed By:
@@ -19,8 +21,8 @@ public class EmpEquipment extends AbstractEquipment
 	{		
 		this.name = "EMP";
 		this.description = "The EMP destroys every drone around you";
-		this.setBounds(x, y, 4, 4); // tamanho defaut		
-		this.onMap = onMap;
+		this.setSize (4, 4); // tamanho defaut		
+		this.onMap = onMap; //Hein?? O que eh isso? (se nao for um parametro do construtor, nao vale nada)
 	}
 	
 	public void activateOnMap(IMapAccess map) 
