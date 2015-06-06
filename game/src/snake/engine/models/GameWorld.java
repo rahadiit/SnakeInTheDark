@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import snake.engine.core.LevelStage;
 import snake.engine.creators.WorldSettings;
-import snake.map.MapEntity;
+import snake.map.IMapEntity;
 
 /**                               Developed By:
  *                                   NoDark
@@ -47,10 +47,10 @@ public abstract class GameWorld extends Group /* Group makes it connected to Map
 	
 	public void dispose() {
 		for (Actor a: this.getChildren()) {
-			try {
-				MapEntity e = (MapEntity) a;
+			if (a instanceof IMapEntity) {
+				IMapEntity e = (IMapEntity) a;
 				e.dispose();
-			} catch (ClassCastException e){}
+			}
 		}
 	}
 	
