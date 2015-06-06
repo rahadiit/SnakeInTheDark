@@ -87,10 +87,10 @@ public class SensorEquipment extends AbstractEquipment
 	@Override
 	public void act(float delta)
 	{
-		vec.set(0, 0);
-		this.localToStageCoordinates(vec);
-		light.setActive(!light.isActive());
-		light.setPosition(vec);
+		//vec.set(0, 0);
+		//this.localToStageCoordinates(vec);
+		//light.setActive(!light.isActive());
+		//light.setPosition(vec);
 
 		// TODO Auto-generated method stub
 
@@ -99,8 +99,8 @@ public class SensorEquipment extends AbstractEquipment
 	@Override
 	public void createLights()
 	{ // Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
-		light = new PointLight(Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f), 40, 45, 45, 45, 30);
-		light.setActive(false);
+		//light = new PointLight(Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f), 40, 45, 45, 45, 30);
+		//light.setActive(false);
 	} // Se quiser destruir a luz, pode ser em qualquer lugar
 
 	@Override
