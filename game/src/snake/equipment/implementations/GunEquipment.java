@@ -17,8 +17,10 @@ public class GunEquipment extends AbstractEquipment
 	boolean onMap;
 	Texture texture = new Texture(Gdx.files.internal("PixelFlashlight.png"));
 	Sprite sprite = new Sprite(texture); 
-	public GunEquipment()
+	public GunEquipment(float x, float y, boolean onMap)
 	{
+		this.setBounds(x, y, 4, 4);
+		this.onMap = onMap; 
 		this.name = "Gun";
 		this.description = "When a droid gets close to you, if you have ammo, it's destroyed";
 	}

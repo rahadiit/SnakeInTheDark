@@ -20,11 +20,10 @@ public class SensorEquipment extends AbstractEquipment
 	PointLight light;  						/** MUDEI PARA POINTLIGHT AQUI */
 	Vector2 vec = new Vector2();
 
-	public SensorEquipment(int x, int y)
+	public SensorEquipment(float x, float y, boolean onMap)
 	{		
 		this.name = "Sensor";
 		this.description = "The Sensor reveals drones around you";
-		
 		this.setBounds (x, y, 5, 5); // ver o setPosition
 	}
 	

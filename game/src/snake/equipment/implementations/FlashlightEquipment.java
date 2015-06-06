@@ -36,10 +36,8 @@ public class FlashlightEquipment extends AbstractEquipment
 	{
 		this.name = "Flashlight";
 		this.description = "The Flashlight lights in front of you, but use with caution, it doesn't last long. To turn it on, press T button.";
-		
 		this.setBounds(x, y, 4, 4); // tamanho defaut
-		
-		this.onMap = onMap;
+		this.onMap = onMap;		
 	}
 	
 	

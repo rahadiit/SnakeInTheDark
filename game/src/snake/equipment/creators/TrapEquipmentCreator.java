@@ -14,6 +14,6 @@ public class TrapEquipmentCreator implements IEquipmentCreator
 {
 	public IEquipment create(float x, float y, boolean onMap)
 	{
-		return new TrapEquipment();
+		return new TrapEquipment(x, y, onMap);
 	}
 }
