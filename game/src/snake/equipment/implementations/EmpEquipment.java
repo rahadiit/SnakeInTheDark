@@ -28,7 +28,7 @@ public class EmpEquipment extends AbstractEquipment
 //		x = map.getX();
 //		y = map.getY();
 //		m = map.getWidth();
-//		n = getHeight();
+//		n = map.getHeight();
 //		
 //		if (x > 0)
 //			i = -1;

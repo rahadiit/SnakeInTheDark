@@ -15,7 +15,9 @@ public class SensorEquipment extends AbstractEquipment
 {
 	
 	// sensor eh um equipment sem sprite, ele eh fixo com o player
-	
+	ConeLight light;
+	Vector2 vec = new Vector2();
+
 	public SensorEquipment(int x, int y)
 	{		
 		this.name = "Sensor";
@@ -34,6 +36,7 @@ public class SensorEquipment extends AbstractEquipment
 	public void activateOnMap(IMapAccess map) 
 	{
 //		int x, y, i, j, m, n, a, b;
+//		int count;
 //		x = map.getX();
 //		y = map.getY();
 //		m = map.getWidth();
@@ -62,7 +65,7 @@ public class SensorEquipment extends AbstractEquipment
 //		for(i; i < a; i++)
 //			for (j; j < b; j++)
 //				if (map.getCell(i, j) == "drone")
-//					"warning"
+//					count++;
 		//
 		//			
 	}
@@ -84,9 +87,35 @@ public class SensorEquipment extends AbstractEquipment
 	@Override
 	public void act(float delta)
 	{
+		vec.set(0, 0);
+		this.localToStageCoordinates(vec);
+		light.setActive(!light.isActive());
+		light.setPosition(vec);
+
 		// TODO Auto-generated method stub
 
 	}
 	
-	// THIS EQUIPMENT HAS NO LIGHTS
+	@Override
+	public void createLights()
+	{ // Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
+		light = new PointLight(Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f), 40, 45, 45, 45, 30);
+		light.setActive(false);
+	} // Se quiser destruir a luz, pode ser em qualquer lugar
+
+	@Override
+	public void disposeLights()
+	{
+		if (light != null)
+		{
+			light.remove();
+			light.dispose();
+		}
+	}
+	
+	@Override
+	public void dispose() 
+	{
+		sprite.getTexture().dispose(); // if you don't dispose stuff gets crazy
+	}
 }
