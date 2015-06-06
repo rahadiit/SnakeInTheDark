@@ -14,6 +14,6 @@ public class BoxEquipmentCreator implements IEquipmentCreator
 {
 	public IEquipment create(float x, float y, boolean onMap)
 	{
-		return new BoxEquipment();
+		return new BoxEquipment(x, y, onMap);
 	}
 }

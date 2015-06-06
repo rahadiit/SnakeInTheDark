@@ -17,12 +17,12 @@ public class BoxEquipment extends AbstractEquipment
 	boolean onMap;
 	Texture texture = new Texture(Gdx.files.internal("mysteryBox.png"));
 	Sprite sprite = new Sprite(texture); 
-	public BoxEquipment()
+	public BoxEquipment(float x, float y, boolean onMap)
 	{		
 		this.name = "Box";
 		this.description = "It would't be a Spy game without a box";	
-		this.setSize(4, 4); // tamanho defaut // NOTA: A POSICAO NAO ESTA SETTADA. VOLTAR PARA SETBOUNDS
-		this.onMap = onMap; //Hein?? O que eh isso? (se nao for um parametro do construtor, nao vale nada) //Strings
+		this.setBounds(x, y, 4, 4); // tamanho defaut // NOTA: A POSICAO NAO ESTA SETTADA. VOLTAR PARA SETBOUNDS
+		this.onMap = onMap; 
 
 	}
 	

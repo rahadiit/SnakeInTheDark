@@ -17,12 +17,12 @@ public class EmpEquipment extends AbstractEquipment
 	Texture texture = new Texture(Gdx.files.internal("emp.png"));
 	Sprite sprite = new Sprite(texture); 
 	boolean onMap;
-	public EmpEquipment()
+	public EmpEquipment(float x, float y, boolean onMap)
 	{		
 		this.name = "EMP";
 		this.description = "The EMP destroys every drone around you";
-		this.setSize (4, 4); // tamanho defaut	// NOTA: A POSICAO NAO ESTA SETTADA. VOLTAR PARA SETBOUNDS
-		this.onMap = onMap; //Hein?? O que eh isso? (se nao for um parametro do construtor, nao vale nada)
+		this.setBounds(x, y, 4, 4); // tamanho defaut	// NOTA: A POSICAO NAO ESTA SETTADA. VOLTAR PARA SETBOUNDS
+		this.onMap = onMap; 
 	}
 	
 	public void activateOnMap(IMapAccess map) 

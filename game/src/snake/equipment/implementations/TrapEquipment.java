@@ -19,10 +19,12 @@ public class TrapEquipment extends AbstractEquipment
 	Sprite sprite = new Sprite(texture); 
 	boolean onMap;
 
-	public TrapEquipment()
+	public TrapEquipment(float x, float y, boolean onMap)
 	{		
 		this.name = "Trap";
 		this.description = "The Trap destroy a drone that pass the cell you placed it";	
+		this.setBounds(x, y, 4, 4);
+		this.onMap = onMap; 
 	}
 	
 	public void activateOnMap(IMapAccess map) 

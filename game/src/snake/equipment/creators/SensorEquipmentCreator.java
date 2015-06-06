@@ -14,6 +14,6 @@ public class SensorEquipmentCreator implements IEquipmentCreator
 {
 	public IEquipment create(float x, float y, boolean onMap)
 	{
-		return new SensorEquipment();
+		return new SensorEquipment(x, y, onMap);
 	}
 }
