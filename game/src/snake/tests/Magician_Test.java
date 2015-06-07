@@ -25,7 +25,7 @@ public class Magician_Test extends LightMapEntity {
 	private Sprite sprite;
 	private Weapon weapon;
 	private FlashLight_test flashlight;
-	private String texName = "magician.png";
+	private String texName = "demos/magician.png";
 	
 	
 	public Magician_Test (GameWorld world) {

@@ -1,80 +1,84 @@
-package snake.map.types;
+package snake.map.tests;
 
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
-import snake.visuals.Lights;
+import snake.equipment.EquipmentCreator;
+import snake.equipment.IEquipment;
+import snake.tests.Magician_Test;
+import snake.tests.Box_Test;
+import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;
-import box2dLight.Light;
-import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;	
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 
 
 /**                               Developed By:
  *                                   NoDark
  *                                sessaGlasses
  *                                
- * <br> Map for testing purposes only. (BAD DESIGN) </br>
+ * <br> Map for testing purposes only. (BETTER DESIGN) </br>
  * @author Mr.Strings
  */
 
-public class ForestMap_test extends VisualGameWorld {
+public class TempleMap_test extends VisualGameWorld {
 	
 	// The code below is simply a prototype for testing purposes 
-	private Sprite sprite;
-	private Sprite entity; //must be changed to Map Entities
-	Light light;
-	private float velocity = .2f;
-	private int x = 1;
-	private boolean y = false, triggered = false;
-	private String texName = "foggy_forest_by_BrokenLens.jpeg";
-	private String entityName = "Scary_Silhouette.png";
+	private Sprite temple;
+	private Magician_Test magician; //Da pra colocar uma array com todas as entities? 
+	private Box_Test box; // Provavelmente sim.
+	private String texName = "demos/pixelArtTemple.png";
 	
-	public ForestMap_test (String LevelData/* Add other parameters of choice*/) {
-		
+	public TempleMap_test (String LevelData/* Add other parameters of choice*/) {
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(texName, Texture.class);
-		Loader.getManager().finishLoadingAsset(texName);
-				
-		//Cria a imagem
-		Texture texture = Loader.get(texName);
-		sprite = new Sprite(texture);
-		sprite.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
-		
-		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
-		Loader.load(entityName, Texture.class);
-		Loader.getManager().finishLoadingAsset(entityName);
+		while (!Loader.isLoaded(texName))
+			Loader.update();
 						
 		//Cria a imagem
-		Texture texture2 = Loader.get(entityName);
-		entity = new Sprite(texture2);
+		Texture texture = Loader.get(texName);
+		temple = new Sprite(texture);
+		temple.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight());
 		
-		entity.setSize(4, 12);
-		entity.setAlpha(1f);
-		entity.setPosition(60, 15);
+		
+		//Cria o Player
+		magician = new Magician_Test(this); //Player
+		magician.setBounds(0, WorldSettings.heightFix(0), 30, 30); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
+		//... Com o heightFix, o topo fica 100, o chao fica 0 (Highly recommended)
+	
+		//Cria uma caixa
+		box = new Box_Test(this); //Simple box with shadow
+		box.setBounds(38, WorldSettings.heightFix(53), 23, 23);		
+		box.setPosition(38, WorldSettings.heightFix(53));
+				
+		// VC PASSA A POSI??????O INICIAL DO EQUIPAMENTO, TEM A VERS???O DO CONSTRUTOR SEM ISSO TBM!
+		IEquipment flashlight = EquipmentCreator.createFactory("flashlight").create(20, 20, true); //Equipment
+		this.addActor((Group)flashlight); //Added to group // added to this map
+		
+		createLights();
 	}
 	
 	
 	public void show () {
-		WorldSettings.setAmbientColor(Color.BLACK);
-		WorldSettings.setWorld2ScreenRatio(1);
-		
+		WorldSettings.setAmbientColor(Color.WHITE);
 	}
 	
 	
 	
 	@Override
 	public void act(float delta) {
+		super.act(delta);
 		
-		
+
 		//Adds new screen on top of this one
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			String[] param = {"SnakeScreen", "TempleMap", "Some random Data"};
+			String[] param = {"SnakeScreen", "tiledmap", "maps/testmap.tmx"};
 			try {
 				ScreenCreator.addAndGo(param);
 			}  catch (Exception e) {
@@ -86,55 +90,35 @@ public class ForestMap_test extends VisualGameWorld {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
 			try {
 				ScreenCreator.backToPrevious();
-			} catch (Exception e) { //OR... Creates new SnakeHub Screen
+			} catch (Exception e) { //OR... Create a menu to go back
 				String[] param = {"SnakeLevel", "MainMenu", "LevelDataID"};
 				try {
-					ScreenCreator.switchAndGo(param);
+					ScreenCreator.switchAndGo(param); 
 				} catch (Exception excp) {
 					e.printStackTrace(System.out);
 				}
 			}
 		}
 		
-		
-		
-		//Do level stuff
-		if (light.getX() >= 100) {
-			velocity *=-1;
-			y = false;
-		} else if (light.getX() <= 0) {
-			x++;
-			if (x % 3 == 0) {
-				y = true;
-				entity.setPosition(entity.getX() - entity.getWidth()*1/2, entity.getY() - entity.getHeight()*3 /4);
-				entity.setSize(entity.getWidth()* 2f, entity.getHeight() * 2f);
-			}
-			velocity *= -1;
+		if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
+			WorldSettings.setAmbientColor(new Color (.1f, .1f, .3f, 1f));
 		}
-		light.setPosition(light.getX() + velocity, light.getY());
-		
-		
-		if (x == 9 && light.getX() >= 90) {
-			triggered = true;
-			WorldSettings.setAmbientColor(new Color(1f, 0, 0, 1f));
-		}
-		
-		if (triggered && light.getX() > 91) {
-			Gdx.app.exit();
+		if (Gdx.input.isKeyPressed(Input.Keys.X)) {
+			WorldSettings.setAmbientColor(Color.WHITE);
 		}
 		
 		
 		//Camera Movement
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+		if (Gdx.input.isKeyPressed(Input.Keys.A))
 			getStage().getCameraMan().moveCamera(-20f * delta, 0);
 			
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+		if (Gdx.input.isKeyPressed(Input.Keys.D))
 			getStage().getCameraMan().moveCamera(20f * delta, 0);
 			
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+		if (Gdx.input.isKeyPressed(Input.Keys.S))
 			getStage().getCameraMan().moveCamera( 0, -20f * delta);
 			
-		if (Gdx.input.isKeyPressed(Input.Keys.UP))
+		if (Gdx.input.isKeyPressed(Input.Keys.W))
 			getStage().getCameraMan().moveCamera(0, 20f * delta);
 			
 		//Camera Zoom
@@ -168,22 +152,22 @@ public class ForestMap_test extends VisualGameWorld {
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) {
-		sprite.draw(batch);
-		if (y)
-			entity.draw(batch);
+		temple.draw(batch);
 		super.drawChildren(batch, parentAlpha);
 	}
 
-
 	public void createLights() {
-		light = new PointLight (Lights.getRayhandler(), 5000, new Color(1f, 0f, .5f, 1f), 40, 50, WorldSettings.heightFix(50));
-		light.setSoft(false);
+		for (Actor x : this.getChildren()) {
+			try {
+				LightMapEntity ent = (LightMapEntity) x;
+				ent.createLights();
+			} catch (ClassCastException e){}
+		}
 	}
 	
 	@Override
 	public void dispose() {
 		Loader.unload(texName);
-		Loader.unload(entityName);
 		super.dispose();
 	}
 

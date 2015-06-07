@@ -14,7 +14,7 @@ import snake.map.IMapAccess;
 
 public class EmpEquipment extends AbstractEquipment
 {
-	Texture texture = new Texture(Gdx.files.internal("emp.png"));
+	Texture texture = new Texture(Gdx.files.internal("equipments/emp.png"));
 	Sprite sprite = new Sprite(texture); 
 	boolean onMap;
 	public EmpEquipment(float x, float y, boolean onMap)

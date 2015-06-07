@@ -1,9 +1,9 @@
 package snake.equipment.implementations;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
 
 /**                              Developed By:
@@ -15,14 +15,19 @@ import snake.map.IMapAccess;
 public class BoxEquipment extends AbstractEquipment
 {	
 	boolean onMap;
-	Texture texture = new Texture(Gdx.files.internal("BoxPixel.png"));
-	Sprite sprite = new Sprite(texture); 
+	Texture texture;
+	Sprite sprite;
 	public BoxEquipment(float x, float y, boolean onMap)
 	{		
 		this.name = "Box";
 		this.description = "It would't be a Spy game without a box";	
 		this.setBounds(x, y, 4, 4); // tamanho default
-		this.onMap = onMap; 
+		this.onMap = onMap;
+		
+		Loader.load("equipments/BoxPixel.png", Texture.class);
+		Loader.finishLoadingAsset("equipments/BoxPixel.png");
+		texture = Loader.get("equipments/BoxPixel.png");
+		sprite = new Sprite(texture);
 
 	}
 	
@@ -34,7 +39,7 @@ public class BoxEquipment extends AbstractEquipment
 	@Override
 	public void dispose()
 	{
-		// TODO Auto-generated method stub
+		Loader.unload("equipments/BoxPixel.png");
 
 	}
 

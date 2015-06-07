@@ -13,7 +13,7 @@ import snake.visuals.enhanced.LightMapEntity;
 public class Box_Test extends LightMapEntity{
 	private Sprite sprite;
 	private ShadowSource shadow;
-	private String texName = "mysteryBox.png";
+	private String texName = "demos/mysteryBox.png";
 	
 	public Box_Test(GameWorld world) {
 		super(world);

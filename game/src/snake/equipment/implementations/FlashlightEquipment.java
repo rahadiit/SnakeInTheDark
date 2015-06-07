@@ -24,7 +24,7 @@ import snake.visuals.Lights;
 
 public class FlashlightEquipment extends AbstractEquipment 
 {
-	Texture texture = new Texture(Gdx.files.internal("PixelFlashlight.png"));
+	Texture texture = new Texture(Gdx.files.internal("equipments/PixelFlashlight.png"));
 	Sprite sprite = new Sprite(texture); 
 	ConeLight light;
 	Vector2 vec = new Vector2();

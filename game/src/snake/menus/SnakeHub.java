@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import snake.engine.creators.ScreenCreator;
+import snake.engine.dataManagment.Loader;
 import snake.engine.models.HUD;
 
 
@@ -22,10 +23,14 @@ public class SnakeHub extends HUD {
 	private BitmapFont font;
 	private GlyphLayout layout;
 	private float w, h;
-	String instructions[]; //will be changed to buttons
+	private String instructions[]; //will be changed to buttons
+	private String fontName = "fonts/ak_sc_o.fnt";
 
 	public SnakeHub() {
-		this.font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), false);
+		
+		Loader.load(fontName, BitmapFont.class);
+		Loader.finishLoadingAsset(fontName);
+		this.font = Loader.get(fontName);
 		this.layout = new GlyphLayout();
 
 		w = Gdx.graphics.getWidth();

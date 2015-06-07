@@ -1,6 +1,5 @@
 package snake.engine.dataManagment;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 
 
@@ -22,15 +21,19 @@ public class Loader {
 	}
 	
 	public static <T> void load (String filename, Class<T> type) {
-		getManager().load(Gdx.files.internal(filename).name(), type);
+		getManager().load(filename, type);
 	}
 	
 	public static <T> T get(String filename) {
-		return getManager().get(Gdx.files.internal(filename).name());
+		return getManager().get(filename);
 	}
 	
 	public static boolean isLoaded (String filename) {
-		return getManager().isLoaded(Gdx.files.internal(filename).name());
+		return getManager().isLoaded(filename);
+	}
+	
+	public static void finishLoadingAsset(String filename) {
+		getManager().finishLoadingAsset(filename);
 	}
 	
 	public static void update() {
@@ -38,6 +41,6 @@ public class Loader {
 	}
 	
 	public static void unload(String filename) {
-		getManager().unload(Gdx.files.internal(filename).name());
+		getManager().unload(filename);
 	}
 }

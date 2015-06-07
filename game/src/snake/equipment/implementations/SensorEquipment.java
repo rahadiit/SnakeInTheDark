@@ -17,7 +17,7 @@ public class SensorEquipment extends AbstractEquipment
 {
 	
 	// sensor eh um equipment sem sprite, ele eh fixo com o player
-	PointLight light;  						/** MUDEI PARA POINTLIGHT AQUI */
+	PointLight light;  					
 	Vector2 vec = new Vector2();
 
 	public SensorEquipment(float x, float y, boolean onMap)

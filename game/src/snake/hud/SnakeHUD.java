@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import snake.engine.dataManagment.Loader;
 import snake.engine.models.HUD;
 
 /**                               Developed By:
@@ -18,9 +19,10 @@ import snake.engine.models.HUD;
 
 
 public class SnakeHUD extends HUD {
-	SnakeInfosHUD infos;
-	SnakeDialogHUD dialog;
-	BitmapFont font;
+	private SnakeInfosHUD infos;
+	private SnakeDialogHUD dialog;
+	private BitmapFont font;
+	private String fontName = "fonts/ak_sc_o.fnt";
 	
 	public SnakeHUD (String levelData) {
 		super();
@@ -28,7 +30,9 @@ public class SnakeHUD extends HUD {
 		infos = new SnakeInfosHUD();
 		dialog  = new SnakeDialogHUD();
 		
-		font = new BitmapFont(Gdx.files.internal("ak_sc_o.fnt"), false);
+		Loader.load(fontName, BitmapFont.class);
+		Loader.finishLoadingAsset(fontName);
+		this.font = Loader.get(fontName);
 	}
 	
 	

@@ -17,7 +17,7 @@ public class Bullet extends LightMapEntity {
 	private Vector2 velocity;
 	private float angularVelocity = 250;
 	private Sprite sprite;
-	private String texName = "blueOrb.png";
+	private String texName = "demos/blueOrb.png";
 	private Light light;
 	Vector2 vec; //To avoid instantiating 60x per second
 	
