@@ -82,7 +82,7 @@ public class Weapon extends LightMapEntity {
 			//add to weapon
 			world.addActor(bullet);
 			
-			bullet.setZIndex(1);; //make it go under the box
+			bullet.setZIndex(0); //make it go under the box
 			
 			if (bulletSize < 2f)
 				shootSound.play(.5f);
