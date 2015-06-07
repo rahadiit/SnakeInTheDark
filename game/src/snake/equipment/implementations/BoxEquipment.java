@@ -15,7 +15,7 @@ import snake.map.IMapAccess;
 public class BoxEquipment extends AbstractEquipment
 {	
 	boolean onMap;
-	Texture texture = new Texture(Gdx.files.internal("mysteryBox.png"));
+	Texture texture = new Texture(Gdx.files.internal("BoxPixel.png"));
 	Sprite sprite = new Sprite(texture); 
 	public BoxEquipment(float x, float y, boolean onMap)
 	{		
