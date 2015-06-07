@@ -17,6 +17,7 @@ public class Box_Test extends LightMapEntity{
 	
 	public Box_Test(GameWorld world) {
 		super(world);
+		this.setSize(23, 23);
 			
 		world.addActor(this);
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)

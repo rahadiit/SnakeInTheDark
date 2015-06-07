@@ -49,12 +49,11 @@ public class TempleMap_test extends VisualGameWorld {
 		
 		//Cria o Player
 		magician = new Magician_Test(this); //Player
-		magician.setBounds(0, WorldSettings.heightFix(0), 30, 30); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
+		magician.setPosition(0, WorldSettings.heightFix(0)); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
 		//... Com o heightFix, o topo fica 100, o chao fica 0 (Highly recommended)
 	
 		//Cria uma caixa
 		box = new Box_Test(this); //Simple box with shadow
-		box.setBounds(38, WorldSettings.heightFix(53), 23, 23);		
 		box.setPosition(38, WorldSettings.heightFix(53));
 				
 		// VC PASSA A POSI??????O INICIAL DO EQUIPAMENTO, TEM A VERS???O DO CONSTRUTOR SEM ISSO TBM!
