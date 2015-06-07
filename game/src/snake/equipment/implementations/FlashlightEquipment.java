@@ -9,8 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
+import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
 import snake.visuals.Lights;
 
@@ -24,8 +25,8 @@ import snake.visuals.Lights;
 
 public class FlashlightEquipment extends AbstractEquipment 
 {
-	Texture texture = new Texture(Gdx.files.internal("equipments/PixelFlashlight.png"));
-	Sprite sprite = new Sprite(texture); 
+	Texture texture;
+	Sprite sprite; 
 	ConeLight light;
 	Vector2 vec = new Vector2();
 	boolean onMap;
@@ -38,6 +39,12 @@ public class FlashlightEquipment extends AbstractEquipment
 		this.description = "The Flashlight lights in front of you, but use with caution, it doesn't last long. To turn it on, press T button.";
 		this.setBounds(x, y, 4, 4); // tamanho default
 		this.onMap = onMap;		
+		
+		Loader.load("equipments/PixelFlashlight.png", Texture.class);
+		Loader.finishLoadingAsset("equipments/PixelFlashlight.png");
+		texture = Loader.get("equipments/PixelFlashlight.png");
+		sprite = new Sprite(texture);
+
 	}
 	
 	
@@ -108,6 +115,7 @@ public class FlashlightEquipment extends AbstractEquipment
 	@Override
 	public void dispose() 
 	{
+		Loader.unload("equipments/PixelFlashlight.png");
 		sprite.getTexture().dispose(); // if you don't dispose stuff gets crazy
 	}
 }

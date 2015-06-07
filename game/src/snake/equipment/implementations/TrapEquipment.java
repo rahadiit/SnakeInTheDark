@@ -1,10 +1,10 @@
 package snake.equipment.implementations;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
+import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
 
 /**                              Developed By:
@@ -15,8 +15,8 @@ import snake.map.IMapAccess;
 
 public class TrapEquipment extends AbstractEquipment
 {
-	Texture texture = new Texture(Gdx.files.internal("equipments/ArmadilhaDesarmada.png"));
-	Sprite sprite = new Sprite(texture); 
+	Texture texture;
+	Sprite sprite; 
 	boolean onMap;
 
 	public TrapEquipment(float x, float y, boolean onMap)
@@ -25,6 +25,12 @@ public class TrapEquipment extends AbstractEquipment
 		this.description = "The Trap destroy a drone that pass the cell you placed it";	
 		this.setBounds(x, y, 4, 4);
 		this.onMap = onMap; 
+		
+		Loader.load("equipments/ArmadilhaDesarmada.png", Texture.class);
+		Loader.finishLoadingAsset("equipments/ArmadilhaDesarmada.png");
+		texture = Loader.get("equipments/ArmadilhaDesarmada.png");
+		sprite = new Sprite(texture);
+
 	}
 	
 	public void activateOnMap(IMapAccess map) 
@@ -35,8 +41,7 @@ public class TrapEquipment extends AbstractEquipment
 	@Override
 	public void dispose()
 	{
-		// TODO Auto-generated method stub
-
+		Loader.unload("equipments/ArmadilhaDesarmada.png");
 	}
 
 	@Override

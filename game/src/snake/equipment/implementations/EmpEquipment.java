@@ -1,9 +1,10 @@
 package snake.equipment.implementations;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+
+import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
 
 /**                              Developed By:
@@ -14,8 +15,8 @@ import snake.map.IMapAccess;
 
 public class EmpEquipment extends AbstractEquipment
 {
-	Texture texture = new Texture(Gdx.files.internal("equipments/emp.png"));
-	Sprite sprite = new Sprite(texture); 
+	Texture texture;
+	Sprite sprite; 
 	boolean onMap;
 	public EmpEquipment(float x, float y, boolean onMap)
 	{		
@@ -23,6 +24,12 @@ public class EmpEquipment extends AbstractEquipment
 		this.description = "The EMP destroys every drone around you";
 		this.setBounds(x, y, 4, 4); // tamanho default
 		this.onMap = onMap; 
+		
+		Loader.load("equipments/emp.png", Texture.class);
+		Loader.finishLoadingAsset("equipments/emp.png");
+		texture = Loader.get("equipments/emp.png");
+		sprite = new Sprite(texture);
+
 	}
 	
 	public void activateOnMap(IMapAccess map) 
@@ -64,7 +71,7 @@ public class EmpEquipment extends AbstractEquipment
 	@Override
 	public void dispose()
 	{
-		// TODO Auto-generated method stub
+		Loader.unload("equipments/emp.png");
 
 	}
 

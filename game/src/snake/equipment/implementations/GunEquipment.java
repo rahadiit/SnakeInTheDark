@@ -1,9 +1,10 @@
 package snake.equipment.implementations;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+
+import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
 
 /**
@@ -15,14 +16,20 @@ import snake.map.IMapAccess;
 public class GunEquipment extends AbstractEquipment
 {
 	boolean onMap;
-	Texture texture = new Texture(Gdx.files.internal("equipments/BulletPixel.png"));
-	Sprite sprite = new Sprite(texture); 
+	Texture texture;
+	Sprite sprite; 
 	public GunEquipment(float x, float y, boolean onMap)
 	{
 		this.setBounds(x, y, 4, 4);
 		this.onMap = onMap; 
 		this.name = "Gun";
 		this.description = "When a droid gets close to you, if you have ammo, it's destroyed";
+		
+		Loader.load("equipments/BulletPixel.png", Texture.class);
+		Loader.finishLoadingAsset("equipments/BulletPixel.png");
+		texture = Loader.get("equipments/BulletPixel.png");
+		sprite = new Sprite(texture);
+
 	}
 
 	public int ammo;
@@ -36,8 +43,7 @@ public class GunEquipment extends AbstractEquipment
 	@Override
 	public void dispose()
 	{
-		// TODO Auto-generated method stub
-
+		Loader.unload("equipments/BulletPixel.png");
 	}
 
 	@Override
