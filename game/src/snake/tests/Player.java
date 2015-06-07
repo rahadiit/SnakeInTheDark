@@ -26,8 +26,9 @@ public class Player extends LightMapEntity {
 	private FlashLight_test flashlight;
 	private String texName = "character/player1.png";
 	private int timer = 0;
+	private static Player player;
 	
-	public Player (GameWorld world) {
+	private Player (GameWorld world) {
 		super(world);
 
 		world.addActor(this);
@@ -55,6 +56,12 @@ public class Player extends LightMapEntity {
 		this.addActor(flashlight);
 		flashlight.setPosition(15f, 20);
 		
+	}
+	
+	static public Player getinstance(GameWorld world){
+		if(player == null)
+			player = new Player(world);
+		return player;
 	}
 	
 	@Override
