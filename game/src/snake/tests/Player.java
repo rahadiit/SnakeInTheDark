@@ -9,8 +9,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**                              Developed By:
  *                                  NoDark
@@ -26,8 +24,8 @@ public class Player extends LightMapEntity {
 	private Sprite sprite;
 	private Weapon weapon;
 	private FlashLight_test flashlight;
-	private String texName = "character/player.png";
-	
+	private String texName = "character/player1.png";
+	private int timer = 0;
 	
 	public Player (GameWorld world) {
 		super(world);
@@ -62,39 +60,42 @@ public class Player extends LightMapEntity {
 	@Override
 	public void act (float delta) { // Aqui se realizam as atualizacoes
 		super.act(delta);
-
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-			moveBy(-1, 0);
-			Texture texture = new Texture(Gdx.files.internal("character/player4.png"));
-			sprite = new Sprite(texture);
-			sprite.setAlpha(1f);
-		}
-		else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			moveBy(1, 0);
-			Texture texture = new Texture(Gdx.files.internal("character/player7.png"));
-			sprite = new Sprite(texture);
-			sprite.setAlpha(1f);
-		}
-		else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			System.out.println("apertou ");
-
-			moveBy(0, 1);
-			Texture texture = new Texture(Gdx.files.internal("character/player10.png"));
-			sprite = new Sprite(texture);
-			sprite.setAlpha(1f);
-		}
-		else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			moveBy(0, -1);
-			Texture texture = new Texture(Gdx.files.internal("character/player1.png"));
-			sprite = new Sprite(texture);
-			sprite.setAlpha(1f);
-		}
+		timer++;
 		
-		else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-			rotateBy(5);
-		}
-		else if (Gdx.input.isKeyPressed(Input.Keys.V)) {
-			rotateBy(-5);
+		if(timer>5){
+			timer = 0;
+		
+			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+				moveBy(-2.5f, 0);
+				Texture texture = new Texture(Gdx.files.internal("character/player4.png"));
+				sprite = new Sprite(texture);
+				sprite.setAlpha(1f);
+			}
+			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+				moveBy(2.5f, 0);
+				Texture texture = new Texture(Gdx.files.internal("character/player7.png"));
+				sprite = new Sprite(texture);
+				sprite.setAlpha(1f);
+			}
+			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+				moveBy(0, 2.5f);
+				Texture texture = new Texture(Gdx.files.internal("character/player10.png"));
+				sprite = new Sprite(texture);
+				sprite.setAlpha(1f);
+			}
+			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+				moveBy(0, -2.5f);
+				Texture texture = new Texture(Gdx.files.internal("character/player1.png"));
+				sprite = new Sprite(texture);
+				sprite.setAlpha(1f);
+			}
+			
+			else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
+				rotateBy(5);
+			}
+			else if (Gdx.input.isKeyPressed(Input.Keys.V)) {
+				rotateBy(-5);
+			}
 		}
 	}
 	
