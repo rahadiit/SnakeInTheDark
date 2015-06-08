@@ -48,7 +48,7 @@ public class Player extends LightMapEntity {
 		Texture texture = Loader.get(texName);
 		sprite = new Sprite(texture);
 					
-		sprite.setAlpha(1f); //Transparencia -- de 0 a 1 (0 eh invisivel)
+		//sprite.setAlpha(1f); //Transparencia -- de 0 a 1 (0 eh invisivel)
 		
 		
 		//Adiciona equipamento arma
