@@ -36,7 +36,6 @@ public class Player extends LightMapEntity {
 	private Player (GameWorld world) {
 		super(world);
 
-		world.addActor(this);
 		this.setSize(2.5f, 3);
 		this.setOrigin(0,0); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
