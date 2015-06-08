@@ -161,10 +161,12 @@ public class MapManager implements IMapAccess {
         return mapHeight;
     }
 
+    @Override
     public int getTileWidth() {
         return tileWidth;
     }
 
+    @Override
     public int getTileHeight() {
         return tileHeight;
     }
