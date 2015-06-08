@@ -11,7 +11,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**                              Developed By:
@@ -39,6 +38,9 @@ public class Player extends LightMapEntity {
 	
 	private static final int FRAME_ROWS = 4, FRAME_COLS = 3;
 	
+	private float speed = 10;
+	private int direction = UP;
+	
 	//Equipments
 	private Weapon weapon;
 	private FlashLight_test flashlight;
@@ -46,7 +48,6 @@ public class Player extends LightMapEntity {
 	//Stuff
 	private int timer = 0;
 	private float stateTime = 0;
-	private int direcao = UP;
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	private Player (GameWorld world) {
@@ -98,30 +99,31 @@ public class Player extends LightMapEntity {
 		timer++;
 		
 		stateTime += delta;
-		currentFrame = animatedWalk[direcao].getKeyFrame(stateTime, true);
+		currentFrame = animatedWalk[direction].getKeyFrame(stateTime, true);
 		
+		timer = 6;
 		if(timer>5){
 			timer = 0;
 		
 			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-				moveBy(-2.5f, 0);
+				moveBy(-speed * delta, 0);
+				direction = LEFT;
 				update();
-				direcao = LEFT;
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-				moveBy(2.5f, 0);
+				moveBy(speed * delta, 0);
+				direction = RIGHT;
 				update();
-				direcao = RIGHT;
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-				moveBy(0, 2.5f);
+				moveBy(0, speed * delta);
+				direction = UP;
 				update();
-				direcao = UP;			
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-				moveBy(0, -2.5f);
+				moveBy(0, -speed * delta);
+				direction = DOWN;
 				update();
-				direcao = DOWN;				
 			}
 			
 			else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
