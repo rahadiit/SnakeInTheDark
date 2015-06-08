@@ -28,15 +28,16 @@ public class Player extends LightMapEntity {
 	private static Player player;
 	
 	private static final int DOWN = 0, LEFT = 1, RIGHT = 2, UP = 3;
-	private static final int ANIMATION_STATES_NUM = 4;
+	private static final int ANIMATION_WALK_STATES_NUM = 4, ANIMATION_STILL_STATES_NUM = 3;
 	
 	//Animation
-	private Texture walkSheet; //debugar o esquema
-	private Animation[] animatedWalk;
+	private Texture walkSheet, standingSheet; //debugar o esquema
+	private Animation[] animatedWalk, animatedStanding;
 	private TextureRegion currentFrame, region;
-	private String texName = "character/CharacterSprite.png";
+	private String walkTexName = "character/CharacterSprite.png", standingTexName = "character/BlinkingCharacterSprite.png";
 	
-	private static final int FRAME_ROWS = 4, FRAME_COLS = 3;
+	private static final int FRAME_ROWS_WALK = 4, FRAME_COLS_WALK = 3;
+	private static final int FRAME_ROWS_STANDING = 3, FRAME_COLS_STANDING = 3;
 	
 	private float speed = 10;
 	private int direction;
@@ -48,36 +49,47 @@ public class Player extends LightMapEntity {
 	//Stuff
 	private int timer = 0;
 	private float stateTime = 0;
-<<<<<<< HEAD
-=======
-	private int direcao = UP;
->>>>>>> 8098392bf649050380b641981adfc6c1b523acd0
+
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	private Player (GameWorld world) {
 		super(world);
 
-		this.setSize(3.5f, 4);
+		this.setSize(14f, 16);
 		this.setOrigin(0,0); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
-		Loader.load(texName, Texture.class);
-		Loader.finishLoadingAsset(texName);
-		walkSheet = Loader.get(texName);
+		Loader.load(walkTexName, Texture.class);
+		Loader.finishLoadingAsset(walkTexName);
+		walkSheet = Loader.get(walkTexName);
+		
+		Loader.load(standingTexName, Texture.class);
+		Loader.finishLoadingAsset(standingTexName);
+		walkSheet = Loader.get(standingTexName);
+		
 		
 		
 		//Cria as animacoes
 		animatedWalk = new Animation[4];
-	    for (int i = 0; i < ANIMATION_STATES_NUM; i++) {
+	    for (int i = 0; i < ANIMATION_WALK_STATES_NUM; i++) {
 
-	    	region = new TextureRegion(walkSheet, 0, (float) i/FRAME_ROWS, 1,(float) (i+1) /FRAME_ROWS);
+	    	region = new TextureRegion(walkSheet, 0, (float) i/FRAME_ROWS_WALK, 1,(float) (i+1) /FRAME_ROWS_WALK);
 	    	
-			TextureRegion[][] tmp2 = region.split(region.getRegionWidth()/FRAME_COLS,region.getRegionHeight());
-			
-			
+			TextureRegion[][] tmp2 = region.split(region.getRegionWidth()/FRAME_COLS_WALK,region.getRegionHeight());
 			
 			animatedWalk[i] = new Animation(0.25f, tmp2[0]);
 	    }
+	    
+	    animatedStanding = new Animation[4];
+	    for (int i = 0; i < ANIMATION_STILL_STATES_NUM; i++) {
+
+	    	region = new TextureRegion(walkSheet, 0, (float) i/FRAME_ROWS_STANDING, 1,(float) (i+1) /FRAME_ROWS_STANDING);
+	    	
+			TextureRegion[][] tmp2 = region.split(region.getRegionWidth()/FRAME_COLS_STANDING,region.getRegionHeight());
+			
+			animatedStanding[i] = new Animation(0.25f, tmp2[0]);
+	    }
+	    
       
 		
 		//Adiciona equipamento arma
@@ -103,7 +115,7 @@ public class Player extends LightMapEntity {
 		timer++;
 		
 		stateTime += delta;
-		currentFrame = animatedWalk[direction].getKeyFrame(stateTime, true);
+		currentFrame = animatedStanding[0].getKeyFrame(stateTime, true);
 		
 		timer = 6;
 		if(timer>5){
@@ -182,7 +194,9 @@ public class Player extends LightMapEntity {
 		if (this.getParent() != null || this.getStage() != null) {
 			this.remove();
 		}
-		Loader.unload(texName);
+		Loader.unload(walkTexName);
+		Loader.unload(standingTexName);
+		player = null;
 	}
 	
 	public void attach(IObserver observer){

@@ -3,8 +3,6 @@ package snake.equipment.implementations;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.sun.xml.internal.stream.Entity;
-
 import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
 
