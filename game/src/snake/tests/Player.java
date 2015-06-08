@@ -48,6 +48,10 @@ public class Player extends LightMapEntity {
 	//Stuff
 	private int timer = 0;
 	private float stateTime = 0;
+<<<<<<< HEAD
+=======
+	private int direcao = UP;
+>>>>>>> 8098392bf649050380b641981adfc6c1b523acd0
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	private Player (GameWorld world) {
@@ -79,13 +83,12 @@ public class Player extends LightMapEntity {
 		//Adiciona equipamento arma
 		weapon = new Weapon (world);
 		this.addActor(weapon);
-		weapon.setPosition(15.25f, 22.5f);
+		weapon.setPosition(2f, 3);
 		
 		//adiciona equipamento lanterna_teste
 		flashlight = new FlashLight_test (world);
 		this.addActor(flashlight);
-		flashlight.setPosition(15f, 20);
-		
+		flashlight.setPosition(0, 0);		
 	}
 	
 	static public Player getinstance(GameWorld world){

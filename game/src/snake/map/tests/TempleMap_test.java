@@ -77,6 +77,10 @@ public class TempleMap_test extends VisualGameWorld {
 		this.addActor((Group)flashlight); //Added to group // added to this map
 		
 		createLights();
+		
+		IEquipment sensor = EquipmentCreator.createFactory("sensor").create(20, 20, true); //Equipment
+		this.addActor((Group)sensor); //Added to group // added to this map
+				
 	}
 	
 	
