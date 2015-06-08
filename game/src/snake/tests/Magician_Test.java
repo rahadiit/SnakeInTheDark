@@ -30,8 +30,6 @@ public class Magician_Test extends LightMapEntity {
 	
 	public Magician_Test (GameWorld world) {
 		super(world);
-
-		world.addActor(this);
 		this.setSize(30, 30);
 		this.setOrigin(13, 16); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
