@@ -1,115 +1,87 @@
 package snake.equipment.implementations;
 
 import box2dLight.PointLight;
+import box2dLight.PositionalLight;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
-import snake.map.IMapAccess;
 
-/**                              Developed By:
- *                                  NoDarkGlasses
+import snake.map.IMapAccess;
+import snake.visuals.Lights;
+
+/**
+ * Developed By: NoDarkGlasses
  *
  * Implementa������o concreta do sensor
- *    
+ * 
  * @author bszazulla
  */
 
-public class SensorEquipment extends AbstractEquipment
-{
-	
+public class SensorEquipment extends AbstractEquipment {
+
 	// sensor eh um equipment sem sprite, ele eh fixo com o player
-	PointLight light;  					
+	PointLight light;
 	Vector2 vec = new Vector2();
 
-	public SensorEquipment(float x, float y, boolean onMap)
-	{		
+	public SensorEquipment(float x, float y, boolean onMap) {
 		this.name = "Sensor";
 		this.description = "The Sensor reveals drones around you";
-		this.setBounds (x, y, 5, 5); // ver o setPosition
+		this.setBounds(x, y, 5, 5); // ver o setPosition
 	}
-	
-	
-	public SensorEquipment()
-	{		
+
+	public SensorEquipment() {
 		this.name = "Sensor";
 		this.description = "The Sensor reveals drones around you";
 	}
-	
-	public void activateOnMap(IMapAccess map) 
-	{
-//		int x, y, i, j, m, n, a, b;
-//		int count;
-//		x = map.getX();
-//		y = map.getY();
-//		m = map.getWidth();
-//		n = getHeight();
-//		
-//		if (x > 0)
-//			i = -1;
-//		else
-//			i = 0;
-//		if (y > 0)
-//			j = -1;
-//		
-//		else
-//			j = 0;
-//		
-//		if (x == m)
-//			a = 1;
-//		else
-//			a = 2;
-//		
-//		if (y == n)
-//			b = 1;
-//		else
-//			b = 2;
-//
-//		for(i; i < a; i++)
-//			for (j; j < b; j++)
-//				if (map.getCell(i, j) == "drone")
-//					count++;
-		//
-		//			
+
+	public void activateOnMap(IMapAccess map) {
+		float x, y;
+		float i, j;
+		int count = 0;
+
+		x = getX();
+		y = getY();
+		for (i = -2; i < 3 && x + i >= 0 && x + i == map.getMapWidth(); i++)
+			for (j = -2; j < 3 && x + j >= 0 && x + j == map.getMapHeight(); j++)
+				count++;
+
 	}
 
 	@Override
-	public void draw(Batch batch, float parentAlpha)
-	{
+	public void draw(Batch batch, float parentAlpha) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void act(float delta)
-	{
-		//vec.set(0, 0);
-		//this.localToStageCoordinates(vec);
-		//light.setActive(!light.isActive());
-		//light.setPosition(vec);
-
+	public void act(float delta) {
+		vec.set(0, 0);
+		this.localToStageCoordinates(vec);
+		light.setPosition(vec);
 		// TODO Auto-generated method stub
 
 	}
-	
-	@Override
-	public void createLights()
-	{ // Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
-		//light = new PointLight(Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f), 40, 45, 45, 45, 30);
-		//light.setActive(false);
-	} // Se quiser destruir a luz, pode ser em qualquer lugar
 
 	@Override
-	public void disposeLights()
-	{
-		if (light != null)
-		{
+	public void createLights() { // Criacao de luzes tem que ser algo separado
+	// (senao da pau) -- tudo aqui
+		light = new PointLight(Lights.getRayhandler(), 5000, new Color(0f, 1f,
+				0f, 1f), 10, getX() + 50, getY() + 50);
+		light.setActive(true);
+	}
+
+	@Override
+	public void disposeLights() {
+		if (light != null) {
 			light.remove();
 			light.dispose();
 		}
 	}
-	
+
 	@Override
-	public void dispose() 
-	{
-		////////sprite.getTexture().dispose(); // if you don't dispose stuff gets crazy
+	public void dispose() {
+		// //////sprite.getTexture().dispose(); // if you don't dispose stuff
+		// gets crazy
 	}
 }

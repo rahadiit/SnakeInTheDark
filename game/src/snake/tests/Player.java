@@ -1,5 +1,9 @@
 package snake.tests;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import snake.Drone.IObserver;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
 import snake.visuals.enhanced.LightMapEntity;
@@ -27,6 +31,7 @@ public class Player extends LightMapEntity {
 	private String texName = "character/player1.png";
 	private int timer = 0;
 	private static Player player;
+	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	private Player (GameWorld world) {
 		super(world);
@@ -102,6 +107,10 @@ public class Player extends LightMapEntity {
 			else if (Gdx.input.isKeyPressed(Input.Keys.V)) {
 				rotateBy(-5);
 			}
+			
+			for (IObserver observer : observers) {
+				observer.update();
+			}				
 		}
 	}
 	
@@ -136,4 +145,8 @@ public class Player extends LightMapEntity {
 		}
 		Loader.unload(texName);
 	}
+	
+	public void attach(IObserver observer){
+	      observers.add(observer);		
+	   }
 }

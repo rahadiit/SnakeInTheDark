@@ -1,5 +1,6 @@
 package snake.map.tests;
 
+import snake.Drone.Drone;
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
@@ -38,6 +39,7 @@ public class TempleMap_test extends VisualGameWorld {
 	private Player player;
 	private Box_Test box; // Provavelmente sim.
 	private String texName = "demos/pixelArtTemple.png";
+	private Drone drone;
 	
 	public TempleMap_test (String LevelData/* Add other parameters of choice*/) {
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
@@ -51,18 +53,23 @@ public class TempleMap_test extends VisualGameWorld {
 		
 		
 		//Cria o Player
-		magician = new Magician_Test(this);
+		player = Player.getinstance(this);
 		//magician = new Player(this); //Player
-		magician.setPosition(0, WorldSettings.heightFix(0)); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
+		player.setPosition(0, WorldSettings.heightFix(0)); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
 		//... Com o heightFix, o topo fica 100, o chao fica 0 (Highly recommended)
 		
+
 		//this.addActor(magician);
 		
 		
 		player = Player.getinstance(this);
 		player.setPosition(0,  WorldSettings.heightFix(0));
 		this.addActor(player);
-		
+
+		//Cria um drone [experimental]
+		drone = new Drone(this, 1, 1, "baixo");
+		drone.setPosition(0, WorldSettings.heightFix(0));
+		this.addActor(drone);
 		
 		//Cria uma caixa
 		box = new Box_Test(this); //Simple box with shadow
