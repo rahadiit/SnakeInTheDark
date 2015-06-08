@@ -98,14 +98,14 @@ public class MapManager implements IMapAccess {
         for (int i = 0; i < equipQuantity; i++) {
             String cellType;
             Cell cell;
-            int w, h;
+            int x, y;
             boolean alreadySpawned;
 
             do {
-                w = random.nextInt(mapWidth);
-                h = random.nextInt(mapHeight);
+                x = random.nextInt(mapWidth);
+                y = random.nextInt(mapHeight);
 
-                cell = baseLayer.getCell(w, h);
+                cell = baseLayer.getCell(x, y);
                 MapProperties properties = cell.getTile().getProperties();
 
                 cellType = properties.get("type", "", String.class);
@@ -115,7 +115,7 @@ public class MapManager implements IMapAccess {
             cell.getTile().getProperties().put("spawned", true);
 
             int index = random.nextInt(availableEquipments.size());
-            IEquipment equipment = EquipmentCreator.createFactory(availableEquipments.get(index)).create(0, 0, true);
+            IEquipment equipment = EquipmentCreator.createFactory(availableEquipments.get(index)).create(x, y, true);
 
             addEntity(equipment);
         }
