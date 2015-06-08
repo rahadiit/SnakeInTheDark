@@ -5,6 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import snake.engine.creators.HUDSettings;
+import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.HUD;
 
@@ -28,7 +30,11 @@ public class SnakeHUD extends HUD {
 		super();
 		
 		infos = new SnakeInfosHUD();
+		
+		
 		dialog  = new SnakeDialogHUD();
+		dialog.setPosition(5, 5);
+		//this.addActor(dialog);
 		
 		Loader.load(fontName, BitmapFont.class);
 		Loader.finishLoadingAsset(fontName);
@@ -41,11 +47,20 @@ public class SnakeHUD extends HUD {
 	}
 	
 	
+	@Override
+	public void act (float delta) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+			System.out.println("Position: "+ WorldSettings.getVScreenX_Porc() + ":" + WorldSettings.getVScreenY_Porc());
+			System.out.println("Size: "+ WorldSettings.getVScreenWidth_Porc() + ":" + WorldSettings.getVScreenHeight_Porc());
+		}
+	}
+	
+	
 	public void draw(Batch batch, float parentAlpha) {
+		super.draw(batch, parentAlpha);
 		// Draw fps
 		font.setColor(Color.GREEN);
 		
-		font.getData().setScale(1f);
 		if (Gdx.input.isKeyPressed(Input.Keys.H) || Gdx.input.isTouched())
 			font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, this.getHeight());
 		
@@ -53,12 +68,6 @@ public class SnakeHUD extends HUD {
 			font.setColor(Color.MAGENTA);
 			font.draw(batch, "Wow. Just... Wow.", 50, 50);
 		}
-		
-		font.setColor(Color.ORANGE);
-		font.getData().setScale(.5f);
-		if (Gdx.input.isKeyPressed(Input.Keys.H))
-			font.draw(batch, "Use Directional Arrows and IJKL for moving, YU and OP for zooming", this.getWidth()/4, this.getHeight() * 99/100);
-		//Ends drawing
 	}
 
 

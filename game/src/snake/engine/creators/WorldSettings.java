@@ -22,8 +22,8 @@ public class WorldSettings {
 	private static float CAMERAPOSITIONX = 50,  CAMERAPOSITIONY = heightFix(50); //center of camera position (Changeable)
 	private static float MAXZOOM = .1f, MINZOOM = 1f;
 	private static boolean HAS_VIRTUAL_SCREEN = true; //Defines if World camera occupies whole screen or is clipped
-	private static float VSCREEN_X_PORC = 0f, VSCREEN_Y_PORC = 0f; // Starting point of Virtual Screen (if set) (porcentage to Screen Size
-	private static float VSCREEN_WIDTH_PORC = 1f, VSCREEN_HEIGHT_PORC = 1f; //Size of Virtual Screen (porcentage to Screen Size)
+	private static float VSCREEN_X_PORC = 0f, VSCREEN_Y_PORC = .1636f; // Starting point of Virtual Screen (if set) (porcentage to Screen Size
+	private static float VSCREEN_WIDTH_PORC = .834f, VSCREEN_HEIGHT_PORC = .834f; //Size of Virtual Screen (porcentage to Screen Size)
 	private static float VSCREEN_MINSIZE = .3f, VSCREEN_MAXSIZE = 1;
 	//IMPORTANT NOTE -- VSCREEN is UNreliable if it goes beyond the Screen size
 	
