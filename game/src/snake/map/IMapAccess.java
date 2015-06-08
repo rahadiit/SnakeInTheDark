@@ -14,8 +14,11 @@ public interface IMapAccess {
 
     int getMapHeight();
 
+    int getTileWidth();
+
+    int getTileHeight();
+
     CellType getCellType(int x, int y);
 
     void setCellType(int x, int y, CellType type);
-
 }
