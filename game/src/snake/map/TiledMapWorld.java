@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapRenderer;
 import snake.engine.creators.WorldSettings;
+import snake.tests.Player;
 import snake.visuals.enhanced.ILightMapEntity;
 import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;
@@ -42,7 +43,11 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void show() {
-        WorldSettings.setAmbientColor(Color.WHITE);
+        WorldSettings.setAmbientColor(new Color(.05f, .05f, .05f, 1f));
+
+        IMapEntity player = Player.getinstance(this);
+        manager.addEntity(player);
+
         OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
         int width = manager.getMapWidth();
         int height = manager.getMapHeight();
