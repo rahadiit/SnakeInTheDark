@@ -53,12 +53,9 @@ public class TempleMap_test extends VisualGameWorld {
 		
 		
 		//Cria o Player
-		player = Player.getinstance(this);
-		//magician = new Player(this); //Player
-		player.setPosition(0, WorldSettings.heightFix(0)); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
+		magician = new Magician_Test(this);
+		magician.setPosition(0, WorldSettings.heightFix(0)); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
 		//... Com o heightFix, o topo fica 100, o chao fica 0 (Highly recommended)
-		
-
 		//this.addActor(magician);
 		
 		
@@ -69,13 +66,13 @@ public class TempleMap_test extends VisualGameWorld {
 		//Cria um drone [experimental]
 		drone = new Drone(this, 1, 1, "baixo");
 		drone.setPosition(50, WorldSettings.heightFix(50));
-		this.addActor(drone);
+		//this.addActor(drone);
 		
 		//Cria uma caixa
 		box = new Box_Test(this); //Simple box with shadow
 		box.setPosition(38, WorldSettings.heightFix(53));
-				
-		// VC PASSA A POSI??????O INICIAL DO EQUIPAMENTO, TEM A VERS???O DO CONSTRUTOR SEM ISSO TBM!
+
+		// VC PASSA A POSISAO INICIAL DO EQUIPAMENTO, TEM A VERS???O DO CONSTRUTOR SEM ISSO TBM!
 		IEquipment flashlight = EquipmentCreator.createFactory("flashlight").create(20, 20, true); //Equipment
 		this.addActor((Group)flashlight); //Added to group // added to this map
 		

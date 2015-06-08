@@ -28,7 +28,7 @@ public class Player extends LightMapEntity {
 	//Singleton area
 	private static Player player;
 	
-	private static final int DOWN = 0, LEFT = 1, WRIGHT = 2, UP = 3;
+	private static final int DOWN = 0, LEFT = 1, RIGHT = 2, UP = 3;
 	private static final int ANIMATION_STATES_NUM = 4;
 	
 	//Animation
@@ -38,6 +38,9 @@ public class Player extends LightMapEntity {
 	private String texName = "character/CharacterSprite.png";
 	
 	private static final int FRAME_ROWS = 4, FRAME_COLS = 3;
+	
+	private float speed = 10;
+	private int direction;
 	
 	//Equipments
 	private Weapon weapon;
@@ -98,34 +101,39 @@ public class Player extends LightMapEntity {
 		timer++;
 		
 		stateTime += delta;
-		currentFrame = animatedWalk[UP].getKeyFrame(stateTime, true);
+		currentFrame = animatedWalk[direction].getKeyFrame(stateTime, true);
 		
+		timer = 6;
 		if(timer>5){
 			timer = 0;
 		
 			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-				moveBy(-2.5f, 0);
+				moveBy(-speed * delta, 0);
+				direction = LEFT;
 				update();
 				/*Texture texture = new Texture(Gdx.files.internal("character/player4.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-				moveBy(2.5f, 0);
+				moveBy(speed * delta, 0);
+				direction = RIGHT;
 				update();
 				/*Texture texture = new Texture(Gdx.files.internal("character/player7.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-				moveBy(0, 2.5f);
+				moveBy(0, speed * delta);
+				direction = UP;
 				update();
 				/*Texture texture = new Texture(Gdx.files.internal("character/player10.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-				moveBy(0, -2.5f);
+				moveBy(0, -speed * delta);
+				direction = DOWN;
 				update();
 				/*Texture texture = new Texture(Gdx.files.internal("character/player1.png"));
 				sprite = new Sprite(texture);
