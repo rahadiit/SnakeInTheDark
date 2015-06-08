@@ -28,20 +28,24 @@ public class Player extends LightMapEntity {
 	//Singleton area
 	private static Player player;
 	
+	private static final int DOWN = 0, LEFT = 1, WRIGHT = 2, UP = 3;
+	private static final int ANIMATION_STATES_NUM = 4;
+	
 	//Animation
-	private Texture walkSheet;
-	private Animation animation;
-	private TextureRegion currentFrame;
+	private Texture walkSheet; //debugar o esquema
+	private Animation[] animatedWalk;
+	private TextureRegion currentFrame, region;
 	private String texName = "character/CharacterSprite.png";
 	
-	private static final int FRAME_ROWS = 3, FRAME_COLS = 2;
+	private static final int FRAME_ROWS = 4, FRAME_COLS = 3;
 	
 	//Equipments
 	private Weapon weapon;
 	private FlashLight_test flashlight;
 	
 	//Stuff
-	private int timer = 0, stateTime = 0;
+	private int timer = 0;
+	private float stateTime = 0;
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	private Player (GameWorld world) {
@@ -53,23 +57,22 @@ public class Player extends LightMapEntity {
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(texName, Texture.class);
 		Loader.finishLoadingAsset(texName);
-		
-
 		walkSheet = Loader.get(texName);
 		
-		//Cria a animacao
-		TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth()/FRAME_COLS, walkSheet.getHeight()/FRAME_ROWS);
-		TextureRegion[] walkFrames = new TextureRegion[FRAME_ROWS * FRAME_COLS];
-		int index = 0;
-        for (int i = 0; i < FRAME_ROWS; i++) {
-            for (int j = 0; j < FRAME_COLS; j++) {
-                walkFrames[index++] = tmp[i][j];
-            }
-        }
 		
-		animation = new Animation(0.025f, walkFrames);
-		
-	
+		//Cria as animacoes
+		animatedWalk = new Animation[4];
+	    for (int i = 0; i < ANIMATION_STATES_NUM; i++) {
+
+	    	region = new TextureRegion(walkSheet, 0, (float) i/FRAME_ROWS, 1,(float) (i+1) /FRAME_ROWS);
+	    	
+			TextureRegion[][] tmp2 = region.split(region.getRegionWidth()/FRAME_COLS,region.getRegionHeight());
+			
+			
+			
+			animatedWalk[i] = new Animation(0.25f, tmp2[0]);
+	    }
+      
 		
 		//Adiciona equipamento arma
 		weapon = new Weapon (world);
@@ -95,9 +98,7 @@ public class Player extends LightMapEntity {
 		timer++;
 		
 		stateTime += delta;
-		currentFrame = animation.getKeyFrame(stateTime, true);
-		
-		
+		currentFrame = animatedWalk[UP].getKeyFrame(stateTime, true);
 		
 		if(timer>5){
 			timer = 0;

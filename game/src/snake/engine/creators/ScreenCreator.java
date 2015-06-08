@@ -47,7 +47,7 @@ public abstract class ScreenCreator {
 					return null;
 		}
 		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println ("Not enough parameters to create requested Screen.");
+			e.printStackTrace();
 			return null;
 		}
 
@@ -116,7 +116,7 @@ public abstract class ScreenCreator {
 			
 			
 		}catch (IllegalStateException e) {
-			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+			e.printStackTrace();
 		}
 	}
 	
@@ -140,7 +140,7 @@ public abstract class ScreenCreator {
 			
 			
 		}catch (IllegalStateException e) {
-			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+			e.printStackTrace();
 		}
 	}
 	
@@ -163,7 +163,7 @@ public abstract class ScreenCreator {
 			updateRequested = true;
 			
 		}catch (IllegalStateException e) {
-			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+			e.printStackTrace();
 		}
 	}
 
@@ -189,7 +189,7 @@ public abstract class ScreenCreator {
 			updateRequested = true;
 			
 		}catch (IllegalStateException e) {
-			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+			e.printStackTrace();
 		}
 	}
 	
@@ -216,7 +216,7 @@ public abstract class ScreenCreator {
 			updateRequested = true;
 			
 		}catch (IllegalStateException e) {
-			throw new IllegalStateException ("Not enough space avaible for new Screen.");
+			e.printStackTrace();
 		}
 	}
 	
