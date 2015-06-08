@@ -88,19 +88,7 @@ public class Player extends LightMapEntity {
 			TextureRegion[][] tmp2 = region.split(region.getRegionWidth()/FRAME_COLS_STANDING,region.getRegionHeight());
 			
 			animatedStanding[i] = new Animation(0.25f, tmp2[0]);
-	    }
-	    
-      
-		
-		//Adiciona equipamento arma
-		weapon = new Weapon (world);
-		this.addActor(weapon);
-		weapon.setPosition(2f, 3);
-		
-		//adiciona equipamento lanterna_teste
-		flashlight = new FlashLight_test (world);
-		this.addActor(flashlight);
-		flashlight.setPosition(0, 0);		
+	    }		
 	}
 	
 	static public Player getinstance(GameWorld world){
