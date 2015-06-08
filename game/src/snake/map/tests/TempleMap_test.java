@@ -34,7 +34,7 @@ public class TempleMap_test extends VisualGameWorld {
 	// The code below is simply a prototype for testing purposes 
 	private Sprite temple;
 	//private Magician_Test magician; //Da pra colocar uma array com todas as entities? 
-	private Magician_Test magician;
+	private Player player;
 	private Box_Test box; // Provavelmente sim.
 	private String texName = "demos/pixelArtTemple.png";
 	
@@ -50,9 +50,9 @@ public class TempleMap_test extends VisualGameWorld {
 		
 		
 		//Cria o Player
-		magician = new Magician_Test(this);
+		player = Player.getinstance(this);
 		//magician = new Player(this); //Player
-		magician.setPosition(0, WorldSettings.heightFix(0)); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
+		player.setPosition(0, WorldSettings.heightFix(0)); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
 		//... Com o heightFix, o topo fica 100, o chao fica 0 (Highly recommended)
 	
 		//Cria uma caixa
