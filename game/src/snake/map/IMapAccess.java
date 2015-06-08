@@ -5,6 +5,17 @@ import java.util.List;
 public interface IMapAccess {
 
     List<IMapEntity> getEntities();
-    void addEntity(IMapEntity entity);
+
+    boolean addEntity(IMapEntity entity);
+
+    boolean removeEntity(IMapEntity entity);
+
+    int getMapWidth();
+
+    int getMapHeight();
+
+    CellType getCellType(int x, int y);
+
+    void setCellType(int x, int y, CellType type);
 
 }
