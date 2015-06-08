@@ -28,13 +28,16 @@ public class Player extends LightMapEntity {
 	//Singleton area
 	private static Player player;
 	
+	private static final int UP = 1, LEFT = 2, WRIGHT = 3, DOWN = 4;
+	private static final int ANIMATION_STATES_NUM = 4;
+	
 	//Animation
 	private Texture walkSheet; //debugar o esquema
-	private Animation animation;
-	private TextureRegion currentFrame;
+	private Animation[] animatedWalk;
+	private TextureRegion currentFrame, region;
 	private String texName = "character/CharacterSprite.png";
 	
-	private static final int FRAME_ROWS = 1, FRAME_COLS = 2;
+	private static final int FRAME_ROWS = 4, FRAME_COLS = 3;
 	
 	//Equipments
 	private Weapon weapon;
@@ -54,21 +57,23 @@ public class Player extends LightMapEntity {
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(texName, Texture.class);
 		Loader.finishLoadingAsset(texName);
-		
 		walkSheet = Loader.get(texName);
 		
-		//Cria a animacao
-		TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth()/FRAME_COLS, walkSheet.getHeight()/FRAME_ROWS);
-		TextureRegion[] walkFrames = new TextureRegion[FRAME_ROWS * FRAME_COLS];
-		int index = 0;
-        for (int i = 0; i < FRAME_ROWS; i++) {
-            for (int j = 0; j < FRAME_COLS; j++) {
-                walkFrames[index++] = tmp[i][j];
-            }
-        }
 		
-		animation = new Animation(0.5f, walkFrames);
-		
+		//Cria as animacoes
+		animatedWalk = new Animation[4];
+	    for (int i = 0; i < ANIMATION_STATES_NUM; i++) {
+
+	    	region = new TextureRegion(walkSheet, 0, (float) i/FRAME_ROWS, 1,(float) (i+1) /FRAME_ROWS);
+	    	
+			TextureRegion[][] tmp2 = region.split(region.getRegionWidth(),region.getRegionHeight()/FRAME_COLS);
+			
+			TextureRegion[] walkFrames = tmp2[0];
+			System.out.println(tmp2[0].length);
+			
+			animatedWalk[i] = new Animation(0.25f, walkFrames);
+	    }
+      
 		
 		//Adiciona equipamento arma
 		weapon = new Weapon (world);
@@ -94,33 +99,36 @@ public class Player extends LightMapEntity {
 		timer++;
 		
 		stateTime += delta;
-		currentFrame = animation.getKeyFrame(stateTime, true);
-		System.out.println(stateTime);
+		currentFrame = animatedWalk[0].getKeyFrame(stateTime, true);
 		
 		if(timer>5){
 			timer = 0;
 		
 			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
 				moveBy(-2.5f, 0);
+				update();
 				/*Texture texture = new Texture(Gdx.files.internal("character/player4.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 				moveBy(2.5f, 0);
+				update();
 				/*Texture texture = new Texture(Gdx.files.internal("character/player7.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 				moveBy(0, 2.5f);
+				update();
 				/*Texture texture = new Texture(Gdx.files.internal("character/player10.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-				/*moveBy(0, -2.5f);
-				Texture texture = new Texture(Gdx.files.internal("character/player1.png"));
+				moveBy(0, -2.5f);
+				update();
+				/*Texture texture = new Texture(Gdx.files.internal("character/player1.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
 			}
@@ -130,11 +138,7 @@ public class Player extends LightMapEntity {
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.V)) {
 				rotateBy(-5);
-			}
-			
-			for (IObserver observer : observers) {
-				observer.update();
-			}				
+			}										
 		}
 	}
 	
@@ -174,4 +178,10 @@ public class Player extends LightMapEntity {
 	public void attach(IObserver observer){
 	      observers.add(observer);		
 	   }
+	
+	private void update(){
+		for (IObserver observer : observers) {
+			observer.update();
+		}
+	}
 }
