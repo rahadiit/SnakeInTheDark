@@ -107,34 +107,21 @@ public class Player extends LightMapEntity {
 				moveBy(-2.5f, 0);
 				update();
 				direcao = LEFT;
-
-				/*Texture texture = new Texture(Gdx.files.internal("character/player4.png"));
-				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 				moveBy(2.5f, 0);
 				update();
 				direcao = RIGHT;
-				/*Texture texture = new Texture(Gdx.files.internal("character/player7.png"));
-				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 				moveBy(0, 2.5f);
 				update();
-				direcao = UP;
-				/*Texture texture = new Texture(Gdx.files.internal("character/player10.png"));
-				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);*/
+				direcao = UP;			
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 				moveBy(0, -2.5f);
 				update();
-				direcao = DOWN;
-				/*Texture texture = new Texture(Gdx.files.internal("character/player1.png"));
-				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);*/
+				direcao = DOWN;				
 			}
 			
 			else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
