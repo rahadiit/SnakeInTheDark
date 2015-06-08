@@ -34,16 +34,15 @@ public class TempleMap_test extends VisualGameWorld {
 	// The code below is simply a prototype for testing purposes 
 	private Sprite temple;
 	//private Magician_Test magician; //Da pra colocar uma array com todas as entities? 
-	private Player magician;
+	private Magician_Test magician;
 	private Box_Test box; // Provavelmente sim.
 	private String texName = "demos/pixelArtTemple.png";
 	
 	public TempleMap_test (String LevelData/* Add other parameters of choice*/) {
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(texName, Texture.class);
-		while (!Loader.isLoaded(texName))
-			Loader.update();
-						
+		Loader.finishLoadingAsset(texName);
+		
 		//Cria a imagem
 		Texture texture = Loader.get(texName);
 		temple = new Sprite(texture);
@@ -51,7 +50,7 @@ public class TempleMap_test extends VisualGameWorld {
 		
 		
 		//Cria o Player
-		magician = Player.getinstance(this);
+		magician = new Magician_Test(this);
 		//magician = new Player(this); //Player
 		magician.setPosition(0, WorldSettings.heightFix(0)); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
 		//... Com o heightFix, o topo fica 100, o chao fica 0 (Highly recommended)

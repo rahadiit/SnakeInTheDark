@@ -42,9 +42,6 @@ public class Magician_Test extends LightMapEntity {
 		//Cria a imagem
 		Texture texture = Loader.get(texName);
 		sprite = new Sprite(texture);
-					
-		sprite.setAlpha(1f); //Transparencia -- de 0 a 1 (0 eh invisivel)
-		
 		
 		//Adiciona equipamento arma
 		weapon = new Weapon (world);

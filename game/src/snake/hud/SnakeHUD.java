@@ -5,8 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import snake.engine.creators.HUDSettings;
-import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.HUD;
 
@@ -34,7 +32,7 @@ public class SnakeHUD extends HUD {
 		
 		dialog  = new SnakeDialogHUD();
 		dialog.setPosition(5, 5);
-		//this.addActor(dialog);
+		this.addActor(dialog);
 		
 		Loader.load(fontName, BitmapFont.class);
 		Loader.finishLoadingAsset(fontName);
@@ -49,10 +47,11 @@ public class SnakeHUD extends HUD {
 	
 	@Override
 	public void act (float delta) {
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+		super.act(delta);
+		/*if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			System.out.println("Position: "+ WorldSettings.getVScreenX_Porc() + ":" + WorldSettings.getVScreenY_Porc());
 			System.out.println("Size: "+ WorldSettings.getVScreenWidth_Porc() + ":" + WorldSettings.getVScreenHeight_Porc());
-		}
+		}*/
 	}
 	
 	

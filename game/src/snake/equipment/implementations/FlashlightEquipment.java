@@ -72,7 +72,6 @@ public class FlashlightEquipment extends AbstractEquipment
 		else
 			vec.set(0, 0); // sen�o, centro defaut
 		
-		
 		this.localToStageCoordinates(vec);
 		
 		// lanterna ascende ou apaga ao pressionar k
