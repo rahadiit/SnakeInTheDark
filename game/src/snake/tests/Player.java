@@ -29,19 +29,20 @@ public class Player extends LightMapEntity {
 	private static Player player;
 	
 	//Animation
-	private Texture walkSheet;
+	private Texture walkSheet; //debugar o esquema
 	private Animation animation;
 	private TextureRegion currentFrame;
 	private String texName = "character/CharacterSprite.png";
 	
-	private static final int FRAME_ROWS = 3, FRAME_COLS = 2;
+	private static final int FRAME_ROWS = 1, FRAME_COLS = 2;
 	
 	//Equipments
 	private Weapon weapon;
 	private FlashLight_test flashlight;
 	
 	//Stuff
-	private int timer = 0, stateTime = 0;
+	private int timer = 0;
+	private float stateTime = 0;
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	private Player (GameWorld world) {
@@ -66,8 +67,7 @@ public class Player extends LightMapEntity {
             }
         }
 		
-		animation = new Animation(0.025f, walkFrames);
-		
+		animation = new Animation(0.5f, walkFrames);
 		
 		
 		//Adiciona equipamento arma
@@ -95,8 +95,7 @@ public class Player extends LightMapEntity {
 		
 		stateTime += delta;
 		currentFrame = animation.getKeyFrame(stateTime, true);
-		
-		
+		System.out.println(stateTime);
 		
 		if(timer>5){
 			timer = 0;
