@@ -36,17 +36,19 @@ public class SensorEquipment extends AbstractEquipment {
 	}
 
 	public void activateOnMap(IMapAccess map) {
-		float x, y;
-		float i, j;
-		int count = 0;
-
-		x = getX();
-		y = getY();
-		for (i = -2; i < 3 && x + i >= 0 && x + i == map.getMapWidth(); i++)
-			for (j = -2; j < 3 && x + j >= 0 && x + j == map.getMapHeight(); j++)
-				count++;
-
 	}
+
+	int a = 0;
+//	public int hasDrone(int x, int y, int radius) {
+//		int count = 0;
+//		IMapAccess map;
+//		for(int i = -radius; i <= radius && x + i >= 0 && x+i <= map.getMapWidth(); i++)
+//			for (int j = -radius; j <= radius && x + j >= 0 && x+j <= map.getMapHeight(); j++)
+//				if (map.getEntity(i, j).type == "DRONE")
+//					count++;
+//		return count;
+//	}
+	
 
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
@@ -59,15 +61,17 @@ public class SensorEquipment extends AbstractEquipment {
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
-		// TODO Auto-generated method stub
+
+//		if (hasDrone((int)getX(), (int)getY(), 10) > 0)
+	//	 	light.setColor(new Color(1f, 0f, 0f, 1f));
 
 	}
 
 	@Override
 	public void createLights() { // Criacao de luzes tem que ser algo separado
-	// (senao da pau) -- tudo aqui
+		// (senao da pau) -- tudo aqui
 		light = new PointLight(Lights.getRayhandler(), 5000, new Color(0f, 1f,
-				0f, 1f), 10, getX() + 50, getY() + 50);
+				0f, 1f), 10, getX(), getY());
 		light.setActive(true);
 	}
 
@@ -81,7 +85,5 @@ public class SensorEquipment extends AbstractEquipment {
 
 	@Override
 	public void dispose() {
-		// //////sprite.getTexture().dispose(); // if you don't dispose stuff
-		// gets crazy
 	}
 }
