@@ -28,7 +28,7 @@ public class Player extends LightMapEntity {
 	//Singleton area
 	private static Player player;
 	
-	private static final int DOWN = 0, LEFT = 1, WRIGHT = 2, UP = 3;
+	private static final int DOWN = 0, LEFT = 1, RIGHT = 2, UP = 3;
 	private static final int ANIMATION_STATES_NUM = 4;
 	
 	//Animation
@@ -46,12 +46,13 @@ public class Player extends LightMapEntity {
 	//Stuff
 	private int timer = 0;
 	private float stateTime = 0;
+	private int direcao;
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	private Player (GameWorld world) {
 		super(world);
 
-		this.setSize(25f, 30);
+		this.setSize(3.5f, 4);
 		this.setOrigin(0,0); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
@@ -98,7 +99,7 @@ public class Player extends LightMapEntity {
 		timer++;
 		
 		stateTime += delta;
-		currentFrame = animatedWalk[UP].getKeyFrame(stateTime, true);
+		currentFrame = animatedWalk[direcao].getKeyFrame(stateTime, true);
 		
 		if(timer>5){
 			timer = 0;
@@ -106,6 +107,8 @@ public class Player extends LightMapEntity {
 			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
 				moveBy(-2.5f, 0);
 				update();
+				direcao = LEFT;
+
 				/*Texture texture = new Texture(Gdx.files.internal("character/player4.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
@@ -113,6 +116,7 @@ public class Player extends LightMapEntity {
 			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 				moveBy(2.5f, 0);
 				update();
+				direcao = RIGHT;
 				/*Texture texture = new Texture(Gdx.files.internal("character/player7.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
@@ -120,6 +124,7 @@ public class Player extends LightMapEntity {
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 				moveBy(0, 2.5f);
 				update();
+				direcao = UP;
 				/*Texture texture = new Texture(Gdx.files.internal("character/player10.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
@@ -127,6 +132,7 @@ public class Player extends LightMapEntity {
 			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 				moveBy(0, -2.5f);
 				update();
+				direcao = DOWN;
 				/*Texture texture = new Texture(Gdx.files.internal("character/player1.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
