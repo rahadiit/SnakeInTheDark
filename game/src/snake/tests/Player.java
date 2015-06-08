@@ -2,17 +2,17 @@ package snake.tests;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import snake.Drone.IObserver;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
 import snake.visuals.enhanced.LightMapEntity;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**                              Developed By:
  *                                  NoDark
@@ -25,30 +25,51 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Player extends LightMapEntity {
 	
-	private Sprite sprite;
+	//Singleton area
+	private static Player player;
+	
+	//Animation
+	private Texture walkSheet;
+	private Animation animation;
+	private TextureRegion currentFrame;
+	private String texName = "character/CharacterSprite.png";
+	
+	private static final int FRAME_ROWS = 3, FRAME_COLS = 2;
+	
+	//Equipments
 	private Weapon weapon;
 	private FlashLight_test flashlight;
-	private String texName = "character/player1.png";
-	private int timer = 0;
-	private static Player player;
+	
+	//Stuff
+	private int timer = 0, stateTime = 0;
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	private Player (GameWorld world) {
 		super(world);
 
-		this.setSize(2.5f, 3);
+		this.setSize(25f, 30);
 		this.setOrigin(0,0); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(texName, Texture.class);
-		Loader.getManager().finishLoadingAsset(texName);
+		Loader.finishLoadingAsset(texName);
 		
-		//Cria a imagem
-		Texture texture = Loader.get(texName);
-		sprite = new Sprite(texture);
-					
-		//sprite.setAlpha(1f); //Transparencia -- de 0 a 1 (0 eh invisivel)
+
+		walkSheet = Loader.get(texName);
 		
+		//Cria a animacao
+		TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth()/FRAME_COLS, walkSheet.getHeight()/FRAME_ROWS);
+		TextureRegion[] walkFrames = new TextureRegion[FRAME_ROWS * FRAME_COLS];
+		int index = 0;
+        for (int i = 0; i < FRAME_ROWS; i++) {
+            for (int j = 0; j < FRAME_COLS; j++) {
+                walkFrames[index++] = tmp[i][j];
+            }
+        }
+		
+		animation = new Animation(0.025f, walkFrames);
+		
+	
 		
 		//Adiciona equipamento arma
 		weapon = new Weapon (world);
@@ -73,32 +94,41 @@ public class Player extends LightMapEntity {
 		super.act(delta);
 		timer++;
 		
+		stateTime += delta;
+		currentFrame = animation.getKeyFrame(stateTime, true);
+		
+		
+		
 		if(timer>5){
 			timer = 0;
 		
 			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
 				moveBy(-2.5f, 0);
-				Texture texture = new Texture(Gdx.files.internal("character/player4.png"));
+				update();
+				/*Texture texture = new Texture(Gdx.files.internal("character/player4.png"));
 				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);
+				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 				moveBy(2.5f, 0);
-				Texture texture = new Texture(Gdx.files.internal("character/player7.png"));
+				update();
+				/*Texture texture = new Texture(Gdx.files.internal("character/player7.png"));
 				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);
+				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 				moveBy(0, 2.5f);
-				Texture texture = new Texture(Gdx.files.internal("character/player10.png"));
+				update();
+				/*Texture texture = new Texture(Gdx.files.internal("character/player10.png"));
 				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);
+				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 				moveBy(0, -2.5f);
-				Texture texture = new Texture(Gdx.files.internal("character/player1.png"));
+				update();
+				/*Texture texture = new Texture(Gdx.files.internal("character/player1.png"));
 				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);
+				sprite.setAlpha(1f);*/
 			}
 			
 			else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
@@ -106,18 +136,15 @@ public class Player extends LightMapEntity {
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.V)) {
 				rotateBy(-5);
-			}
-			
-			for (IObserver observer : observers) {
-				observer.update();
-			}				
+			}										
 		}
 	}
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
 		
-		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
+		
+		batch.draw(currentFrame, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 		super.draw(batch, parentAlpha);
 	}
@@ -149,4 +176,10 @@ public class Player extends LightMapEntity {
 	public void attach(IObserver observer){
 	      observers.add(observer);		
 	   }
+	
+	private void update(){
+		for (IObserver observer : observers) {
+			observer.update();
+		}
+	}
 }

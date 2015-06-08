@@ -31,7 +31,7 @@ public class Drone extends LightMapEntity implements IObserver{
 	public Drone (GameWorld world, int x, int y, String Direcao){
 		super(world);
 		
-		this.setSize(2.5f, 3);
+		this.setSize(5f, 6);
 		this.setOrigin(x,y); //, valor dado por quem chama , mapa?
 		
 		//Observer

@@ -68,7 +68,7 @@ public class TempleMap_test extends VisualGameWorld {
 
 		//Cria um drone [experimental]
 		drone = new Drone(this, 1, 1, "baixo");
-		drone.setPosition(0, WorldSettings.heightFix(0));
+		drone.setPosition(50, WorldSettings.heightFix(50));
 		this.addActor(drone);
 		
 		//Cria uma caixa
