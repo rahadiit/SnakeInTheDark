@@ -3,6 +3,7 @@ package snake.equipment.implementations;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.sun.xml.internal.stream.Entity;
 
 import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
@@ -18,6 +19,7 @@ public class EmpEquipment extends AbstractEquipment
 	Texture texture;
 	Sprite sprite; 
 	boolean onMap;
+	public final int radius = 2;
 	public EmpEquipment(float x, float y, boolean onMap)
 	{		
 		this.name = "EMP";
@@ -34,15 +36,12 @@ public class EmpEquipment extends AbstractEquipment
 	
 	public void activateOnMap(IMapAccess map) 
 	{
-//		int x, y, i, j;
-//		
-//	for(i = -2; i < 3 && x + i >= 0 && x+i == map.getMapWidth(); i++)
-	//for (j = -2; j < 3 && x + j >= 0 && x+j == map.getMapHeight(); j++)
-	//	if (map.getCellType(i, j) == DRONE)
-		//		map.removeEntity(entity);
-//					
-//				
-	}
+//		int x, y, i, j, radius;
+//			for(i = -radius; i <= radius && x + i >= 0 && x+i <= map.getMapWidth(); i++)
+//				for (j = -radius; j <= radius && x + j >= 0 && x+j <= map.getMapHeight(); j++)
+//					if (map.getEntity(i, j).type == "DRONE")
+//						removeEntity(map.getEntity(i, j));
+		}
 
 	@Override
 	public void dispose()

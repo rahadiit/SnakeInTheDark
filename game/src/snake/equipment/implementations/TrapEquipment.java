@@ -35,7 +35,7 @@ public class TrapEquipment extends AbstractEquipment
 	
 	public void activateOnMap(IMapAccess map) 
 	{
-	//	map.setCellType (trap);
+	//map.setCellType (int(getX()), int(getY()), "TRAP");
 	}
 
 	@Override
