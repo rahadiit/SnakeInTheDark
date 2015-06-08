@@ -40,7 +40,7 @@ public class Player extends LightMapEntity {
 	private static final int FRAME_ROWS_STANDING = 3, FRAME_COLS_STANDING = 3;
 	
 	private float speed = 10;
-	private int direction;
+	private int direction = UP;
 	
 	//Equipments
 	private Weapon weapon;
@@ -125,34 +125,21 @@ public class Player extends LightMapEntity {
 				moveBy(-speed * delta, 0);
 				direction = LEFT;
 				update();
-
-				/*Texture texture = new Texture(Gdx.files.internal("character/player4.png"));
-				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 				moveBy(speed * delta, 0);
 				direction = RIGHT;
 				update();
-				/*Texture texture = new Texture(Gdx.files.internal("character/player7.png"));
-				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 				moveBy(0, speed * delta);
 				direction = UP;
 				update();
-				/*Texture texture = new Texture(Gdx.files.internal("character/player10.png"));
-				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);*/
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 				moveBy(0, -speed * delta);
 				direction = DOWN;
 				update();
-				/*Texture texture = new Texture(Gdx.files.internal("character/player1.png"));
-				sprite = new Sprite(texture);
-				sprite.setAlpha(1f);*/
 			}
 			
 			else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
