@@ -28,7 +28,7 @@ public class Player extends LightMapEntity {
 	//Singleton area
 	private static Player player;
 	
-	private static final int UP = 1, LEFT = 2, WRIGHT = 3, DOWN = 4;
+	private static final int DOWN = 0, LEFT = 1, WRIGHT = 2, UP = 3;
 	private static final int ANIMATION_STATES_NUM = 4;
 	
 	//Animation
@@ -66,12 +66,11 @@ public class Player extends LightMapEntity {
 
 	    	region = new TextureRegion(walkSheet, 0, (float) i/FRAME_ROWS, 1,(float) (i+1) /FRAME_ROWS);
 	    	
-			TextureRegion[][] tmp2 = region.split(region.getRegionWidth(),region.getRegionHeight()/FRAME_COLS);
+			TextureRegion[][] tmp2 = region.split(region.getRegionWidth()/FRAME_COLS,region.getRegionHeight());
 			
-			TextureRegion[] walkFrames = tmp2[0];
-			System.out.println(tmp2[0].length);
 			
-			animatedWalk[i] = new Animation(0.25f, walkFrames);
+			
+			animatedWalk[i] = new Animation(0.25f, tmp2[0]);
 	    }
       
 		
@@ -99,7 +98,7 @@ public class Player extends LightMapEntity {
 		timer++;
 		
 		stateTime += delta;
-		currentFrame = animatedWalk[0].getKeyFrame(stateTime, true);
+		currentFrame = animatedWalk[UP].getKeyFrame(stateTime, true);
 		
 		if(timer>5){
 			timer = 0;
