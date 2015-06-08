@@ -88,7 +88,13 @@ public class Player extends LightMapEntity {
 			TextureRegion[][] tmp2 = region.split(region.getRegionWidth()/FRAME_COLS_STANDING,region.getRegionHeight());
 			
 			animatedStanding[i] = new Animation(0.25f, tmp2[0]);
-	    }		
+	    }
+	    
+
+		//adiciona equipamento lanterna_teste
+		flashlight = new FlashLight_test (world);
+		this.addActor(flashlight);
+		flashlight.setPosition(7, 5);		
 	}
 	
 	static public Player getinstance(GameWorld world){
@@ -103,7 +109,7 @@ public class Player extends LightMapEntity {
 		timer++;
 		
 		stateTime += delta;
-		currentFrame = animatedStanding[0].getKeyFrame(stateTime, true);
+		currentFrame = animatedStanding[RIGHT].getKeyFrame(stateTime, true);
 		
 		timer = 6;
 		if(timer>5){

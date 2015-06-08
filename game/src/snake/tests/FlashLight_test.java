@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import box2dLight.ConeLight;
 import box2dLight.Light;
 import snake.engine.models.GameWorld;
@@ -35,7 +36,15 @@ public class FlashLight_test extends LightMapEntity {
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
 		//And rotation
-		light.setDirection(this.getParent().getRotation() + 90);
+		
+		Actor parent = this.getParent();
+		float rotation = 0;
+		while (parent != null) {
+			rotation += parent.getRotation();
+			parent = parent.getParent();
+		}
+		
+		light.setDirection(rotation);
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)) {
 			System.out.println(getX() + ":" + getY());
