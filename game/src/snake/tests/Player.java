@@ -11,7 +11,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**                              Developed By:
@@ -54,7 +53,7 @@ public class Player extends LightMapEntity {
 	private Player (GameWorld world) {
 		super(world);
 
-		this.setSize(25f, 30);
+		this.setSize(3.5f, 4);
 		this.setOrigin(0,0); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
@@ -111,6 +110,7 @@ public class Player extends LightMapEntity {
 				moveBy(-speed * delta, 0);
 				direction = LEFT;
 				update();
+
 				/*Texture texture = new Texture(Gdx.files.internal("character/player4.png"));
 				sprite = new Sprite(texture);
 				sprite.setAlpha(1f);*/
