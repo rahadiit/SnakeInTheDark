@@ -56,12 +56,12 @@ public class TempleMap_test extends VisualGameWorld {
 		magician.setPosition(0, WorldSettings.heightFix(0)); // Perceba o heightFix -- otimo para trabalhar com porcentagem em relacao ao mundo
 		//... Com o heightFix, o topo fica 100, o chao fica 0 (Highly recommended)
 		
-		this.addActor(magician);
+		//this.addActor(magician);
 		
 		
 		player = Player.getinstance(this);
 		player.setPosition(0,  WorldSettings.heightFix(0));
-		//this.addActor(player);
+		this.addActor(player);
 		
 		
 		//Cria uma caixa
