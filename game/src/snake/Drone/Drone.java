@@ -30,7 +30,7 @@ public class Drone extends LightMapEntity {
 		this.setSize(2.5f,3);
 		//this.setOrigin(), valor dado por quem chama , mapa?
 		
-		
+		this.Direction = Direcao;	
 		Loader.load(textName,Texture.class);
 		sprite = new Sprite(texture);
 		
@@ -39,16 +39,16 @@ public class Drone extends LightMapEntity {
 	
 	public void act(){
 		if(Direction.equalsIgnoreCase("Esquerda"))
-			moveby(-2.5f,0);
+			moveBy(-2.5f,0);
 			
 		else if(Direction.equalsIgnoreCase("Direita"))
-			moveby(2.5f,0);
+			moveBy(2.5f,0);
 		
 		else if(Direction.equalsIgnoreCase("Cima"))
-			moveby(0,2.5f);
+			moveBy(0,2.5f);
 		
 		else if(Direction.equalsIgnoreCase("Baixo"))
-			moveby(0,2.5f);
+			moveBy(0,2.5f);
 			
 		}
 		

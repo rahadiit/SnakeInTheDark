@@ -34,36 +34,12 @@ public class EmpEquipment extends AbstractEquipment
 	
 	public void activateOnMap(IMapAccess map) 
 	{
-//		int x, y, i, j, m, n, a, b;
-//		x = map.getX();
-//		y = map.getY();
-//		m = map.getWidth();
-//		n = map.getHeight();
+//		int x, y, i, j;
 //		
-//		if (x > 0)
-//			i = -1;
-//		else
-//			i = 0;
-//		if (y > 0)
-//			j = -1;
-//		
-//		else
-//			j = 0;
-//		
-//		if (x == m)
-//			a = 1;
-//		else
-//			a = 2;
-//		
-//		if (y == n)
-//			b = 1;
-//		else
-//			b = 2;
-//
-//		for(i; i < a; i++)
-//			for (j; j < b; j++)
-//				if (map.getCell(i, j) == "drone")
-//					map.destroyDrone(i, j);
+//	for(i = -2; i < 3 && x + i >= 0 && x+i == map.getMapWidth(); i++)
+	//for (j = -2; j < 3 && x + j >= 0 && x+j == map.getMapHeight(); j++)
+	//	if (map.getCellType(i, j) == DRONE)
+		//		map.removeEntity(entity);
 //					
 //				
 	}

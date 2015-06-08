@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
+import snake.map.IMapEntity;
 
 /**
  * Developed By: NoDarkGlasses
@@ -36,8 +37,9 @@ public class GunEquipment extends AbstractEquipment
 
 	public void activateOnMap(IMapAccess map) 
 	{
-		//if (ammo > 0)
-		//	map.destroyDrone(map.getX(), map.getY());
+		IMapEntity entity = null;
+		if (ammo > 0)
+			map.removeEntity(entity);
 	}
 
 	@Override
