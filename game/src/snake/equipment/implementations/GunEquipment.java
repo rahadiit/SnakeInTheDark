@@ -35,7 +35,6 @@ public class GunEquipment extends AbstractEquipment {
 	public int ammo;
 
 	public void activateOnMap(IMapAccess map) {
-		IMapEntity entity = null;
 		if (ammo > 0) {
 			// map.removeEntity(map.getEntity((int)getX(), (int)getY());
 			ammo--;

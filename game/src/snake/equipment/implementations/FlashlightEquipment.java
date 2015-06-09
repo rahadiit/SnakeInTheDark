@@ -115,6 +115,5 @@ public class FlashlightEquipment extends AbstractEquipment
 	public void dispose() 
 	{
 		Loader.unload("equipments/PixelFlashlight.png");
-		sprite.getTexture().dispose(); // if you don't dispose stuff gets crazy
 	}
 }
