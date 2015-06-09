@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 /**                              Developed By:
  *                                  NoDark
@@ -33,7 +34,7 @@ public class Drone extends LightMapEntity implements IObserver{
 	
 	private TextureRegion tex;
 	private TextureRegion[] explodeFrames;
-	private String direction;
+	private Vector2 direction;
 	private String texName = "character/drone", explodeTexName = "character/explosaosprite.png";
 	private static Player player;
 	private IMapAccess world;
@@ -46,39 +47,52 @@ public class Drone extends LightMapEntity implements IObserver{
 	private float speed = 3f;
 	private State state = State.STANDING;
 	
+	
+	//Stuff
+	private float time;
+	private float distanceMoved;
+	private float lastPosX, lastPosY;
+	
+	
 	private float stateTime = 0;
-	public Drone (GameWorld world, int x, int y, String Direcao){
+	public Drone (GameWorld world, int x, int y, String direcao){
 		super(world);
 		
 		this.world = ((TiledMapWorld) world).getMapAccess();
 		
-		this.setSize(5f, 6);
-		this.setOrigin(x,y); 
+		this.setSize(1, 1);
+		this.setPosition(x,y);
 		
 		//Observer
 		player = Player.getInstance(world);
 		player.attach(this);
 		
-		if(Direcao.equalsIgnoreCase("esquerda"))
+		if(direcao.equalsIgnoreCase("esquerda")) {
+			this.direction = new Vector2(-speed, 0);
 			texName = texName + "esquerda.png";
+		}
 		
-		else if(Direcao.equalsIgnoreCase("direita"))
+		else if(direcao.equalsIgnoreCase("direita")) {
+			this.direction = new Vector2(speed, 0);
 			texName = texName + "direita.png";
+		}
 		
-		else if(Direcao.equalsIgnoreCase("cima"))
+		else if(direcao.equalsIgnoreCase("cima")) {
+			this.direction = new Vector2(0, speed);
 			texName = texName + "tras.png";
+		}
 		
-		else if(Direcao.equalsIgnoreCase("baixo"))
+		else if(direcao.equalsIgnoreCase("baixo")) {
+			this.direction = new Vector2(0, -speed);
 			texName = texName + "frente.png";
+		}
 		
 		
 		Loader.load(texName,Texture.class);
 		Loader.getManager().finishLoadingAsset(texName);
 		
 		tex = Loader.get(texName);	
-		//sprite.setAlpha(1f);
-
-		this.direction = Direcao;	
+		//sprite.setAlpha(1f);	
 		
 		//carrega spirte da explosao
 		Loader.load(explodeTexName, Texture.class);
@@ -102,64 +116,101 @@ public class Drone extends LightMapEntity implements IObserver{
 	
 	public void update(float delta){
 		state = State.MOVING;
+		lastPosX = getX();
+		lastPosY = getY();
+		distanceMoved = 0;
 		
-		if(direction.equalsIgnoreCase("Esquerda") && !CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY()))) {
-			IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY());
-			if (entity != null && "player".equals(entity.getType())) {
-				//Try to catch player
+		if(direction.x < 0) {
+			if (CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY()))) {
+				state = State.EXPLODING;
+				time = 0;
+			}
+			else {
+				IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY());
+				if (entity != null && "player".equals(entity.getType())) {
+					//(Player) entity).getDirection();
+					//((Player) entity).destroy();
+				}
 			}
 		}
 			
 			
-		else if(direction.equalsIgnoreCase("Direita") && !CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY()))){
-			IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY());
-			if (entity != null && "player".equals(entity.getType())) {
-				//((Player) entity).destroy();
+		else if(direction.x > 0){
+			if (CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY()))) {
+				state = State.EXPLODING;
+				time = 0;
+			}
+			else {
+				IMapEntity entity = world.getEntity((int)getX() + 1, (int)getY());
+				if (entity != null && "player".equals(entity.getType())) {
+					//(Player) entity).getDirection();
+					//((Player) entity).destroy();
+				}
 			}
 		}
 		
 		
-		else if(direction.equalsIgnoreCase("Cima") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1))){
-			IMapEntity entity = world.getEntity((int)getX(), (int)getY() + 1);
-			if (entity != null && "player".equals(entity.getType())) {
-				//Try to catch player
+		else if(direction.y > 0) {
+			if (CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1))){
+				state = State.EXPLODING;
+				time = 0;
+			}
+			else {
+				IMapEntity entity = world.getEntity((int)getX(), (int)getY() + 1);
+				if (entity != null && "player".equals(entity.getType())) {
+					//(Player) entity).getDirection();
+					//((Player) entity).destroy();
+				}
 			}
 		}
 		
-		else if(direction.equalsIgnoreCase("Baixo") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1))){
-			IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY());
-			if (entity != null && "player".equals(entity.getType())) {
-				//Try to catch player
+		else if(direction.y < 0) {
+			if (CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1))){
+				state = State.EXPLODING;
+				time = 0;
+			}
+			else {
+				IMapEntity entity = world.getEntity((int)getX(), (int)getY() - 1);
+				if (entity != null && "player".equals(entity.getType())) {
+					//(Player) entity).getDirection();
+					//((Player) entity).destroy();
+				}
 			}
 		}
 	}
 	
-	
-	private float time;
 	@Override
 	public void act(float delta) {
 		if (state == State.MOVING) {
-			if(direction.equalsIgnoreCase("Esquerda") && !CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY())))
-				moveBy(-speed * delta,0);
-				
-			else if(direction.equalsIgnoreCase("Direita") && !CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY())))
-				moveBy(speed * delta,0);
-			
-			else if(direction.equalsIgnoreCase("Cima") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1)))
-				moveBy(0,speed * delta);
-			
-			else if(direction.equalsIgnoreCase("Baixo") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1)))
-				moveBy(0,-speed * delta);
-			else {
-				state = State.EXPLODING;
-				time = 0;
+			distanceMoved += (speed * delta);
+			if (distanceMoved == 1) {
+
+				state = State.STANDING;
+				stateTime = 0;
+				IMapEntity entity = world.getEntity((int)getX(), (int)getY());
+				if (entity != null && "player".equals(entity.getType()) /* &&((Player) entity).destroy();*/) {
+				}
 			}
-		}
+			else if (distanceMoved > 1) { 
+				lastPosX += (direction.x != 0 ? direction.x/Math.abs(direction.x) : 0);
+				lastPosY += (direction.y != 0 ? direction.y/Math.abs(direction.y) : 0);
+				this.setPosition(lastPosX, lastPosY);
+				state = State.STANDING;
+				stateTime = 0;
+				
+				IMapEntity entity = world.getEntity((int)getX(), (int)getY());
+				if (entity != null && "player".equals(entity.getType())) {
+					//((Player) entity).destroy();
+				}
+				
+			}
+			else {
+				this.moveBy(direction.x * delta, direction.y * delta);
+			}
+		}	
 		else if (state == State.EXPLODING) {
 			tex = explodeAnimation.getKeyFrame(time);
-			time +=delta;
-			
-			if (explodeAnimation.isAnimationFinished(time - delta)) {
+			if (explodeAnimation.isAnimationFinished(time +=delta)) {
 				this.dispose();
 			}
 		}

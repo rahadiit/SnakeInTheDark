@@ -1,16 +1,16 @@
 package snake.equipment.implementations;
 
-import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
+
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.graphics.g2d.Batch;
 
 import snake.engine.dataManagment.Loader;
-import snake.equipment.IEquipment;
+
+
 /**                              Developed By:
 	 *                                  NoDark
 	 *                               sessaGlasses
@@ -20,7 +20,7 @@ import snake.equipment.IEquipment;
 	 * @author Agustina
 	 */
 
-public class BlinkingSensor {
+public class BlinkingSensor extends Actor {
 
 	private static final int ANIMATION_BLINK_STATES =2 ;
 	
@@ -68,13 +68,13 @@ public class BlinkingSensor {
 	
 		
 	}
-// A classe precisa implementar uma interface ou extender uma classe que tenha metodo draw
-	/*	@Override
-	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
+
+	@Override
+	public void draw (Batch batch, float parentAlpha) { 
 		batch.draw(currentFrame, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
 				getWidth(), getHeight(), getScaleX(), getScaleY(), super.getRotation());
 		super.draw(batch, parentAlpha);
 	}
-	*/
+
 	
 }

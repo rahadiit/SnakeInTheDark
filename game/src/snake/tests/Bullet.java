@@ -74,7 +74,6 @@ public class Bullet extends LightMapEntity {
 		if (this.getParent() != null || this.getStage() != null)
 			this.remove();
 		Loader.unload(texName);
-		
 	}
 
 	@Override
