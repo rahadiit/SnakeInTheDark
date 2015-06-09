@@ -6,6 +6,9 @@ import snake.drone.IObserver;
 import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
+import snake.map.CellType;
+import snake.map.IMapAccess;
+import snake.map.TiledMapWorld;
 import snake.tests.FlashLight_test;
 import snake.tests.Weapon;
 import snake.visuals.enhanced.LightMapEntity;
@@ -32,8 +35,10 @@ public class Player extends LightMapEntity {
 	//Singleton area
 	private static Player player;
 	
+	private IMapAccess world;
+	
 	private static final int DOWN = 0, LEFT = 1, RIGHT = 2, UP = 3;
-	private static final int ANIMATION_WALK_STATES_NUM = 4, ANIMATION_STILL_STATES_NUM = 3;
+	private static final int ANIMATION_WALK_STATES_NUM = 4, ANIMATION_STILL_STATES_NUM = 4;
 	
 	private enum State {STANDING, MOVING};
 	
@@ -47,7 +52,9 @@ public class Player extends LightMapEntity {
 	private static final int FRAME_ROWS_WALK = 4, FRAME_COLS_WALK = 3;
 	private static final int FRAME_ROWS_STANDING = 4, FRAME_COLS_STANDING = 3;
 	
-	private float speed = 10;
+	/* Movement */
+	private float speed = 3f;
+	private float walkAnimationSpeed = .1f, standingAnimationSpeed = .5f;
 	private Vector2 direction;
 	private State state = State.STANDING;
 	private float distanceMoved;
@@ -57,16 +64,20 @@ public class Player extends LightMapEntity {
 	private FlashLight_test flashlight;
 	
 	//Stuff
-	private int timer = 0;
 	private float stateTime = 0;
+	private float lastPosX, lastPosY;
 
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	private Player (GameWorld world) {
 		super(world);
+		
+		this.world = ((TiledMapWorld) world).getMapAccess();
 
 		this.setSize(1f, 1f);
 		this.setOrigin(0,0); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
+		
+		this.setPosition(1, 1);
 		
 		direction = new Vector2();
 		
@@ -89,7 +100,7 @@ public class Player extends LightMapEntity {
 	    	
 			TextureRegion[][] tmp2 = region.split(region.getRegionWidth()/FRAME_COLS_WALK,region.getRegionHeight());
 			
-			animatedWalk[i] = new Animation(0.25f, tmp2[0]);
+			animatedWalk[i] = new Animation(walkAnimationSpeed, tmp2[0]);
 	    }
 	    
 	    animatedStanding = new Animation[4];
@@ -99,7 +110,7 @@ public class Player extends LightMapEntity {
 	    	
 			TextureRegion[][] tmp2 = region.split(region.getRegionWidth()/FRAME_COLS_STANDING,region.getRegionHeight());
 			
-			animatedStanding[i] = new Animation(0.25f, tmp2[0]);
+			animatedStanding[i] = new Animation(standingAnimationSpeed, tmp2[0]);
 	    }
 	    
 	    currentAnimation = animatedStanding[DOWN];
@@ -111,7 +122,7 @@ public class Player extends LightMapEntity {
 		flashlight.setPosition(0,0);
 	}
 	
-	static public Player getinstance(GameWorld world){
+	static public Player getInstance(GameWorld world){
 		if(player == null || player.getWorld() != world) {
 			player = new Player(world);
 		}
@@ -121,78 +132,79 @@ public class Player extends LightMapEntity {
 	@Override
 	public void act (float delta) { // Aqui se realizam as atualizacoes
 		super.act(delta);
-		timer++;
-		
 		
 		stateTime += delta;
+		//currentAnimation = animatedWalk[DOWN];
 		currentFrame = currentAnimation.getKeyFrame(stateTime, true);
 		
 		
 		if (state  == State.STANDING) {
 
-			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+			
+			if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && !CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY()))){
 				distanceMoved = 0;
 				direction.set(-speed, 0);
 				currentAnimation = animatedWalk[LEFT];
-				state = State.MOVING;		
+				lastPosX = getX(); lastPosY = getY();
+				state = State.MOVING;	
+				stateTime = 0;
 			}
-			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY()))) {
 				distanceMoved = 0;
 				direction.set(speed, 0);
 				currentAnimation = animatedWalk[RIGHT];
+				lastPosX = getX(); lastPosY = getY();
 				state = State.MOVING;
+				stateTime = 0;
 			}
-			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			else if (Gdx.input.isKeyPressed(Input.Keys.UP) && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1))) {
 				distanceMoved = 0;
 				direction.set(0, speed);
 				currentAnimation = animatedWalk[UP];
+				lastPosX = getX(); lastPosY = getY();
 				state = State.MOVING;
+				stateTime = 0;
 			}
-			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1))) {
 				distanceMoved = 0;
 				direction.set(0, -speed);
 				currentAnimation = animatedWalk[DOWN];
+				lastPosX = getX(); lastPosY = getY();
 				state = State.MOVING;
-			}					
+				stateTime = 0;
+			} else {
+				if (direction.x > 0) {
+					currentAnimation = animatedStanding[RIGHT];
+				} 
+				else if (direction.x < 0) {
+					currentAnimation = animatedStanding[LEFT];
+				} 
+				else if (direction.y > 0) {
+					currentAnimation = animatedStanding[UP];
+				} 
+				else {
+					currentAnimation = animatedStanding[DOWN];
+				} 
+			}
 		}
 		
 		else if (state == State.MOVING) {
+
 			distanceMoved += (speed * delta);
 			if (distanceMoved == 1) {
 
 				state = State.STANDING;
-				if (direction.x > 0) {
-					currentAnimation = animatedStanding[RIGHT];
-				} 
-				else if (direction.x < 0) {
-					currentAnimation = animatedStanding[LEFT];
-				} 
-				else if (direction.y > 0) {
-					currentAnimation = animatedStanding[UP];
-				} 
-				else {
-					currentAnimation = animatedStanding[DOWN];
-				} 
+				stateTime = 0;
 			}
-			else if (distanceMoved > 1) {
-				this.setPosition(Math.round(getX()), Math.round(getY()));
+			else if (distanceMoved > 1) { 
+				lastPosX += (direction.x != 0 ? direction.x/Math.abs(direction.x) : 0);
+				lastPosY += (direction.y != 0 ? direction.y/Math.abs(direction.y) : 0);
+				this.setPosition(lastPosX, lastPosY);
 				state = State.STANDING;
-				
-				if (direction.x > 0) {
-					currentAnimation = animatedStanding[RIGHT];
-				} 
-				else if (direction.x < 0) {
-					currentAnimation = animatedStanding[LEFT];
-				} 
-				else if (direction.y > 0) {
-					currentAnimation = animatedStanding[UP];
-				} 
-				else {
-					currentAnimation = animatedStanding[DOWN];
-				} 
+				stateTime = 0;
 			}
 			else {
-				this.moveBy(direction.x, direction.y);
+				this.moveBy(direction.x * delta, direction.y * delta);
 			}
 			
 		}

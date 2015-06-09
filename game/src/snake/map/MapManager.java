@@ -144,7 +144,8 @@ public class MapManager implements IMapAccess {
         String cellType = properties.get("type", "", String.class);
 
         try {
-            return CellType.valueOf(cellType.toUpperCase(Locale.ENGLISH));
+            CellType c = CellType.valueOf(cellType.toUpperCase(Locale.ENGLISH));
+            return c;
         } catch (IllegalArgumentException e) {
             return null;
         }

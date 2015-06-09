@@ -116,4 +116,10 @@ public class FlashlightEquipment extends AbstractEquipment
 	{
 		Loader.unload("equipments/PixelFlashlight.png");
 	}
+
+
+	@Override
+	public String getType() {
+		return "Flashlight";
+	}
 }

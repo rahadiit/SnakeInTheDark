@@ -58,5 +58,10 @@ public class TrapEquipment extends AbstractEquipment
 
 	}
 
+	@Override
+	public String getType() {
+		return "Trap";
+	}
+
 	// THIS EQUIPMENT HAS NO LIGHTS
 }

@@ -34,7 +34,7 @@ public class Drone extends LightMapEntity implements IObserver{
 		this.setOrigin(x,y); //, valor dado por quem chama , mapa?
 		
 		//Observer
-		player = Player.getinstance(world);
+		player = Player.getInstance(world);
 		player.attach(this);
 		
 		Loader.load(texName,Texture.class);

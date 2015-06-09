@@ -5,10 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public interface IMapEntity {
 
-    float getX();
-
-    float getY();
-
     void dispose();
 
     void act(float delta);
@@ -18,4 +14,8 @@ public interface IMapEntity {
 	GameWorld getWorld();
 	
 	public String getType();
+	
+	public float getX();
+	
+	public float getY();
 }

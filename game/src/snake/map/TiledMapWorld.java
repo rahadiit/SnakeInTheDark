@@ -20,7 +20,7 @@ public class TiledMapWorld extends VisualGameWorld {
         manager.loadMap(mapName);
         renderer = manager.createRenderer();
         
-        IMapEntity player = Player.getinstance(this);
+        IMapEntity player = Player.getInstance(this);
         manager.addEntity(player);
     }
 

@@ -58,7 +58,7 @@ public class TempleMap_test extends VisualGameWorld {
 		//this.addActor(magician);
 		
 		
-		player = Player.getinstance(this);
+		player = Player.getInstance(this);
 		player.setPosition(0,  WorldSettings.heightFix(0));
 		this.addActor(player);
 
