@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="100" tileheight="100" nextobjectid="1">
+ <properties>
+  <property name="equipList" value="flashlight,sensor"/>
+  <property name="equipQuantity" value="2"/>
+ </properties>
  <tileset firstgid="1" name="tileset" tilewidth="100" tileheight="100">
   <image source="tileset.png" width="400" height="400"/>
   <tile id="0">
@@ -23,7 +27,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tile Layer 1" width="10" height="10">
+ <layer name="base" width="10" height="10">
   <data encoding="base64">
    AgAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAgAAAAIAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAABQAAAAIAAAACAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAACAAAAAgAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAgAAAAIAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAIAAAACAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAACAAAAAgAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAgAAAAIAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAIAAAACAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAACAAAAAgAAAA==
   </data>
