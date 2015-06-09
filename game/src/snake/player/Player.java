@@ -53,7 +53,7 @@ public class Player extends LightMapEntity {
 	private static final int FRAME_ROWS_WALK = 4, FRAME_COLS_WALK = 3;
 	private static final int FRAME_ROWS_STANDING = 4, FRAME_COLS_STANDING = 3;
 	
-	/* Movement */
+	// Movement 
 	private float speed = 3f;
 	private float walkAnimationSpeed = .1f, standingAnimationSpeed = .5f;
 	private Vector2 direction;
@@ -67,22 +67,20 @@ public class Player extends LightMapEntity {
 	//Stuff
 	private float stateTime = 0;
 	private float lastPosX, lastPosY;
-
+	
+	//Observer
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	private Player (GameWorld world) {
-		super(world);
 		
+		//Mundo, tamanho e posicao
 		this.world = ((TiledMapWorld) world).getMapAccess();
-
 		this.setSize(1f, 1f);
-		this.setOrigin(0,0); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
-		
-		this.setPosition(1, 1); // TODO: definir pelo mapa
+	    this.setPosition(1, 1); // TODO: definir pelo mapa
 		
 		direction = new Vector2();
 		
-		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
+		//Carrega as texturas
 		Loader.load(walkTexName, Texture.class);
 		Loader.finishLoadingAsset(walkTexName);
 		walkSheet = Loader.get(walkTexName);
@@ -90,8 +88,6 @@ public class Player extends LightMapEntity {
 		Loader.load(standingTexName, Texture.class);
 		Loader.finishLoadingAsset(standingTexName);
 		standingSheet = Loader.get(standingTexName);
-		
-		
 		
 		//Cria as animacoes
 		animatedWalk = new Animation[4];
@@ -133,6 +129,12 @@ public class Player extends LightMapEntity {
 			player = new Player(world);
 		}
 		return player;
+	}
+	
+	static public Player getCurrentInstance(){
+		if(player!=null)
+			return player;
+		return null;
 	}
 	
 	@Override
