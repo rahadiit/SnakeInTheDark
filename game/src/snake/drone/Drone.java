@@ -104,24 +104,34 @@ public class Drone extends LightMapEntity implements IObserver{
 		state = State.MOVING;
 		
 		if(direction.equalsIgnoreCase("Esquerda") && !CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY()))) {
-			IMapEntity entity = world.getEntity((int)getX(), (int)getY());
-			if (entity != null && "equipment".equals(entity.getType())) {
-				world.removeEntity(entity); //Retira do mundo
-				entity.setPosition(.5f, .5f);
-				addActor((Actor) entity); //Adiciona ao player
-				//TODO: onMap setter
+			IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY());
+			if (entity != null && "player".equals(entity.getType())) {
+				//Try to catch player
 			}
 		}
 			
 			
-		else if(direction.equalsIgnoreCase("Direita") && !CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY())))
-			moveBy(speed * delta,0);
+		else if(direction.equalsIgnoreCase("Direita") && !CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY()))){
+			IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY());
+			if (entity != null && "player".equals(entity.getType())) {
+				//((Player) entity).destroy();
+			}
+		}
 		
-		else if(direction.equalsIgnoreCase("Cima") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1)))
-			moveBy(0,speed * delta);
 		
-		else if(direction.equalsIgnoreCase("Baixo") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1)))
-			moveBy(0,-speed * delta);
+		else if(direction.equalsIgnoreCase("Cima") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1))){
+			IMapEntity entity = world.getEntity((int)getX(), (int)getY() + 1);
+			if (entity != null && "player".equals(entity.getType())) {
+				//Try to catch player
+			}
+		}
+		
+		else if(direction.equalsIgnoreCase("Baixo") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1))){
+			IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY());
+			if (entity != null && "player".equals(entity.getType())) {
+				//Try to catch player
+			}
+		}
 	}
 	
 	@Override
