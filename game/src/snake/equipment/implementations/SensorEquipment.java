@@ -38,14 +38,14 @@ public class SensorEquipment extends AbstractEquipment {
 	public void activateOnMap(IMapAccess map) {
 	}
 
-	int a = 0;
 //	public int hasDrone(int x, int y, int radius) {
-//		int count = 0;
-//		IMapAccess map;
-//		for(int i = -radius; i <= radius && x + i >= 0 && x+i <= map.getMapWidth(); i++)
-//			for (int j = -radius; j <= radius && x + j >= 0 && x+j <= map.getMapHeight(); j++)
-//				if (map.getEntity(i, j).type == "DRONE")
-//					count++;
+	//	int count = 0;
+	//	IMapAccess map;
+	//	radius = radius * map.getTileHeight();
+	//	for(int i = -radius; i <= radius && x + i >= 0 && x+i <= map.getMapWidth(); i = i + map.getTileWidth())
+			//for (int j = -radius; j <= radius && x + j >= 0 && x+j <= map.getMapHeight(); j = j + map.getTileHeight())
+		//		if (map.getEntity(i, j).type == "DRONE")
+	//				count++;
 //		return count;
 //	}
 	
@@ -71,7 +71,7 @@ public class SensorEquipment extends AbstractEquipment {
 	public void createLights() { // Criacao de luzes tem que ser algo separado
 		// (senao da pau) -- tudo aqui
 		light = new PointLight(Lights.getRayhandler(), 5000, new Color(0f, 1f,
-				0f, 1f), 10, getX(), getY());
+				0f, 1f), 1, getX(), getY());
 		light.setActive(true);
 	}
 

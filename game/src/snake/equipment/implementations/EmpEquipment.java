@@ -34,10 +34,10 @@ public class EmpEquipment extends AbstractEquipment
 	
 	public void activateOnMap(IMapAccess map) 
 	{
-//		int x, y, i, j, radius;
-//			for(i = -radius; i <= radius && x + i >= 0 && x+i <= map.getMapWidth(); i++)
-//				for (j = -radius; j <= radius && x + j >= 0 && x+j <= map.getMapHeight(); j++)
-//					if (map.getEntity(i, j).type == "DRONE")
+	//	int x, y, i, j, radius = 2;
+		//	for(i = -radius; i <= radius && x + i >= 0 && x+i <= map.getMapWidth(); i = i + map.getTileWidth())
+		//		for (j = -radius; j <= radius && x + j >= 0 && x+j <= map.getMapHeight(); j = j + map.getTileHeight())
+	//				if (map.getEntity(i, j).type == "DRONE")
 //						removeEntity(map.getEntity(i, j));
 		}
 
