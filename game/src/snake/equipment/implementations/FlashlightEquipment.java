@@ -116,4 +116,12 @@ public class FlashlightEquipment extends AbstractEquipment
 	{
 		Loader.unload("equipments/PixelFlashlight.png");
 	}
+	public void setOnMap(boolean onMap){
+		this.onMap = onMap;
+	}
+	
+	public boolean getOnMap(){
+		return this.onMap;
+	}
+
 }
