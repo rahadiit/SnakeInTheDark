@@ -133,8 +133,7 @@ public class Drone extends LightMapEntity implements IObserver{
 				}
 			}
 		}
-			
-			
+		
 		else if(direction.x > 0){
 			if (CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY()))) {
 				state = State.EXPLODING;
@@ -232,11 +231,6 @@ public class Drone extends LightMapEntity implements IObserver{
 	@Override
 	public void createLights() { //Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
 		super.createLights(); //Importante para criar as luzes/sombra dos filhos
-	}
-
-	@Override
-	public void disposeLights() {
-		super.disposeLights();
 	}
 
 	@Override

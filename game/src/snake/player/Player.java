@@ -251,11 +251,6 @@ public class Player extends LightMapEntity {
 	}
 
 	@Override
-	public void disposeLights() {
-		super.disposeLights();
-	}
-
-	@Override
 	public void dispose() {
 		super.dispose();
 		if (this.getParent() != null || this.getStage() != null) {

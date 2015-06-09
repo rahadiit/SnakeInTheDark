@@ -86,17 +86,14 @@ public class SensorEquipment extends AbstractEquipment {
 		light.setActive(true);
 	}
 
-	@Override
-	public void disposeLights() {
-		if (light != null) {
-			light.remove();
-			light.dispose();
-		}
-	}
 
 	@Override
 	public void dispose() 
 	{
+		if (light != null) {
+			light.remove();
+			light.dispose();
+		}
 		super.dispose(); // esse estah na classe AbstractEquipment, abra ela se tiver duvida
 	}
 
