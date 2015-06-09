@@ -1,7 +1,6 @@
 package snake.equipment.implementations;
 
 import snake.map.IMapAccess;
-import snake.map.TiledMapWorld;
 import snake.visuals.Lights;
 import box2dLight.PointLight;
 
@@ -15,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  * Implementação concreta do sensor
  * 
- * @author Gabriel Gimenez
+ * @author Gabriel Gimenez & Bszazulla
  */
 
 public class SensorEquipment extends AbstractEquipment {
@@ -96,7 +95,9 @@ public class SensorEquipment extends AbstractEquipment {
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose() 
+	{
+		super.dispose(); // esse estah na classe AbstractEquipment, abra ela se tiver duvida
 	}
 
 	public void setOnMap(boolean onMap) {

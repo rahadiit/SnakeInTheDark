@@ -38,13 +38,6 @@ public class BoxEquipment extends AbstractEquipment
 	}
 
 	@Override
-	public void dispose()
-	{
-		Loader.unload("equipments/BoxPixel.png");
-
-	}
-
-	@Override
 	public void act(float delta)
 	{
 		// TODO Auto-generated method stub
@@ -63,6 +56,14 @@ public class BoxEquipment extends AbstractEquipment
 	
 	public boolean getOnMap(){
 		return this.onMap;
+	}
+
+	@Override
+	public void dispose()
+	{
+		super.dispose(); // esse estah na classe AbstractEquipment, abra ela se tiver duvida
+		
+		Loader.unload("equipments/BoxPixel.png"); // da o unload
 	}
 
 

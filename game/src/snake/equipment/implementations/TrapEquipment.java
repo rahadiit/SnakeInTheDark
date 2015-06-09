@@ -10,7 +10,7 @@ import snake.map.IMapAccess;
 /**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * @author bszazulla & Gabriel Gimenez
+ * @author Bszazulla & Gabriel Gimenez
  */
 
 public class TrapEquipment extends AbstractEquipment
@@ -41,7 +41,9 @@ public class TrapEquipment extends AbstractEquipment
 	@Override
 	public void dispose()
 	{
-		Loader.unload("equipments/ArmadilhaDesarmada.png");
+		super.dispose(); // da o dispose da classe abstrata (olha la)
+		
+		Loader.unload("equipments/ArmadilhaDesarmada.png"); // dispose da sprite
 	}
 
 	@Override

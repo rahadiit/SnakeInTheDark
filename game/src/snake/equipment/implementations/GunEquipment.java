@@ -10,7 +10,7 @@ import snake.map.IMapAccess;
 /**
  * Developed By: NoDarkGlasses
  * 
- * @author bszazulla & Gabriel Gimenez
+ * @author Bszazulla & Gabriel Gimenez
  */
 
 public class GunEquipment extends AbstractEquipment{
@@ -41,7 +41,10 @@ public class GunEquipment extends AbstractEquipment{
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose() 
+	{
+		super.dispose(); // da o dispose da classe abstrata (veja la)
+	
 		Loader.unload("equipments/BulletPixel.png");
 	}
 

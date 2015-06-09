@@ -10,9 +10,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-
+import snake.drone.IObserver;
 import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
+import snake.player.Player;
 import snake.visuals.Lights;
 
 /**                              Developed By:
@@ -23,7 +24,7 @@ import snake.visuals.Lights;
  * @author bszazulla
  */
 
-public class FlashlightEquipment extends AbstractEquipment 
+public class FlashlightEquipment extends AbstractEquipment implements IObserver
 {
 	Texture texture;
 	Sprite sprite; 
@@ -31,12 +32,13 @@ public class FlashlightEquipment extends AbstractEquipment
 	Vector2 vec = new Vector2();
 	boolean onMap;
 	int cont;
+	int batteryCounter;
 
 	// Construtor com parametros de posicao de inicio
 	public FlashlightEquipment(float x, float y, boolean onMap)
 	{
 		this.name = "Flashlight";
-		this.description = "The Flashlight lights in front of you, but use with caution, it doesn't last long. To turn it on, press T button.";
+		this.description = "The Flashlight lights in front of you, but use with caution, it doesn't last long.";
 		this.setBounds(x, y, 1, 1); // tamanho default
 		this.onMap = onMap;		
 		
@@ -44,47 +46,55 @@ public class FlashlightEquipment extends AbstractEquipment
 		Loader.finishLoadingAsset("equipments/PixelFlashlight.png");
 		texture = Loader.get("equipments/PixelFlashlight.png");
 		sprite = new Sprite(texture);
-
+		
+		// me inscrevo no player para saber que a mudança de turno vai diminuir a bateria da lanterna
+		Player.getCurrentInstance().attach(this);
+		
+		this.batteryCounter = 4; // bateria fixa de toda lanterna
 	}
-	
-	
+
 	// Ativacao de seu efeito no mapa
-	public void activateOnMap(IMapAccess map) 
+	public void activateOnMap(IMapAccess map)
 	{
 		// nao ha ativacao especifica para a lanterna
 	}
 
-	// Desenho do equipamento no jogo, SE ADICIONADO EM ALGUM LUGAR QUE PECA SEU SPRITE (EXEMPLO: MAPA TEMPLE)
-	public void draw (Batch batch, float parentAlpha)
+	// Desenho do equipamento no jogo, SE ADICIONADO EM ALGUM LUGAR QUE PECA SEU
+	// SPRITE (EXEMPLO: MAPA TEMPLE)
+	public void draw(Batch batch, float parentAlpha)
 	{
 		// se estiver no mapa eh que usa a sprite
-		if(onMap)
-			batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-	}
-	
-	// Atualizacao grafica no jogo
-	public void act (float delta) 
-	{
-		// set do vetor de localizaï¿½ï¿½o do foco de luz
-		
 		if (onMap)
-			vec.set(2.3f, 3.6f); // ajustado a sprite PixelFlashlight.png, para ficar no lugar
-		else
-			vec.set(0, 0); // senï¿½o, centro defaut
-		
+			batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(),
+					getScaleY(), getRotation());
+	}
+
+	// Atualizacao grafica no jogo
+	public void act(float delta)
+	{
+		// arruma a posicao do foco de luz
+		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
-		
-		// lanterna ascende ou apaga ao pressionar k
-		if (Gdx.input.isKeyJustPressed(Input.Keys.T) && onMap == false)
+		light.setPosition(vec);
+
+		// aurruma a rotacao do foco de luz
+		Actor parent = this.getParent();
+		float rotation = 0;
+		while (parent != null)
+		{
+			rotation += parent.getRotation();
+			parent = parent.getParent();
+		}
+
+		// arruma a rotacao da propria lanterna
+		this.setRotation(rotation);
+		light.setDirection(rotation);
+
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
 		{
 			light.setActive(!light.isActive());
 		}
 
-		light.setPosition(vec);
-
-		Actor parent = getParent();
-		if (parent != null)
-			light.setDirection(parent.getRotation() + 90);
 	}
 
 	// THIS EQUIPMENT HAS LIGHTS
@@ -110,18 +120,37 @@ public class FlashlightEquipment extends AbstractEquipment
 			light.dispose();
 		}
 	}
-	
+
 	@Override
-	public void dispose() 
+	public void dispose()
 	{
-		Loader.unload("equipments/PixelFlashlight.png");
+		super.dispose(); // esse estah na classe AbstractEquipment, abra ela se tiver duvida
+		
+		Loader.unload("equipments/PixelFlashlight.png"); // da o unload
 	}
-	public void setOnMap(boolean onMap){
+
+	public void setOnMap(boolean onMap)
+	{
 		this.onMap = onMap;
 	}
-	
-	public boolean getOnMap(){
+
+	public boolean getOnMap()
+	{
 		return this.onMap;
+	}
+
+	@Override
+	public void update(float delta)
+	{
+		// toda vez que o palyer andar, essa funcao serah chamada
+		
+		this.batteryCounter--;
+		
+		// se acabar a bateria, a lanterna se da um dispose
+		if(this.batteryCounter == 0)
+		{
+			dispose();
+		}
 	}
 
 }
