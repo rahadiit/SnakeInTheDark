@@ -10,7 +10,7 @@ import snake.map.IMapAccess;
 /**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * @author 
+ * @author bszazulla & Gabriel Gimenez
  */
 
 public class BoxEquipment extends AbstractEquipment

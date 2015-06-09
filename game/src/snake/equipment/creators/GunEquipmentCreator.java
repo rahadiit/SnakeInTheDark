@@ -7,7 +7,7 @@ import snake.equipment.implementations.GunEquipment;
 /**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * @author bszazulla
+ * @author bszazulla & Gabriel Gimenez
  */
 
 public class GunEquipmentCreator implements IEquipmentCreator

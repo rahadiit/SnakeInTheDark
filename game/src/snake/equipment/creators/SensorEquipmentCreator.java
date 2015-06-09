@@ -7,7 +7,7 @@ import snake.equipment.implementations.SensorEquipment;
 /**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * @author bszazulla
+ * @author bszazulla & Gabriel Gimenez
  */
 
 public class SensorEquipmentCreator implements IEquipmentCreator

@@ -10,14 +10,13 @@ import snake.map.IMapAccess;
 /**
  * Developed By: NoDarkGlasses
  * 
- * @author
+ * @author bszazulla & Gabriel Gimenez
  */
 
 public class EmpEquipment extends AbstractEquipment {
 	Texture texture;
 	Sprite sprite;
 	boolean onMap;
-	public final int radius = 2;
 
 	public EmpEquipment(float x, float y, boolean onMap) {
 		this.name = "EMP";
@@ -35,11 +34,11 @@ public class EmpEquipment extends AbstractEquipment {
 	public void activateOnMap(IMapAccess map) {
 		int x = (int)getX();
 		int y = (int)getY();
-		int i, j, radius = 2;
+		int i, j, radius = (int) 2f;
 		for (i = -radius; i <= radius && x + i >= 0
-				&& x + i <= map.getMapWidth(); i = i + map.getTileWidth())
+				&& x + i <= map.getMapWidth(); i += 1f)
 			for (j = -radius; j <= x+ radius && y + radius >= 0
-					&& y + j <= map.getMapHeight(); j = j + map.getTileHeight())
+					&& y + j <= map.getMapHeight(); j += 1f)
 				if (map.getEntity(i, j).getType() == "Drone")
 					map.removeEntity(map.getEntity(i, j));
 	}

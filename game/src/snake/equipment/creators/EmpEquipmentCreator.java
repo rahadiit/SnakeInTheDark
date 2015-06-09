@@ -7,7 +7,7 @@ import snake.equipment.implementations.EmpEquipment;
 /**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * @author bszazulla
+ * @author bszazulla & Gabriel Gimenez
  */
 
 public class EmpEquipmentCreator implements IEquipmentCreator

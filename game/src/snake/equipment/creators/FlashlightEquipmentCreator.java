@@ -7,7 +7,7 @@ import snake.equipment.implementations.FlashlightEquipment;
 /**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * @author bszazulla
+ * @author bszazulla & Gabriel Gimenez
  */
 
 public class FlashlightEquipmentCreator implements IEquipmentCreator
