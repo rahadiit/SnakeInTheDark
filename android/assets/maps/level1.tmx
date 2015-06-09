@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="100" tileheight="100" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="100" tileheight="100" nextobjectid="3">
  <properties>
   <property name="equipList" value="flashlight"/>
   <property name="equipQuantity" value="2"/>
+  <property name="nextMap" value="maps/level2.tmx"/>
  </properties>
  <tileset firstgid="1" name="tileset" tilewidth="100" tileheight="100">
   <image source="tileset.png" width="400" height="400"/>

@@ -13,6 +13,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import snake.engine.dataManagment.Loader;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
+import snake.visuals.enhanced.ILightMapEntity;
+import snake.visuals.enhanced.LightMapEntity;
 
 import java.util.*;
 
@@ -26,6 +28,8 @@ public class MapManager implements IMapAccess {
     }
 
     private TiledMap map;
+    private String currentMap;
+    private String nextMap;
 
     private final List<IMapEntity> entities = new LinkedList<>();
     private final List<IMapEntity> entitiesWrapper = Collections.unmodifiableList(entities);
@@ -64,6 +68,7 @@ public class MapManager implements IMapAccess {
     }
 
     public void clearEntities() {
+        disposeEntities();
         entities.clear();
     }
 
@@ -85,8 +90,9 @@ public class MapManager implements IMapAccess {
         preloadMap(name);
         assetManager.finishLoadingAsset(name);
         map = assetManager.get(name);
+        currentMap = name;
 
-        entities.clear();
+        clearEntities();
         availableEquipments.clear();
 
         MapProperties properties = map.getProperties();
@@ -95,10 +101,22 @@ public class MapManager implements IMapAccess {
         tileWidth = properties.get("tilewidth", Integer.class);
         tileHeight = properties.get("tileheight", Integer.class);
 
+        nextMap = properties.get("nextMap", null, String.class);
+
         String equips = properties.get("equipList", "", String.class);
         Collections.addAll(availableEquipments, equips.split(","));
         int equipQuantity = Integer.parseInt(properties.get("equipQuantity", "0", String.class));
         spawnEquipments(equipQuantity);
+    }
+
+    @Override
+    public void loadNextMap() {
+        loadMap(nextMap);
+    }
+
+    @Override
+    public void reloadMap() {
+        loadMap(currentMap);
     }
 
     public MapRenderer createRenderer() {
@@ -132,6 +150,14 @@ public class MapManager implements IMapAccess {
             IEquipment equipment = EquipmentCreator.createFactory(availableEquipments.get(index)).create(x, y, true);
 
             addEntity(equipment);
+        }
+    }
+
+    public void disposeEntities() {
+        for (IMapEntity entity : entities) {
+            entity.dispose();
+            if (entity instanceof ILightMapEntity)
+                ((LightMapEntity) entity).disposeLights();
         }
     }
 

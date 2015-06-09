@@ -4,6 +4,10 @@ import java.util.List;
 
 public interface IMapAccess {
 
+    void loadNextMap();
+
+    void reloadMap();
+
     List<IMapEntity> getEntities();
 
     IMapEntity getEntity(int x, int y);

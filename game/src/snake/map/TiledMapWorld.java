@@ -74,11 +74,7 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void dispose() {
-        for (IMapEntity entity : manager.getEntities()) {
-            entity.dispose();
-            if (entity instanceof ILightMapEntity)
-                ((LightMapEntity) entity).disposeLights();
-        }
+        manager.disposeEntities();
     }
 
     @Override

@@ -145,9 +145,8 @@ public class Player extends LightMapEntity {
 		currentFrame = currentAnimation.getKeyFrame(stateTime, true);
 		
 		
-		if  (CellType.EXIT.equals(world.getCellType((int)getX(), (int)getY()))) {
-			// TODO: CARREGAR PROXIMO MAPA
-		}
+		if  (CellType.EXIT.equals(world.getCellType((int)getX(), (int)getY())))
+			world.loadNextMap();
 		
 		IMapEntity entity = world.getEntity((int)getX(), (int)getY());
 		if (entity != null && "equipment".equals(entity.getType())) {
