@@ -11,4 +11,5 @@ public interface IEquipment extends ILightMapEntity
 	String getDescription();
 	String getName();
 	void draw(Batch batch, float parentAlpha);
+	void setOnMap(boolean onMap);
 }
