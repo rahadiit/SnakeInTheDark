@@ -170,8 +170,7 @@ public class MapManager implements IMapAccess {
         String cellType = properties.get("type", "", String.class);
 
         try {
-            CellType c = CellType.valueOf(cellType.toUpperCase(Locale.ENGLISH));
-            return c;
+            return CellType.valueOf(cellType.toUpperCase(Locale.ENGLISH));
         } catch (IllegalArgumentException e) {
             return null;
         }
