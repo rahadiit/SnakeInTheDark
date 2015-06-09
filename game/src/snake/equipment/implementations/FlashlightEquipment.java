@@ -66,7 +66,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 					getScaleY(), getRotation());
 	}
 
-	// Atualizacao grafica no jogo
+	// Atualizacao grafica no jogo 
 	public void act(float delta)
 	{
 		// arruma a posicao do foco de luz
