@@ -121,7 +121,7 @@ public class Player extends LightMapEntity {
 		addActor((Actor) sensor);
 		
 		//adiciona arma
-		arma = EquipmentCreator.createFactory("arma").create(.5f, .5f, false);
+		arma = EquipmentCreator.createFactory("gun").create(.5f, .5f, false);
 		addActor((Actor) arma);
 	}
 	
