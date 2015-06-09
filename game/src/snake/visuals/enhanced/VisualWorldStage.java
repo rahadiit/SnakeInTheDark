@@ -52,6 +52,7 @@ public class VisualWorldStage extends LevelStage {
 		
 		try {
 			VisualGameWorld world = (VisualGameWorld) level.getGameWorld();
+
 			world.createLights();
 		} catch (Exception e) {
 			System.out.println ("GameWorld of VisualWorldStage must be a VisualGameWorld");

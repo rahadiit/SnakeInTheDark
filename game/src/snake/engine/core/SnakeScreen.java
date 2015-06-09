@@ -48,6 +48,7 @@ public class SnakeScreen implements GameLevel {
 		hud = HUDCreator.createHUD(levelType, levelDataID);
 
 		// Creates a stage (world organizer)
+
 		stageWorld = WorldCreator.createWorldStage(ScreenCreator.getBatch(), this, world);
 		// Creates a stage (UI organizer)
 		stageHUD = HUDCreator.createHUDStage(ScreenCreator.getBatch(), this, hud);

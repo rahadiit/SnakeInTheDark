@@ -23,8 +23,8 @@ public abstract class VisualGameWorld extends GameWorld{
 	
 	public void createLights() {
 		for (Actor a: this.getChildren()) {
-			if (a instanceof ILightMapEntity) {
-				ILightMapEntity e = (ILightMapEntity) a;
+			if (a instanceof LightMapEntity) {
+				ILightMapEntity e = (LightMapEntity) a;
 				e.createLights();
 			}
 		}

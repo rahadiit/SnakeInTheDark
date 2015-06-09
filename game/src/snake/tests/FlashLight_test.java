@@ -52,7 +52,6 @@ public class FlashLight_test extends LightMapEntity {
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			light.setActive(!light.isActive());
-			System.out.println("Tutz tutz");
 		}
 	}
 	

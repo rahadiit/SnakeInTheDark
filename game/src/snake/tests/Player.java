@@ -109,10 +109,10 @@ public class Player extends LightMapEntity {
 	}
 	
 	static public Player getinstance(GameWorld world){
-		/*if(player == null || player.getWorld() != world) {
+		if(player == null || player.getWorld() != world) {
 			player = new Player(world);
-		}*/
-		return new Player(world);
+		}
+		return player;
 	}
 	
 	@Override
@@ -172,6 +172,7 @@ public class Player extends LightMapEntity {
 	@Override
 	public void createLights() { //Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
 		super.createLights(); //Importante para criar as luzes/sombra dos filhos
+		System.out.println("Criei luzes do player");
 	}
 
 	@Override

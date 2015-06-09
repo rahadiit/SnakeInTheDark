@@ -97,7 +97,7 @@ public class TempleMap_test extends VisualGameWorld {
 
 		//Adds new screen on top of this one
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			String[] param = {"SnakeScreen", "templeMap", "maps/level1.tmx"};
+			String[] param = {"SnakeScreen", "tiledMap", "maps/level1.tmx"};
 			try {
 				ScreenCreator.addAndGo(param);
 			}  catch (Exception e) {

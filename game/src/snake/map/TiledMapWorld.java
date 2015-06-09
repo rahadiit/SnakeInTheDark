@@ -19,6 +19,9 @@ public class TiledMapWorld extends VisualGameWorld {
         manager = new MapManager();
         manager.loadMap(mapName);
         renderer = manager.createRenderer();
+        
+        IMapEntity player = Player.getinstance(this);
+        manager.addEntity(player);
     }
 
     public IMapAccess getMapAccess() {
@@ -44,9 +47,6 @@ public class TiledMapWorld extends VisualGameWorld {
     @Override
     public void show() {
         WorldSettings.setAmbientColor(new Color(.05f, .05f, .05f, 1f));
-
-        IMapEntity player = Player.getinstance(this);
-        manager.addEntity(player);
 
         OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
         int width = manager.getMapWidth();
