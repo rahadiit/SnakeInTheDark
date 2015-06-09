@@ -45,6 +45,7 @@ public class FlashLight_test extends LightMapEntity {
 			parent = parent.getParent();
 		}
 		
+		this.setRotation(rotation);
 		light.setDirection(rotation);
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
@@ -76,7 +77,4 @@ public class FlashLight_test extends LightMapEntity {
 	public String getType() {
 		return "flashlight";
 	}
-	
-	
-
 }

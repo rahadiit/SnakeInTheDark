@@ -121,6 +121,7 @@ public class Player extends LightMapEntity {
 		flashlight = new FlashLight_test (world);
 		this.addActor(flashlight);
 		flashlight.setPosition(1f,.5f);
+		flashlight.setOrigin(-.5f, 0f);
 
 		//adiciona sensor
 		sensor = EquipmentCreator.createFactory("sensor").create(.5f, .5f, false);
@@ -150,6 +151,7 @@ public class Player extends LightMapEntity {
 		if (entity != null && "equipment".equals(entity.getType())) {
 			world.removeEntity(entity); //Retira do mundo
 			addActor((Actor) entity); //Adiciona ao player
+			//TODO: onMap setter
 		}
 		
 		if (state  == State.STANDING) {
@@ -226,7 +228,7 @@ public class Player extends LightMapEntity {
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
 		batch.draw(currentFrame, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
-				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+				getWidth(), getHeight(), getScaleX(), getScaleY(), super.getRotation());
 		super.draw(batch, parentAlpha);
 	}
 
@@ -269,5 +271,21 @@ public class Player extends LightMapEntity {
 	@Override
 	public String getType() {
 		return "player";
+	}
+	
+	@Override
+	public float getRotation() {
+		if (direction.x > 0) {
+			return 0;
+		} 
+		else if (direction.x < 0) {
+			return 180;
+		} 
+		else if (direction.y > 0) {
+			return 90;
+		} 
+		else {
+			return 270;
+		} 
 	}
 }
