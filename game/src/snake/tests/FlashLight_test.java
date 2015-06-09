@@ -46,7 +46,7 @@ public class FlashLight_test extends LightMapEntity {
 		
 		light.setDirection(rotation);
 		
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			light.setActive(!light.isActive());
 		}
 	}

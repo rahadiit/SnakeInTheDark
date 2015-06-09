@@ -144,14 +144,7 @@ public class Player extends LightMapEntity {
 					moveBy(0, -speed * delta);
 					direction = DOWN;
 					update();
-				}
-				
-				else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-					rotateBy(5);
-				}
-				else if (Gdx.input.isKeyPressed(Input.Keys.V)) {
-					rotateBy(-5);
-				}										
+				}					
 			}
 		}
 	}
