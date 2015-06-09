@@ -31,6 +31,8 @@ public class MapManager implements IMapAccess {
     private String currentMap;
     private String nextMap;
 
+    private int spawnX, spawnY;
+
     private final List<IMapEntity> entities = new LinkedList<>();
     private final List<IMapEntity> entitiesWrapper = Collections.unmodifiableList(entities);
 
@@ -103,6 +105,10 @@ public class MapManager implements IMapAccess {
 
         nextMap = properties.get("nextMap", null, String.class);
 
+        String[] spawn = properties.get("spawnPoint", "1,1", String.class).split(",");
+        spawnX = Integer.parseInt(spawn[0]);
+        spawnY = Integer.parseInt(spawn[1]);
+
         String equips = properties.get("equipList", "", String.class);
         Collections.addAll(availableEquipments, equips.split(","));
         int equipQuantity = Integer.parseInt(properties.get("equipQuantity", "0", String.class));
@@ -122,6 +128,10 @@ public class MapManager implements IMapAccess {
     public MapRenderer createRenderer() {
         int tileSize = Math.min(tileWidth, tileHeight);
         return new OrthogonalTiledMapRenderer(map, 1f / tileSize);
+    }
+
+    void moveToSpawnPoint(IMapEntity entity) {
+        entity.setPosition(spawnX, spawnY);
     }
 
     private void spawnEquipments(int equipQuantity) {

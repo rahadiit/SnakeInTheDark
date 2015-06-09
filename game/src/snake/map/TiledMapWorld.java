@@ -22,6 +22,7 @@ public class TiledMapWorld extends VisualGameWorld {
         
         IMapEntity player = Player.getInstance(this);
         manager.addEntity(player);
+        manager.moveToSpawnPoint(player);
     }
 
     public IMapAccess getMapAccess() {
