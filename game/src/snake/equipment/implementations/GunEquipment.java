@@ -20,7 +20,7 @@ public class GunEquipment extends AbstractEquipment{
 	Sprite sprite;
 
 	public GunEquipment(float x, float y, boolean onMap) {
-		this.setBounds(x, y, 4, 4);
+		this.setBounds(x, y, 1, 1);
 		this.onMap = onMap;
 		this.name = "Gun";
 		this.description = "When a droid gets close to you, if you have ammo, it's destroyed";

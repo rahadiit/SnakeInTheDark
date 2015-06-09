@@ -37,7 +37,7 @@ public class FlashlightEquipment extends AbstractEquipment
 	{
 		this.name = "Flashlight";
 		this.description = "The Flashlight lights in front of you, but use with caution, it doesn't last long. To turn it on, press T button.";
-		this.setBounds(x, y, 4, 4); // tamanho default
+		this.setBounds(x, y, 1, 1); // tamanho default
 		this.onMap = onMap;		
 		
 		Loader.load("equipments/PixelFlashlight.png", Texture.class);

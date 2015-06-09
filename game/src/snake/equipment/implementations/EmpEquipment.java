@@ -22,7 +22,7 @@ public class EmpEquipment extends AbstractEquipment {
 	public EmpEquipment(float x, float y, boolean onMap) {
 		this.name = "EMP";
 		this.description = "The EMP destroys every drone around you";
-		this.setBounds(x, y, 4, 4); // tamanho default
+		this.setBounds(x, y, 1, 1); // tamanho default
 		this.onMap = onMap;
 
 		Loader.load("equipments/emp.png", Texture.class);

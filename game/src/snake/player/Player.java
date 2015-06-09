@@ -3,23 +3,23 @@ package snake.player;
 import java.util.ArrayList;
 import java.util.List;
 import snake.drone.IObserver;
-import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
+import snake.equipment.EquipmentCreator;
+import snake.equipment.IEquipment;
 import snake.map.CellType;
 import snake.map.IMapAccess;
 import snake.map.TiledMapWorld;
 import snake.tests.FlashLight_test;
-import snake.tests.Weapon;
 import snake.visuals.enhanced.LightMapEntity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**                              Developed By:
  *                                  NoDark
@@ -60,7 +60,7 @@ public class Player extends LightMapEntity {
 	private float distanceMoved;
 	
 	//Equipments
-	private Weapon weapon;
+	private IEquipment sensor;
 	private FlashLight_test flashlight;
 	
 	//Stuff
@@ -77,7 +77,7 @@ public class Player extends LightMapEntity {
 		this.setSize(1f, 1f);
 		this.setOrigin(0,0); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
-		this.setPosition(1, 1);
+		this.setPosition(1, 1); // TODO: definir pelo mapa
 		
 		direction = new Vector2();
 		
@@ -119,7 +119,11 @@ public class Player extends LightMapEntity {
 		//adiciona equipamento lanterna_teste
 		flashlight = new FlashLight_test (world);
 		this.addActor(flashlight);
-		flashlight.setPosition(0,0);
+		flashlight.setPosition(1f,.5f);
+
+		//adiciona sensor
+		sensor = EquipmentCreator.createFactory("sensor").create(.5f, .5f, false);
+		addActor((Actor) sensor);
 	}
 	
 	static public Player getInstance(GameWorld world){
@@ -212,7 +216,6 @@ public class Player extends LightMapEntity {
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
-		WorldSettings.setAmbientColor(Color.WHITE);
 		batch.draw(currentFrame, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 		super.draw(batch, parentAlpha);

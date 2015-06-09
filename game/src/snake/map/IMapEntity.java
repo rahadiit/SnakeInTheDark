@@ -18,4 +18,8 @@ public interface IMapEntity {
 	public float getX();
 	
 	public float getY();
+
+	public void setPosition(float x, float y);
+
+	public void setSize(float width, float height);
 }

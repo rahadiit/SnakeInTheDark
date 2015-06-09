@@ -32,9 +32,6 @@ public class FlashLight_test extends LightMapEntity {
 	
 	@Override
 	public void act(float delta) {
-		/*light = new ConeLight (Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f),
-				30, 5, 5, 90, 30);
-		*/
 		//Set lights' position
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
@@ -60,7 +57,7 @@ public class FlashLight_test extends LightMapEntity {
 	public void createLights () {
 		super.createLights();
 		light = new ConeLight (Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f),
-				30, getX(), getY(), 90, 30);
+				2, getX(), getY(), 90, 30);
 		light.setActive(true); //Comeca acessa
 	}
 	

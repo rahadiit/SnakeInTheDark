@@ -22,7 +22,7 @@ public class BoxEquipment extends AbstractEquipment
 	{		
 		this.name = "Box";
 		this.description = "It would't be a Spy game without a box";	
-		this.setBounds(x, y, 4, 4); // tamanho default
+		this.setBounds(x, y, 1, 1); // tamanho default
 		this.onMap = onMap;
 		
 		Loader.load("equipments/BoxPixel.png", Texture.class);

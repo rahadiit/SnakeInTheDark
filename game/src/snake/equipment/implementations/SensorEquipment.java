@@ -1,20 +1,17 @@
 package snake.equipment.implementations;
 
-import box2dLight.PointLight;
-import box2dLight.PositionalLight;
-
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-
 import snake.map.IMapAccess;
 import snake.visuals.Lights;
+import box2dLight.PointLight;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * Developed By: NoDarkGlasses
  *
- * Implementa������o concreta do sensor
+ * Implementação concreta do sensor
  * 
  * @author bszazulla
  */
@@ -25,10 +22,14 @@ public class SensorEquipment extends AbstractEquipment {
 	PointLight light;
 	Vector2 vec = new Vector2();
 
+	private static final float MIN_INTENSITY = .6f;
+	private static final float MAX_INTENSITY = .9f;
+	private static final float PULSE_VELOCITY = 3f;
+
 	public SensorEquipment(float x, float y, boolean onMap) {
 		this.name = "Sensor";
 		this.description = "The Sensor reveals drones around you";
-		this.setBounds(x, y, 5, 5); // ver o setPosition
+		this.setBounds(x, y, 1, 1); // ver o setPosition
 	}
 
 	public SensorEquipment() {
@@ -52,15 +53,20 @@ public class SensorEquipment extends AbstractEquipment {
 
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
-		// TODO Auto-generated method stub
-
 	}
+
+	private float time;
 
 	@Override
 	public void act(float delta) {
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
+
+		time += delta;
+		float intensity = (MAX_INTENSITY- MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
+
+		light.setDistance(intensity);
 
 //		 if (hasDrone((int)getX(), (int)getY(), 1) > 0)
 //			 light.setColor(new Color(1f, 0f, 0f, 1f));
@@ -71,7 +77,7 @@ public class SensorEquipment extends AbstractEquipment {
 	public void createLights() { // Criacao de luzes tem que ser algo separado
 		// (senao da pau) -- tudo aqui
 		light = new PointLight(Lights.getRayhandler(), 5000, new Color(0f, 1f,
-				0f, 1f), 5, getX(), getY());
+				0f, 1f), MAX_INTENSITY, getX(), getY());
 		light.setActive(true);
 	}
 

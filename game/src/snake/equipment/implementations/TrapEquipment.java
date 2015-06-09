@@ -23,7 +23,7 @@ public class TrapEquipment extends AbstractEquipment
 	{		
 		this.name = "Trap";
 		this.description = "The Trap destroy a drone that pass the cell you placed it";	
-		this.setBounds(x, y, 4, 4);
+		this.setBounds(x, y, 1, 1);
 		this.onMap = onMap; 
 		
 		Loader.load("equipments/ArmadilhaDesarmada.png", Texture.class);
