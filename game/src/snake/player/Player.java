@@ -2,17 +2,20 @@ package snake.player;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import snake.drone.IObserver;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
+import snake.equipment.implementations.GunEquipment;
 import snake.map.CellType;
 import snake.map.IMapAccess;
 import snake.map.IMapEntity;
 import snake.map.TiledMapWorld;
 import snake.tests.FlashLight_test;
 import snake.visuals.enhanced.LightMapEntity;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -62,7 +65,8 @@ public class Player extends LightMapEntity {
 	
 	//Equipments
 	private IEquipment sensor;
-	private FlashLight_test flashlight;
+	
+	private IEquipment arma;
 	
 	//Stuff
 	private float stateTime = 0;
@@ -115,9 +119,19 @@ public class Player extends LightMapEntity {
 		//adiciona sensor
 		sensor = EquipmentCreator.createFactory("sensor").create(.5f, .5f, false);
 		addActor((Actor) sensor);
+		
+		//adiciona arma
+		arma = EquipmentCreator.createFactory("arma").create(.5f, .5f, false);
+		addActor((Actor) arma);
 	}
-	//public boolean destroy() {
-	//}
+	
+	public boolean destroy() {
+		if (((GunEquipment) arma).getAmmo() > 0)
+			return false;
+		else
+			return true;
+			
+	}
 		
 	
 	static public Player getInstance(GameWorld world){
