@@ -29,9 +29,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Drone extends LightMapEntity implements IObserver{
 	
+	private enum State {MOVING, STANDING, EXPLODING};
+	
 	private TextureRegion tex;
-	private String Direction;
-	private String texName = "character/drone";
+	private TextureRegion[] explodeFrames;
+	private String direction;
+	private String texName = "character/drone", explodeTexName = "character/explosaosprite.png";
 	private static Player player;
 	private IMapAccess world;
 	private static final int FRAME_ROWS_EXPLODE = 2, FRAME_COLS_EXPLODE = 6;
@@ -39,7 +42,9 @@ public class Drone extends LightMapEntity implements IObserver{
 	private Texture explodeSheet;
 	private TextureRegion region, currentFrame;
 	private Animation explodeAnimation;
-	private String explodeTexName = "character/explosaosprite.png";
+	
+	private float speed = 3f;
+	private State state = State.STANDING;
 	
 	private float stateTime = 0;
 	public Drone (GameWorld world, int x, int y, String Direcao){
@@ -73,7 +78,7 @@ public class Drone extends LightMapEntity implements IObserver{
 		tex = Loader.get(texName);	
 		//sprite.setAlpha(1f);
 
-		this.Direction = Direcao;	
+		this.direction = Direcao;	
 		
 		//carrega spirte da explosao
 		Loader.load(explodeTexName, Texture.class);
@@ -81,30 +86,63 @@ public class Drone extends LightMapEntity implements IObserver{
 		explodeSheet = Loader.get(explodeTexName);
 		
 		
-		TextureRegion[][] tmp2 = region.split(region.getRegionWidth()/FRAME_COLS_EXPLODE, region.getRegionHeight()/FRAME_ROWS_EXPLODE);
-		explodeAnimation = new Animation(explosionSpeed, tmp2[0]);
+		TextureRegion[][] tmp = TextureRegion.split(explodeSheet, explodeSheet.getWidth()/FRAME_COLS_EXPLODE,
+														explodeSheet.getHeight()/FRAME_ROWS_EXPLODE);
+		
+		explodeFrames = new TextureRegion[FRAME_COLS_EXPLODE * FRAME_ROWS_EXPLODE];
+        int index = 0;
+        for (int i = 0; i < FRAME_ROWS_EXPLODE; i++) {
+            for (int j = 0; j < FRAME_COLS_EXPLODE; j++) {
+                explodeFrames[index++] = tmp[i][j];
+            }
+        }
+		explodeAnimation = new Animation(explosionSpeed, explodeFrames);
 		
 	}
 	
 	public void update(float delta){
-		if(Direction.equalsIgnoreCase("Esquerda") && !CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY())))
-			moveBy(-2.5f,0);
-			
-		else if(Direction.equalsIgnoreCase("Direita") && !CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY())))
-			moveBy(2.5f,0);
+		state = State.MOVING;
 		
-		else if(Direction.equalsIgnoreCase("Cima") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1)))
-			moveBy(0,2.5f);
-		
-		else if(Direction.equalsIgnoreCase("Baixo") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1)))
-			moveBy(0,-2.5f);
-		else{
-			//Ativar animacao
-			stateTime+= delta;
-			tex = explodeAnimation.getKeyFrame(stateTime, true);
-			
-			this.dispose();
+		if(direction.equalsIgnoreCase("Esquerda") && !CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY()))) {
+			IMapEntity entity = world.getEntity((int)getX(), (int)getY());
+			if (entity != null && "equipment".equals(entity.getType())) {
+				world.removeEntity(entity); //Retira do mundo
+				entity.setPosition(.5f, .5f);
+				addActor((Actor) entity); //Adiciona ao player
+				//TODO: onMap setter
+			}
 		}
+			
+			
+		else if(direction.equalsIgnoreCase("Direita") && !CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY())))
+			moveBy(speed * delta,0);
+		
+		else if(direction.equalsIgnoreCase("Cima") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1)))
+			moveBy(0,speed * delta);
+		
+		else if(direction.equalsIgnoreCase("Baixo") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1)))
+			moveBy(0,-speed * delta);
+	}
+	
+	@Override
+	public void act(float delta) {
+		if (state == State.MOVING) {
+			if(direction.equalsIgnoreCase("Esquerda") && !CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY())))
+				moveBy(-speed * delta,0);
+				
+			else if(direction.equalsIgnoreCase("Direita") && !CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY())))
+				moveBy(speed * delta,0);
+			
+			else if(direction.equalsIgnoreCase("Cima") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1)))
+				moveBy(0,speed * delta);
+			
+			else if(direction.equalsIgnoreCase("Baixo") && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1)))
+				moveBy(0,-speed * delta);
+			else {
+				state = State.EXPLODING;
+			}
+		}
+		else if (state == State.EXPLODING)
 	}
 
 	@Override

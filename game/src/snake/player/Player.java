@@ -150,6 +150,7 @@ public class Player extends LightMapEntity {
 		IMapEntity entity = world.getEntity((int)getX(), (int)getY());
 		if (entity != null && "equipment".equals(entity.getType())) {
 			world.removeEntity(entity); //Retira do mundo
+			entity.setPosition(.5f, .5f);
 			addActor((Actor) entity); //Adiciona ao player
 			//TODO: onMap setter
 		}
