@@ -64,15 +64,18 @@ public class SensorEquipment extends AbstractEquipment {
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
-
+		boolean drone;
 		time += delta;
 		float intensity = (MAX_INTENSITY - MIN_INTENSITY)
 				* MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
 
 		light.setDistance(intensity);
-
-	if (hasDrone((IMapAccess) getWorld(), (int)getX(), (int)getY()) > 0)
+		drone = false;
+		if (hasDrone((IMapAccess) getWorld(), (int)getX(), (int)getY()) > 0) {
 			light.setColor(new Color(1f, 0f, 0f, 1f));
+			drone = true;
+	}
+		//BlinkingSensor.act(delta, drone);
 
 	}
 
