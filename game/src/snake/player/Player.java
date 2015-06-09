@@ -3,6 +3,7 @@ package snake.player;
 import java.util.ArrayList;
 import java.util.List;
 import snake.drone.IObserver;
+import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
 import snake.tests.FlashLight_test;
@@ -10,10 +11,12 @@ import snake.tests.Weapon;
 import snake.visuals.enhanced.LightMapEntity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 
 /**                              Developed By:
  *                                  NoDark
@@ -37,6 +40,7 @@ public class Player extends LightMapEntity {
 	//Animation
 	private Texture walkSheet, standingSheet; //debugar o esquema
 	private Animation[] animatedWalk, animatedStanding;
+	private Animation currentAnimation;
 	private TextureRegion currentFrame, region;
 	private String walkTexName = "character/CharacterSprite.png", standingTexName = "character/BlinkingCharacterSprite.png";
 	
@@ -44,9 +48,9 @@ public class Player extends LightMapEntity {
 	private static final int FRAME_ROWS_STANDING = 4, FRAME_COLS_STANDING = 3;
 	
 	private float speed = 10;
-	private int direction = UP;
+	private Vector2 direction;
 	private State state = State.STANDING;
-	private Animation currentAnimation;
+	private float distanceMoved;
 	
 	//Equipments
 	private Weapon weapon;
@@ -63,6 +67,8 @@ public class Player extends LightMapEntity {
 
 		this.setSize(1f, 1f);
 		this.setOrigin(0,0); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
+		
+		direction = new Vector2();
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
 		Loader.load(walkTexName, Texture.class);
@@ -103,11 +109,6 @@ public class Player extends LightMapEntity {
 		flashlight = new FlashLight_test (world);
 		this.addActor(flashlight);
 		flashlight.setPosition(0,0);
-		
-		//Adiciona equipamento arma
-		/*weapon = new Weapon (world);
-		this.addActor(weapon);
-		weapon.setPosition(0f, 0f);*/
 	}
 	
 	static public Player getinstance(GameWorld world){
@@ -128,39 +129,78 @@ public class Player extends LightMapEntity {
 		
 		
 		if (state  == State.STANDING) {
-			
-			timer = 6;
-			if(timer>5){
-				timer = 0;
-			
-				if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-					super.moveBy(-speed * delta, 0);
-					direction = LEFT;
-					update();
-				}
-				else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-					moveBy(speed * delta, 0);
-					direction = RIGHT;
-					update();
-				}
-				else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-					moveBy(0, speed * delta);
-					direction = UP;
-					update();
-				}
-				else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-					moveBy(0, -speed * delta);
-					direction = DOWN;
-					update();
-				}					
+
+			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+				distanceMoved = 0;
+				direction.set(-speed, 0);
+				currentAnimation = animatedWalk[LEFT];
+				state = State.MOVING;		
 			}
+			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+				distanceMoved = 0;
+				direction.set(speed, 0);
+				currentAnimation = animatedWalk[RIGHT];
+				state = State.MOVING;
+			}
+			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+				distanceMoved = 0;
+				direction.set(0, speed);
+				currentAnimation = animatedWalk[UP];
+				state = State.MOVING;
+			}
+			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+				distanceMoved = 0;
+				direction.set(0, -speed);
+				currentAnimation = animatedWalk[DOWN];
+				state = State.MOVING;
+			}					
+		}
+		
+		else if (state == State.MOVING) {
+			distanceMoved += (speed * delta);
+			if (distanceMoved == 1) {
+
+				state = State.STANDING;
+				if (direction.x > 0) {
+					currentAnimation = animatedStanding[RIGHT];
+				} 
+				else if (direction.x < 0) {
+					currentAnimation = animatedStanding[LEFT];
+				} 
+				else if (direction.y > 0) {
+					currentAnimation = animatedStanding[UP];
+				} 
+				else {
+					currentAnimation = animatedStanding[DOWN];
+				} 
+			}
+			else if (distanceMoved > 1) {
+				this.setPosition(Math.round(getX()), Math.round(getY()));
+				state = State.STANDING;
+				
+				if (direction.x > 0) {
+					currentAnimation = animatedStanding[RIGHT];
+				} 
+				else if (direction.x < 0) {
+					currentAnimation = animatedStanding[LEFT];
+				} 
+				else if (direction.y > 0) {
+					currentAnimation = animatedStanding[UP];
+				} 
+				else {
+					currentAnimation = animatedStanding[DOWN];
+				} 
+			}
+			else {
+				this.moveBy(direction.x, direction.y);
+			}
+			
 		}
 	}
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
-		if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
-			System.out.println (getX() + ";" + getY());
+		WorldSettings.setAmbientColor(Color.WHITE);
 		batch.draw(currentFrame, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 		super.draw(batch, parentAlpha);
