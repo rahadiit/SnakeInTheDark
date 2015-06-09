@@ -7,7 +7,7 @@ import snake.equipment.implementations.BoxEquipment;
 /**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * @author bszazulla
+ * @author bszazulla & Gabriel Gimenez
  */
 
 public class BoxEquipmentCreator implements IEquipmentCreator

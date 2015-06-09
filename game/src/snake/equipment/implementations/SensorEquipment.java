@@ -1,8 +1,10 @@
 package snake.equipment.implementations;
 
 import snake.map.IMapAccess;
+import snake.map.TiledMapWorld;
 import snake.visuals.Lights;
 import box2dLight.PointLight;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
@@ -13,7 +15,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  * Implementação concreta do sensor
  * 
- * @author bszazulla
+ * @author Gabriel Gimenez
  */
 
 public class SensorEquipment extends AbstractEquipment {
@@ -43,9 +45,9 @@ public class SensorEquipment extends AbstractEquipment {
 
 	public int hasDrone(IMapAccess map, int x, int y) {
 		int count = 0;
-		int radius = 1;
-		for (int i = -radius; i <= radius && x + i >= 0 && x + i <= map.getMapWidth(); i = i + map.getTileWidth())
-			for (int j = -radius; j <= x+ radius && y + radius >= 0 && y + j <= map.getMapHeight(); j = j + map.getTileHeight())
+		int radius = (int) 1f;
+		for (int i = -radius; i <= radius && x + i >= 0 && x + i <= map.getMapWidth(); i += 1f )
+			for (int j = -radius; j <= x+ radius && y + radius >= 0 && y + j <= map.getMapHeight(); j += 1f)
 				if (map.getEntity(i, j).getType() == "Drone")
 					count++;
 		return count;
@@ -69,8 +71,8 @@ public class SensorEquipment extends AbstractEquipment {
 
 		light.setDistance(intensity);
 
-		//if (hasDrone(map, (int)getX(), (int)getY()) > 0)
-			//light.setColor(new Color(1f, 0f, 0f, 1f));
+	if (hasDrone((IMapAccess) getWorld(), (int)getX(), (int)getY()) > 0)
+			light.setColor(new Color(1f, 0f, 0f, 1f));
 
 	}
 

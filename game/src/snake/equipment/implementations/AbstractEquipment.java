@@ -12,7 +12,7 @@ import snake.visuals.enhanced.LightMapEntity;
  *                                  
  * Classe abstrata diretora de todos os equipamentos concretos
  *                        
- * @author bszazulla
+ * @author bszazulla & Gabriel Gimenez
  */
 
 public abstract class AbstractEquipment extends LightMapEntity implements IEquipment

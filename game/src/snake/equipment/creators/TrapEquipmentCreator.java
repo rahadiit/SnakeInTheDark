@@ -7,7 +7,7 @@ import snake.equipment.implementations.TrapEquipment;
 /**                              Developed By:
  *                                  NoDarkGlasses
  *                        
- * @author bszazulla
+ * @author bszazulla & Gabriel Gimenez
  */
 
 public class TrapEquipmentCreator implements IEquipmentCreator
