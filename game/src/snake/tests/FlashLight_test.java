@@ -21,7 +21,7 @@ public class FlashLight_test extends LightMapEntity {
 		setSize(1, 1);
 		vec = new Vector2();
 		
-		createLights();
+		//createLights();
 	}
 	
 	@Override
@@ -32,7 +32,9 @@ public class FlashLight_test extends LightMapEntity {
 	
 	@Override
 	public void act(float delta) {
-		
+		/*light = new ConeLight (Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f),
+				30, 5, 5, 90, 30);
+		*/
 		//Set lights' position
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);

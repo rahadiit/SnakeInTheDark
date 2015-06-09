@@ -39,7 +39,7 @@ public class Player extends LightMapEntity {
 	private String walkTexName = "character/CharacterSprite.png", standingTexName = "character/BlinkingCharacterSprite.png";
 	
 	private static final int FRAME_ROWS_WALK = 4, FRAME_COLS_WALK = 3;
-	private static final int FRAME_ROWS_STANDING = 3, FRAME_COLS_STANDING = 3;
+	private static final int FRAME_ROWS_STANDING = 4, FRAME_COLS_STANDING = 3;
 	
 	private float speed = 10;
 	private int direction = UP;
@@ -109,10 +109,10 @@ public class Player extends LightMapEntity {
 	}
 	
 	static public Player getinstance(GameWorld world){
-		if(player == null || player.getWorld() != world) {
+		/*if(player == null || player.getWorld() != world) {
 			player = new Player(world);
-		}
-		return player;
+		}*/
+		return new Player(world);
 	}
 	
 	@Override
