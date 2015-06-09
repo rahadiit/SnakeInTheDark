@@ -69,26 +69,26 @@ public class MapManager implements IMapAccess {
         return entities.remove(entity);
     }
 
-    public void clearEntities() {
+    void clearEntities() {
         disposeEntities();
         entities.clear();
     }
 
-    public void tickEntities(float delta) {
+    void tickEntities(float delta) {
         for (IMapEntity entity : entities)
             entity.act(delta);
     }
 
-    public void drawEntities(Batch batch, float parentAlpha) {
+    void drawEntities(Batch batch, float parentAlpha) {
         for (IMapEntity entity : entities)
             entity.draw(batch, parentAlpha);
     }
 
-    public void preloadMap(String name) {
+    void preloadMap(String name) {
         assetManager.load(name, TiledMap.class);
     }
 
-    public void loadMap(String name) {
+    void loadMap(String name) {
         preloadMap(name);
         assetManager.finishLoadingAsset(name);
         map = assetManager.get(name);
@@ -163,7 +163,7 @@ public class MapManager implements IMapAccess {
         }
     }
 
-    public void disposeEntities() {
+    void disposeEntities() {
         for (IMapEntity entity : entities) {
             entity.dispose();
             if (entity instanceof ILightMapEntity)
