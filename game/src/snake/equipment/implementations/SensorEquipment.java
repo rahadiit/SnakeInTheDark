@@ -21,6 +21,7 @@ public class SensorEquipment extends AbstractEquipment {
 	// sensor eh um equipment sem sprite, ele eh fixo com o player
 	PointLight light;
 	Vector2 vec = new Vector2();
+	boolean onMap = false;
 
 	private static final float MIN_INTENSITY = .6f;
 	private static final float MAX_INTENSITY = .9f;
@@ -40,16 +41,15 @@ public class SensorEquipment extends AbstractEquipment {
 	public void activateOnMap(IMapAccess map) {
 	}
 
-//	public int hasDrone(int x, int y, int radius) {
-//		int count = 0;
-//		for (int i = -radius; i <= radius && x + i >= 0
-//				&& x + i <= map.getMapWidth(); i++)
-//			for (int j = -radius; j <= radius && x + j >= 0
-//					&& x + j <= map.getMapHeight(); j++)
-//				if (map.getEntity(i, j).getType() == "Drone")
-//					count++;
-//		return count;
-//	}
+	public int hasDrone(IMapAccess map, int x, int y) {
+		int count = 0;
+		int radius = 1;
+		for (int i = -radius; i <= radius && x + i >= 0 && x + i <= map.getMapWidth(); i = i + map.getTileWidth())
+			for (int j = -radius; j <= x+ radius && y + radius >= 0 && y + j <= map.getMapHeight(); j = j + map.getTileHeight())
+				if (map.getEntity(i, j).getType() == "Drone")
+					count++;
+		return count;
+	}
 
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
@@ -64,12 +64,13 @@ public class SensorEquipment extends AbstractEquipment {
 		light.setPosition(vec);
 
 		time += delta;
-		float intensity = (MAX_INTENSITY- MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
+		float intensity = (MAX_INTENSITY - MIN_INTENSITY)
+				* MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
 
 		light.setDistance(intensity);
 
-//		 if (hasDrone((int)getX(), (int)getY(), 1) > 0)
-//			 light.setColor(new Color(1f, 0f, 0f, 1f));
+		//if (hasDrone(map, (int)getX(), (int)getY()) > 0)
+			//light.setColor(new Color(1f, 0f, 0f, 1f));
 
 	}
 
@@ -92,4 +93,13 @@ public class SensorEquipment extends AbstractEquipment {
 	@Override
 	public void dispose() {
 	}
+
+	public void setOnMap(boolean onMap) {
+		this.onMap = onMap;
+	}
+
+	public boolean getOnMap() {
+		return this.onMap;
+	}
+
 }

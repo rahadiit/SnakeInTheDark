@@ -57,6 +57,14 @@ public class BoxEquipment extends AbstractEquipment
 		if(onMap)
 			batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
+	public void setOnMap(boolean onMap){
+		this.onMap = onMap;
+	}
+	
+	public boolean getOnMap(){
+		return this.onMap;
+	}
+
 
 	// THIS EQUIPMENT HAS NO LIGHTS
 }

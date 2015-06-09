@@ -57,5 +57,13 @@ public class TrapEquipment extends AbstractEquipment
 		// TODO Auto-generated method stub
 
 	}
+	public void setOnMap(boolean onMap){
+		this.onMap = onMap;
+	}
+	
+	public boolean getOnMap(){
+		return this.onMap;
+	}
+
 	// THIS EQUIPMENT HAS NO LIGHTS
 }

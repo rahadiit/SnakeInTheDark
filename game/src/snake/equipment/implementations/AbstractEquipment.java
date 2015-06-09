@@ -59,9 +59,12 @@ public abstract class AbstractEquipment extends LightMapEntity implements IEquip
 	{
 	}
 	
-	
 	@Override
 	public String getType() {
 		return "equipment";
 	}
+	public abstract void setOnMap(boolean onMap);
+	
+	public abstract boolean getOnMap();
+
 }
