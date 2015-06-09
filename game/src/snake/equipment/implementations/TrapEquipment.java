@@ -57,11 +57,5 @@ public class TrapEquipment extends AbstractEquipment
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public String getType() {
-		return "Trap";
-	}
-
 	// THIS EQUIPMENT HAS NO LIGHTS
 }

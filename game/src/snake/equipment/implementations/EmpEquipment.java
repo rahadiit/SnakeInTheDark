@@ -64,10 +64,5 @@ public class EmpEquipment extends AbstractEquipment {
 
 	}
 
-	@Override
-	public String getType() {
-		return "EMP";
-	}
-
 	// THIS EQUIPMENT HAS NO LIGHTS
 }

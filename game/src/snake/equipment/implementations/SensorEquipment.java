@@ -92,9 +92,4 @@ public class SensorEquipment extends AbstractEquipment {
 	@Override
 	public void dispose() {
 	}
-
-	@Override
-	public String getType() {
-		return "Sensor";
-	}
 }

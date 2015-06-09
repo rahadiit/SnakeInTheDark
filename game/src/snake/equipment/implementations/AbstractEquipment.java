@@ -26,7 +26,7 @@ public abstract class AbstractEquipment extends LightMapEntity implements IEquip
 		return name;
 	}
 	
-	// para pegar uma pequena descriÁ„o do equipamento
+	// para pegar uma pequena descri√ß√£o do equipamento
 	public String getDescription()
 	{
 		return description;
@@ -38,24 +38,30 @@ public abstract class AbstractEquipment extends LightMapEntity implements IEquip
 	// Para se desenhar na tela (ele se chama sozinho)
 	public abstract void draw (Batch batch, float parentAlpha);
 	
-	// Para se atualizar na lÛgica do jogo
+	// Para se atualizar na l√≥gica do jogo
 	public abstract void act (float delta);
 	
-	// MÈtodos relacionados ao foco de luz (alguns equipments ter„o eles sobrescritos, outros n„o - usam esses da classe m„e mesmo -)
-	// Se h· ou n„o luz funcionando (just a test)
+	// M√©todos relacionados ao foco de luz (alguns equipments ter√£o eles sobrescritos, outros n√£o - usam esses da classe mÔøΩe mesmo -)
+	// Se h√° ou n√£o luz funcionando (just a test)
 	@Override
 	public boolean hasLights()
 	{
 		return false;
 	}
-	// CriaÁ„o da luz (nunguÈm chama de fora, ele È um dos mÈtodos que caracterizam o objeto)
+	// Cria√ß√£o da luz (nungu√©m chama de fora, ele √© um dos m√©todos que caracterizam o objeto)
 	@Override
 	public void createLights()
 	{
 	}
-	// EspÈcie de free na luz criada
+	// Especie de free na luz criada
 	@Override
 	public void disposeLights()
 	{
+	}
+	
+	
+	@Override
+	public String getType() {
+		return "equipment";
 	}
 }

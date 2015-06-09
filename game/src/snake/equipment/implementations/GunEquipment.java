@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
-import snake.map.IMapEntity;
 
 /**
  * Developed By: NoDarkGlasses
@@ -58,11 +57,6 @@ public class GunEquipment extends AbstractEquipment{
 	public void act(float delta) {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public String getType() {
-		return "Gun";
 	}
 
 	// THIS EQUIPMENT HAS NO LIGHTS

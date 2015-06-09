@@ -58,10 +58,5 @@ public class BoxEquipment extends AbstractEquipment
 			batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 
-	@Override
-	public String getType() {
-		return "Box";
-	}
-
 	// THIS EQUIPMENT HAS NO LIGHTS
 }

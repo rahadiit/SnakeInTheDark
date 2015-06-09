@@ -9,6 +9,7 @@ import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
 import snake.map.CellType;
 import snake.map.IMapAccess;
+import snake.map.IMapEntity;
 import snake.map.TiledMapWorld;
 import snake.tests.FlashLight_test;
 import snake.visuals.enhanced.LightMapEntity;
@@ -138,13 +139,21 @@ public class Player extends LightMapEntity {
 		super.act(delta);
 		
 		stateTime += delta;
-		//currentAnimation = animatedWalk[DOWN];
 		currentFrame = currentAnimation.getKeyFrame(stateTime, true);
 		
 		
+		if  (CellType.EXIT.equals(world.getCellType((int)getX(), (int)getY()))) {
+			// TODO: CARREGAR PROXIMO MAPA
+		}
+		
+		IMapEntity entity = world.getEntity((int)getX(), (int)getY());
+		if (entity != null && "equipment".equals(entity.getType())) {
+			world.removeEntity(entity); //Retira do mundo
+			addActor((Actor) entity); //Adiciona ao player
+		}
+		
 		if (state  == State.STANDING) {
 
-			
 			if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && !CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY()))){
 				distanceMoved = 0;
 				direction.set(-speed, 0);
