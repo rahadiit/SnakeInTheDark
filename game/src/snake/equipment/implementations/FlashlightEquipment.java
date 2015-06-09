@@ -112,7 +112,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	public void dispose()
 	{
 		super.dispose(); // esse estah na classe AbstractEquipment, abra ela se tiver duvida
-		
+
 		if(light != null)
 		{
 			light.remove();
