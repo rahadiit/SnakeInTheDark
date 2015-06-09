@@ -1,7 +1,6 @@
 package snake.equipment.implementations;
 
 import snake.map.IMapAccess;
-import snake.map.TiledMapWorld;
 import snake.visuals.Lights;
 import box2dLight.PointLight;
 
@@ -15,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  * Implementação concreta do sensor
  * 
- * @author Gabriel Gimenez
+ * @author Gabriel Gimenez & Bszazulla
  */
 
 public class SensorEquipment extends AbstractEquipment {
@@ -64,15 +63,18 @@ public class SensorEquipment extends AbstractEquipment {
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
-
+		boolean drone;
 		time += delta;
 		float intensity = (MAX_INTENSITY - MIN_INTENSITY)
 				* MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
 
 		light.setDistance(intensity);
-
-	if (hasDrone((IMapAccess) getWorld(), (int)getX(), (int)getY()) > 0)
+		drone = false;
+		if (hasDrone((IMapAccess) getWorld(), (int)getX(), (int)getY()) > 0) {
 			light.setColor(new Color(1f, 0f, 0f, 1f));
+			drone = true;
+	}
+		//BlinkingSensor.act(delta, drone);
 
 	}
 
@@ -93,7 +95,9 @@ public class SensorEquipment extends AbstractEquipment {
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose() 
+	{
+		super.dispose(); // esse estah na classe AbstractEquipment, abra ela se tiver duvida
 	}
 
 	public void setOnMap(boolean onMap) {

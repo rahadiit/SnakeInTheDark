@@ -13,6 +13,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import snake.engine.dataManagment.Loader;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
+import snake.visuals.enhanced.ILightMapEntity;
+import snake.visuals.enhanced.LightMapEntity;
 
 import java.util.*;
 
@@ -26,6 +28,10 @@ public class MapManager implements IMapAccess {
     }
 
     private TiledMap map;
+    private String currentMap;
+    private String nextMap;
+
+    private int spawnX, spawnY;
 
     private final List<IMapEntity> entities = new LinkedList<>();
     private final List<IMapEntity> entitiesWrapper = Collections.unmodifiableList(entities);
@@ -63,30 +69,32 @@ public class MapManager implements IMapAccess {
         return entities.remove(entity);
     }
 
-    public void clearEntities() {
+    void clearEntities() {
+        disposeEntities();
         entities.clear();
     }
 
-    public void tickEntities(float delta) {
+    void tickEntities(float delta) {
         for (IMapEntity entity : entities)
             entity.act(delta);
     }
 
-    public void drawEntities(Batch batch, float parentAlpha) {
+    void drawEntities(Batch batch, float parentAlpha) {
         for (IMapEntity entity : entities)
             entity.draw(batch, parentAlpha);
     }
 
-    public void preloadMap(String name) {
+    void preloadMap(String name) {
         assetManager.load(name, TiledMap.class);
     }
 
-    public void loadMap(String name) {
+    void loadMap(String name) {
         preloadMap(name);
         assetManager.finishLoadingAsset(name);
         map = assetManager.get(name);
+        currentMap = name;
 
-        entities.clear();
+        clearEntities();
         availableEquipments.clear();
 
         MapProperties properties = map.getProperties();
@@ -95,15 +103,35 @@ public class MapManager implements IMapAccess {
         tileWidth = properties.get("tilewidth", Integer.class);
         tileHeight = properties.get("tileheight", Integer.class);
 
+        nextMap = properties.get("nextMap", null, String.class);
+
+        String[] spawn = properties.get("spawnPoint", "1,1", String.class).split(",");
+        spawnX = Integer.parseInt(spawn[0]);
+        spawnY = Integer.parseInt(spawn[1]);
+
         String equips = properties.get("equipList", "", String.class);
         Collections.addAll(availableEquipments, equips.split(","));
         int equipQuantity = Integer.parseInt(properties.get("equipQuantity", "0", String.class));
         spawnEquipments(equipQuantity);
     }
 
+    @Override
+    public void loadNextMap() {
+        loadMap(nextMap);
+    }
+
+    @Override
+    public void reloadMap() {
+        loadMap(currentMap);
+    }
+
     public MapRenderer createRenderer() {
         int tileSize = Math.min(tileWidth, tileHeight);
         return new OrthogonalTiledMapRenderer(map, 1f / tileSize);
+    }
+
+    void moveToSpawnPoint(IMapEntity entity) {
+        entity.setPosition(spawnX, spawnY);
     }
 
     private void spawnEquipments(int equipQuantity) {
@@ -135,6 +163,14 @@ public class MapManager implements IMapAccess {
         }
     }
 
+    void disposeEntities() {
+        for (IMapEntity entity : entities) {
+            entity.dispose();
+            if (entity instanceof ILightMapEntity)
+                ((LightMapEntity) entity).disposeLights();
+        }
+    }
+
     @Override
     public CellType getCellType(int x, int y) {
         TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get("base");
@@ -144,8 +180,7 @@ public class MapManager implements IMapAccess {
         String cellType = properties.get("type", "", String.class);
 
         try {
-            CellType c = CellType.valueOf(cellType.toUpperCase(Locale.ENGLISH));
-            return c;
+            return CellType.valueOf(cellType.toUpperCase(Locale.ENGLISH));
         } catch (IllegalArgumentException e) {
             return null;
         }

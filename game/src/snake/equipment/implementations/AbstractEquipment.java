@@ -59,6 +59,18 @@ public abstract class AbstractEquipment extends LightMapEntity implements IEquip
 	{
 	}
 	
+	// dispose dos equipamentos, só falta o unload que eh sobreposto!
+	@Override 
+	public void dispose()
+	{
+		super.dispose();
+		
+		if(this.getParent() != null || this.getStage() != null)
+		{
+			this.remove();
+		}
+	}
+	
 	@Override
 	public String getType() {
 		return "equipment";

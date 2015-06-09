@@ -22,6 +22,7 @@ public class TiledMapWorld extends VisualGameWorld {
         
         IMapEntity player = Player.getInstance(this);
         manager.addEntity(player);
+        manager.moveToSpawnPoint(player);
     }
 
     public IMapAccess getMapAccess() {
@@ -74,11 +75,7 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void dispose() {
-        for (IMapEntity entity : manager.getEntities()) {
-            entity.dispose();
-            if (entity instanceof ILightMapEntity)
-                ((LightMapEntity) entity).disposeLights();
-        }
+        manager.disposeEntities();
     }
 
     @Override

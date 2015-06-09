@@ -44,9 +44,11 @@ public class EmpEquipment extends AbstractEquipment {
 	}
 
 	@Override
-	public void dispose() {
-		Loader.unload("equipments/emp.png");
-
+	public void dispose() 
+	{
+		super.dispose(); // da o dipose de luzes e afins
+		
+		Loader.unload("equipments/emp.png"); // da o dispose da sprite
 	}
 
 	@Override
