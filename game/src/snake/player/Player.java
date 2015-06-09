@@ -112,13 +112,6 @@ public class Player extends LightMapEntity {
 	    
 	    currentAnimation = animatedStanding[DOWN];
 	    
-
-		//adiciona equipamento lanterna_teste
-		flashlight = new FlashLight_test (world);
-		this.addActor(flashlight);
-		flashlight.setPosition(1f,.5f);
-		flashlight.setOrigin(-.5f, 0f);
-
 		//adiciona sensor
 		sensor = EquipmentCreator.createFactory("sensor").create(.5f, .5f, false);
 		addActor((Actor) sensor);
