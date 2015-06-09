@@ -30,6 +30,8 @@ public class Player extends LightMapEntity {
 	private static final int DOWN = 0, LEFT = 1, RIGHT = 2, UP = 3;
 	private static final int ANIMATION_WALK_STATES_NUM = 4, ANIMATION_STILL_STATES_NUM = 3;
 	
+	private enum State {STANDING, MOVING};
+	
 	//Animation
 	private Texture walkSheet, standingSheet; //debugar o esquema
 	private Animation[] animatedWalk, animatedStanding;
@@ -41,6 +43,8 @@ public class Player extends LightMapEntity {
 	
 	private float speed = 10;
 	private int direction = UP;
+	private State state = State.STANDING;
+	private Animation currentAnimation;
 	
 	//Equipments
 	private Weapon weapon;
@@ -55,7 +59,7 @@ public class Player extends LightMapEntity {
 	private Player (GameWorld world) {
 		super(world);
 
-		this.setSize(14f, 16);
+		this.setSize(1f, 1f);
 		this.setOrigin(0,0); // A origem ficou zoada pois o PNG nao ficou bom -- arrumar isso
 		
 		//Procedimento padrao para se carregar um arquivo (FORMA EFICIENTE!!)
@@ -90,6 +94,8 @@ public class Player extends LightMapEntity {
 			animatedStanding[i] = new Animation(0.25f, tmp2[0]);
 	    }
 	    
+	    currentAnimation = animatedStanding[DOWN];
+	    
 
 		//adiciona equipamento lanterna_teste
 		flashlight = new FlashLight_test (world);
@@ -108,40 +114,45 @@ public class Player extends LightMapEntity {
 		super.act(delta);
 		timer++;
 		
+		
 		stateTime += delta;
-		currentFrame = animatedStanding[RIGHT].getKeyFrame(stateTime, true);
+		currentFrame = currentAnimation.getKeyFrame(stateTime, true);
 		
-		timer = 6;
-		if(timer>5){
-			timer = 0;
 		
-			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-				moveBy(-speed * delta, 0);
-				direction = LEFT;
-				update();
-			}
-			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-				moveBy(speed * delta, 0);
-				direction = RIGHT;
-				update();
-			}
-			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-				moveBy(0, speed * delta);
-				direction = UP;
-				update();
-			}
-			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-				moveBy(0, -speed * delta);
-				direction = DOWN;
-				update();
-			}
+		if (state  == State.STANDING) {
 			
-			else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-				rotateBy(5);
+			timer = 6;
+			if(timer>5){
+				timer = 0;
+			
+				if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+					moveBy(-speed * delta, 0);
+					direction = LEFT;
+					update();
+				}
+				else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+					moveBy(speed * delta, 0);
+					direction = RIGHT;
+					update();
+				}
+				else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+					moveBy(0, speed * delta);
+					direction = UP;
+					update();
+				}
+				else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+					moveBy(0, -speed * delta);
+					direction = DOWN;
+					update();
+				}
+				
+				else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
+					rotateBy(5);
+				}
+				else if (Gdx.input.isKeyPressed(Input.Keys.V)) {
+					rotateBy(-5);
+				}										
 			}
-			else if (Gdx.input.isKeyPressed(Input.Keys.V)) {
-				rotateBy(-5);
-			}										
 		}
 	}
 	
