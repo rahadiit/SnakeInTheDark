@@ -81,7 +81,7 @@ public abstract class ScreenCreator {
 	 * 
 	 * @param settings[] -- settings used to create Screen
 	 * @throws Exception */
-	public static void addAndGo (String settings[]) throws Exception {
+	public static void addAndGo (String... settings) throws Exception {
 		
 		try {
 			Screen screen = createScreen(settings);
@@ -150,7 +150,7 @@ public abstract class ScreenCreator {
 	 * @param settings
 	 * @throws Exception 
 	 */
-	public static void switchAndGo (String settings[]) throws Exception {
+	public static void switchAndGo (String... settings) throws Exception {
 		try {
 			
 			if (screenStack.isEmpty() == false) {

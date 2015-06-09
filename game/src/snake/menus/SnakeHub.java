@@ -49,9 +49,8 @@ public class SnakeHub extends HUD {
 	public void act(float delta) {
 		font.setColor(Color.GREEN);
 		if (Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) {
-			String[] param = {"SnakeScreen", "TiledMap", "maps/level1.tmx"};
 			try {
-				ScreenCreator.switchAndGo(param);
+				ScreenCreator.switchAndGo("SnakeScreen", "TiledMap", "maps/level1.tmx");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

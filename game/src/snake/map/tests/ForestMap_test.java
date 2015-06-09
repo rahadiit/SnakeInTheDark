@@ -74,11 +74,10 @@ public class ForestMap_test extends VisualGameWorld {
 		
 		//Adds new screen on top of this one
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-			String[] param = {"SnakeScreen", "TempleMap", "Some random Data"};
 			try {
-				ScreenCreator.addAndGo(param);
+				ScreenCreator.addAndGo("SnakeScreen", "TempleMap", "");
 			}  catch (Exception e) {
-				e.printStackTrace(System.out);
+				e.printStackTrace();
 			}
 		}
 		
@@ -87,11 +86,10 @@ public class ForestMap_test extends VisualGameWorld {
 			try {
 				ScreenCreator.backToPrevious();
 			} catch (Exception e) { //OR... Creates new SnakeHub Screen
-				String[] param = {"SnakeLevel", "MainMenu", "LevelDataID"};
 				try {
-					ScreenCreator.switchAndGo(param);
+					ScreenCreator.switchAndGo("SnakeLevel", "MainMenu", "");
 				} catch (Exception excp) {
-					e.printStackTrace(System.out);
+					e.printStackTrace();
 				}
 			}
 		}
