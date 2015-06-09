@@ -47,7 +47,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		texture = Loader.get("equipments/PixelFlashlight.png");
 		sprite = new Sprite(texture);
 		
-		this.batteryCounter = 100000; // bateria fixa de toda lanterna
+		this.batteryCounter = 4; // bateria fixa de toda lanterna
 	}
 
 	// Ativacao de seu efeito no mapa
