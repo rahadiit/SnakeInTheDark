@@ -16,7 +16,7 @@ import snake.engine.models.GameWorld;
 public abstract class MapEntity extends Group implements IMapEntity {
 
     protected int xInMap, yInMap;
-    public GameWorld world;
+    private GameWorld world;
 
     //Creates and adds actor to world
     public MapEntity(GameWorld world) {
@@ -37,5 +37,11 @@ public abstract class MapEntity extends Group implements IMapEntity {
             if (child instanceof MapEntity)
                 ((MapEntity) child).dispose();
         }
+    }
+    
+    
+    @Override
+    public GameWorld getWorld() {
+    	return world;
     }
 }

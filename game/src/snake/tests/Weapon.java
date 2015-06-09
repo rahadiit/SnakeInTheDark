@@ -41,7 +41,7 @@ public class Weapon extends LightMapEntity {
 		super.act(delta);
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !charging) { //Devia ser acionada pelo player
 			charging = true;
-			bullet = new Bullet (world);
+			bullet = new Bullet (getWorld());
 			bullet.setPosition(0, 0);
 			this.addActor(bullet);
 			
@@ -80,7 +80,7 @@ public class Weapon extends LightMapEntity {
 			bullet.setVelocity(vec);
 			
 			//add to weapon
-			world.addActor(bullet);
+			getWorld().addActor(bullet);
 			
 			bullet.setZIndex(0); //make it go under the box
 			

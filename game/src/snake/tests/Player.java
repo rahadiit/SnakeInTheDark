@@ -100,12 +100,18 @@ public class Player extends LightMapEntity {
 		//adiciona equipamento lanterna_teste
 		flashlight = new FlashLight_test (world);
 		this.addActor(flashlight);
-		flashlight.setPosition(0,0);		
+		flashlight.setPosition(0,0);
+		
+		//Adiciona equipamento arma
+		/*weapon = new Weapon (world);
+		this.addActor(weapon);
+		weapon.setPosition(0f, 0f);*/
 	}
 	
 	static public Player getinstance(GameWorld world){
-		if(player == null)
+		if(player == null || player.getWorld() != world) {
 			player = new Player(world);
+		}
 		return player;
 	}
 	

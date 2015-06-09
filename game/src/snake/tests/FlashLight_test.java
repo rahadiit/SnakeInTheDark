@@ -18,8 +18,10 @@ public class FlashLight_test extends LightMapEntity {
 	
 	public FlashLight_test (GameWorld world) {
 		super(world);
-		setBounds(0, 0, 1, 1);
+		setSize(1, 1);
 		vec = new Vector2();
+		
+		createLights();
 	}
 	
 	@Override
@@ -39,15 +41,16 @@ public class FlashLight_test extends LightMapEntity {
 		
 		Actor parent = this.getParent();
 		float rotation = 0;
-		while (parent != null) {
+		/*while (parent != null) {
 			rotation += parent.getRotation();
 			parent = parent.getParent();
-		}
+		}*/
 		
 		light.setDirection(rotation);
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			light.setActive(!light.isActive());
+			System.out.println("Tutz tutz");
 		}
 	}
 	
@@ -56,8 +59,8 @@ public class FlashLight_test extends LightMapEntity {
 	public void createLights () {
 		super.createLights();
 		light = new ConeLight (Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f),
-				100, getX(), getY(), 90, 30);
-		light.setActive(false); //Comeca apagada
+				30, getX(), getY(), 90, 30);
+		light.setActive(true); //Comeca acessa
 	}
 	
 	
