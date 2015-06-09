@@ -27,6 +27,16 @@ public abstract class MapEntity extends Group implements IMapEntity {
     }
 
     @Override
+    public float getX() {
+        return xInMap;
+    }
+
+    @Override
+    public float getY() {
+        return yInMap;
+    }
+
+    @Override
     public LevelStage getStage() {
         return (LevelStage) super.getStage();
     }
