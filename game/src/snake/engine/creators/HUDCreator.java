@@ -96,7 +96,7 @@ public class HUDCreator {
 		float width = stage.getViewport().getCamera().viewportWidth;
 		float height = stage.getViewport().getCamera().viewportHeight;
 		
-		stage.getViewport().getCamera().translate(HUDSettings.getCameraPosX() - width/2, HUDSettings.getCameraPosY() - height/2, 0);
+		//stage.getViewport().getCamera().translate(HUDSettings.getCameraPosX() - width/2, HUDSettings.getCameraPosY() - height/2, 0);
 		
 		return  stage;
 	}

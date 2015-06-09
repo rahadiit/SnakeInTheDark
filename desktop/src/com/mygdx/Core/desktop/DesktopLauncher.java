@@ -16,8 +16,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		
 		config.title = "SnakeInTheDark";
-		config.width = 1920;
-	    config.height = 1080;
+		config.width = 1280;
+	    config.height = 720;
 		new LwjglApplication(new SnakeStart(), config);
 	}
 }

@@ -3,8 +3,11 @@ package snake.hud;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import snake.engine.creators.HUDSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.HUD;
 
@@ -19,24 +22,27 @@ import snake.engine.models.HUD;
 
 
 public class SnakeHUD extends HUD {
-	private SnakeInfosHUD infos;
-	private SnakeDialogHUD dialog;
+
 	private BitmapFont font;
-	private String fontName = "fonts/ak_sc_o.fnt";
+	private String fontName = "fonts/ak_sc_o.fnt", hudName = "hud/hudFinal_compressed.png";
+	private Texture tex;
+	private Sprite sprite;
 	
 	public SnakeHUD (String levelData) {
 		super();
 		
-		infos = new SnakeInfosHUD();
-		
-		
-		dialog  = new SnakeDialogHUD();
-		dialog.setPosition(5, 5);
-		this.addActor(dialog);
+		this.setBounds(0, 0, HUDSettings.getHudWidth(), HUDSettings.getHudHeight());
 		
 		Loader.load(fontName, BitmapFont.class);
 		Loader.finishLoadingAsset(fontName);
-		this.font = Loader.get(fontName);
+		font = Loader.get(fontName);
+		
+		
+		Loader.load(hudName, Texture.class);
+		Loader.finishLoadingAsset(hudName);
+		tex = Loader.get(hudName);
+		
+		sprite = new Sprite(tex);
 	}
 	
 	
@@ -59,7 +65,6 @@ public class SnakeHUD extends HUD {
 		super.draw(batch, parentAlpha);
 		// Draw fps
 		font.setColor(Color.GREEN);
-		
 		if (Gdx.input.isKeyPressed(Input.Keys.H) || Gdx.input.isTouched())
 			font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, this.getHeight());
 		
@@ -67,6 +72,9 @@ public class SnakeHUD extends HUD {
 			font.setColor(Color.MAGENTA);
 			font.draw(batch, "Wow. Just... Wow.", 50, 50);
 		}
+		
+		
+		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 	}
 
 
