@@ -116,6 +116,9 @@ public class Player extends LightMapEntity {
 		sensor = EquipmentCreator.createFactory("sensor").create(.5f, .5f, false);
 		addActor((Actor) sensor);
 	}
+	//public boolean destroy() {
+	//}
+		
 	
 	static public Player getInstance(GameWorld world){
 		if(player == null || player.getWorld() != world) {
@@ -241,11 +244,6 @@ public class Player extends LightMapEntity {
 	@Override
 	public void createLights() { //Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
 		super.createLights(); //Importante para criar as luzes/sombra dos filhos
-	}
-
-	@Override
-	public void disposeLights() {
-		super.disposeLights();
 	}
 
 	@Override
