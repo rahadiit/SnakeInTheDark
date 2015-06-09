@@ -1,5 +1,5 @@
 package snake.drone;
 
 public interface IObserver {
-	public abstract void update();
+	public abstract void update(float delta);
 }
