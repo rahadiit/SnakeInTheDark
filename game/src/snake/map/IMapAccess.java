@@ -6,6 +6,8 @@ public interface IMapAccess {
 
     List<IMapEntity> getEntities();
 
+    IMapEntity getEntity(int x, int y);
+
     boolean addEntity(IMapEntity entity);
 
     boolean removeEntity(IMapEntity entity);

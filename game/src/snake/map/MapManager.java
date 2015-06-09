@@ -45,6 +45,15 @@ public class MapManager implements IMapAccess {
     }
 
     @Override
+    public IMapEntity getEntity(int x, int y) {
+        // Slow code
+        for (IMapEntity entity : entities)
+            if ((int) entity.getX() == x && (int) entity.getY() == y)
+                return entity;
+        return null;
+    }
+
+    @Override
     public boolean addEntity(IMapEntity entity) {
         return entities.add(entity);
     }
