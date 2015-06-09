@@ -134,6 +134,8 @@ public class Drone extends LightMapEntity implements IObserver{
 		}
 	}
 	
+	
+	private float time;
 	@Override
 	public void act(float delta) {
 		if (state == State.MOVING) {
@@ -150,9 +152,17 @@ public class Drone extends LightMapEntity implements IObserver{
 				moveBy(0,-speed * delta);
 			else {
 				state = State.EXPLODING;
+				time = 0;
 			}
 		}
-		else if (state == State.EXPLODING)
+		else if (state == State.EXPLODING) {
+			tex = explodeAnimation.getKeyFrame(time);
+			time +=delta;
+			
+			if (explodeAnimation.isAnimationFinished(time - delta)) {
+				this.dispose();
+			}
+		}
 	}
 
 	@Override
