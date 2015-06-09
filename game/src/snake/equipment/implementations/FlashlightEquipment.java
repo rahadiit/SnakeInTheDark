@@ -1,5 +1,10 @@
 package snake.equipment.implementations;
 
+import snake.drone.IObserver;
+import snake.engine.dataManagment.Loader;
+import snake.map.IMapAccess;
+import snake.player.Player;
+import snake.visuals.Lights;
 import box2dLight.ConeLight;
 
 import com.badlogic.gdx.Gdx;
@@ -10,11 +15,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import snake.drone.IObserver;
-import snake.engine.dataManagment.Loader;
-import snake.map.IMapAccess;
-import snake.player.Player;
-import snake.visuals.Lights;
 
 /**                              Developed By:
  *                                  NoDarkGlasses
@@ -46,9 +46,6 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		Loader.finishLoadingAsset("equipments/PixelFlashlight.png");
 		texture = Loader.get("equipments/PixelFlashlight.png");
 		sprite = new Sprite(texture);
-		
-		// me inscrevo no player para saber que a mudança de turno vai diminuir a bateria da lanterna
-		Player.getCurrentInstance().attach(this);
 		
 		this.batteryCounter = 4; // bateria fixa de toda lanterna
 	}
@@ -137,6 +134,12 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	public boolean getOnMap()
 	{
 		return this.onMap;
+	}
+	
+	@Override
+	public void onPickup(Player player)
+	{
+		player.attach(this);
 	}
 
 	@Override

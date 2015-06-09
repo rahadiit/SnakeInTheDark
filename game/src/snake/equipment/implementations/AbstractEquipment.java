@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 import snake.equipment.IEquipment;
 import snake.map.IMapAccess;
+import snake.player.Player;
 import snake.visuals.enhanced.LightMapEntity;
 
 /**                              Developed By:
@@ -59,6 +60,11 @@ public abstract class AbstractEquipment extends LightMapEntity implements IEquip
 	{
 	}
 	
+	@Override
+	public void onPickup(Player player)
+	{
+	}
+	
 	// dispose dos equipamentos, só falta o unload que eh sobreposto!
 	@Override 
 	public void dispose()
@@ -75,8 +81,5 @@ public abstract class AbstractEquipment extends LightMapEntity implements IEquip
 	public String getType() {
 		return "equipment";
 	}
-	public abstract void setOnMap(boolean onMap);
-	
-	public abstract boolean getOnMap();
 
 }

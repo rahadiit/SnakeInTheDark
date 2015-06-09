@@ -3,6 +3,7 @@ package snake.equipment;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import snake.map.IMapAccess;
+import snake.player.Player;
 import snake.visuals.enhanced.ILightMapEntity;
 
 public interface IEquipment extends ILightMapEntity
@@ -12,4 +13,6 @@ public interface IEquipment extends ILightMapEntity
 	String getName();
 	void draw(Batch batch, float parentAlpha);
 	void setOnMap(boolean onMap);
+	boolean getOnMap();
+	void onPickup(Player player);
 }
