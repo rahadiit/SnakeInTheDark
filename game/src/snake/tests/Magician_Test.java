@@ -80,7 +80,8 @@ public class Magician_Test extends LightMapEntity {
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
-		
+		if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
+			System.out.println (getX() + ";" + getY());
 		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 		super.draw(batch, parentAlpha);
@@ -108,5 +109,10 @@ public class Magician_Test extends LightMapEntity {
 			this.remove();
 		}
 		Loader.unload(texName);
+	}
+
+	@Override
+	public String getType() {
+		return "player";
 	}
 }

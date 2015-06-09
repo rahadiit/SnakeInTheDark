@@ -1,6 +1,6 @@
 package snake.map.tests;
 
-import snake.Drone.Drone;
+import snake.drone.Drone;
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
@@ -8,10 +8,9 @@ import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
 import snake.tests.Magician_Test;
 import snake.tests.Box_Test;
-import snake.tests.Player;
+import snake.player.Player;
 import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;

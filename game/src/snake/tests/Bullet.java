@@ -111,6 +111,11 @@ public class Bullet extends LightMapEntity {
 	public void setVelocity (Vector2 velocity) {
 		this.velocity.set(velocity);
 	}
+
+	@Override
+	public String getType() {
+		return "bullet";
+	}
 	
 	
 }

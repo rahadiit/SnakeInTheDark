@@ -63,4 +63,9 @@ public class Box_Test extends LightMapEntity{
 			this.remove();
 		Loader.unload(texName);
 	}
+
+	@Override
+	public String getType() {
+		return "box";
+	}
 }

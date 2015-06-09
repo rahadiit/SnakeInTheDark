@@ -16,4 +16,6 @@ public interface IMapEntity {
     void draw(Batch batch, float parentAlpha);
 
 	GameWorld getWorld();
+	
+	public String getType();
 }

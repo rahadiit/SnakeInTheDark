@@ -14,8 +14,7 @@ import snake.engine.models.GameWorld;
  * @author Mr.Strings
  */
 public abstract class MapEntity extends Group implements IMapEntity {
-
-    protected int xInMap, yInMap;
+	
     private GameWorld world;
 
     //Creates and adds actor to world
@@ -23,18 +22,7 @@ public abstract class MapEntity extends Group implements IMapEntity {
         this.world = world;
     }
 
-    public MapEntity() {
-    }
-
-    @Override
-    public float getX() {
-        return xInMap;
-    }
-
-    @Override
-    public float getY() {
-        return yInMap;
-    }
+    public MapEntity() {}
 
     @Override
     public LevelStage getStage() {
@@ -54,4 +42,6 @@ public abstract class MapEntity extends Group implements IMapEntity {
     public GameWorld getWorld() {
     	return world;
     }
+    
+    public abstract String getType();
 }

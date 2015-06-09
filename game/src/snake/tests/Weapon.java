@@ -111,4 +111,10 @@ public class Weapon extends LightMapEntity {
 		Loader.unload(thunderSoundName);
 	}
 
+
+	@Override
+	public String getType() {
+		return "weapon";
+	}
+
 }

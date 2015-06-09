@@ -1,11 +1,10 @@
 
-package snake.Drone;
+package snake.drone;
 
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
-import snake.tests.Player;
+import snake.player.Player;
 import snake.visuals.enhanced.LightMapEntity;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -94,5 +93,10 @@ public class Drone extends LightMapEntity implements IObserver{
 			this.remove();
 		}
 		Loader.unload(texName);
+	}
+
+	@Override
+	public String getType() {
+		return "Drone";
 	}
 }

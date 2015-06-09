@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapRenderer;
 import snake.engine.creators.WorldSettings;
-import snake.tests.Player;
+import snake.player.Player;
 import snake.visuals.enhanced.ILightMapEntity;
 import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;

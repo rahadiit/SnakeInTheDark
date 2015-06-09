@@ -43,10 +43,10 @@ public class FlashLight_test extends LightMapEntity {
 		
 		Actor parent = this.getParent();
 		float rotation = 0;
-		/*while (parent != null) {
+		while (parent != null) {
 			rotation += parent.getRotation();
 			parent = parent.getParent();
-		}*/
+		}
 		
 		light.setDirection(rotation);
 		
@@ -73,6 +73,11 @@ public class FlashLight_test extends LightMapEntity {
 			light.dispose();
 		}
 			
+	}
+
+	@Override
+	public String getType() {
+		return "flashlight";
 	}
 	
 	

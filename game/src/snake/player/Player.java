@@ -1,10 +1,12 @@
-package snake.tests;
+package snake.player;
 
 import java.util.ArrayList;
 import java.util.List;
-import snake.Drone.IObserver;
+import snake.drone.IObserver;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
+import snake.tests.FlashLight_test;
+import snake.tests.Weapon;
 import snake.visuals.enhanced.LightMapEntity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -69,7 +71,7 @@ public class Player extends LightMapEntity {
 		
 		Loader.load(standingTexName, Texture.class);
 		Loader.finishLoadingAsset(standingTexName);
-		walkSheet = Loader.get(standingTexName);
+		standingSheet = Loader.get(standingTexName);
 		
 		
 		
@@ -87,7 +89,7 @@ public class Player extends LightMapEntity {
 	    animatedStanding = new Animation[4];
 	    for (int i = 0; i < ANIMATION_STILL_STATES_NUM; i++) {
 
-	    	region = new TextureRegion(walkSheet, 0, (float) i/FRAME_ROWS_STANDING, 1,(float) (i+1) /FRAME_ROWS_STANDING);
+	    	region = new TextureRegion(standingSheet, 0, (float) i/FRAME_ROWS_STANDING, 1,(float) (i+1) /FRAME_ROWS_STANDING);
 	    	
 			TextureRegion[][] tmp2 = region.split(region.getRegionWidth()/FRAME_COLS_STANDING,region.getRegionHeight());
 			
@@ -132,7 +134,7 @@ public class Player extends LightMapEntity {
 				timer = 0;
 			
 				if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-					moveBy(-speed * delta, 0);
+					super.moveBy(-speed * delta, 0);
 					direction = LEFT;
 					update();
 				}
@@ -157,8 +159,8 @@ public class Player extends LightMapEntity {
 	
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
-		
-		
+		if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
+			System.out.println (getX() + ";" + getY());
 		batch.draw(currentFrame, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 		super.draw(batch, parentAlpha);
@@ -172,7 +174,6 @@ public class Player extends LightMapEntity {
 	@Override
 	public void createLights() { //Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
 		super.createLights(); //Importante para criar as luzes/sombra dos filhos
-		System.out.println("Criei luzes do player");
 	}
 
 	@Override
@@ -199,5 +200,10 @@ public class Player extends LightMapEntity {
 		for (IObserver observer : observers) {
 			observer.update();
 		}
+	}
+
+	@Override
+	public String getType() {
+		return "player";
 	}
 }
