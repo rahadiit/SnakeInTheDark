@@ -75,7 +75,7 @@ public class FlashlightEquipment extends AbstractEquipment
 		this.localToStageCoordinates(vec);
 		
 		// lanterna ascende ou apaga ao pressionar k
-		if (Gdx.input.isKeyJustPressed(Input.Keys.T))
+		if (Gdx.input.isKeyJustPressed(Input.Keys.T) && onMap == false)
 		{
 			light.setActive(!light.isActive());
 		}
