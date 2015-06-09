@@ -73,6 +73,10 @@ public class GunEquipment extends AbstractEquipment {
 		return ammo;
 	}
 
+	public int shoot()
+	{
+		return --ammo;
+	}
 
 	// THIS EQUIPMENT HAS NO LIGHTS
 }
