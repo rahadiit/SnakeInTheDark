@@ -6,6 +6,7 @@ import box2dLight.PositionalLight;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import snake.map.IMapAccess;
 import snake.visuals.Lights;
@@ -39,16 +40,15 @@ public class SensorEquipment extends AbstractEquipment {
 	}
 
 //	public int hasDrone(int x, int y, int radius) {
-	//	int count = 0;
-	//	IMapAccess map;
-	//	radius = radius * map.getTileHeight();
-	//	for(int i = -radius; i <= radius && x + i >= 0 && x+i <= map.getMapWidth(); i = i + map.getTileWidth())
-			//for (int j = -radius; j <= radius && x + j >= 0 && x+j <= map.getMapHeight(); j = j + map.getTileHeight())
-		//		if (map.getEntity(i, j).type == "DRONE")
-	//				count++;
+//		int count = 0;
+//		for (int i = -radius; i <= radius && x + i >= 0
+//				&& x + i <= map.getMapWidth(); i++)
+//			for (int j = -radius; j <= radius && x + j >= 0
+//					&& x + j <= map.getMapHeight(); j++)
+//				if (map.getEntity(i, j).getType() == "Drone")
+//					count++;
 //		return count;
 //	}
-	
 
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
@@ -62,8 +62,8 @@ public class SensorEquipment extends AbstractEquipment {
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
 
-//		if (hasDrone((int)getX(), (int)getY(), 10) > 0)
-	//	 	light.setColor(new Color(1f, 0f, 0f, 1f));
+//		 if (hasDrone((int)getX(), (int)getY(), 1) > 0)
+//			 light.setColor(new Color(1f, 0f, 0f, 1f));
 
 	}
 
@@ -71,7 +71,7 @@ public class SensorEquipment extends AbstractEquipment {
 	public void createLights() { // Criacao de luzes tem que ser algo separado
 		// (senao da pau) -- tudo aqui
 		light = new PointLight(Lights.getRayhandler(), 5000, new Color(0f, 1f,
-				0f, 1f), 1, getX(), getY());
+				0f, 1f), 5, getX(), getY());
 		light.setActive(true);
 	}
 
@@ -85,5 +85,10 @@ public class SensorEquipment extends AbstractEquipment {
 
 	@Override
 	public void dispose() {
+	}
+
+	@Override
+	public String getType() {
+		return "Sensor";
 	}
 }

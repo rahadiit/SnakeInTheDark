@@ -3,6 +3,7 @@ package snake.equipment.implementations;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
 
@@ -55,6 +56,11 @@ public class BoxEquipment extends AbstractEquipment
 	{
 		if(onMap)
 			batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+	}
+
+	@Override
+	public String getType() {
+		return "Box";
 	}
 
 	// THIS EQUIPMENT HAS NO LIGHTS
