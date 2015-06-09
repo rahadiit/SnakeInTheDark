@@ -109,19 +109,15 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	} // Se quiser destruir a luz, pode ser em qualquer lugar
 
 	@Override
-	public void disposeLights()
+	public void dispose()
 	{
-		if (light != null)
+		super.dispose(); // esse estah na classe AbstractEquipment, abra ela se tiver duvida
+		
+		if(light != null)
 		{
 			light.remove();
 			light.dispose();
 		}
-	}
-
-	@Override
-	public void dispose()
-	{
-		super.dispose(); // esse estah na classe AbstractEquipment, abra ela se tiver duvida
 		
 		Loader.unload("equipments/PixelFlashlight.png"); // da o unload
 	}
