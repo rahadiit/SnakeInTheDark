@@ -163,6 +163,7 @@ public class Player extends LightMapEntity {
 				lastPosX = getX(); lastPosY = getY();
 				state = State.MOVING;	
 				stateTime = 0;
+				update(delta);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY()))) {
 				distanceMoved = 0;
@@ -171,6 +172,7 @@ public class Player extends LightMapEntity {
 				lastPosX = getX(); lastPosY = getY();
 				state = State.MOVING;
 				stateTime = 0;
+				update(delta);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP) && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1))) {
 				distanceMoved = 0;
@@ -179,6 +181,7 @@ public class Player extends LightMapEntity {
 				lastPosX = getX(); lastPosY = getY();
 				state = State.MOVING;
 				stateTime = 0;
+				update(delta);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1))) {
 				distanceMoved = 0;
@@ -187,6 +190,7 @@ public class Player extends LightMapEntity {
 				lastPosX = getX(); lastPosY = getY();
 				state = State.MOVING;
 				stateTime = 0;
+				update(delta);
 			} else {
 				if (direction.x > 0) {
 					currentAnimation = animatedStanding[RIGHT];
@@ -262,9 +266,9 @@ public class Player extends LightMapEntity {
 	      observers.add(observer);		
 	   }
 	
-	private void update(){
+	private void update(float delta){
 		for (IObserver observer : observers) {
-			observer.update();
+			observer.update(delta);
 		}
 	}
 
