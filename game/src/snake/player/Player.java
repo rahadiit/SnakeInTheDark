@@ -126,8 +126,10 @@ public class Player extends LightMapEntity {
 	}
 	
 	public boolean destroy() {
-		if (((GunEquipment) arma).getAmmo() > 0)
+		if (((GunEquipment) arma).getAmmo() > 0) {
+			((GunEquipment) arma).shoot();
 			return false;
+		}
 		else
 			return true;
 			
