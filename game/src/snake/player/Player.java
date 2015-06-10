@@ -160,8 +160,8 @@ public class Player extends LightMapEntity {
 		if  (CellType.EXIT.equals(access.getCellType((int) getX(), (int) getY())))
 			access.loadNextMap();
 		
-		IMapEntity entity = access.getEntity((int)getX(), (int)getY());
-		if (entity != null && "equipment".equals(entity.getType())) {
+		IMapEntity entity = access.getEntity((int)getX(), (int)getY(), "equipment");
+		if (entity != null) {
 			IEquipment equipment = (IEquipment) entity;
 			access.removeEntity(equipment); //Retira do mundo
 			equipment.setPosition(.5f, .5f);

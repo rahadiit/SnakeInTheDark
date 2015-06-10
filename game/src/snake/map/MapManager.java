@@ -49,12 +49,31 @@ public class MapManager implements IMapAccess {
     }
 
     @Override
-    public IMapEntity getEntity(int x, int y) {
+    public List<IMapEntity> getEntities(int x, int y) {
+        List<IMapEntity> ret = new ArrayList<>();
         // Slow code
         for (IMapEntity entity : entities)
             if ((int) entity.getX() == x && (int) entity.getY() == y)
-                return entity;
-        return null;
+                ret.add(entity);
+        return ret;
+    }
+
+    @Override
+    public List<IMapEntity> getEntities(int x, int y, String type) {
+        List<IMapEntity> ret = new ArrayList<>();
+        // Slow code
+        for (IMapEntity entity : entities)
+            if ((int) entity.getX() == x && (int) entity.getY() == y && entity.getType().equals(type))
+                ret.add(entity);
+        return ret;
+    }
+
+    @Override
+    public IMapEntity getEntity(int x, int y, String type) {
+        List<IMapEntity> entities = getEntities(x, y, type);
+        if (entities.isEmpty())
+            return null;
+        return entities.get(0);
     }
 
     @Override

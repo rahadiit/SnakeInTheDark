@@ -36,12 +36,12 @@ public class EmpEquipment extends AbstractEquipment {
 		int x = (int)getX();
 		int y = (int)getY();
 		int i, j, radius = (int) 2f;
-		for (i = -radius; i <= radius && x + i >= 0
-				&& x + i <= map.getMapWidth(); i += 1f)
-			for (j = -radius; j <= x+ radius && y + radius >= 0
-					&& y + j <= map.getMapHeight(); j += 1f)
-				if (map.getEntity(i, j).getType() == "Drone")
-					((Drone)map.getEntity(i, j)).destroy();
+//		for (i = -radius; i <= radius && x + i >= 0
+//				&& x + i <= map.getMapWidth(); i += 1f)
+//			for (j = -radius; j <= x+ radius && y + radius >= 0
+//					&& y + j <= map.getMapHeight(); j += 1f)
+//				if (map.getEntity(i, j).getType() == "Drone")
+//					map.removeEntity(map.getEntity(i, j));
 	}
 
 	@Override

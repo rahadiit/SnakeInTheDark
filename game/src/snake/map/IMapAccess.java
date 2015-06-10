@@ -1,5 +1,6 @@
 package snake.map;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface IMapAccess {
@@ -10,7 +11,11 @@ public interface IMapAccess {
 
     List<IMapEntity> getEntities();
 
-    IMapEntity getEntity(int x, int y);
+    List<IMapEntity> getEntities(int x, int y);
+
+    List<IMapEntity> getEntities(int x, int y, String type);
+
+    IMapEntity getEntity(int x, int y, String type);
 
     boolean addEntity(IMapEntity entity);
 

@@ -44,8 +44,8 @@ public class SensorEquipment extends AbstractEquipment {
 		int radius = 1;
 		for (int i = -radius; i <= radius; i++)
 			for (int j = -radius; j <= radius; j++) {
-				IMapEntity entity = access.getEntity(x + i, y + j);
-				if (entity != null && "Drone".equals(entity.getType()))
+				IMapEntity entity = access.getEntity(x + i, y + j, "Drone");
+				if (entity != null)
 					count++;
 			}
 		return count;
@@ -62,16 +62,15 @@ public class SensorEquipment extends AbstractEquipment {
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
-		boolean drone;
 		time += delta;
 		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
 
 		light.setDistance(intensity);
-		drone = false;
 		if (hasDrone((int) getParent().getX(), (int) getParent().getY()) > 0) {
-			light.setColor(new Color(1f, 0f, 0f, 1f));
-			drone = true;
-	}
+			light.setColor(Color.RED);
+		} else {
+			light.setColor(Color.GREEN);
+		}
 		//BlinkingSensor.act(delta, drone);
 
 	}
