@@ -245,7 +245,7 @@ public class Drone extends LightMapEntity implements IObserver{
 		super.dispose();
 		if (this.getParent() != null || this.getStage() != null) {
 			this.remove();
-			getWolrd
+			((IMapAccess)getWorld()).removeEntity(this);
 		}
 		Loader.unload(explodeTexName);
 		Loader.unload(texName);
