@@ -39,7 +39,7 @@ public class Drone extends LightMapEntity implements IObserver{
 	private static Player player;
 	private IMapAccess world;
 	private static final int FRAME_ROWS_EXPLODE = 2, FRAME_COLS_EXPLODE = 6;
-	private float explosionSpeed = 3f;
+	private float explosionSpeed = .2f;
 	private Texture explodeSheet;
 	private TextureRegion region, currentFrame;
 	private Animation explodeAnimation;
@@ -181,6 +181,8 @@ public class Drone extends LightMapEntity implements IObserver{
 		}
 	}
 	
+	
+	private boolean notDisposed = true;
 	@Override
 	public void act(float delta) {
 		
@@ -214,8 +216,9 @@ public class Drone extends LightMapEntity implements IObserver{
 		}	
 		else if (state == State.EXPLODING) {
 			tex = explodeAnimation.getKeyFrame(time);
-			if (explodeAnimation.isAnimationFinished(time +=delta)) {
+			if (explodeAnimation.isAnimationFinished(time +=delta) && notDisposed) {
 				this.dispose();
+				notDisposed = false;
 			}
 		}
 	}
@@ -243,6 +246,7 @@ public class Drone extends LightMapEntity implements IObserver{
 		if (this.getParent() != null || this.getStage() != null) {
 			this.remove();
 		}
+		Loader.unload(explodeTexName);
 		Loader.unload(texName);
 	}
 

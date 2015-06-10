@@ -24,7 +24,7 @@ import snake.engine.models.HUD;
 public class SnakeHUD extends HUD {
 
 	private BitmapFont font;
-	private String fontName = "fonts/ak_sc_o.fnt", hudName = "hud/hudFinal_compressed.png";
+	private String fontName = "fonts/ak_sc_o.fnt", hudName = "HUD/hudFinal_compressed.png";
 	private Texture tex;
 	private Sprite sprite;
 	

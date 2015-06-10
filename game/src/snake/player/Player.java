@@ -76,6 +76,7 @@ public class Player extends LightMapEntity {
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	private Player (GameWorld world) {
+		super(world);
 		
 		//Mundo, tamanho e posicao
 		this.world = ((TiledMapWorld) world).getMapAccess();

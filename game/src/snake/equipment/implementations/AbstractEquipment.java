@@ -54,18 +54,13 @@ public abstract class AbstractEquipment extends LightMapEntity implements IEquip
 	public void createLights()
 	{
 	}
-	// Especie de free na luz criada
-	@Override
-	public void disposeLights()
-	{
-	}
 	
 	@Override
 	public void onPickup(Player player)
 	{
 	}
 	
-	// dispose dos equipamentos, só falta o unload que eh sobreposto!
+	// dispose dos equipamentos, sï¿½ falta o unload que eh sobreposto!
 	@Override 
 	public void dispose()
 	{
