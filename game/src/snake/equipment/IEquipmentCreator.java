@@ -1,6 +1,8 @@
 package snake.equipment;
 
-public interface IEquipmentCreator 
+import snake.map.IMapAccess;
+
+public interface IEquipmentCreator
 {
-	public IEquipment create(float x, float y, boolean onMap);
+	IEquipment create(float x, float y, boolean onMap, IMapAccess access);
 }

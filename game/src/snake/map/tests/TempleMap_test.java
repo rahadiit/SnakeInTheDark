@@ -72,12 +72,12 @@ public class TempleMap_test extends VisualGameWorld {
 		box.setPosition(38, WorldSettings.heightFix(53));
 
 		// VC PASSA A POSISAO INICIAL DO EQUIPAMENTO, TEM A VERS???O DO CONSTRUTOR SEM ISSO TBM!
-		IEquipment flashlight = EquipmentCreator.createFactory("flashlight").create(20, 20, true); //Equipment
+		IEquipment flashlight = EquipmentCreator.createFactory("flashlight").create(20, 20, true, null); //Equipment
 		this.addActor((Group)flashlight); //Added to group // added to this map
 		
 		createLights();
 		
-		IEquipment sensor = EquipmentCreator.createFactory("sensor").create(20, 20, true); //Equipment
+		IEquipment sensor = EquipmentCreator.createFactory("sensor").create(20, 20, true, null); //Equipment
 		this.addActor((Group)sensor); //Added to group // added to this map
 				
 	}

@@ -13,8 +13,6 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import snake.engine.dataManagment.Loader;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
-import snake.visuals.enhanced.ILightMapEntity;
-import snake.visuals.enhanced.LightMapEntity;
 
 import java.util.*;
 
@@ -157,7 +155,7 @@ public class MapManager implements IMapAccess {
             cell.getTile().getProperties().put("spawned", true);
 
             int index = random.nextInt(availableEquipments.size());
-            IEquipment equipment = EquipmentCreator.createFactory(availableEquipments.get(index)).create(x, y, true);
+            IEquipment equipment = EquipmentCreator.createFactory(availableEquipments.get(index)).create(x, y, true, this);
 
             addEntity(equipment);
         }

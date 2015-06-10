@@ -13,7 +13,6 @@ import snake.map.CellType;
 import snake.map.IMapAccess;
 import snake.map.IMapEntity;
 import snake.map.TiledMapWorld;
-import snake.tests.FlashLight_test;
 import snake.visuals.enhanced.LightMapEntity;
 
 import com.badlogic.gdx.Gdx;
@@ -39,7 +38,7 @@ public class Player extends LightMapEntity {
 	//Singleton area
 	private static Player player;
 	
-	private IMapAccess world;
+	private IMapAccess access;
 	
 	private static final int DOWN = 0, LEFT = 1, RIGHT = 2, UP = 3;
 	private static final int ANIMATION_WALK_STATES_NUM = 4, ANIMATION_STILL_STATES_NUM = 4;
@@ -79,7 +78,7 @@ public class Player extends LightMapEntity {
 		super(world);
 		
 		//Mundo, tamanho e posicao
-		this.world = ((TiledMapWorld) world).getMapAccess();
+		this.access = ((TiledMapWorld) world).getMapAccess();
 		this.setSize(1f, 1f);
 	    this.setPosition(1, 1); // TODO: definir pelo mapa
 		
@@ -118,11 +117,11 @@ public class Player extends LightMapEntity {
 	    currentAnimation = animatedStanding[DOWN];
 	    
 		//adiciona sensor
-		sensor = EquipmentCreator.createFactory("sensor").create(.5f, .5f, false);
+		sensor = EquipmentCreator.createFactory("sensor").create(.5f, .5f, false, access);
 		addActor((Actor) sensor);
 		
 		//adiciona arma
-		arma = EquipmentCreator.createFactory("gun").create(.5f, .5f, false);
+		arma = EquipmentCreator.createFactory("gun").create(.5f, .5f, false, access);
 		addActor((Actor) arma);
 	}
 	
@@ -158,13 +157,13 @@ public class Player extends LightMapEntity {
 		currentFrame = currentAnimation.getKeyFrame(stateTime, true);
 		
 		
-		if  (CellType.EXIT.equals(world.getCellType((int)getX(), (int)getY())))
-			world.loadNextMap();
+		if  (CellType.EXIT.equals(access.getCellType((int) getX(), (int) getY())))
+			access.loadNextMap();
 		
-		IMapEntity entity = world.getEntity((int)getX(), (int)getY());
+		IMapEntity entity = access.getEntity((int)getX(), (int)getY());
 		if (entity != null && "equipment".equals(entity.getType())) {
 			IEquipment equipment = (IEquipment) entity;
-			world.removeEntity(equipment); //Retira do mundo
+			access.removeEntity(equipment); //Retira do mundo
 			equipment.setPosition(.5f, .5f);
 			equipment.setOnMap(false);
 			equipment.onPickup(this);
@@ -173,7 +172,7 @@ public class Player extends LightMapEntity {
 		
 		if (state  == State.STANDING) {
 
-			if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && !CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY()))){
+			if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && !CellType.WALL.equals(access.getCellType((int)getX() - 1, (int)getY()))){
 				distanceMoved = 0;
 				direction.set(-speed, 0);
 				currentAnimation = animatedWalk[LEFT];
@@ -182,7 +181,7 @@ public class Player extends LightMapEntity {
 				stateTime = 0;
 				update(delta);
 			}
-			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY()))) {
+			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !CellType.WALL.equals(access.getCellType((int)getX() + 1, (int)getY()))) {
 				distanceMoved = 0;
 				direction.set(speed, 0);
 				currentAnimation = animatedWalk[RIGHT];
@@ -191,7 +190,7 @@ public class Player extends LightMapEntity {
 				stateTime = 0;
 				update(delta);
 			}
-			else if (Gdx.input.isKeyPressed(Input.Keys.UP) && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1))) {
+			else if (Gdx.input.isKeyPressed(Input.Keys.UP) && !CellType.WALL.equals(access.getCellType((int)getX(), (int)getY() + 1))) {
 				distanceMoved = 0;
 				direction.set(0, speed);
 				currentAnimation = animatedWalk[UP];
@@ -200,7 +199,7 @@ public class Player extends LightMapEntity {
 				stateTime = 0;
 				update(delta);
 			}
-			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && !CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1))) {
+			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && !CellType.WALL.equals(access.getCellType((int)getX(), (int)getY() - 1))) {
 				distanceMoved = 0;
 				direction.set(0, -speed);
 				currentAnimation = animatedWalk[DOWN];
