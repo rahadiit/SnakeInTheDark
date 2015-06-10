@@ -87,10 +87,6 @@ public class SensorEquipment extends AbstractEquipment {
 	}
 
 	@Override
-	public void disposeLights() {
-	}
-
-	@Override
 	public void dispose() 
 	{
 		if (light != null) {

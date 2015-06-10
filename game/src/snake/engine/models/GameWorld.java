@@ -22,8 +22,8 @@ public abstract class GameWorld extends Group /* Group makes it connected to Map
 		this.setSize(WorldSettings.getWorldWidth(), WorldSettings.getWorldHeight()); //Sets world size to be displayed on screen
 	}
 	
-	public String getPrefferedStage() {
-		return new String ("LevelStage");
+	public String getPreferredStage() {
+		return "LevelStage";
 	}
 	
 	
