@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import snake.drone.Drone;
 import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
+import snake.map.IMapEntity;
 
 /**
  * Developed By: NoDarkGlasses
@@ -18,6 +19,7 @@ public class EmpEquipment extends AbstractEquipment {
 	Texture texture;
 	Sprite sprite;
 	boolean onMap;
+	IMapAccess access;
 
 	public EmpEquipment(float x, float y, boolean onMap) {
 		this.name = "EMP";
@@ -35,13 +37,13 @@ public class EmpEquipment extends AbstractEquipment {
 	public void activateOnMap(IMapAccess map) {
 		int x = (int)getX();
 		int y = (int)getY();
-		int i, j, radius = (int) 2f;
-//		for (i = -radius; i <= radius && x + i >= 0
-//				&& x + i <= map.getMapWidth(); i += 1f)
-//			for (j = -radius; j <= x+ radius && y + radius >= 0
-//					&& y + j <= map.getMapHeight(); j += 1f)
-//				if (map.getEntity(i, j).getType() == "Drone")
-//					map.removeEntity(map.getEntity(i, j));
+		int radius = (int) 2f;
+		for (int i = -radius; i <= radius; i++)
+			for (int j = -radius; j <= radius; j++) {
+				IMapEntity entity = access.getEntity(x + i, y + j, "Drone");
+				if (entity != null)
+					((Drone)entity).destroy();
+			}
 	}
 
 	@Override
