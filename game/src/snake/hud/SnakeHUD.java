@@ -24,9 +24,10 @@ import snake.engine.models.HUD;
 public class SnakeHUD extends HUD {
 
 	private BitmapFont font;
-	private String fontName = "fonts/ak_sc_o.fnt", hudName = "hud/hudFinal_compressed.png";
-	private Texture tex;
-	private Sprite sprite;
+	private String fontName = "fonts/ak_sc_o.fnt", hudName = "hud/HUDFinal.png", lanterna = "equipments/flashlights.png";
+	private String emp ="equipments/EMPVecto.png", bullet = "equipments/Bullet.png";
+	private Texture tex, tex1, tex2, tex3;
+	private Sprite sprite, sprite1, sprite2, sprite3;
 	
 	public SnakeHUD (String levelData) {
 		super();
@@ -41,8 +42,30 @@ public class SnakeHUD extends HUD {
 		Loader.load(hudName, Texture.class);
 		Loader.finishLoadingAsset(hudName);
 		tex = Loader.get(hudName);
+
+		Loader.load(lanterna, Texture.class);
+		Loader.finishLoadingAsset(lanterna);
+		tex1 = Loader.get(lanterna);
+
+		Loader.load(emp, Texture.class);
+		Loader.finishLoadingAsset(emp);
+		tex2 = Loader.get(emp);
+
+		Loader.load(bullet, Texture.class);
+		Loader.finishLoadingAsset(bullet);
+		tex3 = Loader.get(bullet);
 		
 		sprite = new Sprite(tex);
+		sprite1 = new Sprite(tex1);
+		sprite2 = new Sprite(tex2);		
+		sprite3 = new Sprite(tex3);
+		
+		sprite1.setSize(100f, 100f);
+		sprite1.setPosition(30, 530);
+		sprite2.setSize(100f,100f);
+		sprite2.setPosition(30, 400);
+		sprite3.setSize(100,100);
+		sprite3.setPosition(30, 270);
 	}
 	
 	
@@ -74,7 +97,12 @@ public class SnakeHUD extends HUD {
 		}
 		
 		
+		
 		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+		sprite1.draw(batch);
+		sprite2.draw(batch);
+		sprite3.draw(batch);
+	
 	}
 
 
