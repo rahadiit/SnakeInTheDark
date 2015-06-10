@@ -6,6 +6,4 @@ public interface ILightMapEntity extends IMapEntity {
     boolean hasLights();
 
     void createLights();
-
-    void disposeLights();
 }
