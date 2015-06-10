@@ -51,16 +51,15 @@ public class Drone extends LightMapEntity implements IObserver{
 	
 	
 	private float stateTime = 0;
-	public Drone (GameWorld world, int x, int y, String direcao){
-		super(world);
+	public Drone (IMapAccess world, int x, int y, String direcao){
 		
-		this.world = ((TiledMapWorld) world).getMapAccess();
+		this.world = world;
 		
 		this.setSize(1, 1);
 		this.setPosition(x,y);
 		
 		//Observer
-		player = Player.getInstance(world);
+		player = Player.getCurrentInstance();
 		player.attach(this);
 		
 		if(direcao.equalsIgnoreCase("esquerda")) {

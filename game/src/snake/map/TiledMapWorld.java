@@ -24,9 +24,6 @@ public class TiledMapWorld extends VisualGameWorld {
         IMapEntity player = Player.getInstance(this);
         manager.addEntity(player);
         manager.moveToSpawnPoint(player);
-        
-        IMapEntity drone = new Drone(this, 4, 2, "esquerda");
-        manager.addEntity(drone);
     }
 
     public IMapAccess getMapAccess() {
