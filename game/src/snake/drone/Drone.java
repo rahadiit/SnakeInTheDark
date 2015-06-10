@@ -91,8 +91,7 @@ public class Drone extends LightMapEntity implements IObserver{
 		Loader.load(texName,Texture.class);
 		Loader.getManager().finishLoadingAsset(texName);
 		
-		tex = Loader.get(texName);	
-		//sprite.setAlpha(1f);	
+		tex = new TextureRegion ((Texture)Loader.get(texName));
 		
 		//carrega spirte da explosao
 		Loader.load(explodeTexName, Texture.class);
@@ -115,10 +114,13 @@ public class Drone extends LightMapEntity implements IObserver{
 	}
 	
 	public void update(float delta){
+		System.out.println("Dei update");
 		state = State.MOVING;
 		lastPosX = getX();
 		lastPosY = getY();
 		distanceMoved = 0;
+		
+		System.out.println(direction.x + ":" + direction.y);
 		
 		if(direction.x < 0) {
 			if (CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY()))) {
@@ -133,7 +135,8 @@ public class Drone extends LightMapEntity implements IObserver{
 				}
 			}
 		}
-		
+			
+			
 		else if(direction.x > 0){
 			if (CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY()))) {
 				state = State.EXPLODING;
@@ -180,7 +183,9 @@ public class Drone extends LightMapEntity implements IObserver{
 	
 	@Override
 	public void act(float delta) {
+		
 		if (state == State.MOVING) {
+			System.out.println("Drone act");
 			distanceMoved += (speed * delta);
 			if (distanceMoved == 1) {
 
@@ -217,7 +222,6 @@ public class Drone extends LightMapEntity implements IObserver{
 
 	@Override
 	public void draw (Batch batch, float parentAlpha) { //Aqui se desenha
-		
 		batch.draw(tex, getX(), getY(), getOriginX(), getOriginY(), //Esse tanto de parametro e necessario para movimento automatico
 				getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 		super.draw(batch, parentAlpha);

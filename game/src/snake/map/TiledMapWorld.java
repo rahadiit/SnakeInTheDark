@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapRenderer;
+import snake.drone.Drone;
 import snake.engine.creators.WorldSettings;
 import snake.player.Player;
 import snake.visuals.enhanced.ILightMapEntity;
@@ -23,6 +24,9 @@ public class TiledMapWorld extends VisualGameWorld {
         IMapEntity player = Player.getInstance(this);
         manager.addEntity(player);
         manager.moveToSpawnPoint(player);
+        
+        IMapEntity drone = new Drone(this, 2, 2, "baixo");
+        manager.addEntity(drone);
     }
 
     public IMapAccess getMapAccess() {
@@ -48,6 +52,7 @@ public class TiledMapWorld extends VisualGameWorld {
     @Override
     public void show() {
         WorldSettings.setAmbientColor(new Color(1f, 1f, 1f, 1f)); ///TODO: fix ambient light
+
 
         OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
         int width = manager.getMapWidth();

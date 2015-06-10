@@ -94,6 +94,18 @@ public class Bullet extends LightMapEntity {
 		light.setSoft(false);
 		
 	}
+
+	@Override
+	public void disposeLights() {
+		if (light != null) {
+			light.remove();
+			light.dispose();
+			light = null;
+		}
+		
+		super.disposeLights();
+	}
+	
 	
 	public void setVelocity (Vector2 velocity) {
 		this.velocity.set(velocity);

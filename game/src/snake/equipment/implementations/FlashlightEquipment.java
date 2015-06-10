@@ -66,11 +66,11 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 					getScaleY(), getRotation());
 	}
 
-	// Atualizacao grafica no jogo
+	// Atualizacao grafica no jogo 
 	public void act(float delta)
 	{
 		// arruma a posicao do foco de luz
-		vec.set(0, 0);
+		vec.set(.45f, 0);
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
 
@@ -87,7 +87,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		this.setRotation(rotation);
 		light.setDirection(rotation);
 
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (!onMap))
 		{
 			light.setActive(!light.isActive());
 		}
@@ -104,7 +104,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	@Override
 	public void createLights()
 	{ // Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
-		light = new ConeLight(Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f), 40, 45, 45, 45, 30);
+		light = new ConeLight(Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f), 2, getX(), getY(), 90, 30);
 		light.setActive(false);
 	} // Se quiser destruir a luz, pode ser em qualquer lugar
 
@@ -112,8 +112,8 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	public void dispose()
 	{
 		super.dispose(); // esse estah na classe AbstractEquipment, abra ela se tiver duvida
-		
-		if (light != null)
+
+		if(light != null)
 		{
 			light.remove();
 			light.dispose();

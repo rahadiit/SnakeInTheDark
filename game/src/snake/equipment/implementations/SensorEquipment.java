@@ -86,6 +86,9 @@ public class SensorEquipment extends AbstractEquipment {
 		light.setActive(true);
 	}
 
+	@Override
+	public void disposeLights() {
+	}
 
 	@Override
 	public void dispose() 

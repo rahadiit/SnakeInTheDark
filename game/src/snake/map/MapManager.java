@@ -166,7 +166,8 @@ public class MapManager implements IMapAccess {
     void disposeEntities() {
         for (IMapEntity entity : entities) {
             entity.dispose();
-            //REMOVED DISPOSE LIGHTS
+            if (entity instanceof ILightMapEntity)
+                ((LightMapEntity) entity).disposeLights();
         }
     }
 

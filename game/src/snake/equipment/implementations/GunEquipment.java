@@ -13,7 +13,8 @@ import snake.map.IMapAccess;
  * @author Bszazulla & Gabriel Gimenez
  */
 
-public class GunEquipment extends AbstractEquipment{
+public class GunEquipment extends AbstractEquipment {
+	
 	boolean onMap;
 	Texture texture;
 	Sprite sprite;
@@ -31,13 +32,10 @@ public class GunEquipment extends AbstractEquipment{
 
 	}
 
-	public int ammo;
+	private int ammo;
 
 	public void activateOnMap(IMapAccess map) {
-		if (ammo > 0) {
-			map.removeEntity(map.getEntity((int)getX(), (int)getY()));
-			ammo--;
-		}
+		// sem implement específico
 	}
 
 	@Override
@@ -68,7 +66,17 @@ public class GunEquipment extends AbstractEquipment{
 	public boolean getOnMap(){
 		return this.onMap;
 	}
+	
+	// quantidade de balas
+	public int getAmmo()
+	{
+		return ammo;
+	}
 
+	public int shoot()
+	{
+		return --ammo;
+	}
 
 	// THIS EQUIPMENT HAS NO LIGHTS
 }

@@ -40,7 +40,12 @@ public abstract class VisualGameWorld extends GameWorld{
 	public void dispose() {
 		super.dispose();
 		for (Actor a: this.getChildren()) {
-			 if (a instanceof IMapEntity) {
+			if (a instanceof ILightMapEntity) {
+				ILightMapEntity e = (ILightMapEntity) a;
+				e.disposeLights();
+				e.dispose();
+			}
+			else if (a instanceof IMapEntity) {
 				IMapEntity e = (IMapEntity) a;
 				e.dispose();
 			}

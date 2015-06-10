@@ -2,17 +2,20 @@ package snake.player;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import snake.drone.IObserver;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
+import snake.equipment.implementations.GunEquipment;
 import snake.map.CellType;
 import snake.map.IMapAccess;
 import snake.map.IMapEntity;
 import snake.map.TiledMapWorld;
 import snake.tests.FlashLight_test;
 import snake.visuals.enhanced.LightMapEntity;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -62,7 +65,8 @@ public class Player extends LightMapEntity {
 	
 	//Equipments
 	private IEquipment sensor;
-	private FlashLight_test flashlight;
+	
+	private IEquipment arma;
 	
 	//Stuff
 	private float stateTime = 0;
@@ -112,17 +116,25 @@ public class Player extends LightMapEntity {
 	    
 	    currentAnimation = animatedStanding[DOWN];
 	    
-
-		//adiciona equipamento lanterna_teste
-		flashlight = new FlashLight_test (world);
-		this.addActor(flashlight);
-		flashlight.setPosition(1f,.5f);
-		flashlight.setOrigin(-.5f, 0f);
-
 		//adiciona sensor
 		sensor = EquipmentCreator.createFactory("sensor").create(.5f, .5f, false);
 		addActor((Actor) sensor);
+		
+		//adiciona arma
+		arma = EquipmentCreator.createFactory("gun").create(.5f, .5f, false);
+		addActor((Actor) arma);
 	}
+	
+	public boolean destroy() {
+		if (((GunEquipment) arma).getAmmo() > 0) {
+			((GunEquipment) arma).shoot();
+			return false;
+		}
+		else
+			return true;
+			
+	}
+		
 	
 	static public Player getInstance(GameWorld world){
 		if(player == null || player.getWorld() != world) {
@@ -262,10 +274,13 @@ public class Player extends LightMapEntity {
 	}
 	
 	public void attach(IObserver observer){
-	      observers.add(observer);		
+		System.out.println("attached!");
+	      observers.add(observer);
+	      System.out.println("Number of observers: " + observers.size());
 	   }
 	
 	private void update(float delta){
+		System.out.println("Number of observers: "+ observers.size());
 		for (IObserver observer : observers) {
 			observer.update(delta);
 		}

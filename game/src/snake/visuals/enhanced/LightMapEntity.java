@@ -27,6 +27,19 @@ public abstract class LightMapEntity extends MapEntity implements ILightMapEntit
 			if (child instanceof ILightMapEntity)
 			    ((ILightMapEntity) child).createLights();
 	}
+
+	@Override
+	public void disposeLights() {
+		for (Actor child : getChildren())
+			if (child instanceof ILightMapEntity)
+				((ILightMapEntity) child).disposeLights();
+	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		disposeLights();
+	}
 	
 	@Override
 	public VisualWorldStage getStage() {
