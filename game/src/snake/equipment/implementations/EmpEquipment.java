@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
+import snake.drone.Drone;
 import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
 
@@ -40,7 +41,7 @@ public class EmpEquipment extends AbstractEquipment {
 			for (j = -radius; j <= x+ radius && y + radius >= 0
 					&& y + j <= map.getMapHeight(); j += 1f)
 				if (map.getEntity(i, j).getType() == "Drone")
-					map.removeEntity(map.getEntity(i, j));
+					((Drone)map.getEntity(i, j)).destroy();
 	}
 
 	@Override
