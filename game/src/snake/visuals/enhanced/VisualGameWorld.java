@@ -18,7 +18,7 @@ public abstract class VisualGameWorld extends GameWorld{
 	
 	@Override
 	public String getPrefferedStage() {
-		return new String ("Visual World Stage");
+		return "Visual World Stage";
 	}
 	
 	public void createLights() {
@@ -34,21 +34,5 @@ public abstract class VisualGameWorld extends GameWorld{
 	@Override
 	public VisualWorldStage getStage() {
 		return (VisualWorldStage) super.getStage();
-	}
-	
-	@Override
-	public void dispose() {
-		super.dispose();
-		for (Actor a: this.getChildren()) {
-			if (a instanceof ILightMapEntity) {
-				ILightMapEntity e = (ILightMapEntity) a;
-				e.disposeLights();
-				e.dispose();
-			}
-			else if (a instanceof IMapEntity) {
-				IMapEntity e = (IMapEntity) a;
-				e.dispose();
-			}
-		}
 	}
 }

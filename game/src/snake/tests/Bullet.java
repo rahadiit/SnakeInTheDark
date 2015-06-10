@@ -73,6 +73,11 @@ public class Bullet extends LightMapEntity {
 		super.dispose();
 		if (this.getParent() != null || this.getStage() != null)
 			this.remove();
+		if (light != null) {
+			light.remove();
+			light.dispose();
+			light = null;
+		}
 		Loader.unload(texName);
 	}
 
@@ -95,18 +100,6 @@ public class Bullet extends LightMapEntity {
 		
 	}
 
-	@Override
-	public void disposeLights() {
-		if (light != null) {
-			light.remove();
-			light.dispose();
-			light = null;
-		}
-		
-		super.disposeLights();
-	}
-	
-	
 	public void setVelocity (Vector2 velocity) {
 		this.velocity.set(velocity);
 	}
