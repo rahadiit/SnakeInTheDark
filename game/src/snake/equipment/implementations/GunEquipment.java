@@ -18,6 +18,7 @@ public class GunEquipment extends AbstractEquipment {
 	boolean onMap;
 	Texture texture;
 	Sprite sprite;
+	private int ammo;
 
 	public GunEquipment(float x, float y, boolean onMap) {
 		this.setBounds(x, y, 1, 1);
@@ -29,10 +30,10 @@ public class GunEquipment extends AbstractEquipment {
 		Loader.finishLoadingAsset("equipments/BulletPixel.png");
 		texture = Loader.get("equipments/BulletPixel.png");
 		sprite = new Sprite(texture);
+		
+		this.ammo = 3; // valor de inicio
 
 	}
-
-	private int ammo;
 
 	public void activateOnMap(IMapAccess map) {
 		// sem implement específico
@@ -76,6 +77,11 @@ public class GunEquipment extends AbstractEquipment {
 	public int shoot()
 	{
 		return --ammo;
+	}
+	
+	public void addAmmo()
+	{
+		this.ammo++;
 	}
 
 	// THIS EQUIPMENT HAS NO LIGHTS
