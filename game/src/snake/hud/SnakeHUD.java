@@ -25,7 +25,7 @@ import snake.player.Player;
 
 public class SnakeHUD extends HUD {
 
-	private BitmapFont font;
+	private BitmapFont font, empqt, flashqt, bulletqt;
 	private String fontName = "fonts/ak_sc_o.fnt", hudName = "hud/HUDFinal.png", lanterna = "equipments/flashlights.png";
 	private String emp ="equipments/EMPVecto.png", bullet = "equipments/Bullet.png";
 	private Texture tex, tex1, tex2, tex3;
@@ -39,6 +39,18 @@ public class SnakeHUD extends HUD {
 		Loader.load(fontName, BitmapFont.class);
 		Loader.finishLoadingAsset(fontName);
 		font = Loader.get(fontName);
+		
+		Loader.load(fontName, BitmapFont.class);
+		Loader.finishLoadingAsset(fontName);
+		empqt = Loader.get(fontName);
+		
+		Loader.load(fontName, BitmapFont.class);
+		Loader.finishLoadingAsset(fontName);
+		flashqt = Loader.get(fontName);
+		
+		Loader.load(fontName, BitmapFont.class);
+		Loader.finishLoadingAsset(fontName);
+		bulletqt = Loader.get(fontName);
 		
 		
 		Loader.load(hudName, Texture.class);
@@ -96,16 +108,22 @@ public class SnakeHUD extends HUD {
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 			font.setColor(Color.MAGENTA);
-			font.draw(batch, "Wow. Just... Wow.", 50, 50);
+			font.draw(batch, "Wow. Just... Wow.", 250, 100);
 		}
-		
-		
 		
 		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
 		sprite1.draw(batch);
 		sprite2.draw(batch);
 		sprite3.draw(batch);
 	
+		flashqt.setColor(Color.WHITE);
+		flashqt.draw(batch, "x1", 140, 590);
+		
+		empqt.setColor(Color.WHITE);
+		empqt.draw(batch, "x1", 140, 460);
+		
+		bulletqt.setColor(Color.WHITE);
+		bulletqt.draw(batch, "x2", 140, 330);
 	}
 
 
