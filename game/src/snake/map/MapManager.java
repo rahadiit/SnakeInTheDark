@@ -13,8 +13,6 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import snake.engine.dataManagment.Loader;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
-import snake.visuals.enhanced.ILightMapEntity;
-import snake.visuals.enhanced.LightMapEntity;
 
 import java.util.*;
 
@@ -51,12 +49,31 @@ public class MapManager implements IMapAccess {
     }
 
     @Override
-    public IMapEntity getEntity(int x, int y) {
+    public List<IMapEntity> getEntities(int x, int y) {
+        List<IMapEntity> ret = new ArrayList<>();
         // Slow code
         for (IMapEntity entity : entities)
             if ((int) entity.getX() == x && (int) entity.getY() == y)
-                return entity;
-        return null;
+                ret.add(entity);
+        return ret;
+    }
+
+    @Override
+    public List<IMapEntity> getEntities(int x, int y, String type) {
+        List<IMapEntity> ret = new ArrayList<>();
+        // Slow code
+        for (IMapEntity entity : entities)
+            if ((int) entity.getX() == x && (int) entity.getY() == y && entity.getType().equals(type))
+                ret.add(entity);
+        return ret;
+    }
+
+    @Override
+    public IMapEntity getEntity(int x, int y, String type) {
+        List<IMapEntity> entities = getEntities(x, y, type);
+        if (entities.isEmpty())
+            return null;
+        return entities.get(0);
     }
 
     @Override
@@ -157,7 +174,7 @@ public class MapManager implements IMapAccess {
             cell.getTile().getProperties().put("spawned", true);
 
             int index = random.nextInt(availableEquipments.size());
-            IEquipment equipment = EquipmentCreator.createFactory(availableEquipments.get(index)).create(x, y, true);
+            IEquipment equipment = EquipmentCreator.createFactory(availableEquipments.get(index)).create(x, y, true, this);
 
             addEntity(equipment);
         }

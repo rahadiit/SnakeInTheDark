@@ -1,13 +1,13 @@
 package snake.equipment.implementations;
 
-import snake.map.IMapAccess;
-import snake.visuals.Lights;
 import box2dLight.PointLight;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import snake.map.IMapAccess;
+import snake.map.IMapEntity;
+import snake.visuals.Lights;
 
 /**
  * Developed By: NoDarkGlasses
@@ -23,32 +23,31 @@ public class SensorEquipment extends AbstractEquipment {
 	PointLight light;
 	Vector2 vec = new Vector2();
 	boolean onMap = false;
+	IMapAccess access;
 
 	private static final float MIN_INTENSITY = .6f;
 	private static final float MAX_INTENSITY = .9f;
 	private static final float PULSE_VELOCITY = 3f;
 
-	public SensorEquipment(float x, float y, boolean onMap) {
+	public SensorEquipment(float x, float y, boolean onMap, IMapAccess access) {
 		this.name = "Sensor";
 		this.description = "The Sensor reveals drones around you";
 		this.setBounds(x, y, 1, 1); // ver o setPosition
-	}
-
-	public SensorEquipment() {
-		this.name = "Sensor";
-		this.description = "The Sensor reveals drones around you";
+		this.access = access;
 	}
 
 	public void activateOnMap(IMapAccess map) {
 	}
 
-	public int hasDrone(IMapAccess map, int x, int y) {
+	public int hasDrone(int x, int y) {
 		int count = 0;
-		int radius = (int) 1f;
-		for (int i = -radius; i <= radius && x + i >= 0 && x + i <= map.getMapWidth(); i += 1f )
-			for (int j = -radius; j <= x+ radius && y + radius >= 0 && y + j <= map.getMapHeight(); j += 1f)
-				if (map.getEntity(i, j).getType() == "Drone")
+		int radius = 1;
+		for (int i = -radius; i <= radius; i++)
+			for (int j = -radius; j <= radius; j++) {
+				IMapEntity entity = access.getEntity(x + i, y + j, "Drone");
+				if (entity != null)
 					count++;
+			}
 		return count;
 	}
 
@@ -63,17 +62,15 @@ public class SensorEquipment extends AbstractEquipment {
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
-		boolean drone;
 		time += delta;
-		float intensity = (MAX_INTENSITY - MIN_INTENSITY)
-				* MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
+		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
 
 		light.setDistance(intensity);
-		drone = false;
-		if (hasDrone((IMapAccess) getWorld(), (int)getX(), (int)getY()) > 0) {
-			light.setColor(new Color(1f, 0f, 0f, 1f));
-			drone = true;
-	}
+		if (hasDrone((int) getParent().getX(), (int) getParent().getY()) > 0) {
+			light.setColor(Color.RED);
+		} else {
+			light.setColor(Color.GREEN);
+		}
 		//BlinkingSensor.act(delta, drone);
 
 	}

@@ -117,8 +117,8 @@ public class Drone extends LightMapEntity implements IObserver{
 				time = 0;
 			}
 			else {
-				IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY());
-				if (entity != null && "player".equals(entity.getType())) {
+				IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY(), "player");
+				if (entity != null) {
 					Vector2 v = ((Player) entity).getDirection();
 					if (v.x == -direction.x && v.y == -direction.y) {
 						if (((Player) entity).destroy()) {
@@ -145,8 +145,8 @@ public class Drone extends LightMapEntity implements IObserver{
 				time = 0;
 			}
 			else {
-				IMapEntity entity = world.getEntity((int)getX() + 1, (int)getY());
-				if (entity != null && "player".equals(entity.getType())) {
+				IMapEntity entity = world.getEntity((int)getX() + 1, (int)getY(), "player");
+				if (entity != null) {
 					Vector2 v = ((Player) entity).getDirection();
 					if (v.x == -direction.x && v.y == -direction.y) {
 						if (((Player) entity).destroy()) {
@@ -173,8 +173,8 @@ public class Drone extends LightMapEntity implements IObserver{
 				time = 0;
 			}
 			else {
-				IMapEntity entity = world.getEntity((int)getX(), (int)getY() + 1);
-				if (entity != null && "player".equals(entity.getType())) {
+				IMapEntity entity = world.getEntity((int)getX(), (int)getY() + 1, "player");
+				if (entity != null) {
 					Vector2 v = ((Player) entity).getDirection();
 					if (v.x == -direction.x && v.y == -direction.y) {
 						if (((Player) entity).destroy()) {
@@ -200,8 +200,8 @@ public class Drone extends LightMapEntity implements IObserver{
 				time = 0;
 			}
 			else {
-				IMapEntity entity = world.getEntity((int)getX(), (int)getY() - 1);
-				if (entity != null && "player".equals(entity.getType())) {
+				IMapEntity entity = world.getEntity((int)getX(), (int)getY() - 1, "player");
+				if (entity != null) {
 					Vector2 v = ((Player) entity).getDirection();
 					if (v.x == -direction.x && v.y == -direction.y) {
 						if (((Player) entity).destroy()) {
@@ -233,9 +233,6 @@ public class Drone extends LightMapEntity implements IObserver{
 
 				state = State.STANDING;
 				stateTime = 0;
-				IMapEntity entity = world.getEntity((int)getX(), (int)getY());
-				if (entity != null && "player".equals(entity.getType()) /* &&((Player) entity).destroy();*/) {
-				}
 			}
 			else if (distanceMoved > 1) { 
 				lastPosX += (direction.x != 0 ? direction.x/Math.abs(direction.x) : 0);
@@ -244,16 +241,13 @@ public class Drone extends LightMapEntity implements IObserver{
 				state = State.STANDING;
 				stateTime = 0;
 				
-				IMapEntity entity = world.getEntity((int)getX(), (int)getY());
-				if (entity != null) System.out.println(entity.getType());
-				if (entity != null && "player".equals(entity.getType())) {
-					
+				IMapEntity entity = world.getEntity((int)getX(), (int)getY(), "player");
+				if (entity != null) {
 					if (((Player) entity).destroy()){
 						//TODO: GAME OVER
 					}
 					else {
 						dispose();
-						
 					}
 				}
 				
