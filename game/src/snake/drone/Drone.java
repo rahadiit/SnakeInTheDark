@@ -167,7 +167,7 @@ public class Drone extends LightMapEntity implements IObserver{
 		}
 		
 		else if(direction.y < 0) {
-			if (CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1))){
+			if (CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1)) && state != State.EXPLODING){
 				state = State.EXPLODING;
 				time = 0;
 			}
@@ -245,6 +245,7 @@ public class Drone extends LightMapEntity implements IObserver{
 		super.dispose();
 		if (this.getParent() != null || this.getStage() != null) {
 			this.remove();
+			getWolrd
 		}
 		Loader.unload(explodeTexName);
 		Loader.unload(texName);
