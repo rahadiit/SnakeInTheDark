@@ -312,4 +312,9 @@ public class Player extends LightMapEntity {
 			return 270;
 		} 
 	}
+	
+	
+	public Vector2 getDirection () {
+		return direction;
+	}
 }

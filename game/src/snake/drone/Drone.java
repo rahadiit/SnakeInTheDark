@@ -35,7 +35,7 @@ public class Drone extends LightMapEntity implements IObserver{
 	private static Player player;
 	private IMapAccess world;
 	private static final int FRAME_ROWS_EXPLODE = 2, FRAME_COLS_EXPLODE = 6;
-	private float explosionSpeed = .2f;
+	private float explosionSpeed = .1f;
 	private Texture explodeSheet;
 	private TextureRegion region, currentFrame;
 	private Animation explodeAnimation;
@@ -110,19 +110,24 @@ public class Drone extends LightMapEntity implements IObserver{
 	}
 	
 	public void update(float delta){
-		System.out.println("Dei update");
 		
 		if(direction.x < 0) {
 			if (CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY()))&& state != State.EXPLODING) {
-				System.out.println("EXplode 0");
 				state = State.EXPLODING;
 				time = 0;
 			}
 			else {
 				IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY());
 				if (entity != null && "player".equals(entity.getType())) {
-					//(Player) entity).getDirection();
-					//((Player) entity).destroy();
+					Vector2 v = ((Player) entity).getDirection();
+					if (v.x == -direction.x && v.y == -direction.y) {
+						if (((Player) entity).destroy()) {
+							//TODO: GAME OVER
+						}
+						else {
+							dispose();
+						}
+					}
 				} 
 				else if (state != State.EXPLODING){
 					state = State.MOVING;
@@ -136,15 +141,21 @@ public class Drone extends LightMapEntity implements IObserver{
 			
 		else if(direction.x > 0){
 			if (CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY())) && state != State.EXPLODING) {
-				System.out.println("Explodeee1");
 				state = State.EXPLODING;
 				time = 0;
 			}
 			else {
 				IMapEntity entity = world.getEntity((int)getX() + 1, (int)getY());
 				if (entity != null && "player".equals(entity.getType())) {
-					//(Player) entity).getDirection();
-					//((Player) entity).destroy();
+					Vector2 v = ((Player) entity).getDirection();
+					if (v.x == -direction.x && v.y == -direction.y) {
+						if (((Player) entity).destroy()) {
+							//TODO: GAME OVER
+						}
+						else {
+							dispose();
+						}
+					}
 				}
 				else if (state != State.EXPLODING) {
 					state = State.MOVING;
@@ -158,15 +169,21 @@ public class Drone extends LightMapEntity implements IObserver{
 		
 		else if(direction.y > 0) {
 			if (CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1)) && state != State.EXPLODING){
-				System.out.println("Explodeee2");
 				state = State.EXPLODING;
 				time = 0;
 			}
 			else {
 				IMapEntity entity = world.getEntity((int)getX(), (int)getY() + 1);
 				if (entity != null && "player".equals(entity.getType())) {
-					//(Player) entity).getDirection();
-					//((Player) entity).destroy();
+					Vector2 v = ((Player) entity).getDirection();
+					if (v.x == -direction.x && v.y == -direction.y) {
+						if (((Player) entity).destroy()) {
+							//TODO: GAME OVER
+						}
+						else {
+							dispose();
+						}
+					}
 				}
 				else if (state != State.EXPLODING){
 					state = State.MOVING;
@@ -179,15 +196,21 @@ public class Drone extends LightMapEntity implements IObserver{
 		
 		else if(direction.y < 0) {
 			if (CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1)) && state != State.EXPLODING){
-				System.out.println(state);
 				state = State.EXPLODING;
 				time = 0;
 			}
 			else {
 				IMapEntity entity = world.getEntity((int)getX(), (int)getY() - 1);
 				if (entity != null && "player".equals(entity.getType())) {
-					//(Player) entity).getDirection();
-					//((Player) entity).destroy();
+					Vector2 v = ((Player) entity).getDirection();
+					if (v.x == -direction.x && v.y == -direction.y) {
+						if (((Player) entity).destroy()) {
+							//TODO: GAME OVER
+						}
+						else {
+							dispose();
+						}
+					}
 				}
 				else if (state != State.EXPLODING){
 					state = State.MOVING;
@@ -205,7 +228,6 @@ public class Drone extends LightMapEntity implements IObserver{
 	public void act(float delta) {
 		
 		if (state == State.MOVING) {
-			System.out.println("Drone act");
 			distanceMoved += (speed * delta);
 			if (distanceMoved == 1) {
 
@@ -223,8 +245,16 @@ public class Drone extends LightMapEntity implements IObserver{
 				stateTime = 0;
 				
 				IMapEntity entity = world.getEntity((int)getX(), (int)getY());
+				if (entity != null) System.out.println(entity.getType());
 				if (entity != null && "player".equals(entity.getType())) {
-					//((Player) entity).destroy();
+					
+					if (((Player) entity).destroy()){
+						//TODO: GAME OVER
+					}
+					else {
+						dispose();
+						
+					}
 				}
 				
 			}
@@ -236,7 +266,6 @@ public class Drone extends LightMapEntity implements IObserver{
 			tex = explodeAnimation.getKeyFrame(time);
 			if (explodeAnimation.isAnimationFinished(time +=delta) && notDisposed) {
 				this.dispose();
-				notDisposed = false;
 			}
 		}
 	}
@@ -260,6 +289,7 @@ public class Drone extends LightMapEntity implements IObserver{
 
 	@Override
 	public void dispose() {
+		notDisposed = false;
 		super.dispose();
 		if (this.getParent() != null || this.getStage() != null) {
 			this.remove();
@@ -276,4 +306,8 @@ public class Drone extends LightMapEntity implements IObserver{
 	}
 
 
+	public boolean destroy() {
+		state = State.EXPLODING;
+		return true;
+	}
 }
