@@ -73,7 +73,7 @@ public class HUDCreator {
 	
 	
 	/** 
-	 * Creates Stage for HUD as specified in method getPrefferedStage(). Can be customized as desired.
+	 * Creates Stage for HUD as specified in method getPreferredStage(). Can be customized as desired.
 	 * @param batch
 	 * @param level - Current level
 	 * @param hud - hud to be Staged

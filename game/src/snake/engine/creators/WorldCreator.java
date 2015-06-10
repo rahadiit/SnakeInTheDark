@@ -87,7 +87,7 @@ public abstract class WorldCreator {
 		
 	}
 	
-	/** Creates Stage for GameWorld as specified in method getPrefferedStage(). Can be customized as desired.
+	/** Creates Stage for GameWorld as specified in method getPreferredStage(). Can be customized as desired.
 	 * 
 	 * @author Mr.Strings (Modifiable according to need)
 	 * 
@@ -100,7 +100,7 @@ public abstract class WorldCreator {
 		LevelStage stage;
 		
 		 //change StageType here
-		switch  (world.getPrefferedStage().toLowerCase()) {
+		switch  (world.getPreferredStage().toLowerCase()) {
 			case "worldstage":
 			case "world stage":
 				stage = new LevelStage(level, createWorldViewport(world), batch);

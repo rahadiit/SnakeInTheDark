@@ -14,10 +14,10 @@ import snake.map.IMapEntity;
  */
 
 
-public abstract class VisualGameWorld extends GameWorld{
+public abstract class VisualGameWorld extends GameWorld {
 	
 	@Override
-	public String getPrefferedStage() {
+	public String getPreferredStage() {
 		return "Visual World Stage";
 	}
 	
