@@ -7,9 +7,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import snake.engine.creators.HUDSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.HUD;
+import snake.player.Player;
 
 /**                               Developed By:
  *                                   NoDark
@@ -17,7 +19,7 @@ import snake.engine.models.HUD;
  * 
  * Game HUD, to display status and general information
  * 
- * @author Mr.Strings
+ * @author Mr.Strings &Agustina & Guilherme
  */
 
 
@@ -60,12 +62,13 @@ public class SnakeHUD extends HUD {
 		sprite2 = new Sprite(tex2);		
 		sprite3 = new Sprite(tex3);
 		
-		sprite1.setSize(100f, 100f);
+		sprite1.setSize(100f, 85f);
 		sprite1.setPosition(30, 530);
-		sprite2.setSize(100f,100f);
+		sprite2.setSize(94f,100f);
 		sprite2.setPosition(30, 400);
-		sprite3.setSize(100,100);
+		sprite3.setSize(54, 100);
 		sprite3.setPosition(30, 270);
+		Player player = Player.getCurrentInstance();
 	}
 	
 	
