@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import snake.drone.Drone;
 import snake.engine.dataManagment.Loader;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
@@ -31,8 +32,9 @@ public class MapManager implements IMapAccess {
 
     private int spawnX, spawnY;
 
-    private final List<IMapEntity> entities = new LinkedList<>();
+    private final List<IMapEntity> entities = new LinkedList<IMapEntity>();
     private final List<IMapEntity> entitiesWrapper = Collections.unmodifiableList(entities);
+    private final List<IMapEntity> entitiesToRemove = new ArrayList<>();
 
     private final List<String> availableEquipments = new ArrayList<>();
 
@@ -83,7 +85,7 @@ public class MapManager implements IMapAccess {
 
     @Override
     public boolean removeEntity(IMapEntity entity) {
-        return entities.remove(entity);
+        return entitiesToRemove.add(entity);
     }
 
     void clearEntities() {
@@ -94,6 +96,8 @@ public class MapManager implements IMapAccess {
     void tickEntities(float delta) {
         for (IMapEntity entity : entities)
             entity.act(delta);
+        entities.removeAll(entitiesToRemove);
+        entitiesToRemove.clear();
     }
 
     void drawEntities(Batch batch, float parentAlpha) {
@@ -130,6 +134,9 @@ public class MapManager implements IMapAccess {
         Collections.addAll(availableEquipments, equips.split(","));
         int equipQuantity = Integer.parseInt(properties.get("equipQuantity", "0", String.class));
         spawnEquipments(equipQuantity);
+
+        int droneQuantity = Integer.parseInt(properties.get("droneQuantity", "0", String.class));
+        spawnDrones(droneQuantity);
     }
 
     @Override
@@ -177,6 +184,50 @@ public class MapManager implements IMapAccess {
             IEquipment equipment = EquipmentCreator.createFactory(availableEquipments.get(index)).create(x, y, true, this);
 
             addEntity(equipment);
+        }
+    }
+
+    private void spawnDrones(int droneQuantity) {
+        TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get("base");
+
+        for (int i = 0; i < droneQuantity; i++) {
+            String cellType;
+            Cell cell;
+            int x, y;
+            String direction;
+
+            do {
+                x = random.nextInt(mapWidth);
+                y = random.nextInt(mapHeight);
+
+                if (random.nextBoolean()) {
+                    if (random.nextBoolean()) {
+                        x = 0;
+                        direction = "direita";
+                    } else {
+                        x = mapWidth - 1;
+                        direction = "esquerda";
+                    }
+                } else {
+                    if (random.nextBoolean()) {
+                        y = 0;
+                        direction = "cima";
+                    }
+                    else {
+                        y = mapHeight - 1;
+                        direction = "baixo";
+                    }
+                }
+
+                cell = baseLayer.getCell(x, y);
+                MapProperties properties = cell.getTile().getProperties();
+
+                cellType = properties.get("type", "", String.class);
+            } while (!cellType.equals("wall"));
+
+            IMapEntity drone = new Drone(this, x, y, direction);
+
+            addEntity(drone);
         }
     }
 

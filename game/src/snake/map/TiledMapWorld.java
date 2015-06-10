@@ -18,10 +18,11 @@ public class TiledMapWorld extends VisualGameWorld {
 
     public TiledMapWorld(String mapName) {
         manager = new MapManager();
+
+        IMapEntity player = Player.getInstance(this);
         manager.loadMap(mapName);
         renderer = manager.createRenderer();
-        
-        IMapEntity player = Player.getInstance(this);
+
         manager.addEntity(player);
         manager.moveToSpawnPoint(player);
     }
@@ -48,8 +49,7 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void show() {
-        WorldSettings.setAmbientColor(Color.BLACK); ///TODO: fix ambient light
-
+        WorldSettings.setAmbientColor(Color.BLACK);
 
         OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
         int width = manager.getMapWidth();
