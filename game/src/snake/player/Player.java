@@ -278,7 +278,12 @@ public class Player extends LightMapEntity {
 		System.out.println("attached!");
 	      observers.add(observer);
 	      System.out.println("Number of observers: " + observers.size());
-	   }
+	}
+	
+	
+	public void dettach (IObserver observer) {
+		observers.remove(observer);
+	}
 	
 	private void update(float delta){
 		System.out.println("Number of observers: "+ observers.size());

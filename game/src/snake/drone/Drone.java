@@ -115,15 +115,10 @@ public class Drone extends LightMapEntity implements IObserver{
 	
 	public void update(float delta){
 		System.out.println("Dei update");
-		state = State.MOVING;
-		lastPosX = getX();
-		lastPosY = getY();
-		distanceMoved = 0;
-		
-		System.out.println(direction.x + ":" + direction.y);
 		
 		if(direction.x < 0) {
-			if (CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY()))) {
+			if (CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY()))&& state != State.EXPLODING) {
+				System.out.println("EXplode 0");
 				state = State.EXPLODING;
 				time = 0;
 			}
@@ -132,13 +127,20 @@ public class Drone extends LightMapEntity implements IObserver{
 				if (entity != null && "player".equals(entity.getType())) {
 					//(Player) entity).getDirection();
 					//((Player) entity).destroy();
+				} 
+				else if (state != State.EXPLODING){
+					state = State.MOVING;
+					lastPosX = getX();
+					lastPosY = getY();
+					distanceMoved = 0;
 				}
 			}
 		}
 			
 			
 		else if(direction.x > 0){
-			if (CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY()))) {
+			if (CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY())) && state != State.EXPLODING) {
+				System.out.println("Explodeee1");
 				state = State.EXPLODING;
 				time = 0;
 			}
@@ -148,12 +150,19 @@ public class Drone extends LightMapEntity implements IObserver{
 					//(Player) entity).getDirection();
 					//((Player) entity).destroy();
 				}
+				else if (state != State.EXPLODING) {
+					state = State.MOVING;
+					lastPosX = getX();
+					lastPosY = getY();
+					distanceMoved = 0;
+				}
 			}
 		}
 		
 		
 		else if(direction.y > 0) {
-			if (CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1))){
+			if (CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1)) && state != State.EXPLODING){
+				System.out.println("Explodeee2");
 				state = State.EXPLODING;
 				time = 0;
 			}
@@ -163,11 +172,18 @@ public class Drone extends LightMapEntity implements IObserver{
 					//(Player) entity).getDirection();
 					//((Player) entity).destroy();
 				}
+				else if (state != State.EXPLODING){
+					state = State.MOVING;
+					lastPosX = getX();
+					lastPosY = getY();
+					distanceMoved = 0;
+				}
 			}
 		}
 		
 		else if(direction.y < 0) {
 			if (CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1)) && state != State.EXPLODING){
+				System.out.println(state);
 				state = State.EXPLODING;
 				time = 0;
 			}
@@ -176,6 +192,12 @@ public class Drone extends LightMapEntity implements IObserver{
 				if (entity != null && "player".equals(entity.getType())) {
 					//(Player) entity).getDirection();
 					//((Player) entity).destroy();
+				}
+				else if (state != State.EXPLODING){
+					state = State.MOVING;
+					lastPosX = getX();
+					lastPosY = getY();
+					distanceMoved = 0;
 				}
 			}
 		}
@@ -245,8 +267,9 @@ public class Drone extends LightMapEntity implements IObserver{
 		super.dispose();
 		if (this.getParent() != null || this.getStage() != null) {
 			this.remove();
-			((IMapAccess)getWorld()).removeEntity(this);
 		}
+		world.removeEntity(this);
+		player.dettach(this);
 		Loader.unload(explodeTexName);
 		Loader.unload(texName);
 	}
