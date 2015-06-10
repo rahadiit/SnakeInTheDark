@@ -1,4 +1,4 @@
-package umbra.text;
+package com.umbra.manager.interfaces;
 
 public interface IComunicator {
 

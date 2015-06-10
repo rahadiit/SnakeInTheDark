@@ -263,7 +263,7 @@ public class SnakeScreen implements GameLevel {
 	
 	/* ------------------------------ Getters ------------------------------ */
 
-	
+
 	/** Gets Level gameWorld */
 	public GameWorld getGameWorld() {return world;}
 	
