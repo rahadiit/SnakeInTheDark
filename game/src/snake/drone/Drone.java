@@ -9,16 +9,12 @@ import snake.map.CellType;
 import snake.map.IMapAccess;
 import snake.map.IMapEntity;
 import snake.map.TiledMapWorld;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+
 /**                              Developed By:
  *                                  NoDark
  *                               sessaGlasses
