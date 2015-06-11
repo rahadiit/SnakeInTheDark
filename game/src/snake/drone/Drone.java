@@ -124,7 +124,7 @@ public class Drone extends LightMapEntity implements IObserver{
 							//TODO: GAME OVER
 						}
 						else {
-							dispose();
+							destroy();
 						}
 					}
 				} 
@@ -154,7 +154,7 @@ public class Drone extends LightMapEntity implements IObserver{
 							//TODO: GAME OVER
 						}
 						else {
-							dispose();
+							destroy();
 						}
 					}
 				}
@@ -172,8 +172,7 @@ public class Drone extends LightMapEntity implements IObserver{
 			if ((CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1)) 
 					|| (CellType.TRAP.equals(world.getCellType((int)getX(), (int)getY() + 1)))) 
 					&& state != State.EXPLODING){
-				state = State.EXPLODING;
-				time = 0;
+				destroy();
 			}
 			else {
 				IMapEntity entity = world.getEntity((int)getX(), (int)getY() + 1, "player");
@@ -184,7 +183,7 @@ public class Drone extends LightMapEntity implements IObserver{
 							//TODO: GAME OVER
 						}
 						else {
-							dispose();
+							destroy();
 						}
 					}
 				}
@@ -213,7 +212,7 @@ public class Drone extends LightMapEntity implements IObserver{
 							//TODO: GAME OVER
 						}
 						else {
-							dispose();
+							destroy();
 						}
 					}
 				}
@@ -252,7 +251,7 @@ public class Drone extends LightMapEntity implements IObserver{
 						//TODO: GAME OVER
 					}
 					else {
-						dispose();
+						destroy();
 					}
 				}
 				
@@ -307,6 +306,7 @@ public class Drone extends LightMapEntity implements IObserver{
 
 	public boolean destroy() {
 		state = State.EXPLODING;
+		time = 0;
 		return true;
 	}
 }

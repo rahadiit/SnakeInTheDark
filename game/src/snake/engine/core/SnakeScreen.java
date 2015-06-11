@@ -282,6 +282,10 @@ public class SnakeScreen implements GameLevel {
 	/** Gets pause menu. To use it, must set Game State to PAUSED. */
 	public PauseMenu getPauseMenu() {return pauseMenu;}
 	
+	public InputMultiplexer getInputMultiplexer() {
+		return input;
+	}
+	
 	
 	/* ------------------------------ Setters ------------------------------ */
 	
