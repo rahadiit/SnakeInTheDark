@@ -31,6 +31,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	ConeLight light;
 	Vector2 vec = new Vector2();
 	boolean onMap;
+	boolean LightsOn = false;
 	int cont;
 	int batteryCounter;
 
@@ -90,6 +91,10 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (!onMap))
 		{
 			light.setActive(!light.isActive());
+			if (light.isActive())
+				this.LightsOn = true;
+			else
+				this.LightsOn = false;
 		}
 
 	}
@@ -137,13 +142,13 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	{
 		player.attach(this);
 	}
-
+	
 	@Override
 	public void update(float delta)
 	{
 		// toda vez que o palyer andar, essa funcao serah chamada
-		
-		this.batteryCounter--;
+		if (this.LightsOn)
+			this.batteryCounter--;
 		
 		// se acabar a bateria, a lanterna se da um dispose
 		if(this.batteryCounter == 0)

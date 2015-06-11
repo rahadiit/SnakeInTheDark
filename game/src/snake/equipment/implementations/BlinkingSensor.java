@@ -57,10 +57,10 @@ public class BlinkingSensor extends Actor {
 		currentAnimation = animatedBlink[GREEN];
 		
 	}
-	public void act(float delta, boolean drone){
+	public void act(float delta, int drones){
 	stateTime += delta;
 	currentFrame = currentAnimation.getKeyFrame(stateTime, true);
-	if (drone)
+	if (drones  >0)
 		currentAnimation = animatedBlink[RED];
 	else
 		currentAnimation = animatedBlink[GREEN];

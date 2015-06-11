@@ -64,14 +64,15 @@ public class SensorEquipment extends AbstractEquipment {
 		light.setPosition(vec);
 		time += delta;
 		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
-
+		int drones = 0;
 		light.setDistance(intensity);
-		if (hasDrone((int) getParent().getX(), (int) getParent().getY()) > 0) {
+		drones = hasDrone((int) getParent().getX(), (int) getParent().getY());
+		if (drones > 0) {
 			light.setColor(Color.RED);
 		} else {
 			light.setColor(Color.GREEN);
 		}
-		//BlinkingSensor.act(delta, drone);
+		//BlinkingSensor.act(delta, drones);
 
 	}
 
