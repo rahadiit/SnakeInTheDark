@@ -109,7 +109,9 @@ public class Drone extends LightMapEntity implements IObserver{
 	public void update(float delta){
 		
 		if(direction.x < 0) {
-			if ((CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY())) || (CellType.TRAP.equals(world.getCellType((int)getX() - 1, (int)getY()))))&& state != State.EXPLODING) {
+			if ((CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY())) 
+					|| (CellType.TRAP.equals(world.getCellType((int)getX() - 1, (int)getY()))))
+					&& state != State.EXPLODING) {
 				state = State.EXPLODING;
 				time = 0;
 			}
@@ -137,7 +139,9 @@ public class Drone extends LightMapEntity implements IObserver{
 			
 			
 		else if(direction.x > 0){
-			if ((CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY())) || (CellType.TRAP.equals(world.getCellType((int)getX() + 1, (int)getY()))))&& state != State.EXPLODING) {
+			if ((CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY())) 
+					|| (CellType.TRAP.equals(world.getCellType((int)getX() + 1, (int)getY()))))
+					&& state != State.EXPLODING) {
 				state = State.EXPLODING;
 				time = 0;
 			}
@@ -165,7 +169,9 @@ public class Drone extends LightMapEntity implements IObserver{
 		
 		
 		else if(direction.y > 0) {
-			if ((CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1)) || (CellType.TRAP.equals(world.getCellType((int)getX(), (int)getY() + 1)))) && state != State.EXPLODING){
+			if ((CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1)) 
+					|| (CellType.TRAP.equals(world.getCellType((int)getX(), (int)getY() + 1)))) 
+					&& state != State.EXPLODING){
 				state = State.EXPLODING;
 				time = 0;
 			}
@@ -192,7 +198,9 @@ public class Drone extends LightMapEntity implements IObserver{
 		}
 		
 		else if(direction.y < 0) {
-			if ((CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1)) || (CellType.TRAP.equals(world.getCellType((int)getX(), (int)getY() - 1))))&& state != State.EXPLODING){
+			if ((CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1)) 
+					|| (CellType.TRAP.equals(world.getCellType((int)getX(), (int)getY() - 1))))
+					&& state != State.EXPLODING){
 				state = State.EXPLODING;
 				time = 0;
 			}
