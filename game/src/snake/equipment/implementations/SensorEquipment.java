@@ -108,7 +108,7 @@ public class SensorEquipment extends AbstractEquipment
 			// para o som do seensor terminar com um beep
 			if (light.getColor().equals(Color.RED))
 			{
-				endSensor.play();
+				endSensor.play(.3f);
 			}
 
 			light.setColor(Color.GREEN);

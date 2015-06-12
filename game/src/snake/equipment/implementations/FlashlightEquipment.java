@@ -9,6 +9,7 @@ import box2dLight.ConeLight;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -34,6 +35,8 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	boolean LightsOn = false;
 	int cont;
 	int batteryCounter;
+	private String flashlightClickName = "sounds/flashlightClick.wav";
+	Sound flashlightClick;
 
 	// Construtor com parametros de posicao de inicio
 	public FlashlightEquipment(float x, float y, boolean onMap)
@@ -49,6 +52,12 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		sprite = new Sprite(texture);
 		
 		this.batteryCounter = 4; // bateria fixa de toda lanterna
+		
+		// flashlight sound 
+		Loader.load(flashlightClickName, Sound.class);
+		while (!Loader.isLoaded(flashlightClickName))
+			Loader.update();
+		flashlightClick = Loader.get(flashlightClickName);
 	}
 
 	// Ativacao de seu efeito no mapa
@@ -58,7 +67,6 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	}
 
 	// Desenho do equipamento no jogo, SE ADICIONADO EM ALGUM LUGAR QUE PECA SEU
-	// SPRITE (EXEMPLO: MAPA TEMPLE)
 	public void draw(Batch batch, float parentAlpha)
 	{
 		// se estiver no mapa eh que usa a sprite
@@ -90,6 +98,9 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (!onMap))
 		{
+			
+			flashlightClick.play(.3f);
+			
 			light.setActive(!light.isActive());
 			if (light.isActive())
 				this.LightsOn = true;
@@ -125,6 +136,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		}
 		
 		Loader.unload("equipments/PixelFlashlight.png"); // da o unload
+		Loader.unload(flashlightClickName);
 	}
 
 	public void setOnMap(boolean onMap)
