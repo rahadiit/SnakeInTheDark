@@ -17,6 +17,7 @@ import snake.visuals.enhanced.LightMapEntity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -74,6 +75,10 @@ public class Player extends LightMapEntity {
 	//Observer
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
+	// Sounds
+	private String stepsSound = "sounds/walkingPlayer.mp3";
+	Sound steps;
+	
 	private Player (GameWorld world) {
 		super(world);
 		
@@ -123,6 +128,12 @@ public class Player extends LightMapEntity {
 		//adiciona arma
 		arma = EquipmentCreator.createFactory("gun").create(.5f, .5f, false, access);
 		addActor((Actor) arma);
+		
+		// carrega sons
+		Loader.load(stepsSound, Sound.class);
+		while (!Loader.isLoaded(stepsSound))
+			Loader.update();
+		steps = Loader.get(stepsSound);
 	}
 	
 	public boolean destroy() {
@@ -180,6 +191,7 @@ public class Player extends LightMapEntity {
 				state = State.MOVING;	
 				stateTime = 0;
 				update(delta);
+				steps.play(.2f);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !CellType.WALL.equals(access.getCellType((int)getX() + 1, (int)getY()))) {
 				distanceMoved = 0;
@@ -189,6 +201,7 @@ public class Player extends LightMapEntity {
 				state = State.MOVING;
 				stateTime = 0;
 				update(delta);
+				steps.play(.2f);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP) && !CellType.WALL.equals(access.getCellType((int)getX(), (int)getY() + 1))) {
 				distanceMoved = 0;
@@ -198,6 +211,7 @@ public class Player extends LightMapEntity {
 				state = State.MOVING;
 				stateTime = 0;
 				update(delta);
+				steps.play(.2f);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && !CellType.WALL.equals(access.getCellType((int)getX(), (int)getY() - 1))) {
 				distanceMoved = 0;
@@ -207,6 +221,7 @@ public class Player extends LightMapEntity {
 				state = State.MOVING;
 				stateTime = 0;
 				update(delta);
+				steps.play(.2f);
 			} else {
 				if (direction.x > 0) {
 					currentAnimation = animatedStanding[RIGHT];
@@ -270,6 +285,7 @@ public class Player extends LightMapEntity {
 		}
 		Loader.unload(walkTexName);
 		Loader.unload(standingTexName);
+		Loader.unload(stepsSound);
 		player = null;
 	}
 	
