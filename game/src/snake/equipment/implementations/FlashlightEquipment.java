@@ -99,7 +99,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (!onMap))
 		{
 			
-			flashlightClick.play(.3f);
+			flashlightClick.play(.2f);
 			
 			light.setActive(!light.isActive());
 			if (light.isActive())

@@ -76,8 +76,8 @@ public class Player extends LightMapEntity {
 	private List<IObserver> observers = new ArrayList<IObserver>();
 	
 	// Sounds
-	private String stepsSound = "sounds/walkingPlayer.mp3";
-	Sound steps;
+	private String stepsSound = "sounds/walkingPlayer.mp3", itemFoundName = "sounds/itemFound.wav";
+	Sound steps, itemFound;
 	
 	private Player (GameWorld world) {
 		super(world);
@@ -131,9 +131,11 @@ public class Player extends LightMapEntity {
 		
 		// carrega sons
 		Loader.load(stepsSound, Sound.class);
-		while (!Loader.isLoaded(stepsSound))
+		Loader.load(itemFoundName, Sound.class);
+		while (!Loader.isLoaded(stepsSound) || !Loader.isLoaded(itemFoundName))
 			Loader.update();
 		steps = Loader.get(stepsSound);
+		itemFound = Loader.get(itemFoundName);
 	}
 	
 	public boolean destroy() {
@@ -173,6 +175,7 @@ public class Player extends LightMapEntity {
 		
 		IMapEntity entity = access.getEntity((int)getX(), (int)getY(), "equipment");
 		if (entity != null) {
+			itemFound.play(.3f);
 			IEquipment equipment = (IEquipment) entity;
 			access.removeEntity(equipment); //Retira do mundo
 			equipment.setPosition(.5f, .5f);

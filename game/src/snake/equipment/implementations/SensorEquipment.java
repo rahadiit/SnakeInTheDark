@@ -16,7 +16,7 @@ import snake.visuals.Lights;
 /**
  * Developed By: NoDarkGlasses
  *
- * Implementação concreta do sensor
+ * Implementacao concreta do sensor
  * 
  * @author Gabriel Gimenez & Bszazulla
  */
@@ -97,8 +97,8 @@ public class SensorEquipment extends AbstractEquipment
 		if (drones > 0)
 		{
 			light.setColor(Color.RED);
-			sensorBackground.loop(1);
-			sensorPing.loop(1);
+			sensorBackground.loop(.5f);
+			sensorPing.loop(.3f);
 		}
 		else
 		{
