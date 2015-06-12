@@ -7,6 +7,7 @@ import snake.engine.models.GameWorld;
 import snake.map.TiledMapWorld;
 import snake.map.tests.ForestMap_test;
 import snake.map.tests.TempleMap_test;
+import snake.menus.SnakeHub;
 import snake.visuals.enhanced.VisualBlankWorld;
 import snake.visuals.enhanced.VisualWorldStage;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -51,7 +52,6 @@ public abstract class WorldCreator {
 				world = new TiledMapWorld(levelDataID);
 				break;
 
-				
 			// Down there are the Demos
 			case "forestmap":
 			case "forest map":
@@ -68,7 +68,7 @@ public abstract class WorldCreator {
 			case "snake hub":
 			case "mainmenu":
 			case "main menu":
-				world = new VisualBlankWorld();
+				world = new SnakeHub();
 				break;
 				
 			case "visualblank":
@@ -103,6 +103,8 @@ public abstract class WorldCreator {
 		switch  (world.getPreferredStage().toLowerCase()) {
 			case "worldstage":
 			case "world stage":
+			case "levelstage":
+			case "level stage":
 				stage = new LevelStage(level, createWorldViewport(world), batch);
 				break;
 			case "visualworldstage":	

@@ -6,6 +6,7 @@ import snake.engine.models.BlankHUD;
 import snake.engine.models.HUD;
 import snake.hud.SnakeHUD;
 import snake.menus.SnakeHub;
+import snake.visuals.enhanced.VisualWorldStage;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -43,12 +44,12 @@ public class HUDCreator {
 			case "forest map":
 				hud = new SnakeHUD (levelDataID); //can be changed for another HUD
 				break;
+				
 			case "snakehub":
 			case "snake hub":
-			case "mainmenu":
-			case "main menu":
-				hud = new SnakeHub();
-				break;
+				hud = new BlankHUD();
+				
+				
 			case "blank":
 				hud = new BlankHUD();
 				break;
@@ -82,10 +83,14 @@ public class HUDCreator {
 	public static LevelStage createHUDStage (Batch batch, SnakeScreen level, HUD hud) {
 		LevelStage stage;
 		
-		switch (hud.getPrefferedStage().toLowerCase()) {
-			case ("levelstage"):
-			case ("level stage"):
+		switch (hud.getPreferredStage().toLowerCase()) {
+			case "levelstage":
+			case "level stage":
 				stage = new LevelStage(level, createHUDViewport(hud), batch);
+				break;
+			case "visualworldstage":
+			case "visual world stage":
+				stage = new VisualWorldStage(level, createHUDViewport(hud), batch);
 				break;
 			default:
 				System.out.println("Stage not found. Please check getPreferredStage() method in HUD");

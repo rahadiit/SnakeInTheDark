@@ -31,6 +31,8 @@ public class SnakeHUD extends HUD {
 	private Texture tex, tex1, tex2, tex3;
 	private Sprite sprite, sprite1, sprite2, sprite3;
 	
+	private boolean paused = false;
+	
 	public SnakeHUD (String levelData) {
 		super();
 		
@@ -92,38 +94,40 @@ public class SnakeHUD extends HUD {
 	@Override
 	public void act (float delta) {
 		super.act(delta);
-		/*if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			System.out.println("Position: "+ WorldSettings.getVScreenX_Porc() + ":" + WorldSettings.getVScreenY_Porc());
-			System.out.println("Size: "+ WorldSettings.getVScreenWidth_Porc() + ":" + WorldSettings.getVScreenHeight_Porc());
-		}*/
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+			paused = !paused;
+		}
 	}
 	
 	
 	public void draw(Batch batch, float parentAlpha) {
-		super.draw(batch, parentAlpha);
-		// Draw fps
-		font.setColor(Color.GREEN);
-		if (Gdx.input.isKeyPressed(Input.Keys.H) || Gdx.input.isTouched())
-			font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, this.getHeight());
+		if (paused) {
+			super.draw(batch, parentAlpha);
+			// Draw fps
+			font.setColor(Color.GREEN);
+			if (Gdx.input.isKeyPressed(Input.Keys.H) || Gdx.input.isTouched())
+				font.draw(batch, "fps: " + Gdx.graphics.getFramesPerSecond(), 0, this.getHeight());
+			
+			if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+				font.setColor(Color.MAGENTA);
+				font.draw(batch, "Wow. Just... Wow.", 250, 100);
+			}
+			
+			batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+			sprite1.draw(batch);
+			sprite2.draw(batch);
+			sprite3.draw(batch);
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-			font.setColor(Color.MAGENTA);
-			font.draw(batch, "Wow. Just... Wow.", 250, 100);
+			flashqt.setColor(Color.WHITE);
+			flashqt.draw(batch, "x1", 140, 590);
+			
+			empqt.setColor(Color.WHITE);
+			empqt.draw(batch, "x1", 140, 460);
+			
+			bulletqt.setColor(Color.WHITE);
+			bulletqt.draw(batch, "x2", 140, 330);
 		}
-		
-		batch.draw(sprite, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-		sprite1.draw(batch);
-		sprite2.draw(batch);
-		sprite3.draw(batch);
-	
-		flashqt.setColor(Color.WHITE);
-		flashqt.draw(batch, "x1", 140, 590);
-		
-		empqt.setColor(Color.WHITE);
-		empqt.draw(batch, "x1", 140, 460);
-		
-		bulletqt.setColor(Color.WHITE);
-		bulletqt.draw(batch, "x2", 140, 330);
 	}
 
 

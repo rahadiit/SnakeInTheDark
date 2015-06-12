@@ -16,7 +16,7 @@ public class Weapon extends LightMapEntity {
 	private Bullet bullet;
 	private float bulletSize, MAXSIZE = 3, MINSIZE = .4f;
 	private String shootSoundName = "sounds/spark.mp3", thunderSoundName = "sounds/thunder.mp3";
-	Sound shootSound, thunderSound;
+	private Sound shootSound, thunderSound;
 
 	
 	

@@ -1,11 +1,15 @@
 package snake.map;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapRenderer;
 import snake.drone.Drone;
 import snake.engine.creators.WorldSettings;
+import snake.engine.dataManagment.Loader;
 import snake.player.Player;
 import snake.visuals.enhanced.ILightMapEntity;
 import snake.visuals.enhanced.LightMapEntity;
@@ -15,6 +19,12 @@ public class TiledMapWorld extends VisualGameWorld {
 
     private MapManager manager;
     private MapRenderer renderer;
+    
+    private Music song1, song2;
+    private String song2Name = "music/nine-lies-the-heart-ed-4.wav", song1Name = "music/yewbic__ambience02.wav";
+    
+    private boolean playing = true;
+    
 
     public TiledMapWorld(String mapName) {
         manager = new MapManager();
@@ -25,6 +35,15 @@ public class TiledMapWorld extends VisualGameWorld {
 
         manager.addEntity(player);
         manager.moveToSpawnPoint(player);
+        
+        Loader.load(song1Name, Music.class);
+        Loader.finishLoadingAsset(song1Name);
+        song1 = Loader.get(song1Name);
+        
+
+        Loader.load(song2Name, Music.class);
+        Loader.finishLoadingAsset(song2Name);
+        song2 = Loader.get(song2Name);
     }
 
     public IMapAccess getMapAccess() {
@@ -33,7 +52,12 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void act(float delta) {
-        manager.tickEntities(delta);
+    	if (playing) {
+        	manager.tickEntities(delta);
+    	}
+    	
+    	if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
+    		playing = !playing;
     }
 
     @Override
@@ -49,7 +73,7 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void show() {
-        WorldSettings.setAmbientColor(Color.WHITE);
+        WorldSettings.setAmbientColor(Color.BLACK);
 
         OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
         int width = manager.getMapWidth();
@@ -61,6 +85,9 @@ public class TiledMapWorld extends VisualGameWorld {
         camera.position.set(width * .5f, height * .5f, 0);
         camera.zoom = factor;
         camera.update();
+        
+        song1.play();
+        song1.setLooping(true);
     }
 
     @Override

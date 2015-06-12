@@ -168,7 +168,7 @@ public class WorldSettings {
 	}
 	
 	/** Sets World size - arbitrary coordinate System.*/
-	public static void setWorldSSize(float sizex, float sizey) {
+	public static void setWorldSize(float sizex, float sizey) {
 		WORLD_WIDTH = sizex;
 		WORLD_HEIGHT = sizey;
 	}

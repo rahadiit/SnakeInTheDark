@@ -19,8 +19,8 @@ public abstract class HUD extends Group {
 		this.setBounds(0, 0, HUDSettings.getHudWidth(), HUDSettings.getHudHeight());
 	}
 	
-	public String getPrefferedStage() {
-		return new String ("LevelStage");
+	public String getPreferredStage() {
+		return "LevelStage";
 	}
 	
 	/** Is called when the Screen in which the GameWorld is is set to current.*/
