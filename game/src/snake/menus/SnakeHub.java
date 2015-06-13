@@ -32,7 +32,7 @@ import snake.engine.models.HUD;
 
 public class SnakeHub extends VisualGameWorld {
 	private BitmapFont font;
-	private Sound gunFire;
+	private Sound gunCock, gunFire;
 	private Sprite title;
 	private float w, h;
 	private String instructions[]; //will be changed to buttons
@@ -40,6 +40,7 @@ public class SnakeHub extends VisualGameWorld {
 	private String titleScreen = "extras/titleScreen_white.png";
 	private String crosshair_cursor = "extras/crosshair_blue.png";
 	private String gunFireName = "sounds/gunshot__shawnyboy__.wav";
+	private String gunCockName = "sounds/gun-cock__smartwentcody__.wav";
 	
 	private Light illumination;
 	
@@ -71,19 +72,20 @@ public class SnakeHub extends VisualGameWorld {
 		Loader.load(gunFireName, Sound.class);
 		Loader.finishLoadingAsset(gunFireName);
 		gunFire = Loader.get(gunFireName);
-
-		w = 100;
-		h = 100;
+		
+		Loader.load(gunCockName, Sound.class);
+		Loader.finishLoadingAsset(gunCockName);
+		gunCock= Loader.get(gunCockName);
 		
 		title.setBounds(157.5f,101, 965, 518);
 		
-		instructions = new String[3];
 	}
 
 	@Override
 	public void show() {
 		WorldSettings.toggleVirtualScreen(false);
 		WorldSettings.setAmbientColor(Color.GREEN);
+		gunCock.play();
 	}
 	
 	
@@ -124,47 +126,6 @@ public class SnakeHub extends VisualGameWorld {
 				}
 			}
 		}
-		
-		//Camera Movement
-			if (Gdx.input.isKeyPressed(Input.Keys.A))
-				getStage().getCameraMan().moveCamera(-20f * delta, 0);
-					
-			if (Gdx.input.isKeyPressed(Input.Keys.D))
-				getStage().getCameraMan().moveCamera(20f * delta, 0);
-					
-			if (Gdx.input.isKeyPressed(Input.Keys.S))
-				getStage().getCameraMan().moveCamera( 0, -20f * delta);
-					
-			if (Gdx.input.isKeyPressed(Input.Keys.W))
-				getStage().getCameraMan().moveCamera(0, 20f * delta);
-					
-			//Camera Zoom
-			if (Gdx.input.isKeyPressed(Input.Keys.O))
-				getStage().getCameraMan().zoomCamera(-.5f * delta);
-				
-			if (Gdx.input.isKeyPressed(Input.Keys.P))
-				getStage().getCameraMan().zoomCamera(.5f * delta);
-				
-				
-			//Virtual Camera Movement
-			if (Gdx.input.isKeyPressed(Input.Keys.L))
-				getStage().getCameraMan().moveVCamera(.01f, 0);
-				
-			if (Gdx.input.isKeyPressed(Input.Keys.J))
-				getStage().getCameraMan().moveVCamera(-.01f, 0);
-					
-			if (Gdx.input.isKeyPressed(Input.Keys.I))
-				getStage().getCameraMan().moveVCamera(0, .01f);
-				
-			if (Gdx.input.isKeyPressed(Input.Keys.K))
-				getStage().getCameraMan().moveVCamera(0, -.01f);
-					
-			//Virtual Camera Zoom
-			if (Gdx.input.isKeyPressed(Input.Keys.U))
-				getStage().getCameraMan().zoomVCamera(.01f);
-					
-			if (Gdx.input.isKeyPressed(Input.Keys.Y))
-				getStage().getCameraMan().zoomVCamera(-.01f);
 	}
 	
 	
