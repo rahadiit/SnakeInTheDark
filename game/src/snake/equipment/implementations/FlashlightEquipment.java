@@ -55,8 +55,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		
 		// flashlight sound 
 		Loader.load(flashlightClickName, Sound.class);
-		while (!Loader.isLoaded(flashlightClickName))
-			Loader.update();
+		Loader.finishLoadingAsset(flashlightClickName);
 		flashlightClick = Loader.get(flashlightClickName);
 	}
 

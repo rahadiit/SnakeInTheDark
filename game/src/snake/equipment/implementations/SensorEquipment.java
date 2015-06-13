@@ -48,9 +48,9 @@ public class SensorEquipment extends AbstractEquipment
 		Loader.load(sensorBackgroundName, Sound.class);
 		Loader.load(sensorPingName, Sound.class);
 		Loader.load(endSensorName, Sound.class);
-		while (!Loader.isLoaded(sensorBackgroundName) || !Loader.isLoaded(sensorPingName)
-				|| !Loader.isLoaded(endSensorName))
-			Loader.update();
+		Loader.finishLoadingAsset(sensorBackgroundName);
+		Loader.finishLoadingAsset(sensorPingName);
+		Loader.finishLoadingAsset(endSensorName);
 		sensorBackground = Loader.get(sensorBackgroundName);
 		sensorPing = Loader.get(sensorPingName);
 		endSensor = Loader.get(endSensorName);
@@ -88,8 +88,7 @@ public class SensorEquipment extends AbstractEquipment
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
 		time += delta;
-		int drones = 0;
-		drones = hasDrone((int) getParent().getX(), (int) getParent().getY());
+		int drones = hasDrone((int) getParent().getX(), (int) getParent().getY());
 
 		if (drones > 0)
 		{

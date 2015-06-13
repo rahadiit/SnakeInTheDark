@@ -39,14 +39,14 @@ public class GunEquipment extends AbstractEquipment {
 		// sounds
 		Loader.load(shotName, Sound.class);
 		Loader.load(explosionName, Sound.class);
-		while (!Loader.isLoaded(shotName) || !Loader.isLoaded(explosionName))
-			Loader.update();
+		Loader.finishLoadingAsset(shotName);
+		Loader.finishLoadingAsset(explosionName);
 		shot = Loader.get(shotName);
 		explosion = Loader.get(shotName);
 	}
 
 	public void activateOnMap(IMapAccess map) {
-		// sem implement específico
+		// sem implement especï¿½fico
 	}
 
 	@Override
