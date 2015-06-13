@@ -81,14 +81,14 @@ public class SensorEquipment extends AbstractEquipment
 	{
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
-		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
-		light.setDistance(intensity);
 		light.setPosition(vec);
 		time += delta;
 		int drones = hasDrone((int) getParent().getX(), (int) getParent().getY());
 
 		if (drones > 0)
 		{
+			float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
+			light.setDistance(intensity);
 			light.setColor(Color.RED);
 			sensorPing.loop(.1f, 1f, -1);
 		}
@@ -99,6 +99,7 @@ public class SensorEquipment extends AbstractEquipment
 			{
 				endSensor.play(.3f);
 			}
+			light.setDistance(MAX_INTENSITY);
 			light.setColor(Color.WHITE);
 		}
 	}
