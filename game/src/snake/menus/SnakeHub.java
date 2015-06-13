@@ -114,7 +114,8 @@ public class SnakeHub extends VisualGameWorld {
 				
 				if (distance <= 0) {
 						WorldSettings.setWorldSize(100, WorldSettings.heightFix(100));
-						WorldSettings.toggleVirtualScreen(true);
+						WorldSettings.toggleVirtualScreen(false);
+						WorldSettings.setCameraPosition(50, WorldSettings.heightFix(50));
 						try {
 							ScreenCreator.switchAndGo("SnakeScreen", "TiledMap", "maps/level1.tmx");
 						} catch (Exception e) {
@@ -186,7 +187,10 @@ public class SnakeHub extends VisualGameWorld {
 
 	@Override
 	public void dispose() {
-		font.dispose();
+		illumination.remove();
+		Loader.unload(fontName);
+		Loader.unload(crosshair_cursor);
+		Loader.unload(titleScreen);
 	}
 
 	@Override

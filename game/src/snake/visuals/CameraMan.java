@@ -146,10 +146,16 @@ public class CameraMan {
 		Lights.setRayhandler(rayHandler);
 		rayHandler.setAmbientLight(WorldSettings.getAmbientColor());
 		rayHandler.setBlurNum(3);
-		rayHandler.useCustomViewport((int)(WorldSettings.getVScreenX_Porc() * Gdx.graphics.getWidth()),
-							         (int)(WorldSettings.getVScreenY_Porc() * Gdx.graphics.getHeight()),
-							         (int)(WorldSettings.getVScreenWidth_Porc() * Gdx.graphics.getWidth()),
-							         (int)(WorldSettings.getVScreenHeight_Porc()  * Gdx.graphics.getHeight()));
+		
+		if (WorldSettings.hasVirtualScreen()) {
+			rayHandler.useCustomViewport((int)(WorldSettings.getVScreenX_Porc() * Gdx.graphics.getWidth()),
+								         (int)(WorldSettings.getVScreenY_Porc() * Gdx.graphics.getHeight()),
+								         (int)(WorldSettings.getVScreenWidth_Porc() * Gdx.graphics.getWidth()),
+								         (int)(WorldSettings.getVScreenHeight_Porc()  * Gdx.graphics.getHeight()));
+		}
+		else {
+			rayHandler.useCustomViewport(0, 0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		}
 		rayHandler.setCombinedMatrix(camera);
 	}
 	

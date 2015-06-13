@@ -39,7 +39,7 @@ public class FlashLight_test extends LightMapEntity {
 		//And rotation
 		
 		Actor parent = this.getParent();
-		float rotation = 0;
+		float rotation = 90;
 		while (parent != null) {
 			rotation += parent.getRotation();
 			parent = parent.getParent();
@@ -48,7 +48,8 @@ public class FlashLight_test extends LightMapEntity {
 		this.setRotation(rotation);
 		light.setDirection(rotation);
 		
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)) {
+			System.out.println("Toggled flashlight");
 			light.setActive(!light.isActive());
 		}
 	}
@@ -58,7 +59,7 @@ public class FlashLight_test extends LightMapEntity {
 	public void createLights () {
 		super.createLights();
 		light = new ConeLight (Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f),
-				2, getX(), getY(), 90, 30);
+				90, getX(), getY(), 90, 30);
 		light.setActive(true); //Comeca acessa
 	}
 	

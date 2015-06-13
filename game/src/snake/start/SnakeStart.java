@@ -19,7 +19,7 @@ public class SnakeStart extends GameStart {
 		ScreenCreator.setGameInstance(this);
 		
 		try {
-			ScreenCreator.addAndGo("SnakeScreen", "SnakeHub", "");
+			ScreenCreator.addAndGo("SnakeScreen", "snakehub", "");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
