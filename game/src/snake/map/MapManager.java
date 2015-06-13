@@ -72,10 +72,11 @@ public class MapManager implements IMapAccess {
 
     @Override
     public IMapEntity getEntity(int x, int y, String type) {
-        List<IMapEntity> entities = getEntities(x, y, type);
-        if (entities.isEmpty())
-            return null;
-        return entities.get(0);
+        // Slow code
+        for (IMapEntity entity : entities)
+            if ((int) entity.getX() == x && (int) entity.getY() == y && entity.getType().equals(type))
+                return entity;
+        return null;
     }
 
     @Override
