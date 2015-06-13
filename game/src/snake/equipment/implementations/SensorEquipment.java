@@ -1,13 +1,12 @@
 package snake.equipment.implementations;
 
 import box2dLight.PointLight;
-
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-
 import snake.engine.dataManagment.Loader;
 import snake.map.IMapAccess;
 import snake.map.IMapEntity;
@@ -29,7 +28,7 @@ public class SensorEquipment extends AbstractEquipment
 	Vector2 vec = new Vector2();
 	boolean onMap = false;
 	IMapAccess access;
-	private String sensorBackgroundName = "sounds/sensorBackground.mp3", sensorPingName = "sounds/sensorPing.wav",
+	private String sensorBackgroundName = "sounds/sensorBackground.mp3", sensorPingName = "sounds/sensorPing_cutShorter.mp3",
 			endSensorName = "sounds/endSensor.wav";
 	Sound sensorBackground, sensorPing, endSensor;
 
@@ -39,6 +38,7 @@ public class SensorEquipment extends AbstractEquipment
 
 	public SensorEquipment(float x, float y, boolean onMap, IMapAccess access)
 	{
+		
 		this.name = "Sensor";
 		this.description = "The Sensor reveals drones around you";
 		this.setBounds(x, y, 1, 1); // ver o setPosition
@@ -84,7 +84,6 @@ public class SensorEquipment extends AbstractEquipment
 	@Override
 	public void act(float delta)
 	{
-
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
@@ -97,8 +96,8 @@ public class SensorEquipment extends AbstractEquipment
 		if (drones > 0)
 		{
 			light.setColor(Color.RED);
-			sensorBackground.loop(1);
-			sensorPing.loop(1);
+			//sensorBackground.loop(1);
+			sensorPing.loop(.1f, 1f, -1);
 		}
 		else
 		{
