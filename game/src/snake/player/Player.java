@@ -194,7 +194,7 @@ public class Player extends LightMapEntity {
 				state = State.MOVING;	
 				stateTime = 0;
 				update(delta);
-				steps.play(.2f);
+				steps.play(.4f);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !CellType.WALL.equals(access.getCellType((int)getX() + 1, (int)getY()))) {
 				distanceMoved = 0;
@@ -204,7 +204,7 @@ public class Player extends LightMapEntity {
 				state = State.MOVING;
 				stateTime = 0;
 				update(delta);
-				steps.play(.2f);
+				steps.play(.4f);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP) && !CellType.WALL.equals(access.getCellType((int)getX(), (int)getY() + 1))) {
 				distanceMoved = 0;
@@ -214,7 +214,7 @@ public class Player extends LightMapEntity {
 				state = State.MOVING;
 				stateTime = 0;
 				update(delta);
-				steps.play(.2f);
+				steps.play(.4f);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && !CellType.WALL.equals(access.getCellType((int)getX(), (int)getY() - 1))) {
 				distanceMoved = 0;
@@ -224,7 +224,7 @@ public class Player extends LightMapEntity {
 				state = State.MOVING;
 				stateTime = 0;
 				update(delta);
-				steps.play(.2f);
+				steps.play(.4f);
 			} else {
 				if (direction.x > 0) {
 					currentAnimation = animatedStanding[RIGHT];
