@@ -15,7 +15,7 @@ import snake.visuals.Lights;
 /**
  * Developed By: NoDarkGlasses
  *
- * Implementação concreta do sensor
+ * Implementacao concreta do sensor
  * 
  * @author Gabriel Gimenez & Bszazulla
  */

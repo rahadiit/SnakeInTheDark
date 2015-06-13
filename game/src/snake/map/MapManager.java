@@ -32,7 +32,7 @@ public class MapManager implements IMapAccess {
 
     private int spawnX, spawnY;
 
-    private final List<IMapEntity> entities = new LinkedList<IMapEntity>();
+    private final List<IMapEntity> entities = new LinkedList<>();
     private final List<IMapEntity> entitiesWrapper = Collections.unmodifiableList(entities);
     private final List<IMapEntity> entitiesToRemove = new ArrayList<>();
 
@@ -197,8 +197,8 @@ public class MapManager implements IMapAccess {
             String direction;
 
             do {
-                x = random.nextInt(mapWidth);
-                y = random.nextInt(mapHeight);
+                x = random.nextInt(mapWidth - 2) + 1;
+                y = random.nextInt(mapHeight - 2) + 1;
 
                 if (random.nextBoolean()) {
                     if (random.nextBoolean()) {

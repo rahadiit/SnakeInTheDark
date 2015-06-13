@@ -1,5 +1,6 @@
 package snake.equipment.implementations;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -19,7 +20,9 @@ public class GunEquipment extends AbstractEquipment {
 	Texture texture;
 	Sprite sprite;
 	private int ammo;
-
+	private String explosionName = "sounds/explosion.mp3", shotName = "sounds/shotGun.wav"; 
+	Sound explosion, shot;
+	
 	public GunEquipment(float x, float y, boolean onMap) {
 		this.setBounds(x, y, 1, 1);
 		this.onMap = onMap;
@@ -32,7 +35,14 @@ public class GunEquipment extends AbstractEquipment {
 		sprite = new Sprite(texture);
 		
 		this.ammo = 3; // valor de inicio
-
+		
+		// sounds
+		Loader.load(shotName, Sound.class);
+		Loader.load(explosionName, Sound.class);
+		while (!Loader.isLoaded(shotName) || !Loader.isLoaded(explosionName))
+			Loader.update();
+		shot = Loader.get(shotName);
+		explosion = Loader.get(shotName);
 	}
 
 	public void activateOnMap(IMapAccess map) {
@@ -76,6 +86,8 @@ public class GunEquipment extends AbstractEquipment {
 
 	public int shoot()
 	{
+		shot.play(.5f); // ver a sintonia disso depois de testado
+		explosion.play(.5f);
 		return --ammo;
 	}
 	
