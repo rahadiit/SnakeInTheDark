@@ -83,6 +83,8 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
 
+		light.setColor(Color.WHITE);
+
 		// aurruma a rotacao do foco de luz
 		Actor parent = this.getParent();
 		float rotation = 0;
