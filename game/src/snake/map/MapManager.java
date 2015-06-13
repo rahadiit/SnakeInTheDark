@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import snake.drone.Drone;
+import snake.engine.creators.ScreenCreator;
 import snake.engine.dataManagment.Loader;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
@@ -90,8 +91,8 @@ public class MapManager implements IMapAccess {
     }
 
     void clearEntities() {
+        entitiesToRemove.addAll(entities);
         disposeEntities();
-        entities.clear();
     }
 
     void tickEntities(float delta) {
@@ -142,12 +143,18 @@ public class MapManager implements IMapAccess {
 
     @Override
     public void loadNextMap() {
-        loadMap(nextMap);
+        try {
+            ScreenCreator.switchAndGo("snakescreen", "tiledmap", nextMap);
+        } catch (Exception ignored) {
+        }
     }
 
     @Override
     public void reloadMap() {
-        loadMap(currentMap);
+        try {
+            ScreenCreator.switchAndGo("snakescreen", "tiledmap", currentMap);
+        } catch (Exception ignored) {
+        }
     }
 
     public MapRenderer createRenderer() {
@@ -213,8 +220,7 @@ public class MapManager implements IMapAccess {
                     if (random.nextBoolean()) {
                         y = 0;
                         direction = "cima";
-                    }
-                    else {
+                    } else {
                         y = mapHeight - 1;
                         direction = "baixo";
                     }
@@ -233,7 +239,7 @@ public class MapManager implements IMapAccess {
     }
 
     void disposeEntities() {
-        for (IMapEntity entity : entities)
+        for (IMapEntity entity : entitiesToRemove)
             entity.dispose();
     }
 
