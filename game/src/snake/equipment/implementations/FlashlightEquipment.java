@@ -32,7 +32,6 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	ConeLight light;
 	Vector2 vec = new Vector2();
 	boolean onMap;
-	boolean lightsOn = false;
 	int cont;
 	int batteryCounter;
 	private String flashlightClickName = "sounds/flashlightClick.wav";
@@ -51,7 +50,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		texture = Loader.get("equipments/PixelFlashlight.png");
 		sprite = new Sprite(texture);
 		
-		this.batteryCounter = 4; // bateria fixa de toda lanterna
+		this.batteryCounter = 5; // bateria fixa de toda lanterna
 		
 		// flashlight sound 
 		Loader.load(flashlightClickName, Sound.class);
@@ -99,9 +98,11 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		{
 			
 			flashlightClick.play(.2f);
-			
 			light.setActive(!light.isActive());
-			this.lightsOn = light.isActive();
+			if (light.isActive())
+				this.batteryCounter--;
+			if(this.batteryCounter == 0)
+				dispose();
 		}
 
 	}
@@ -116,7 +117,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	@Override
 	public void createLights()
 	{ // Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
-		light = new ConeLight(Lights.getRayhandler(), 5000, Color.WHITE, 2, getX(), getY(), 90, 30);
+		light = new ConeLight(Lights.getRayhandler(), 5000, new Color(1f, 1f, .5f, 1f), 2, getX(), getY(), 90, 30);
 		light.setActive(false);
 	} // Se quiser destruir a luz, pode ser em qualquer lugar
 
@@ -153,16 +154,12 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	
 	@Override
 	public void update(float delta)
-	{
-		// toda vez que o palyer andar, essa funcao serah chamada
-		if (this.lightsOn)
+	{		
+		if (light.isActive())
 			this.batteryCounter--;
-		
-		// se acabar a bateria, a lanterna se da um dispose
 		if(this.batteryCounter == 0)
-		{
 			dispose();
-		}
-	}
 
+		// se acabar a bateria, a lanterna se da um dispose
+	}
 }

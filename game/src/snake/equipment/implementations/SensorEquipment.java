@@ -27,7 +27,7 @@ public class SensorEquipment extends AbstractEquipment
 	Vector2 vec = new Vector2();
 	boolean onMap = false;
 	IMapAccess access;
-	private String sensorPingName = "sounds/sensorPing_cutShorter.mp3", endSensorName = "sounds/endSensor.wav";;
+	private String sensorPingName = "sounds/sensorPing_cutShorter.mp3", endSensorName = "sounds/endSensor.wav";
 	Sound sensorPing, endSensor;
 
 	private static final float MIN_INTENSITY = .6f;
@@ -44,12 +44,11 @@ public class SensorEquipment extends AbstractEquipment
 
 		// sensor sounds
 		Loader.load(sensorPingName, Sound.class);
-		Loader.finishLoadingAsset(sensorPingName);
-		sensorPing = Loader.get(sensorPingName);
-		
-		// sensor sounds
 		Loader.load(endSensorName, Sound.class);
+		Loader.finishLoadingAsset(sensorPingName);
 		Loader.finishLoadingAsset(endSensorName);
+		sensorPing = Loader.get(sensorPingName);
+
 		endSensor = Loader.get(endSensorName);
 	}
 
@@ -77,22 +76,22 @@ public class SensorEquipment extends AbstractEquipment
 	}
 
 	private float time;
+	private int drones;
 
 	@Override
 	public void act(float delta)
 	{
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
-		light.setPosition(vec);
-		time += delta;
-		int drones = hasDrone((int) getParent().getX(), (int) getParent().getY());
-
 		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
 		light.setDistance(intensity);
+		light.setPosition(vec);
+		time += delta;
+		drones = hasDrone((int) getParent().getX(), (int) getParent().getY());
+
 		if (drones > 0)
 		{
 			light.setColor(Color.RED);
-			
 			sensorPing.loop(.1f, 1f, -1);
 		}
 		else if (light.getColor().equals(Color.RED))
@@ -122,6 +121,7 @@ public class SensorEquipment extends AbstractEquipment
 		super.dispose(); // esse estah na classe AbstractEquipment, abra ela se
 							// tiver duvida
 		Loader.unload(sensorPingName);
+		Loader.unload(endSensorName);
 	}
 
 	public void setOnMap(boolean onMap)
