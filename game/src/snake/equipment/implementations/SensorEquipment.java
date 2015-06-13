@@ -27,8 +27,8 @@ public class SensorEquipment extends AbstractEquipment
 	Vector2 vec = new Vector2();
 	boolean onMap = false;
 	IMapAccess access;
-	private String sensorPingName = "sounds/sensorPing_cutShorter.mp3";
-	Sound sensorPing;
+	private String sensorPingName = "sounds/sensorPing_cutShorter.mp3", endSensorName = "sounds/endSensor.wav";
+	Sound sensorPing, endSensor;
 
 	private static final float MIN_INTENSITY = .6f;
 	private static final float MAX_INTENSITY = .9f;
@@ -44,8 +44,11 @@ public class SensorEquipment extends AbstractEquipment
 
 		// sensor sounds
 		Loader.load(sensorPingName, Sound.class);
+		Loader.load(endSensorName, Sound.class);
 		Loader.finishLoadingAsset(sensorPingName);
+		Loader.finishLoadingAsset(endSensorName);
 		sensorPing = Loader.get(sensorPingName);
+		endSensor = Loader.get(endSensorName);
 	}
 
 	public void activateOnMap(IMapAccess map)
@@ -78,6 +81,8 @@ public class SensorEquipment extends AbstractEquipment
 	{
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
+		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
+		light.setDistance(intensity);
 		light.setPosition(vec);
 		time += delta;
 		int drones = hasDrone((int) getParent().getX(), (int) getParent().getY());
@@ -85,14 +90,15 @@ public class SensorEquipment extends AbstractEquipment
 		if (drones > 0)
 		{
 			light.setColor(Color.RED);
-			float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
-			light.setDistance(intensity);
 			sensorPing.loop(.1f, 1f, -1);
 		}
 		else
 		{
 			sensorPing.stop();			
-			light.setDistance(MAX_INTENSITY);
+			if(light.getColor().equals(Color.RED))
+			{
+				endSensor.play(.3f);
+			}
 			light.setColor(Color.WHITE);
 		}
 	}
@@ -116,6 +122,7 @@ public class SensorEquipment extends AbstractEquipment
 		super.dispose(); // esse estah na classe AbstractEquipment, abra ela se
 							// tiver duvida
 		Loader.unload(sensorPingName);
+		Loader.unload(endSensorName);
 	}
 
 	public void setOnMap(boolean onMap)
