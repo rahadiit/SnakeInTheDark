@@ -99,7 +99,7 @@ public class SnakeHub extends VisualGameWorld {
 			
 			if (red < 1) {
 				WorldSettings.setAmbientColor(new Color(red, 1 - red, 0, 1));
-				red+=.02f;
+				red+=.005f;
 			}
 			else if (red >= 1) {
 				WorldSettings.setAmbientColor(Color.BLACK);

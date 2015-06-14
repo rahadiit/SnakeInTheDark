@@ -75,7 +75,7 @@ public class SensorEquipment extends AbstractEquipment
 	{
 	}
 
-	private float time;
+	private float time = 0;
 	private int drones;
 
 	@Override
@@ -84,9 +84,9 @@ public class SensorEquipment extends AbstractEquipment
 		vec.set(0, 0);
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
-		time += delta;
 		drones = hasDrone((int) getParent().getX(), (int) getParent().getY());
-		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
+		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.sin(PULSE_VELOCITY * time) + MIN_INTENSITY;
+		time += delta;
 		light.setDistance(intensity);
 		if (drones > 0)
 		{
@@ -105,7 +105,7 @@ public class SensorEquipment extends AbstractEquipment
 	public void createLights()
 	{ // Criacao de luzes tem que ser algo separado
 		// (senao da pau) -- tudo aqui
-		light = new PointLight(Lights.getRayhandler(), 5000, Color.WHITE, MAX_INTENSITY, getX(), getY());
+		light = new PointLight(Lights.getRayhandler(), 5000, Color.WHITE, MIN_INTENSITY, getX(), getY());
 		light.setActive(true);
 	}
 
