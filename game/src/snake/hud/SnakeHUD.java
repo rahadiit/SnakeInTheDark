@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import snake.engine.creators.HUDSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.HUD;
-import snake.player.Player;
 
 /**                               Developed By:
  *                                   NoDark
@@ -82,12 +81,11 @@ public class SnakeHUD extends HUD {
 		sprite2.setPosition(30, 400);
 		sprite3.setSize(54, 100);
 		sprite3.setPosition(30, 270);
-		Player player = Player.getCurrentInstance();
 	}
 	
 	
 	public void show() {
-		//TODO: Auto-generated method snub
+		Gdx.input.setCursorCatched(true);
 	}
 	
 	
@@ -97,7 +95,11 @@ public class SnakeHUD extends HUD {
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 			paused = !paused;
+			Gdx.input.setCursorCatched(!Gdx.input.isCursorCatched());
 		}
+		
+		
+		
 	}
 	
 	
