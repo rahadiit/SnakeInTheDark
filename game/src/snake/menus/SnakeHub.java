@@ -10,16 +10,12 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import snake.visuals.Lights;
 import snake.visuals.enhanced.VisualGameWorld;
-import snake.visuals.enhanced.VisualWorldStage;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import snake.engine.creators.ScreenCreator;
 import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
-import snake.engine.models.HUD;
 
 
 /**                               Developed By:
@@ -34,8 +30,6 @@ public class SnakeHub extends VisualGameWorld {
 	private BitmapFont font;
 	private Sound gunCock, gunFire;
 	private Sprite title;
-	private float w, h;
-	private String instructions[]; //will be changed to buttons
 	private String fontName = "fonts/ak_sc_o.fnt";
 	private String titleScreen = "extras/titleScreen_white.png";
 	private String crosshair_cursor = "extras/crosshair_blue.png";

@@ -225,7 +225,26 @@ public class Player extends LightMapEntity {
 				stateTime = 0;
 				update(delta);
 				steps.play(.4f);
-			} else {
+			}
+			
+			else if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+				direction.set(0, speed);
+				update(delta);
+			}
+			else if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+				direction.set(0, -speed);
+				update(delta);
+			}
+			else if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+				direction.set(-speed, 0);
+				update(delta);
+			}
+			else if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+				direction.set(speed, 0);
+				update(delta);
+			}
+			
+			else {
 				if (direction.x > 0) {
 					currentAnimation = animatedStanding[RIGHT];
 				} 
