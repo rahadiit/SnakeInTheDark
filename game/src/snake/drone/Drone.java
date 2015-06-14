@@ -3,10 +3,14 @@ package snake.drone;
 
 import snake.engine.dataManagment.Loader;
 import snake.player.Player;
+import snake.visuals.Lights;
 import snake.visuals.enhanced.LightMapEntity;
 import snake.map.CellType;
 import snake.map.IMapAccess;
 import snake.map.IMapEntity;
+import box2dLight.PointLight;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -37,9 +41,10 @@ public class Drone extends LightMapEntity implements IObserver{
 	private Texture explodeSheet;
 	private TextureRegion region, currentFrame;
 	private Animation explodeAnimation;
-	
 	private float speed = 3f;
 	private State state = State.STANDING;
+	PointLight light;
+	Vector2 vec = new Vector2();
 	
 	
 	//Stuff
@@ -230,6 +235,9 @@ public class Drone extends LightMapEntity implements IObserver{
 	private boolean notDisposed = true;
 	@Override
 	public void act(float delta) {
+		vec.set(.5f, .5f);
+		this.localToStageCoordinates(vec);
+		light.setPosition(vec);
 		
 		if (state == State.MOVING) {
 			distanceMoved += (speed * delta);
@@ -280,10 +288,10 @@ public class Drone extends LightMapEntity implements IObserver{
 		return false;
 	}
 
-	@Override
-	public void createLights() { //Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
-		super.createLights(); //Importante para criar as luzes/sombra dos filhos
-	}
+	//@Override
+	//public void createLights() { //Criacao de luzes tem que ser algo separado (senao da pau) -- tudo aqui
+		//super.createLights(); //Importante para criar as luzes/sombra dos filhos
+//	}
 
 	@Override
 	public void dispose() {
@@ -296,6 +304,12 @@ public class Drone extends LightMapEntity implements IObserver{
 		player.dettach(this);
 		Loader.unload(explodeTexName);
 		Loader.unload(texName);
+		if (light != null)
+		{
+			light.remove();
+			light.dispose();
+		}
+
 	}
 
 	@Override
@@ -307,6 +321,15 @@ public class Drone extends LightMapEntity implements IObserver{
 	public boolean destroy() {
 		state = State.EXPLODING;
 		time = 0;
+		light.setActive(true);
 		return true;
 	}
+	
+	public void createLights()
+	{ // Criacao de luzes tem que ser algo separado
+		// (senao da pau) -- tudo aqui
+		light = new PointLight(Lights.getRayhandler(), 5000, Color.WHITE, 1, getX(), getY());
+		light.setActive(false);
+	}
+
 }
