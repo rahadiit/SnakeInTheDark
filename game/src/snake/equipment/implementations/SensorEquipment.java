@@ -88,16 +88,11 @@ public class SensorEquipment extends AbstractEquipment
 		drones = hasDrone((int) getParent().getX(), (int) getParent().getY());
 		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
 		light.setDistance(intensity);
+		light.setColor(Color.GREEN);
 		if (drones > 0)
 		{
 			light.setColor(Color.RED);
 			sensorPing.loop(.1f, 1f, -1);
-		}
-		else if (light.getColor().equals(Color.RED))
-		{
-			sensorPing.stop();			
-			endSensor.play(.3f);
-			light.setColor(Color.WHITE);
 		}
 	}
 
