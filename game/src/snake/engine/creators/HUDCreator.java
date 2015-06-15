@@ -48,8 +48,11 @@ public class HUDCreator {
 			case "snakehub":
 			case "snake hub":
 				hud = new BlankHUD();
-				
-				
+				break;
+			case "snakeintro":
+			case "snake intro":
+				hud = new BlankHUD();
+				break;
 			case "blank":
 				hud = new BlankHUD();
 				break;
