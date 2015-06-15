@@ -123,8 +123,8 @@ public class Drone extends LightMapEntity implements IObserver{
 			else {
 				IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY(), "player");
 				if (entity != null) {
-					Vector2 v = ((Player) entity).getDirection();
-					if (v.x == -direction.x && v.y == -direction.y) {
+					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
+					if (v[0] == -direction.x && v[1] == -direction.y) {
 						if (((Player) entity).destroy()) {
 							//TODO: GAME OVER
 						}
@@ -153,8 +153,8 @@ public class Drone extends LightMapEntity implements IObserver{
 			else {
 				IMapEntity entity = world.getEntity((int)getX() + 1, (int)getY(), "player");
 				if (entity != null) {
-					Vector2 v = ((Player) entity).getDirection();
-					if (v.x == -direction.x && v.y == -direction.y) {
+					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
+					if (v[0] == -direction.x && v[1] == -direction.y) {
 						if (((Player) entity).destroy()) {
 							//TODO: GAME OVER
 						}
@@ -182,8 +182,8 @@ public class Drone extends LightMapEntity implements IObserver{
 			else {
 				IMapEntity entity = world.getEntity((int)getX(), (int)getY() + 1, "player");
 				if (entity != null) {
-					Vector2 v = ((Player) entity).getDirection();
-					if (v.x == -direction.x && v.y == -direction.y) {
+					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
+					if (v[0] == -direction.x && v[1] == -direction.y) {
 						if (((Player) entity).destroy()) {
 							//TODO: GAME OVER
 						}
@@ -211,8 +211,8 @@ public class Drone extends LightMapEntity implements IObserver{
 			else {
 				IMapEntity entity = world.getEntity((int)getX(), (int)getY() - 1, "player");
 				if (entity != null) {
-					Vector2 v = ((Player) entity).getDirection();
-					if (v.x == -direction.x && v.y == -direction.y) {
+					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
+					if (v[0] == -direction.x && v[1] == -direction.y) {
 						if (((Player) entity).destroy()) {
 							//TODO: GAME OVER
 						}
