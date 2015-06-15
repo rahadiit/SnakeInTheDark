@@ -132,12 +132,12 @@ public class Drone extends LightMapEntity implements IObserver{
 				IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY(), "player");
 				if (entity != null) {
 					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == -direction.x && v[1] == -direction.y) {
+					if (v[0] == (getX() - 1) && v[1] == getY()) {
 						if (((Player) entity).destroy()) {
 							//TODO: GAME OVER
 						}
 						else {
-							destroy();
+							this.destroy();
 						}
 					}
 				} 
@@ -162,12 +162,12 @@ public class Drone extends LightMapEntity implements IObserver{
 				IMapEntity entity = world.getEntity((int)getX() + 1, (int)getY(), "player");
 				if (entity != null) {
 					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == -direction.x && v[1] == -direction.y) {
+					if (v[0] == (getX() + 1) && v[1] == getY()) {
 						if (((Player) entity).destroy()) {
 							//TODO: GAME OVER
 						}
 						else {
-							destroy();
+							this.destroy();
 						}
 					}
 				}
@@ -191,12 +191,12 @@ public class Drone extends LightMapEntity implements IObserver{
 				IMapEntity entity = world.getEntity((int)getX(), (int)getY() + 1, "player");
 				if (entity != null) {
 					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == -direction.x && v[1] == -direction.y) {
+					if (v[0] == getX()  && v[1] == (getY() + 1)) {
 						if (((Player) entity).destroy()) {
 							//TODO: GAME OVER
 						}
 						else {
-							destroy();
+							this.destroy();
 						}
 					}
 				}
@@ -220,12 +220,12 @@ public class Drone extends LightMapEntity implements IObserver{
 				IMapEntity entity = world.getEntity((int)getX(), (int)getY() - 1, "player");
 				if (entity != null) {
 					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == -direction.x && v[1] == -direction.y) {
+					if (v[0] == getX() && v[1] == (getY() -1)) {
 						if (((Player) entity).destroy()) {
 							//TODO: GAME OVER
 						}
 						else {
-							destroy();
+							this.destroy();
 						}
 					}
 				}
@@ -267,7 +267,7 @@ public class Drone extends LightMapEntity implements IObserver{
 						//TODO: GAME OVER
 					}
 					else {
-						destroy();
+						this.destroy();
 					}
 				}
 				
