@@ -45,7 +45,7 @@ public class Drone extends LightMapEntity implements IObserver{
 	private State state = State.STANDING;
 	PointLight light;
 	Vector2 vec = new Vector2();
-	
+	private State temp  = State.STANDING;
 	
 	//Stuff
 	private float time;
@@ -126,7 +126,7 @@ public class Drone extends LightMapEntity implements IObserver{
 			}
 			else {
 				
-				if (state != State.EXPLODING){
+				if (state != State.EXPLODING &&  checkPlayer((int)getX(), (int)getY())){
 					state = State.MOVING;
 					lastPosX = getX();
 					lastPosY = getY();
@@ -144,7 +144,8 @@ public class Drone extends LightMapEntity implements IObserver{
 				time = 0;
 			}
 			else {
-				if (state != State.EXPLODING) {
+
+				if (state != State.EXPLODING &&  checkPlayer((int)getX(), (int)getY())) {
 					state = State.MOVING;
 					lastPosX = getX();
 					lastPosY = getY();
@@ -159,9 +160,8 @@ public class Drone extends LightMapEntity implements IObserver{
 			if (checkTile((int) getX(), (int) getY() + 1) && state != State.EXPLODING ){
 				destroy();
 			}
-			else {
-
-				if (state != State.EXPLODING){
+			else {				
+				if (state != State.EXPLODING &&  checkPlayer((int)getX(), (int)getY())){
 					state = State.MOVING;
 					lastPosX = getX();
 					lastPosY = getY();
@@ -176,8 +176,8 @@ public class Drone extends LightMapEntity implements IObserver{
 				time = 0;
 			}
 			else {
-				
-				if (state != State.EXPLODING){
+
+				if (state != State.EXPLODING &&  checkPlayer((int)getX(), (int)getY())){
 					state = State.MOVING;
 					lastPosX = getX();
 					lastPosY = getY();
@@ -190,18 +190,23 @@ public class Drone extends LightMapEntity implements IObserver{
 	
 	private boolean notDisposed = true;
 	@Override
+	
 	public void act(float delta) {
 		vec.set(.5f, .5f);
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
 		
-		
-		checkPlayer((int)getX(), (int)getY());
+		if(state == State.STANDING)
+			checkPlayer((int)getX(), (int)getY());
 		
 		if (state == State.MOVING) {
+			
+			if (!checkPlayer((int)getX(), (int)getY()))
+				temp = State.EXPLODING;
+			
 			distanceMoved += (speed * delta);
+	 	
 			if (distanceMoved == 1) {
-
 				state = State.STANDING;				
 			}
 			else if (distanceMoved > 1) { 
@@ -210,22 +215,19 @@ public class Drone extends LightMapEntity implements IObserver{
 				this.setPosition(lastPosX, lastPosY);
 				state = State.STANDING;				
 				
-				IMapEntity entity = world.getEntity((int)getX(), (int)getY(), "player");
-				if (entity != null) {
-					if (((Player) entity).destroy()){
-						//TODO: GAME OVER
-					}
-					else {
-						this.destroy();
-					}
-				}
-				
 			}
 			else {
 				this.moveBy(direction.x * delta, direction.y * delta);
 			}
+			
+			}
+		// Isso ve se o drone se chocou com o player em movimento
+		if(temp == State.EXPLODING){
+			state = State.EXPLODING;
+			temp = State.STANDING;
 		}	
-		else if (state == State.EXPLODING) {
+		// Anima o drone explodindo e o destroi
+		if (state == State.EXPLODING) {
 			tex = explodeAnimation.getKeyFrame(time);
 			if(time == 0)
 				explosion.play(.5f);
@@ -234,6 +236,7 @@ public class Drone extends LightMapEntity implements IObserver{
 				this.dispose();
 			}
 		}
+		
 	}
 
 	@Override
