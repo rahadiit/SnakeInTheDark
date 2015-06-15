@@ -330,8 +330,8 @@ public class Drone extends LightMapEntity implements IObserver{
 
 
 	public boolean destroy() {
-		state = State.EXPLODING;
 		explosion.play(.5f);
+		state = State.EXPLODING;
 		time = 0;
 		
 		return true;
