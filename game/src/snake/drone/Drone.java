@@ -267,7 +267,6 @@ public class Drone extends LightMapEntity implements IObserver{
 						//TODO: GAME OVER
 					}
 					else {
-						
 						destroy();
 					}
 				}
@@ -278,8 +277,9 @@ public class Drone extends LightMapEntity implements IObserver{
 			}
 		}	
 		else if (state == State.EXPLODING) {
-			
 			tex = explodeAnimation.getKeyFrame(time);
+			if(time == 0)
+				explosion.play(.5f);
 			light.setActive(true); // light active during the explosion
 			if (explodeAnimation.isAnimationFinished(time +=delta) && notDisposed) {
 				this.dispose();
@@ -330,7 +330,6 @@ public class Drone extends LightMapEntity implements IObserver{
 
 
 	public boolean destroy() {
-		explosion.play(.5f);
 		state = State.EXPLODING;
 		time = 0;
 		
