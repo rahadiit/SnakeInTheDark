@@ -60,6 +60,8 @@ public class TrapEquipment extends AbstractEquipment
 	{
 		//if (Gdx.input.isKeyJustPressed(Input.Keys.X) && (!onMap))
 	//		activateOnMap(access);
+		//dispose();
+
 
 	}
 	public void setOnMap(boolean onMap){
