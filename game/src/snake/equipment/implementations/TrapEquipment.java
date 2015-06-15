@@ -1,5 +1,7 @@
 package snake.equipment.implementations;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -35,7 +37,7 @@ public class TrapEquipment extends AbstractEquipment
 	
 	public void activateOnMap(IMapAccess map) 
 	{
-	//map.setCellType (int(getX()), int(getY()), "TRAP");
+	//	map.setCellType ((int)getX()), (int)getY(), TRAP);
 	}
 
 	@Override
@@ -56,7 +58,8 @@ public class TrapEquipment extends AbstractEquipment
 	@Override
 	public void act(float delta)
 	{
-		// TODO Auto-generated method stub
+		//if (Gdx.input.isKeyJustPressed(Input.Keys.X) && (!onMap))
+	//		activateOnMap(access);
 
 	}
 	public void setOnMap(boolean onMap){

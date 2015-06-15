@@ -1,5 +1,7 @@
 package snake.equipment.implementations;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -41,6 +43,8 @@ public class BoxEquipment extends AbstractEquipment
 	public void act(float delta)
 	{
 		// TODO Auto-generated method stub
+		//if (Gdx.input.isKeyJustPressed(Input.Keys.C) && (!onMap))
+		//	activateOnMap(access);
 
 	}
 
