@@ -62,7 +62,7 @@ public class Player extends LightMapEntity {
 	private Vector2 direction;
 	private State state = State.STANDING;
 	private float distanceMoved;
-	
+	private boolean walked = false;
 	//Equipments
 	private IEquipment sensor;
 	
@@ -193,7 +193,8 @@ public class Player extends LightMapEntity {
 				lastPosX = getX(); lastPosY = getY();
 				state = State.MOVING;	
 				stateTime = 0;
-				update(delta);
+				walked = true;
+				//update(delta);
 				steps.play(.4f);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !CellType.WALL.equals(access.getCellType((int)getX() + 1, (int)getY()))) {
@@ -203,7 +204,8 @@ public class Player extends LightMapEntity {
 				lastPosX = getX(); lastPosY = getY();
 				state = State.MOVING;
 				stateTime = 0;
-				update(delta);
+				walked = true;
+				//update(delta);
 				steps.play(.4f);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP) && !CellType.WALL.equals(access.getCellType((int)getX(), (int)getY() + 1))) {
@@ -213,7 +215,8 @@ public class Player extends LightMapEntity {
 				lastPosX = getX(); lastPosY = getY();
 				state = State.MOVING;
 				stateTime = 0;
-				update(delta);
+				walked = true;
+				//update(delta);
 				steps.play(.4f);
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && !CellType.WALL.equals(access.getCellType((int)getX(), (int)getY() - 1))) {
@@ -223,24 +226,29 @@ public class Player extends LightMapEntity {
 				lastPosX = getX(); lastPosY = getY();
 				state = State.MOVING;
 				stateTime = 0;
-				update(delta);
+				walked = true;
+				//update(delta);
 				steps.play(.4f);
 			}
 			
 			else if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
 				direction.set(0, speed);
-				update(delta);
+				walked = true;
+				//update(delta);
 			}
 			else if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
 				direction.set(0, -speed);
-				update(delta);
+				walked = true;
+				//update(delta);
 			}
 			else if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
 				direction.set(-speed, 0);
-				update(delta);
+				walked = true;
+				//update(delta);
 			}
 			else if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
 				direction.set(speed, 0);
+				walked = true;
 				update(delta);
 			}
 			
@@ -267,6 +275,9 @@ public class Player extends LightMapEntity {
 
 				state = State.STANDING;
 				stateTime = 0;
+				if (walked)
+					update(delta);
+				walked = false;
 			}
 			else if (distanceMoved > 1) { 
 				lastPosX += (direction.x != 0 ? direction.x/Math.abs(direction.x) : 0);
@@ -274,12 +285,16 @@ public class Player extends LightMapEntity {
 				this.setPosition(lastPosX, lastPosY);
 				state = State.STANDING;
 				stateTime = 0;
+				if (walked)
+					update(delta);
+				walked = false;
 			}
 			else {
 				this.moveBy(direction.x * delta, direction.y * delta);
 			}
 			
 		}
+		
 	}
 	
 	@Override
