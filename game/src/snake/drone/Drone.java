@@ -147,6 +147,18 @@ public class Drone extends LightMapEntity implements IObserver{
 					lastPosY = getY();
 					distanceMoved = 0;
 				}
+				entity = world.getEntity((int)getX(), (int)getY(), "player");
+				if (entity != null) {
+					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
+					if (v[0] == getX()  && v[1] == (getY())) {
+						if (((Player) entity).destroy()) {
+							//TODO: GAME OVER
+						}
+						else {
+							this.destroy();
+						}
+					}
+				}
 			}
 		}
 			
@@ -164,7 +176,7 @@ public class Drone extends LightMapEntity implements IObserver{
 					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
 					if (v[0] == (getX() + 1) && v[1] == getY()) {
 						if (((Player) entity).destroy()) {
-							//TODO: GAME OVER
+							//TODO: GAME OVER  
 						}
 						else {
 							this.destroy();
@@ -176,6 +188,18 @@ public class Drone extends LightMapEntity implements IObserver{
 					lastPosX = getX();
 					lastPosY = getY();
 					distanceMoved = 0;
+				}
+				entity = world.getEntity((int)getX(), (int)getY(), "player");
+				if (entity != null) {
+					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
+					if (v[0] == getX()  && v[1] == (getY())) {
+						if (((Player) entity).destroy()) {
+							//TODO: GAME OVER
+						}
+						else {
+							this.destroy();
+						}
+					}
 				}
 			}
 		}
@@ -200,12 +224,27 @@ public class Drone extends LightMapEntity implements IObserver{
 						}
 					}
 				}
+				
 				else if (state != State.EXPLODING){
 					state = State.MOVING;
 					lastPosX = getX();
 					lastPosY = getY();
 					distanceMoved = 0;
 				}
+				entity = world.getEntity((int)getX(), (int)getY(), "player");
+				if (entity != null) {
+					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
+					if (v[0] == getX()  && v[1] == (getY())) {
+						if (((Player) entity).destroy()) {
+							//TODO: GAME OVER
+						}
+						else {
+							this.destroy();
+						}
+					}
+				}
+				
+				
 			}
 		}
 		
@@ -234,6 +273,18 @@ public class Drone extends LightMapEntity implements IObserver{
 					lastPosX = getX();
 					lastPosY = getY();
 					distanceMoved = 0;
+				}
+				entity = world.getEntity((int)getX(), (int)getY(), "player");
+				if (entity != null) {
+					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
+					if (v[0] == getX()  && v[1] == (getY())) {
+						if (((Player) entity).destroy()) {
+							//TODO: GAME OVER
+						}
+						else {
+							this.destroy();
+						}
+					}
 				}
 			}
 		}
