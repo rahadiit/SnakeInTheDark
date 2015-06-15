@@ -24,14 +24,18 @@ import umbra.text.TextComunicator;
  *                                  NoDark
  *                               sessaGlasses
  *                               
- * <br> Example menu for SnakeEngine </br>
+ * <br> Intro for SnakeInTheDark demo levels </br>
  * @author Mr.Strings
  */
 
 public class SnakeIntro extends VisualGameWorld {
 	private BitmapFont font;
-	private String fontName = "fonts/ak_sc_o.fnt";
 	private IComunicator textMan;
+	private Sound missile, explosion;
+	
+	private String fontName = "fonts/ak_sc_o.fnt",
+				   missileName = "sounds/missile.wav",
+				   explosionName = "sounds/explosionIntro.wav";
 	
 	private Light illumination;
 	
@@ -47,9 +51,17 @@ public class SnakeIntro extends VisualGameWorld {
 		this.font = Loader.get(fontName);
 		this.font.getData().setScale(.5f);
 		
+		Loader.load(missileName, Sound.class);
+		Loader.finishLoadingAsset(missileName);
+		missile = Loader.get(missileName);
+		
+		Loader.load(explosionName, Sound.class);
+		Loader.finishLoadingAsset(explosionName);
+		explosion = Loader.get(explosionName);
+		
 		textMan = new TextComunicator(ScreenCreator.getBatch(), font);
 		
-		textMan.newText("Mensagem interceptada dia 23 de agosto, 22:35. “Milhoes de pessoas... sonhos... Explosoes...",
+		textMan.newText("Radio message intercepted August 23rd, 22:35: ",
 						390, 400, 500, true);
 	}
 
@@ -64,7 +76,15 @@ public class SnakeIntro extends VisualGameWorld {
 	private float red = 1;
 	private int distance = 2000;
 	private float time = 0;
-	private float FINISH_TIME = 7;
+	private boolean got1 = false, got2 = false, got3 = false,
+					got4 = false, got5 = false, got6 = false,
+					got7 = false, got8 = false, got9 = false,
+					got10 = false, got11 = false, got12 = false;
+	private float FINISH_TIME1 = 2, FINISH_TIME2 = 6, FINISH_TIME3 = 7,
+				  FINISH_TIME4 = 9, FINISH_TIME5 = 15, FINISH_TIME6 = 16,
+				  FINISH_TIME7 = 18, FINISH_TIME8 = 18.5f, FINISH_TIME9 = 19.5f,
+				  FINISH_TIME10 = 22, FINISH_TIME11 = 25, FINISH_TIME12 = 28;
+	private float FINISH_TIME  = 32;
 	
 	/** updates Screen logic */
 	@Override
@@ -72,16 +92,78 @@ public class SnakeIntro extends VisualGameWorld {
 		
 		textMan.update(delta);
 		
-		if (time > FINISH_TIME) {
-			textMan.newText("Caracteristicas do remetente: Metodo de criptografia semelhante ao da extinta organizacao terrorista Tyrannos - fabricante clandestino de armamento nuclear pesado e responsavel pelo terrivel marco da explosao da  A.N.T.A. (Aereal Non-Tripulated Armageddon) em 1965",
-					390, 450, 500, true);
-			
-			time = 0;
+		if (!got1 && time > FINISH_TIME1) {
+			textMan.newText("\"Millions of people... all those dreams in fire... \"",
+					390, 400, 500, true);
+			got1 = true;
 		}
 		
-		time += delta;
+		if (!got2 && time > FINISH_TIME2) {
+			textMan.newText("Location:", 390, 400, 500, true);
+		got2 = true;
+		}
 		
-		if (time > FINISH_TIME || (Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched()) && !transition)
+		if (!got3 && time > FINISH_TIME3) {
+			textMan.newText("Extinct vulcano in the Atlantic.", 390, 400, 500, true);
+		got3 = true;
+		}
+		
+		if (!got4 && time > FINISH_TIME4) {
+			textMan.newText("Former operation unit of terrorist organization Tyrannus, held responsable for the launch of A.N.T.A (Aereal Non-Tripulated Armaggedon) in 1963",
+					390, 400, 500, true);
+			got4 = true;
+		}
+		
+		if (!got5 && time > FINISH_TIME5) {
+			textMan.newText("Your task:",
+					390, 400, 500, true);
+			got5 = true;
+		}
+		
+		if (!got6 && time > FINISH_TIME6) {
+			textMan.newText("Find out the source of the signal. Go by jet.",
+					390, 400, 500, true);
+			got6 = true;
+		}
+		
+		if (!got7 && time > FINISH_TIME7) {
+			textMan.newText("Almost th",
+					390, 400, 500, true);
+			got7 = true;
+		}
+		
+		if (!got8 && time > FINISH_TIME8) {
+			missile.play();
+			got8 = true;
+		}
+		
+		if (!got9 && time > FINISH_TIME9) {
+			textMan.newText("",
+					390, 400, 500, true);
+			explosion.play();
+			got9 = true;
+		}
+		
+		if (!got10 && time > FINISH_TIME10) {
+			textMan.newText("Plane explosion, boss. Soldier, are you there?",
+					390, 400, 500, true);
+			got10 = true;
+		}
+		
+		if (!got11 && time > FINISH_TIME11) {
+			textMan.newText("Good... well, almost. Your activity sensor is on, but night-vision googles are destroyed.",
+					390, 400, 500, true);
+			got11 = true;
+		}
+		
+		if (!got12 && time > FINISH_TIME12) {
+			textMan.newText("And there is no way out but... down.",
+					390, 400, 500, true);
+			got12 = true;
+		}
+		
+		
+		if ((time > FINISH_TIME || (Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched())) && !transition)
 			transition = true;
 		else if (transition) {
 			if (red < 1) {
@@ -92,7 +174,7 @@ public class SnakeIntro extends VisualGameWorld {
 				WorldSettings.setAmbientColor(Color.BLACK);
 				illumination.setPosition(640, 0);
 				illumination.setDistance(distance);
-				illumination.setColor(Color.RED);
+				illumination.setColor(Color.DARK_GRAY);
 				distance-=20;
 				
 				if (distance <= 0) {
@@ -107,6 +189,8 @@ public class SnakeIntro extends VisualGameWorld {
 				}
 			}
 		}
+		
+		time += delta;
 	}
 	
 	
