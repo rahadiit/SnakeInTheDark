@@ -66,8 +66,10 @@ public class EmpEquipment extends AbstractEquipment {
 
 	@Override
 	public void act(float delta) {
-		if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && (!onMap))
+		if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && (!onMap)) {
 			activateOnMap(access);
+			dispose();
+		}
 
 	}
 	

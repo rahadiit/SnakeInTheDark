@@ -45,6 +45,8 @@ public class BoxEquipment extends AbstractEquipment
 		// TODO Auto-generated method stub
 		//if (Gdx.input.isKeyJustPressed(Input.Keys.C) && (!onMap))
 		//	activateOnMap(access);
+		//dispose();
+
 
 	}
 
