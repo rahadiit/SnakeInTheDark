@@ -94,6 +94,8 @@ public class SensorEquipment extends AbstractEquipment
 			light.setColor(Color.RED);
 			sensorPing.loop(.1f, 1f, -1);
 		}
+		else
+			sensorPing.stop();
 	}
 
 	@Override
