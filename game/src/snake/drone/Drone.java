@@ -10,6 +10,7 @@ import snake.map.IMapAccess;
 import snake.map.IMapEntity;
 import box2dLight.PointLight;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -54,6 +55,10 @@ public class Drone extends LightMapEntity implements IObserver{
 	private float lastPosX, lastPosY;
 	
 	private float stateTime = 0;
+	
+	private String explosionName = "sounds/explosion.mp3";
+	Sound explosion;
+	
 	public Drone (IMapAccess world, int x, int y, String direcao){
 		
 		this.world = world;
@@ -109,6 +114,9 @@ public class Drone extends LightMapEntity implements IObserver{
         }
 		explodeAnimation = new Animation(explosionSpeed, explodeFrames);
 		
+		Loader.load(explosionName, Sound.class);
+		Loader.finishLoadingAsset(explosionName);
+		explosion = Loader.get(explosionName);
 	}
 	
 	public void update(float delta){
@@ -270,8 +278,9 @@ public class Drone extends LightMapEntity implements IObserver{
 		}	
 		else if (state == State.EXPLODING) {
 			tex = explodeAnimation.getKeyFrame(time);
-			// light active during the explosion
-			light.setActive(true);
+			if(time == 0)
+				explosion.play(.5f);
+			light.setActive(true); // light active during the explosion
 			if (explodeAnimation.isAnimationFinished(time +=delta) && notDisposed) {
 				this.dispose();
 			}
