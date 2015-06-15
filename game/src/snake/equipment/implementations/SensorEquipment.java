@@ -85,13 +85,10 @@ public class SensorEquipment extends AbstractEquipment
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
 		drones = hasDrone((int) getParent().getX(), (int) getParent().getY());
-<<<<<<< HEAD
+
 		light.setColor(Color.GREEN);
 		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
-=======
-		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.sin(PULSE_VELOCITY * time) + MIN_INTENSITY;
 		time += delta;
->>>>>>> branch 'master' of https://github.com/MrStrings/SnakeInTheDark
 		light.setDistance(intensity);
 		
 		if (drones > 0)
