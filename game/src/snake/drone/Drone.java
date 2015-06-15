@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 /**                              Developed By:
@@ -51,7 +52,6 @@ public class Drone extends LightMapEntity implements IObserver{
 	private float time;
 	private float distanceMoved;
 	private float lastPosX, lastPosY;
-	
 	
 	private float stateTime = 0;
 	public Drone (IMapAccess world, int x, int y, String direcao){
@@ -270,6 +270,8 @@ public class Drone extends LightMapEntity implements IObserver{
 		}	
 		else if (state == State.EXPLODING) {
 			tex = explodeAnimation.getKeyFrame(time);
+			// light active during the explosion
+			light.setActive(true);
 			if (explodeAnimation.isAnimationFinished(time +=delta) && notDisposed) {
 				this.dispose();
 			}
@@ -321,7 +323,7 @@ public class Drone extends LightMapEntity implements IObserver{
 	public boolean destroy() {
 		state = State.EXPLODING;
 		time = 0;
-		light.setActive(true);
+		
 		return true;
 	}
 	
