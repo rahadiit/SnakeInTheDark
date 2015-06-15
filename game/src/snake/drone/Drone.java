@@ -16,7 +16,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 /**                              Developed By:
@@ -41,7 +40,6 @@ public class Drone extends LightMapEntity implements IObserver{
 	private static final int FRAME_ROWS_EXPLODE = 2, FRAME_COLS_EXPLODE = 6;
 	private float explosionSpeed = .1f;
 	private Texture explodeSheet;
-	private TextureRegion region, currentFrame;
 	private Animation explodeAnimation;
 	private float speed = 3f;
 	private State state = State.STANDING;
@@ -54,7 +52,7 @@ public class Drone extends LightMapEntity implements IObserver{
 	private float distanceMoved;
 	private float lastPosX, lastPosY;
 	
-	private float stateTime = 0;
+
 	
 	private String explosionName = "sounds/explosion.mp3";
 	Sound explosion;
@@ -122,169 +120,68 @@ public class Drone extends LightMapEntity implements IObserver{
 	public void update(float delta){
 		
 		if(direction.x < 0) {
-			if ((CellType.WALL.equals(world.getCellType((int)getX() - 1, (int)getY())) 
-					|| (CellType.TRAP.equals(world.getCellType((int)getX() - 1, (int)getY()))))
-					&& state != State.EXPLODING) {
+			if (checkTile((int) getX()-1, (int) getY()) && state != State.EXPLODING ) {
 				state = State.EXPLODING;
 				time = 0;
 			}
 			else {
-				IMapEntity entity = world.getEntity((int)getX() - 1, (int)getY(), "player");
-				if (entity != null) {
-					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == (getX() - 1) && v[1] == getY()) {
-						if (((Player) entity).destroy()) {
-							//TODO: GAME OVER
-						}
-						else {
-							this.destroy();
-						}
-					}
-				} 
-				else if (state != State.EXPLODING){
+				
+				if (state != State.EXPLODING){
 					state = State.MOVING;
 					lastPosX = getX();
 					lastPosY = getY();
 					distanceMoved = 0;
 				}
-				entity = world.getEntity((int)getX(), (int)getY(), "player");
-				if (entity != null) {
-					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == getX()  && v[1] == (getY())) {
-						if (((Player) entity).destroy()) {
-							//TODO: GAME OVER
-						}
-						else {
-							this.destroy();
-						}
-					}
-				}
+		
+			
 			}
 		}
 			
 			
 		else if(direction.x > 0){
-			if ((CellType.WALL.equals(world.getCellType((int)getX() + 1, (int)getY())) 
-					|| (CellType.TRAP.equals(world.getCellType((int)getX() + 1, (int)getY()))))
-					&& state != State.EXPLODING) {
+			if (checkTile((int) getX()+1, (int) getY()) && state != State.EXPLODING ){
 				state = State.EXPLODING;
 				time = 0;
 			}
 			else {
-				IMapEntity entity = world.getEntity((int)getX() + 1, (int)getY(), "player");
-				if (entity != null) {
-					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == (getX() + 1) && v[1] == getY()) {
-						if (((Player) entity).destroy()) {
-							//TODO: GAME OVER  
-						}
-						else {
-							this.destroy();
-						}
-					}
-				}
-				else if (state != State.EXPLODING) {
+				if (state != State.EXPLODING) {
 					state = State.MOVING;
 					lastPosX = getX();
 					lastPosY = getY();
 					distanceMoved = 0;
 				}
-				entity = world.getEntity((int)getX(), (int)getY(), "player");
-				if (entity != null) {
-					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == getX()  && v[1] == (getY())) {
-						if (((Player) entity).destroy()) {
-							//TODO: GAME OVER
-						}
-						else {
-							this.destroy();
-						}
-					}
-				}
+			
 			}
 		}
 		
 		
 		else if(direction.y > 0) {
-			if ((CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() + 1)) 
-					|| (CellType.TRAP.equals(world.getCellType((int)getX(), (int)getY() + 1)))) 
-					&& state != State.EXPLODING){
+			if (checkTile((int) getX(), (int) getY() + 1) && state != State.EXPLODING ){
 				destroy();
 			}
 			else {
-				IMapEntity entity = world.getEntity((int)getX(), (int)getY() + 1, "player");
-				if (entity != null) {
-					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == getX()  && v[1] == (getY() + 1)) {
-						if (((Player) entity).destroy()) {
-							//TODO: GAME OVER
-						}
-						else {
-							this.destroy();
-						}
-					}
-				}
-				
-				else if (state != State.EXPLODING){
+
+				if (state != State.EXPLODING){
 					state = State.MOVING;
 					lastPosX = getX();
 					lastPosY = getY();
 					distanceMoved = 0;
-				}
-				entity = world.getEntity((int)getX(), (int)getY(), "player");
-				if (entity != null) {
-					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == getX()  && v[1] == (getY())) {
-						if (((Player) entity).destroy()) {
-							//TODO: GAME OVER
-						}
-						else {
-							this.destroy();
-						}
-					}
-				}
-				
-				
+				}								
 			}
 		}
 		
 		else if(direction.y < 0) {
-			if ((CellType.WALL.equals(world.getCellType((int)getX(), (int)getY() - 1)) 
-					|| (CellType.TRAP.equals(world.getCellType((int)getX(), (int)getY() - 1))))
-					&& state != State.EXPLODING){
+			if (checkTile((int) getX(), (int) getY() -1) && state != State.EXPLODING ){
 				state = State.EXPLODING;
 				time = 0;
 			}
 			else {
-				IMapEntity entity = world.getEntity((int)getX(), (int)getY() - 1, "player");
-				if (entity != null) {
-					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == getX() && v[1] == (getY() -1)) {
-						if (((Player) entity).destroy()) {
-							//TODO: GAME OVER
-						}
-						else {
-							this.destroy();
-						}
-					}
-				}
-				else if (state != State.EXPLODING){
+				
+				if (state != State.EXPLODING){
 					state = State.MOVING;
 					lastPosX = getX();
 					lastPosY = getY();
 					distanceMoved = 0;
-				}
-				entity = world.getEntity((int)getX(), (int)getY(), "player");
-				if (entity != null) {
-					float[] v = {((Player) entity).getX(), ((Player) entity).getY()};
-					if (v[0] == getX()  && v[1] == (getY())) {
-						if (((Player) entity).destroy()) {
-							//TODO: GAME OVER
-						}
-						else {
-							this.destroy();
-						}
-					}
 				}
 			}
 		}
@@ -298,19 +195,20 @@ public class Drone extends LightMapEntity implements IObserver{
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
 		
+		
+		checkPlayer((int)getX(), (int)getY());
+		
 		if (state == State.MOVING) {
 			distanceMoved += (speed * delta);
 			if (distanceMoved == 1) {
 
-				state = State.STANDING;
-				stateTime = 0;
+				state = State.STANDING;				
 			}
 			else if (distanceMoved > 1) { 
 				lastPosX += (direction.x != 0 ? direction.x/Math.abs(direction.x) : 0);
 				lastPosY += (direction.y != 0 ? direction.y/Math.abs(direction.y) : 0);
 				this.setPosition(lastPosX, lastPosY);
-				state = State.STANDING;
-				stateTime = 0;
+				state = State.STANDING;				
 				
 				IMapEntity entity = world.getEntity((int)getX(), (int)getY(), "player");
 				if (entity != null) {
@@ -393,5 +291,30 @@ public class Drone extends LightMapEntity implements IObserver{
 		light = new PointLight(Lights.getRayhandler(), 5000, Color.WHITE, 1, getX(), getY());
 		light.setActive(false);
 	}
+	public boolean checkTile(int x, int y){
+		if ((CellType.WALL.equals(world.getCellType(x, y)) 
+			|| (CellType.TRAP.equals(world.getCellType(x, y)))))
+		
+			return true;
+		else 
+			return false;
+	}
+	
+	//confere se ha um player na posicao x y
+	//Se houver explode o drone
+	public boolean checkPlayer(int x, int y){
+		IMapEntity entity = world.getEntity((int)getX(), (int)getY(), "player");
+		if (entity != null){
+			if (((Player) entity).destroy()){ 
+			//TODO: GAME OVER
+			}	
+			else 
+				this.destroy();
+			return false;	
+		}
+		else return true;	
+		}
+		
+	}
 
-}
+
