@@ -99,6 +99,9 @@ public class SnakeHUD extends HUD {
 		}
 		
 		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
+			Gdx.app.exit();
+		
 		
 	}
 	

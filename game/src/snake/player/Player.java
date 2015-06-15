@@ -313,10 +313,8 @@ public class Player extends LightMapEntity {
 		player = null;
 	}
 	
-	public void attach(IObserver observer){
-		System.out.println("attached!");
+	public void attach(IObserver observer) {
 	      observers.add(observer);
-	      System.out.println("Number of observers: " + observers.size());
 	}
 	
 	
@@ -325,7 +323,6 @@ public class Player extends LightMapEntity {
 	}
 	
 	private void update(float delta){
-		System.out.println("Number of observers: "+ observers.size());
 		for (IObserver observer : observers) {
 			observer.update(delta);
 		}
