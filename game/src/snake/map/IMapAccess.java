@@ -4,10 +4,11 @@ import java.util.Collection;
 import java.util.List;
 
 public interface IMapAccess {
-
     void loadNextMap();
 
     void reloadMap();
+
+    void spawnDrone();
 
     List<IMapEntity> getEntities();
 
