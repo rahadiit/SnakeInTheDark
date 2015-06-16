@@ -110,7 +110,7 @@ public class SnakeHub extends VisualGameWorld {
 				
 				if (distance <= 0) {
 						WorldSettings.setWorldSize(100, WorldSettings.heightFix(100));
-						WorldSettings.toggleVirtualScreen(false);
+						WorldSettings.toggleVirtualScreen(true);
 						WorldSettings.setCameraPosition(50, WorldSettings.heightFix(50));
 						try {
 							ScreenCreator.switchAndGo("SnakeScreen", "SnakeIntro", "");

@@ -28,13 +28,13 @@ import snake.engine.dataManagment.Loader;
 
 public class GameOver extends VisualGameWorld {
 	private BitmapFont font;
-	private Sound gunCock, gunFire;
+	private Sound gunFire, sensor;
 	private Sprite title;
 	private String fontName = "fonts/ak_sc_o.fnt";
-	private String titleScreen = "extras/GameOverScreen.png";
-	private String crosshair_cursor = "extras/crosshair_blue.png";
+	private String gameOver = "extras/GameOverScreen.png";
 	private String gunFireName = "sounds/gunshot__shawnyboy__.wav";
 	private String gunCockName = "sounds/gun-cock__smartwentcody__.wav";
+	private String sensorPingName = "sounds/sensorPing_cutShorter.mp3";
 	
 	private Light illumination;
 	
@@ -47,19 +47,16 @@ public class GameOver extends VisualGameWorld {
 		
 		WorldSettings.setWorldSize(1280, 720);
 		WorldSettings.setCameraPosition(640, 360);
-		
-		Loader.load(crosshair_cursor, Pixmap.class);
-		Loader.finishLoadingAsset(crosshair_cursor);
-		Pixmap cursor = Loader.get(crosshair_cursor);
-		Gdx.input.setCursorImage(cursor, cursor.getWidth()/2, cursor.getHeight()/2);
+	
+		Gdx.input.setCursorCatched(false);
 		
 		Loader.load(fontName, BitmapFont.class);
 		Loader.finishLoadingAsset(fontName);
 		this.font = Loader.get(fontName);
 		
-		Loader.load(titleScreen, Texture.class);
-		Loader.finishLoadingAsset(titleScreen);
-		Texture tex = Loader.get(titleScreen);
+		Loader.load(gameOver, Texture.class);
+		Loader.finishLoadingAsset(gameOver);
+		Texture tex = Loader.get(gameOver);
 		title = new Sprite(tex);
 		
 		
@@ -67,9 +64,10 @@ public class GameOver extends VisualGameWorld {
 		Loader.finishLoadingAsset(gunFireName);
 		gunFire = Loader.get(gunFireName);
 		
-		Loader.load(gunCockName, Sound.class);
-		Loader.finishLoadingAsset(gunCockName);
-		gunCock= Loader.get(gunCockName);
+		Loader.load(sensorPingName, Sound.class);
+		Loader.finishLoadingAsset(sensorPingName);
+		sensor = Loader.get(sensorPingName);
+
 		
 		title.setBounds(157.5f,101, 965, 518);
 		
@@ -78,8 +76,10 @@ public class GameOver extends VisualGameWorld {
 	@Override
 	public void show() {
 		WorldSettings.toggleVirtualScreen(false);
-		WorldSettings.setAmbientColor(Color.GREEN);
-		gunCock.play();
+		WorldSettings.setAmbientColor(Color.BLACK);
+		sensor.stop();
+		sensor.loop(.2f, .9f, -1);
+		gunFire.play();
 	}
 	
 	
@@ -92,7 +92,6 @@ public class GameOver extends VisualGameWorld {
 	@Override
 	public void act(float delta) {
 		if ((Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.justTouched() || time > 10) && !transition) {
-			gunFire.play();
 			transition = true;
 		}
 		else if (transition) {
@@ -107,13 +106,15 @@ public class GameOver extends VisualGameWorld {
 				illumination.setDistance(distance);
 				illumination.setColor(Color.RED);
 				distance-=20;
+				Gdx.input.setCursorCatched(true);
 				
 				if (distance <= 0) {
 						WorldSettings.setWorldSize(100, WorldSettings.heightFix(100));
-						WorldSettings.toggleVirtualScreen(false);
+						WorldSettings.toggleVirtualScreen(true);
 						WorldSettings.setCameraPosition(50, WorldSettings.heightFix(50));
+						sensor.stop();
 						try {
-							ScreenCreator.switchAndGo("SnakeScreen", "SnakeIntro", "");
+							ScreenCreator.backToPrevious();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -136,7 +137,7 @@ public class GameOver extends VisualGameWorld {
 	
 	@Override
 	public void createLights() {
-		illumination = new PointLight (Lights.getRayhandler(), 5000, Color.RED, 5000, 50, WorldSettings.heightFix(50));
+		illumination = new PointLight (Lights.getRayhandler(), 5000, Color.YELLOW, 5000, 50, WorldSettings.heightFix(50));
 	}
 	
 	
@@ -146,8 +147,9 @@ public class GameOver extends VisualGameWorld {
 	public void dispose() {
 		illumination.remove();
 		Loader.unload(fontName);
-		Loader.unload(crosshair_cursor);
-		Loader.unload(titleScreen);
+		Loader.unload(gameOver);
+		Loader.unload(sensorPingName);
+		Loader.unload(gunFireName);
 	}
 
 	@Override

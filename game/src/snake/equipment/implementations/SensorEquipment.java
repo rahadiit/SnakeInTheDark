@@ -131,5 +131,9 @@ public class SensorEquipment extends AbstractEquipment
 	{
 		return this.onMap;
 	}
+	
+	public void pause() {
+		sensorPing.stop();
+	}
 
 }
