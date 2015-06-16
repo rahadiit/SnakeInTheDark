@@ -3,7 +3,7 @@ package snake.player;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
 import snake.map.IMapAccess;
-
+import snake.equipment.implementations.*;
 import java.util.ArrayList;
 
 /**                              Developed By:
@@ -66,15 +66,12 @@ public class Inventory {
 				switch(item){
 					case 0:
 						equipamentos[item] = EquipmentCreator.createFactory("flashlight").create(x, y, false, access);
-						//System.out.println("lanterna");
 						break;
 					case 1:
 						equipamentos[item] = EquipmentCreator.createFactory("emp").create(x, y, false, access);
-						//System.out.println("emp");
 						break;
 					case 2:
 						equipamentos[item] = EquipmentCreator.createFactory("trap").create(x, y, false, access);						
-						//System.out.println("trap");
 						break;
 				}
 			}			

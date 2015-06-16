@@ -94,7 +94,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		this.setRotation(rotation);
 		light.setDirection(rotation);
 
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (!onMap))
+		if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1) && (!onMap))
 		{
 			
 			flashlightClick.play(.2f);
