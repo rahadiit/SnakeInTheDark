@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import snake.engine.creators.HUDSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.HUD;
+import snake.equipment.implementations.SensorEquipment;
 import snake.player.Inventory;
 import snake.player.Player;
 
@@ -141,7 +142,7 @@ public class SnakeHUD extends HUD {
 			flashqt.draw(batch, ("x" + Inventory.getInstance().getItems()[2]), 140, 330);
 			
 			drones.setColor(Color.WHITE);
-			drones.draw(batch, ("Drones: " + Player.getCurrentInstance().numDrones()), 100, 100);
+			drones.draw(batch, ("Drones: " +((SensorEquipment) Player.getCurrentInstance().sensor).hasDrone((int)Player.getCurrentInstance().getX(), (int)Player.getCurrentInstance().getY())), 100, 100);
 			
 			mapsize.setColor(Color.BLACK);
 			mapsize.draw(batch, ("Map: " + Player.getCurrentInstance().getMapSize()[0] + " x " + Player.getCurrentInstance().getMapSize()[1]), 53, 685);

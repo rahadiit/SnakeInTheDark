@@ -64,7 +64,7 @@ public class Player extends LightMapEntity {
 	private float distanceMoved;
 
 	//Equipments
-	private IEquipment sensor;
+	public IEquipment sensor;
 	private IEquipment arma;
 	Inventory inventory = Inventory.getInstance();
 	
