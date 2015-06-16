@@ -48,7 +48,6 @@ public class SensorEquipment extends AbstractEquipment
 		Loader.finishLoadingAsset(sensorPingName);
 		Loader.finishLoadingAsset(endSensorName);
 		sensorPing = Loader.get(sensorPingName);
-
 		endSensor = Loader.get(endSensorName);
 	}
 
@@ -85,19 +84,21 @@ public class SensorEquipment extends AbstractEquipment
 		this.localToStageCoordinates(vec);
 		light.setPosition(vec);
 		drones = hasDrone((int) getParent().getX(), (int) getParent().getY());
-
-		light.setColor(Color.GREEN);
-		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
 		time += delta;
+		float intensity = (MAX_INTENSITY - MIN_INTENSITY) * MathUtils.cos(PULSE_VELOCITY * time) + MIN_INTENSITY;
 		light.setDistance(intensity);
 		
-		if (drones > 0)
+		if (drones > 0 && light.getColor().equals(Color.WHITE))
 		{
 			light.setColor(Color.RED);
-			sensorPing.loop(.1f, 1f, -1);
+			sensorPing.loop(.4f, 1f, -1);
 		}
-		else
+		else if (light.getColor().equals(Color.RED) && drones == 0)
+		{
 			sensorPing.stop();
+			endSensor.play(.1f);
+			light.setColor(Color.WHITE);
+		}
 	}
 
 	@Override
