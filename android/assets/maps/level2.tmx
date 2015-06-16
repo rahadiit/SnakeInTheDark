@@ -6,6 +6,7 @@
   <property name="equipQuantity" value="5"/>
   <property name="nextMap" value="maps/level1.tmx"/>
   <property name="spawnPoint" value="8,8"/>
+  <property name="exit" value="1,1"/>
  </properties>
  <tileset firstgid="1" name="tileset" tilewidth="100" tileheight="100">
   <image source="tileset.png" width="400" height="400"/>

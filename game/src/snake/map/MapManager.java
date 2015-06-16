@@ -1,7 +1,10 @@
 package snake.map;
 
+import box2dLight.Light;
+import box2dLight.PointLight;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.MapRenderer;
@@ -16,7 +19,9 @@ import snake.engine.creators.ScreenCreator;
 import snake.engine.dataManagment.Loader;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
+import snake.visuals.Lights;
 import snake.visuals.enhanced.ILightMapEntity;
+import snake.visuals.enhanced.LightMapEntity;
 
 import java.util.*;
 
@@ -48,6 +53,9 @@ public class MapManager implements IMapAccess, IObserver {
     private int mapHeight;
     private int tileWidth;
     private int tileHeight;
+
+    private Light exitLight;
+    private int exitX, exitY;
 
     private Random random = new Random();
 
@@ -94,6 +102,7 @@ public class MapManager implements IMapAccess, IObserver {
      * Cuidado deve ser tomado ao chamar esse método de dentro de um
      * {@link com.badlogic.gdx.scenes.scene2d.Group#act(float) act}, pois
      * pode gerar exceções.
+     *
      * @param entity IMapEntity a ser adicionada
      * @return true se adicionou com sucesso
      */
@@ -146,9 +155,13 @@ public class MapManager implements IMapAccess, IObserver {
 
         nextMap = properties.get("nextMap", null, String.class);
 
-        String[] spawn = properties.get("spawnPoint", "1,1", String.class).split(",");
-        spawnX = Integer.parseInt(spawn[0]);
-        spawnY = Integer.parseInt(spawn[1]);
+        String[] tmp = properties.get("spawnPoint", "1,1", String.class).split(",");
+        spawnX = Integer.parseInt(tmp[0]);
+        spawnY = Integer.parseInt(tmp[1]);
+
+        tmp = properties.get("exit", "1,1", String.class).split(",");
+        exitX = Integer.parseInt(tmp[0]);
+        exitY = Integer.parseInt(tmp[1]);
 
         String equips = properties.get("equipList", "", String.class);
         Collections.addAll(availableEquipments, equips.split(","));
@@ -269,9 +282,23 @@ public class MapManager implements IMapAccess, IObserver {
         }
     }
 
+    void createLights() {
+        exitLight = new PointLight(Lights.getRayhandler(), 5000, new Color(.3f, .3f, .3f, 1f), .8f, exitX + .5f, exitY + .5f);
+        exitLight.setStaticLight(true);
+        exitLight.setXray(true);
+
+        for (IMapEntity entity : entities)
+            if (entity instanceof ILightMapEntity)
+                ((LightMapEntity) entity).createLights();
+    }
+
     void disposeEntities() {
         for (IMapEntity entity : entitiesToRemove)
             entity.dispose();
+        if (exitLight != null) {
+            exitLight.dispose();
+            exitLight = null;
+        }
     }
 
     @Override
