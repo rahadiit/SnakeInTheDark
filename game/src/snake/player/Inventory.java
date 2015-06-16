@@ -48,7 +48,7 @@ public class Inventory {
 			qtdequipamentos[1]++;
 			break;
 			
-		case "sensor":
+		case "trap":
 			if(equipamentos[2]==null)
 				equipamentos[2] = item;
 			qtdequipamentos[2]++;
