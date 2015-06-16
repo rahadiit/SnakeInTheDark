@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import snake.drone.IObserver;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
@@ -87,7 +88,7 @@ public class Player extends LightMapEntity {
 		this.access = ((TiledMapWorld) world).getMapAccess();
 		this.setSize(1f, 1f);
 	    this.setPosition(1, 1); // TODO: definir pelo mapa
-		
+
 		direction = new Vector2();
 		
 		//Carrega as texturas
@@ -337,6 +338,27 @@ public class Player extends LightMapEntity {
 		observersToRemove.remove(observer);
 	}
 	
+	public int numDrones(){
+		int qtd = 0;
+		for (IObserver observer : observers)
+			if(observer.toString().equalsIgnoreCase("Drone"))
+				qtd++;
+		for (IObserver observer : observersToAdd)
+			if(observer.toString().equalsIgnoreCase("Drone"))
+				qtd++;
+		for (IObserver observer : observersToRemove)
+			if(observer.toString().equalsIgnoreCase("Drone"))
+				qtd--;
+		//qtd += observersToAdd.size();
+		//qtd -= observersToRemove.size();
+		return qtd;
+	}
+	
+	public int[] getMapSize(){
+		int size[] = {access.getMapHeight(), access.getMapWidth()};
+		return size;
+	}
+	
 	private void update(float delta){
 		observers.removeAll(observersToRemove);
 		observers.addAll(observersToAdd);
@@ -345,6 +367,7 @@ public class Player extends LightMapEntity {
 
 		for (IObserver observer : observers)
 			observer.update(delta);
+		
 	}
 
 	@Override
