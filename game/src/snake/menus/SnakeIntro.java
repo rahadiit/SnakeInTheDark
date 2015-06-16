@@ -7,11 +7,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import snake.visuals.Lights;
 import snake.visuals.enhanced.VisualGameWorld;
 import snake.engine.creators.ScreenCreator;
@@ -209,6 +206,9 @@ public class SnakeIntro extends VisualGameWorld {
 		}
 		
 		time += delta;
+		
+		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
+			Gdx.app.exit();
 	}
 	
 	
