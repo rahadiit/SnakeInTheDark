@@ -13,6 +13,7 @@ import snake.engine.creators.HUDSettings;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.HUD;
 import snake.player.Inventory;
+import snake.player.Player;
 
 /**                               Developed By:
  *                                   NoDark
@@ -26,7 +27,7 @@ import snake.player.Inventory;
 
 public class SnakeHUD extends HUD {
 
-	private BitmapFont font, empqt, flashqt, bulletqt;
+	private BitmapFont font, empqt, flashqt, bulletqt, drones, mapsize;
 	private String fontName = "fonts/ak_sc_o.fnt", hudName = "hud/HUDFinal.png", lanterna = "equipments/flashlights.png";
 	private String emp ="equipments/EMPVecto.png", bullet = "equipments/ArmadilhaArmada.png";
 	private Texture tex, tex1, tex2, tex3;
@@ -55,6 +56,13 @@ public class SnakeHUD extends HUD {
 		Loader.finishLoadingAsset(fontName);
 		bulletqt = Loader.get(fontName);
 		
+		Loader.load(fontName, BitmapFont.class);
+		Loader.finishLoadingAsset(fontName);
+		drones = Loader.get(fontName);
+		
+		Loader.load(fontName, BitmapFont.class);
+		Loader.finishLoadingAsset(fontName);
+		mapsize = Loader.get(fontName);
 		
 		Loader.load(hudName, Texture.class);
 		Loader.finishLoadingAsset(hudName);
@@ -98,13 +106,9 @@ public class SnakeHUD extends HUD {
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
 			paused = !paused;
 			Gdx.input.setCursorCatched(!Gdx.input.isCursorCatched());
-		}
-		
-		
+		}		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
-			Gdx.app.exit();
-		
-		
+			Gdx.app.exit();			
 	}
 	
 	
@@ -135,6 +139,12 @@ public class SnakeHUD extends HUD {
 			
 			bulletqt.setColor(Color.WHITE);
 			flashqt.draw(batch, ("x" + Inventory.getInstance().getItems()[2]), 140, 330);
+			
+			drones.setColor(Color.WHITE);
+			drones.draw(batch, ("Drones: " + Player.getCurrentInstance().numDrones()), 100, 100);
+			
+			mapsize.setColor(Color.BLACK);
+			mapsize.draw(batch, ("Map: " + Player.getCurrentInstance().getMapSize()[0] + " x " + Player.getCurrentInstance().getMapSize()[1]), 53, 685);
 
 		}
 	}
