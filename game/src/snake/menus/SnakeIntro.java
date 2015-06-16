@@ -4,6 +4,7 @@ import box2dLight.Light;
 import box2dLight.PointLight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -30,12 +31,14 @@ import umbra.text.TextComunicator;
 
 public class SnakeIntro extends VisualGameWorld {
 	private BitmapFont font;
+	private Music song;
 	private IComunicator textMan;
 	private Sound missile, explosion;
 	
 	private String fontName = "fonts/ak_sc_o.fnt",
 				   missileName = "sounds/missile.wav",
-				   explosionName = "sounds/explosionIntro.wav";
+				   explosionName = "sounds/explosionIntro.wav",
+				   musicName = "music/erh__atmosphere-4.wav";
 	
 	private Light illumination;
 	
@@ -59,6 +62,10 @@ public class SnakeIntro extends VisualGameWorld {
 		Loader.finishLoadingAsset(explosionName);
 		explosion = Loader.get(explosionName);
 		
+		Loader.load(musicName, Music.class);
+		Loader.finishLoadingAsset(musicName);
+		song = Loader.get(musicName);
+		
 		textMan = new TextComunicator(ScreenCreator.getBatch(), font);
 		
 		textMan.newText("Radio message intercepted August 23rd, 22:35: ",
@@ -69,6 +76,8 @@ public class SnakeIntro extends VisualGameWorld {
 	public void show() {
 		WorldSettings.toggleVirtualScreen(false);
 		WorldSettings.setAmbientColor(Color.WHITE);
+		song.setVolume(.2f);
+		song.play();
 	}
 	
 	
@@ -133,6 +142,7 @@ public class SnakeIntro extends VisualGameWorld {
 		}
 		
 		if (!got8 && time > FINISH_TIME8) {
+			song.stop();
 			missile.play();
 			got8 = true;
 		}
@@ -151,6 +161,7 @@ public class SnakeIntro extends VisualGameWorld {
 		}
 		
 		if (!got11 && time > FINISH_TIME11) {
+			song.play();
 			textMan.newText("Good... well, almost. Your activity sensor is on, but night-vision googles are destroyed.",
 					390, 400, 500, true);
 			got11 = true;
@@ -187,6 +198,7 @@ public class SnakeIntro extends VisualGameWorld {
 						WorldSettings.setWorldSize(100, WorldSettings.heightFix(100));
 						WorldSettings.toggleVirtualScreen(true);
 						WorldSettings.setCameraPosition(50, WorldSettings.heightFix(50));
+						song.stop();
 						try {
 							ScreenCreator.switchAndGo("SnakeScreen", "TiledMap", "maps/level1.tmx");
 						} catch (Exception e) {
@@ -223,6 +235,9 @@ public class SnakeIntro extends VisualGameWorld {
 	public void dispose() {
 		illumination.remove();
 		Loader.unload(fontName);
+		Loader.unload(missileName);
+		Loader.unload(explosionName);
+		Loader.unload(musicName);
 	}
 
 	@Override
