@@ -66,7 +66,7 @@ public class Player extends LightMapEntity {
 	//Equipments
 	private IEquipment sensor;
 	private IEquipment arma;
-	Inventory inventory = new Inventory();
+	Inventory inventory = Inventory.getInstance();
 	
 	//Stuff
 	private float stateTime = 0;

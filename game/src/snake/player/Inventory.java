@@ -19,7 +19,21 @@ public class Inventory {
 	
 	private IEquipment equipamentos[] = new IEquipment[3];
 	private int qtdequipamentos[] = new int[3];
+	private static Inventory inventory;
 	
+	private Inventory(){
+		for (int i = 0; i<3; i++){
+			qtdequipamentos[i] = 0;
+		}
+	}
+	
+	//Singleton
+	static public Inventory getInstance(){
+		if (inventory==null)
+			inventory = new Inventory();
+		return inventory;
+	}
+
 	public void addItem(IEquipment item){
 		
 		switch(item.getName().toLowerCase()){
@@ -28,17 +42,19 @@ public class Inventory {
 			if(equipamentos[0]==null)
 				equipamentos[0] = item;
 			qtdequipamentos[0]++;
-			//System.out.println("lanterna");
-		
+			break;
+					
 		case "emp":
 			if(equipamentos[1]==null)
 				equipamentos[1] = item;
 			qtdequipamentos[1]++;
+			break;
 			
 		case "sensor":
 			if(equipamentos[2]==null)
 				equipamentos[2] = item;
-			qtdequipamentos[2]++;					
+			qtdequipamentos[2]++;
+			break;
 		}
 	}
 	
@@ -63,6 +79,10 @@ public class Inventory {
 				}
 			}			
 		}
+	}
+	
+	public int[] getItems(){
+		return qtdequipamentos;
 	}
 }
 
