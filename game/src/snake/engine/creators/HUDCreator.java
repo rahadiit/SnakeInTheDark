@@ -53,6 +53,11 @@ public class HUDCreator {
 			case "snake intro":
 				hud = new BlankHUD();
 				break;
+				
+			case "gameover":
+			case "game over":
+				hud = new BlankHUD();
+				break;
 			case "blank":
 				hud = new BlankHUD();
 				break;

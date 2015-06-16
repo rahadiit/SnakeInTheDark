@@ -92,6 +92,8 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void hide() {
+    	this.song2.stop();
+    	this.song1.stop();
     }
 
     @Override

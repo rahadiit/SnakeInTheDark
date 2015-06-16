@@ -1,8 +1,8 @@
 
 package snake.drone;
 
+import snake.engine.creators.ScreenCreator;
 import snake.engine.dataManagment.Loader;
-
 import snake.map.CellType;
 import snake.map.IMapAccess;
 import snake.map.IMapEntity;
@@ -10,7 +10,6 @@ import snake.player.Player;
 import snake.visuals.Lights;
 import snake.visuals.enhanced.LightMapEntity;
 import box2dLight.PointLight;
-
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -47,7 +46,6 @@ public class Drone extends LightMapEntity implements IObserver{
 	PointLight light;
 	Vector2 vec = new Vector2();
 	private State temp  = State.STANDING;
-
 	//Stuff
 	private float time;
 	private float distanceMoved;
@@ -309,8 +307,15 @@ public class Drone extends LightMapEntity implements IObserver{
 	public boolean checkPlayer(int x, int y){
 		IMapEntity entity = world.getEntity((int)getX(), (int)getY(), "player");
 		if (entity != null){
-			if (((Player) entity).destroy()){ 
+			if (((Player) entity).destroy()){
 				world.reloadMap();
+				try {
+					ScreenCreator.addAndGo("SnakeScreen", "gameOver", "");
+				}
+				catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}	
 			else 
 				this.destroy();

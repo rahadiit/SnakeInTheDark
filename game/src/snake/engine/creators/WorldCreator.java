@@ -5,6 +5,7 @@ import snake.engine.core.SnakeScreen;
 import snake.engine.models.BlankWorld;
 import snake.engine.models.GameWorld;
 import snake.map.TiledMapWorld;
+import snake.menus.GameOver;
 import snake.menus.SnakeHub;
 import snake.menus.SnakeIntro;
 import snake.tests.ForestMap_test;
@@ -75,6 +76,11 @@ public abstract class WorldCreator {
 			case "snakeintro":
 			case "snake intro":
 				world = new SnakeIntro();
+				break;
+				
+			case "gameover":
+			case "game over":
+				world = new GameOver();
 				break;
 			case "visualblank":
 			case "visual blank":	

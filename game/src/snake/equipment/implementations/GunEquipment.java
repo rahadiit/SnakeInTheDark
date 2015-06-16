@@ -34,7 +34,7 @@ public class GunEquipment extends AbstractEquipment {
 		texture = Loader.get("equipments/BulletPixel.png");
 		sprite = new Sprite(texture);
 		
-		this.ammo = 3; // valor de inicio
+		this.ammo = 1; // valor de inicio
 		
 		// sounds
 		Loader.load(shotName, Sound.class);
