@@ -2,19 +2,22 @@
 package snake.drone;
 
 import snake.engine.dataManagment.Loader;
-import snake.player.Player;
-import snake.visuals.Lights;
-import snake.visuals.enhanced.LightMapEntity;
+import snake.hud.RebootGame;
 import snake.map.CellType;
 import snake.map.IMapAccess;
 import snake.map.IMapEntity;
+import snake.player.Player;
+import snake.visuals.Lights;
+import snake.visuals.enhanced.LightMapEntity;
 import box2dLight.PointLight;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
@@ -46,7 +49,7 @@ public class Drone extends LightMapEntity implements IObserver{
 	PointLight light;
 	Vector2 vec = new Vector2();
 	private State temp  = State.STANDING;
-	
+	private RebootGame reboot;
 	//Stuff
 	private float time;
 	private float distanceMoved;
@@ -309,7 +312,7 @@ public class Drone extends LightMapEntity implements IObserver{
 		IMapEntity entity = world.getEntity((int)getX(), (int)getY(), "player");
 		if (entity != null){
 			if (((Player) entity).destroy()){ 
-			//TODO: GAME OVER
+				world.reloadMap();
 			}	
 			else 
 				this.destroy();
