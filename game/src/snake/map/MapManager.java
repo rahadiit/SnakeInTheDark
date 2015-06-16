@@ -21,6 +21,7 @@ import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
 import snake.visuals.Lights;
 import snake.visuals.enhanced.ILightMapEntity;
+import snake.visuals.enhanced.LightMapEntity;
 
 import java.util.*;
 
@@ -54,6 +55,7 @@ public class MapManager implements IMapAccess, IObserver {
     private int tileHeight;
 
     private Light exitLight;
+    private int exitX, exitY;
 
     private Random random = new Random();
 
@@ -158,12 +160,8 @@ public class MapManager implements IMapAccess, IObserver {
         spawnY = Integer.parseInt(tmp[1]);
 
         tmp = properties.get("exit", "1,1", String.class).split(",");
-        int exitX = Integer.parseInt(tmp[0]);
-        int exitY = Integer.parseInt(tmp[1]);
-
-        exitLight = new PointLight(Lights.getRayhandler(), 5000, Color.WHITE, 1f, exitX, exitY);
-        exitLight.setStaticLight(true);
-        exitLight.setXray(true);
+        exitX = Integer.parseInt(tmp[0]);
+        exitY = Integer.parseInt(tmp[1]);
 
         String equips = properties.get("equipList", "", String.class);
         Collections.addAll(availableEquipments, equips.split(","));
@@ -282,6 +280,16 @@ public class MapManager implements IMapAccess, IObserver {
 
             addEntity(drone);
         }
+    }
+
+    void createLights() {
+        exitLight = new PointLight(Lights.getRayhandler(), 5000, new Color(.3f, .3f, .3f, 1f), .8f, exitX + .5f, exitY + .5f);
+        exitLight.setStaticLight(true);
+        exitLight.setXray(true);
+
+        for (IMapEntity entity : entities)
+            if (entity instanceof ILightMapEntity)
+                ((LightMapEntity) entity).createLights();
     }
 
     void disposeEntities() {

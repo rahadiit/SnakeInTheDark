@@ -111,8 +111,6 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void createLights() {
-        for (IMapEntity entity : manager.getEntities())
-            if (entity instanceof ILightMapEntity)
-                ((LightMapEntity) entity).createLights();
+        manager.createLights();
     }
 }
