@@ -89,8 +89,8 @@ public class SnakeIntro extends VisualGameWorld {
 	private float FINISH_TIME1 = 4, FINISH_TIME2 = 8, FINISH_TIME3 = 9,
 				  FINISH_TIME4 = 12, FINISH_TIME5 = 19, FINISH_TIME6 = 20,
 				  FINISH_TIME7 = 22, FINISH_TIME8 = 22.5f, FINISH_TIME9 = 23.5f,
-				  FINISH_TIME10 = 26, FINISH_TIME11 = 29, FINISH_TIME12 = 34, FINISH_TIME13 = 36;
-	private float FINISH_TIME  = 40;
+				  FINISH_TIME10 = 26, FINISH_TIME11 = 30, FINISH_TIME12 = 35, FINISH_TIME13 = 37;
+	private float FINISH_TIME  = 41;
 	
 	/** updates Screen logic */
 	@Override

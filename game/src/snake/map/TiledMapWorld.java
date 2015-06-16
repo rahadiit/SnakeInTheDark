@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapRenderer;
-import snake.drone.Drone;
 import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
 import snake.player.Player;
@@ -29,17 +28,18 @@ public class TiledMapWorld extends VisualGameWorld {
     public TiledMapWorld(String mapName) {
         manager = new MapManager();
 
-        IMapEntity player = Player.getInstance(this);
+        Player player = Player.getInstance(this);
+        player.attach(manager);
         manager.loadMap(mapName);
         renderer = manager.createRenderer();
 
-        manager.addEntity(player);
+        manager.addEntityDirect(player);
         manager.moveToSpawnPoint(player);
-        
+
         Loader.load(song1Name, Music.class);
         Loader.finishLoadingAsset(song1Name);
         song1 = Loader.get(song1Name);
-        
+
 
         Loader.load(song2Name, Music.class);
         Loader.finishLoadingAsset(song2Name);
@@ -73,7 +73,7 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void show() {
-       // WorldSettings.setAmbientColor(Color.WHITE);
+//        WorldSettings.setAmbientColor(Color.WHITE);
 
         OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
         int width = manager.getMapWidth();
@@ -111,8 +111,6 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void createLights() {
-        for (IMapEntity entity : manager.getEntities())
-            if (entity instanceof ILightMapEntity)
-                ((LightMapEntity) entity).createLights();
+        manager.createLights();
     }
 }
