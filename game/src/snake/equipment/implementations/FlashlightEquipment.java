@@ -50,7 +50,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 		texture = Loader.get("equipments/PixelFlashlight.png");
 		sprite = new Sprite(texture);
 		
-		this.batteryCounter = 5; // bateria fixa de toda lanterna
+		this.batteryCounter = 8; // bateria fixa de toda lanterna
 		
 		// flashlight sound 
 		Loader.load(flashlightClickName, Sound.class);

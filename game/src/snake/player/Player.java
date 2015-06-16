@@ -98,7 +98,7 @@ public class Player extends LightMapEntity {
 		standingSheet = Loader.get(standingTexName);
 		
 		//Cria as animacoes
-		animatedWalk = new Animation[4];
+		animatedWalk = new Animation[ANIMATION_WALK_STATES_NUM];
 	    for (int i = 0; i < ANIMATION_WALK_STATES_NUM; i++) {
 
 	    	region = new TextureRegion(walkSheet, 0, (float) i/FRAME_ROWS_WALK, 1,(float) (i+1) /FRAME_ROWS_WALK);
@@ -108,7 +108,7 @@ public class Player extends LightMapEntity {
 			animatedWalk[i] = new Animation(walkAnimationSpeed, tmp2[0]);
 	    }
 	    
-	    animatedStanding = new Animation[4];
+	    animatedStanding = new Animation[ANIMATION_STILL_STATES_NUM];
 	    for (int i = 0; i < ANIMATION_STILL_STATES_NUM; i++) {
 
 	    	region = new TextureRegion(standingSheet, 0, (float) i/FRAME_ROWS_STANDING, 1,(float) (i+1) /FRAME_ROWS_STANDING);
