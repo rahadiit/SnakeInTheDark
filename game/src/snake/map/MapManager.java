@@ -90,6 +90,17 @@ public class MapManager implements IMapAccess, IObserver {
         return entitiesToAdd.add(entity);
     }
 
+    /**
+     * Cuidado deve ser tomado ao chamar esse método de dentro de um
+     * {@link com.badlogic.gdx.scenes.scene2d.Group#act(float) act}, pois
+     * pode gerar exceções.
+     * @param entity IMapEntity a ser adicionada
+     * @return true se adicionou com sucesso
+     */
+    boolean addEntityDirect(IMapEntity entity) {
+        return entities.add(entity);
+    }
+
     @Override
     public boolean removeEntity(IMapEntity entity) {
         return entitiesToRemove.add(entity);
@@ -204,7 +215,7 @@ public class MapManager implements IMapAccess, IObserver {
             IEquipment equipment = EquipmentCreator.createFactory(availableEquipments.get(index)).create(x, y, true, this);
             equipment.createLights();
 
-            addEntity(equipment);
+            addEntityDirect(equipment);
         }
     }
 

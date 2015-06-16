@@ -33,7 +33,7 @@ public class TiledMapWorld extends VisualGameWorld {
         manager.loadMap(mapName);
         renderer = manager.createRenderer();
 
-        manager.addEntity(player);
+        manager.addEntityDirect(player);
         manager.moveToSpawnPoint(player);
 
         Loader.load(song1Name, Music.class);
@@ -73,7 +73,7 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void show() {
-       // WorldSettings.setAmbientColor(Color.WHITE);
+//        WorldSettings.setAmbientColor(Color.WHITE);
 
         OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
         int width = manager.getMapWidth();
