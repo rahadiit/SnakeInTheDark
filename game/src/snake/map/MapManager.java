@@ -11,14 +11,16 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import snake.drone.Drone;
+import snake.drone.IObserver;
 import snake.engine.creators.ScreenCreator;
 import snake.engine.dataManagment.Loader;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
+import snake.visuals.enhanced.ILightMapEntity;
 
 import java.util.*;
 
-public class MapManager implements IMapAccess {
+public class MapManager implements IMapAccess, IObserver {
 
     private static final AssetManager assetManager;
 
@@ -30,6 +32,8 @@ public class MapManager implements IMapAccess {
     private TiledMap map;
     private String currentMap;
     private String nextMap;
+
+    private int dronesToSpawn;
 
     private int spawnX, spawnY;
 
@@ -137,8 +141,13 @@ public class MapManager implements IMapAccess {
         int equipQuantity = Integer.parseInt(properties.get("equipQuantity", "0", String.class));
         spawnEquipments(equipQuantity);
 
-        int droneQuantity = Integer.parseInt(properties.get("droneQuantity", "0", String.class));
-        spawnDrones(droneQuantity);
+        dronesToSpawn = Integer.parseInt(properties.get("droneQuantity", "0", String.class));
+        spawnRandomDrones();
+    }
+
+    @Override
+    public void spawnDrone() {
+        dronesToSpawn++;
     }
 
     @Override
@@ -195,6 +204,15 @@ public class MapManager implements IMapAccess {
         }
     }
 
+    private void spawnRandomDrones() {
+        int droneQuantity = random.nextInt(dronesToSpawn + 1);
+        dronesToSpawn -= droneQuantity;
+        spawnDrones(droneQuantity);
+
+        if (dronesToSpawn > 0)
+            System.out.println("Drones left: " + dronesToSpawn);
+    }
+
     private void spawnDrones(int droneQuantity) {
         TiledMapTileLayer baseLayer = (TiledMapTileLayer) map.getLayers().get("base");
 
@@ -232,7 +250,8 @@ public class MapManager implements IMapAccess {
                 cellType = properties.get("type", "", String.class);
             } while (!cellType.equals("wall"));
 
-            IMapEntity drone = new Drone(this, x, y, direction);
+            ILightMapEntity drone = new Drone(this, x, y, direction);
+            drone.createLights();
 
             addEntity(drone);
         }
@@ -286,5 +305,10 @@ public class MapManager implements IMapAccess {
     @Override
     public int getTileHeight() {
         return tileHeight;
+    }
+
+    @Override
+    public void update(float ignored) {
+        spawnRandomDrones();
     }
 }
