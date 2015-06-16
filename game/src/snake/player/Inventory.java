@@ -3,8 +3,6 @@ package snake.player;
 import snake.equipment.EquipmentCreator;
 import snake.equipment.IEquipment;
 import snake.map.IMapAccess;
-import snake.equipment.implementations.*;
-import java.util.ArrayList;
 
 /**                              Developed By:
  *                                  NoDark

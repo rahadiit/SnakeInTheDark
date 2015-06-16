@@ -28,7 +28,7 @@ public class SnakeHUD extends HUD {
 
 	private BitmapFont font, empqt, flashqt, bulletqt;
 	private String fontName = "fonts/ak_sc_o.fnt", hudName = "hud/HUDFinal.png", lanterna = "equipments/flashlights.png";
-	private String emp ="equipments/EMPVecto.png", bullet = "equipments/Bullet.png";
+	private String emp ="equipments/EMPVecto.png", bullet = "equipments/ArmadilhaArmada.png";
 	private Texture tex, tex1, tex2, tex3;
 	private Sprite sprite, sprite1, sprite2, sprite3;
 	
@@ -81,7 +81,7 @@ public class SnakeHUD extends HUD {
 		sprite1.setPosition(30, 530);
 		sprite2.setSize(94f,100f);
 		sprite2.setPosition(30, 400);
-		sprite3.setSize(54, 100);
+		sprite3.setSize(100, 100);
 		sprite3.setPosition(30, 270);
 	}
 	
