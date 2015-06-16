@@ -62,10 +62,11 @@ public class Player extends LightMapEntity {
 	private Vector2 direction;
 	private State state = State.STANDING;
 	private float distanceMoved;
+
 	//Equipments
 	private IEquipment sensor;
-	
 	private IEquipment arma;
+	Inventory inventory = new Inventory();
 	
 	//Stuff
 	private float stateTime = 0;
@@ -181,6 +182,7 @@ public class Player extends LightMapEntity {
 			equipment.setOnMap(false);
 			equipment.onPickup(this);
 			addActor((Actor) equipment); //Adiciona ao player
+			inventory.addItem(equipment);
 		}
 		
 		if (state  == State.STANDING) {
@@ -241,6 +243,16 @@ public class Player extends LightMapEntity {
 			else if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
 				direction.set(speed, 0);				
 				update(delta);
+			}
+			
+			else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
+				inventory.useItem(0, access, getX(), getY());		
+				}
+			else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
+				inventory.useItem(1, access, getX(), getY());
+			}
+			else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
+				inventory.useItem(2, access, getX(), getY());							
 			}
 			
 			else {
