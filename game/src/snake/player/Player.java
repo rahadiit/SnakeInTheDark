@@ -1,8 +1,14 @@
 package snake.player;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import snake.drone.IObserver;
 import snake.engine.dataManagment.Loader;
 import snake.engine.models.GameWorld;
@@ -15,15 +21,8 @@ import snake.map.IMapEntity;
 import snake.map.TiledMapWorld;
 import snake.visuals.enhanced.LightMapEntity;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import java.util.ArrayList;
+import java.util.List;
 
 /**                              Developed By:
  *                                  NoDark
@@ -44,7 +43,7 @@ public class Player extends LightMapEntity {
 	private static final int DOWN = 0, LEFT = 1, RIGHT = 2, UP = 3;
 	private static final int ANIMATION_WALK_STATES_NUM = 4, ANIMATION_STILL_STATES_NUM = 4;
 	
-	private enum State {STANDING, MOVING};
+	private enum State {STANDING, MOVING}
 	
 	//Animation
 	private Texture walkSheet, standingSheet; //debugar o esquema
@@ -73,7 +72,9 @@ public class Player extends LightMapEntity {
 	private float lastPosX, lastPosY;
 	
 	//Observer
-	private List<IObserver> observers = new ArrayList<IObserver>();
+	private List<IObserver> observers = new ArrayList<>();
+	private List<IObserver> observersToAdd = new ArrayList<>();
+	private List<IObserver> observersToRemove = new ArrayList<>();
 	
 	// Sounds
 	private String stepsSound = "sounds/walkingPlayer.mp3", itemFoundName = "sounds/itemFound.wav";
@@ -120,9 +121,11 @@ public class Player extends LightMapEntity {
 	    }
 	    
 	    currentAnimation = animatedStanding[DOWN];
+		currentFrame = currentAnimation.getKeyFrame(stateTime, true);
 	    
 		//adiciona sensor
 		sensor = EquipmentCreator.createFactory("sensor").create(.5f, .5f, false, access);
+		sensor.createLights();
 		addActor((Actor) sensor);
 		
 		//adiciona arma
@@ -324,20 +327,24 @@ public class Player extends LightMapEntity {
 		Loader.unload(stepsSound);
 		player = null;
 	}
-	
-	public void attach(IObserver observer) {
-	      observers.add(observer);
+
+	public void attach(IObserver observer){
+		observersToAdd.add(observer);
 	}
 	
 	
 	public void dettach (IObserver observer) {
-		observers.remove(observer);
+		observersToRemove.remove(observer);
 	}
 	
 	private void update(float delta){
-		for (IObserver observer : observers) {
+		observers.removeAll(observersToRemove);
+		observers.addAll(observersToAdd);
+		observersToRemove.clear();
+		observersToAdd.clear();
+
+		for (IObserver observer : observers)
 			observer.update(delta);
-		}
 	}
 
 	@Override

@@ -39,6 +39,7 @@ public class MapManager implements IMapAccess, IObserver {
 
     private final List<IMapEntity> entities = new LinkedList<>();
     private final List<IMapEntity> entitiesWrapper = Collections.unmodifiableList(entities);
+    private final List<IMapEntity> entitiesToAdd = new ArrayList<>();
     private final List<IMapEntity> entitiesToRemove = new ArrayList<>();
 
     private final List<String> availableEquipments = new ArrayList<>();
@@ -86,7 +87,7 @@ public class MapManager implements IMapAccess, IObserver {
 
     @Override
     public boolean addEntity(IMapEntity entity) {
-        return entities.add(entity);
+        return entitiesToAdd.add(entity);
     }
 
     @Override
@@ -103,7 +104,9 @@ public class MapManager implements IMapAccess, IObserver {
         for (IMapEntity entity : entities)
             entity.act(delta);
         entities.removeAll(entitiesToRemove);
+        entities.addAll(entitiesToAdd);
         entitiesToRemove.clear();
+        entitiesToAdd.clear();
     }
 
     void drawEntities(Batch batch, float parentAlpha) {
@@ -199,6 +202,7 @@ public class MapManager implements IMapAccess, IObserver {
 
             int index = random.nextInt(availableEquipments.size());
             IEquipment equipment = EquipmentCreator.createFactory(availableEquipments.get(index)).create(x, y, true, this);
+            equipment.createLights();
 
             addEntity(equipment);
         }
