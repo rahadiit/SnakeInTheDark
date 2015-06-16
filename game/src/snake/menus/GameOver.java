@@ -47,8 +47,6 @@ public class GameOver extends VisualGameWorld {
 		
 		WorldSettings.setWorldSize(1280, 720);
 		WorldSettings.setCameraPosition(640, 360);
-	
-		Gdx.input.setCursorCatched(false);
 		
 		Loader.load(fontName, BitmapFont.class);
 		Loader.finishLoadingAsset(fontName);
@@ -80,6 +78,7 @@ public class GameOver extends VisualGameWorld {
 		sensor.stop();
 		sensor.loop(.2f, .9f, -1);
 		gunFire.play();
+		Gdx.input.setCursorCatched(false);
 	}
 	
 	
