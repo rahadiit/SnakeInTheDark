@@ -79,12 +79,12 @@ public class SnakeIntro extends VisualGameWorld {
 	private boolean got1 = false, got2 = false, got3 = false,
 					got4 = false, got5 = false, got6 = false,
 					got7 = false, got8 = false, got9 = false,
-					got10 = false, got11 = false, got12 = false;
-	private float FINISH_TIME1 = 2, FINISH_TIME2 = 6, FINISH_TIME3 = 7,
-				  FINISH_TIME4 = 9, FINISH_TIME5 = 15, FINISH_TIME6 = 16,
-				  FINISH_TIME7 = 18, FINISH_TIME8 = 18.5f, FINISH_TIME9 = 19.5f,
-				  FINISH_TIME10 = 22, FINISH_TIME11 = 25, FINISH_TIME12 = 28;
-	private float FINISH_TIME  = 32;
+					got10 = false, got11 = false, got12 = false, got13 = false;
+	private float FINISH_TIME1 = 4, FINISH_TIME2 = 8, FINISH_TIME3 = 9,
+				  FINISH_TIME4 = 12, FINISH_TIME5 = 19, FINISH_TIME6 = 20,
+				  FINISH_TIME7 = 22, FINISH_TIME8 = 22.5f, FINISH_TIME9 = 23.5f,
+				  FINISH_TIME10 = 26, FINISH_TIME11 = 29, FINISH_TIME12 = 34, FINISH_TIME13 = 36;
+	private float FINISH_TIME  = 40;
 	
 	/** updates Screen logic */
 	@Override
@@ -93,13 +93,13 @@ public class SnakeIntro extends VisualGameWorld {
 		textMan.update(delta);
 		
 		if (!got1 && time > FINISH_TIME1) {
-			textMan.newText("\"Millions of people... all those dreams in fire... \"",
+			textMan.newText("\"Millions of people... all those dreams on fire...\"",
 					390, 400, 500, true);
 			got1 = true;
 		}
 		
 		if (!got2 && time > FINISH_TIME2) {
-			textMan.newText("Location:", 390, 400, 500, true);
+			textMan.newText("Origin:", 390, 400, 500, true);
 		got2 = true;
 		}
 		
@@ -109,7 +109,7 @@ public class SnakeIntro extends VisualGameWorld {
 		}
 		
 		if (!got4 && time > FINISH_TIME4) {
-			textMan.newText("Former operation unit of terrorist organization Tyrannus, held responsable for the launch of A.N.T.A (Aereal Non-Tripulated Armaggedon) in 1963",
+			textMan.newText("Former operation unit of terrorist organization Tyrannus, held responsable for the launch of A.N.T.A (Aereal Non-Tripulated Armaggedon) in 1963.",
 					390, 400, 500, true);
 			got4 = true;
 		}
@@ -157,9 +157,15 @@ public class SnakeIntro extends VisualGameWorld {
 		}
 		
 		if (!got12 && time > FINISH_TIME12) {
-			textMan.newText("And there is no way out but... down.",
+			textMan.newText("And there is no way out but...",
 					390, 400, 500, true);
 			got12 = true;
+		}
+		
+		if (!got13 && time > FINISH_TIME13) {
+			textMan.newText("down.",
+					390, 400, 500, true);
+			got13 = true;
 		}
 		
 		
@@ -179,7 +185,7 @@ public class SnakeIntro extends VisualGameWorld {
 				
 				if (distance <= 0) {
 						WorldSettings.setWorldSize(100, WorldSettings.heightFix(100));
-						WorldSettings.toggleVirtualScreen(false);
+						WorldSettings.toggleVirtualScreen(true);
 						WorldSettings.setCameraPosition(50, WorldSettings.heightFix(50));
 						try {
 							ScreenCreator.switchAndGo("SnakeScreen", "TiledMap", "maps/level1.tmx");
