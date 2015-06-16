@@ -212,9 +212,6 @@ public class MapManager implements IMapAccess, IObserver {
         int droneQuantity = random.nextInt(dronesToSpawn + 1);
         dronesToSpawn -= droneQuantity;
         spawnDrones(droneQuantity);
-
-        if (dronesToSpawn > 0)
-            System.out.println("Drones left: " + dronesToSpawn);
     }
 
     private void spawnDrones(int droneQuantity) {
