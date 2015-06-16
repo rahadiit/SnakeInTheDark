@@ -120,8 +120,8 @@ public class Drone extends LightMapEntity implements IObserver{
 		
 		if(direction.x < 0) {
 			if (checkTile((int) getX()-1, (int) getY()) && state != State.EXPLODING ) {
-				state = State.EXPLODING;
-				time = 0;
+				destroy();
+				world.spawnDrone();
 			}
 			else {
 				
@@ -139,8 +139,9 @@ public class Drone extends LightMapEntity implements IObserver{
 			
 		else if(direction.x > 0){
 			if (checkTile((int) getX()+1, (int) getY()) && state != State.EXPLODING ){
-				state = State.EXPLODING;
-				time = 0;
+				destroy();
+				world.spawnDrone();
+
 			}
 			else {
 
@@ -158,6 +159,7 @@ public class Drone extends LightMapEntity implements IObserver{
 		else if(direction.y > 0) {
 			if (checkTile((int) getX(), (int) getY() + 1) && state != State.EXPLODING ){
 				destroy();
+				world.spawnDrone();
 			}
 			else {				
 				if (state != State.EXPLODING &&  checkPlayer((int)getX(), (int)getY())){
@@ -171,8 +173,8 @@ public class Drone extends LightMapEntity implements IObserver{
 		
 		else if(direction.y < 0) {
 			if (checkTile((int) getX(), (int) getY() -1) && state != State.EXPLODING ){
-				state = State.EXPLODING;
-				time = 0;
+				destroy();
+				world.spawnDrone();
 			}
 			else {
 
@@ -181,6 +183,7 @@ public class Drone extends LightMapEntity implements IObserver{
 					lastPosX = getX();
 					lastPosY = getY();
 					distanceMoved = 0;
+		
 				}
 			}
 		}
@@ -283,7 +286,6 @@ public class Drone extends LightMapEntity implements IObserver{
 	public boolean destroy() {
 		state = State.EXPLODING;
 		time = 0;
-		
 		return true;
 	}
 	
