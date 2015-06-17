@@ -323,7 +323,6 @@ public class MapManager implements IMapAccess, IObserver {
         MapProperties properties = cell.getTile().getProperties();
 
         properties.put("type", type.toString().toLowerCase(Locale.ENGLISH));
-        // TODO: mudar tile quando alterar o tipo
     }
 
     @Override

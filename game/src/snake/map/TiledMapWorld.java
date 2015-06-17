@@ -73,7 +73,7 @@ public class TiledMapWorld extends VisualGameWorld {
 
     @Override
     public void show() {
-//        WorldSettings.setAmbientColor(Color.WHITE);
+        WorldSettings.setAmbientColor(Color.WHITE);
 
         OrthographicCamera camera = (OrthographicCamera) getStage().getCamera();
         int width = manager.getMapWidth();

@@ -37,12 +37,15 @@ public class HUDCreator {
 		switch (type.toLowerCase()) {
 
 			case "tiledmap":
+				hud = new SnakeHUD (levelDataID); //can be changed for another HUD
+				break;
+				
 		
 			case "templemap":
 			case "temple map":
 			case "forestmap":
 			case "forest map":
-				hud = new SnakeHUD (levelDataID); //can be changed for another HUD
+				hud = new BlankHUD(); //can be changed for another HUD
 				break;
 				
 			case "snakehub":
