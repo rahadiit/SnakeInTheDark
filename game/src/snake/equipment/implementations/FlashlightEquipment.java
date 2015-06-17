@@ -34,7 +34,7 @@ public class FlashlightEquipment extends AbstractEquipment implements IObserver
 	boolean onMap;
 	int cont;
 	int batteryCounter;
-	private String flashlightClickName = "sounds/flashlightClick.wav";
+	private String flashlightClickName = "sounds/flashlightClick.mp3";
 	Sound flashlightClick;
 
 	// Construtor com parametros de posicao de inicio

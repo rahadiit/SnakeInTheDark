@@ -3,15 +3,11 @@ package snake.map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapRenderer;
-import snake.engine.creators.WorldSettings;
 import snake.engine.dataManagment.Loader;
 import snake.player.Player;
-import snake.visuals.enhanced.ILightMapEntity;
-import snake.visuals.enhanced.LightMapEntity;
 import snake.visuals.enhanced.VisualGameWorld;
 
 public class TiledMapWorld extends VisualGameWorld {
@@ -20,8 +16,7 @@ public class TiledMapWorld extends VisualGameWorld {
     private MapRenderer renderer;
     
     private Music song1, song2;
-    private String song2Name = "music/nine-lies-the-heart-ed-4.wav", song1Name = "music/yewbic__ambience02.wav";
-    
+
     private boolean playing = true;
     
 
@@ -36,11 +31,13 @@ public class TiledMapWorld extends VisualGameWorld {
         manager.addEntityDirect(player);
         manager.moveToSpawnPoint(player);
 
+        String song1Name = "music/yewbic__ambience02.mp3";
         Loader.load(song1Name, Music.class);
         Loader.finishLoadingAsset(song1Name);
         song1 = Loader.get(song1Name);
 
 
+        String song2Name = "music/nine-lies-the-heart-ed-4.mp3";
         Loader.load(song2Name, Music.class);
         Loader.finishLoadingAsset(song2Name);
         song2 = Loader.get(song2Name);

@@ -27,7 +27,7 @@ public class SensorEquipment extends AbstractEquipment
 	Vector2 vec = new Vector2();
 	boolean onMap = false;
 	IMapAccess access;
-	private String sensorPingName = "sounds/sensorPing_cutShorter.mp3", endSensorName = "sounds/endSensor.wav";
+	private String sensorPingName = "sounds/sensorPing_cutShorter.mp3", endSensorName = "sounds/endSensor.mp3";
 	Sound sensorPing, endSensor;
 
 	private static final float MIN_INTENSITY = .6f;

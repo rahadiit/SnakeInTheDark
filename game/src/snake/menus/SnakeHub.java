@@ -35,9 +35,9 @@ public class SnakeHub extends VisualGameWorld {
 	private String fontName = "fonts/ak_sc_o.fnt";
 	private String titleScreen = "extras/titleScreen_white.png";
 	private String crosshair_cursor = "extras/crosshair_blue.png";
-	private String gunFireName = "sounds/gunshot__shawnyboy__.wav";
-	private String gunCockName = "sounds/gun-cock__smartwentcody__.wav";
-	private String introName = "music/SnakeInTheDarkIntro_v2.wav";
+	private String gunFireName = "sounds/gunshot__shawnyboy__.mp3";
+	private String gunCockName = "sounds/gun-cock__smartwentcody__.mp3";
+	private String introName = "music/SnakeInTheDarkIntro_v2.mp3";
 	
 	private Light illumination;
 	

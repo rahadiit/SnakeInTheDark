@@ -33,9 +33,9 @@ public class SnakeIntro extends VisualGameWorld {
 	private Sound missile, explosion;
 	
 	private String fontName = "fonts/ak_sc_o.fnt",
-				   missileName = "sounds/missile.wav",
-				   explosionName = "sounds/explosionIntro.wav",
-				   musicName = "music/erh__atmosphere-4.wav";
+				   missileName = "sounds/missile.mp3",
+				   explosionName = "sounds/explosionIntro.mp3",
+				   musicName = "music/erh__atmosphere-4.mp3";
 	
 	private Light illumination;
 	

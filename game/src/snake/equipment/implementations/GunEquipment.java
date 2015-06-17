@@ -20,7 +20,7 @@ public class GunEquipment extends AbstractEquipment {
 	Texture texture;
 	Sprite sprite;
 	private int ammo;
-	private String explosionName = "sounds/explosion.mp3", shotName = "sounds/shotGun.wav"; 
+	private String explosionName = "sounds/explosion.mp3", shotName = "sounds/shotGun.mp3";
 	Sound explosion, shot;
 	
 	public GunEquipment(float x, float y, boolean onMap) {
