@@ -78,7 +78,7 @@ public class Player extends LightMapEntity {
 	private List<IObserver> observersToRemove = new ArrayList<>();
 	
 	// Sounds
-	private String stepsSound = "sounds/walkingPlayer.mp3", itemFoundName = "sounds/itemFound.wav";
+	private String stepsSound = "sounds/walkingPlayer.mp3", itemFoundName = "sounds/itemFound.mp3";
 	Sound steps, itemFound;
 	
 	private Player (GameWorld world) {

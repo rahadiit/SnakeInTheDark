@@ -32,8 +32,8 @@ public class GameOver extends VisualGameWorld {
 	private Sprite title;
 	private String fontName = "fonts/ak_sc_o.fnt";
 	private String gameOver = "extras/GameOverScreen.png";
-	private String gunFireName = "sounds/gunshot__shawnyboy__.wav";
-	private String gunCockName = "sounds/gun-cock__smartwentcody__.wav";
+	private String gunFireName = "sounds/gunshot__shawnyboy__.mp3";
+	private String gunCockName = "sounds/gun-cock__smartwentcody__.mp3";
 	private String sensorPingName = "sounds/sensorPing_cutShorter.mp3";
 	
 	private Light illumination;
